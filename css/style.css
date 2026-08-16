@@ -1208,6 +1208,122 @@ body::before {
 }
 
 /* ==========================================================================
+   科學原理專區 (Science & Physics Principles Section)
+   ========================================================================== */
+.science-section {
+  margin-bottom: 48px;
+}
+
+.science-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 900px) {
+  .science-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.science-card {
+  background: var(--bg-surface-1);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  transition: var(--transition-smooth);
+}
+
+.science-card:hover {
+  border-color: rgba(255, 107, 0, 0.35);
+  background: var(--bg-surface-hover);
+}
+
+.science-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #ff9e00;
+  margin-bottom: 14px;
+}
+
+.science-card-body p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.formula-badge-box {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 107, 0, 0.3);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  font-family: 'Plus Jakarta Sans', monospace;
+  font-size: 0.92rem;
+  color: #ffca3a;
+  text-align: center;
+  margin: 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.formula-badge-box small {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.cloud-physics-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 0.82rem;
+}
+
+.cloud-physics-table th, .cloud-physics-table td {
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cloud-physics-table th {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.cloud-physics-table td {
+  color: var(--text-secondary);
+}
+
+.science-banner-full {
+  background: linear-gradient(135deg, rgba(255, 107, 0, 0.12) 0%, rgba(20, 26, 42, 0.9) 100%);
+  border: 1px solid rgba(255, 107, 0, 0.3);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-top: 20px;
+}
+
+.science-banner-full h4 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #ff9e00;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.science-banner-full p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ==========================================================================
    Footer 頁尾
    ========================================================================== */
 .site-footer {

@@ -60,6 +60,9 @@
       </div>
 
       <div class="header-actions">
+        <a href="#scienceSection" class="btn-pill" style="text-decoration: none;">
+          <span>🔬</span> 科學原理
+        </a>
         <button class="btn-pill" id="btnOpenSimulator" title="開啟氣象參數模擬器">
           <span>🧪</span> 氣象沙盒模擬
         </button>
@@ -349,11 +352,125 @@
     </section>
 
     <!-- ==========================================
+         科學預測原理與物理模型專區
+         ========================================== -->
+    <section class="science-section" id="scienceSection">
+      <div class="section-header-row">
+        <h2 class="section-title"><span>🔬</span> 科學預測原理：火燒雲大氣物理模型剖析</h2>
+        <span class="info-chip">大氣光學與雲物理學基礎</span>
+      </div>
+
+      <div class="science-grid">
+        <!-- 卡片 1: 瑞利散射與超長大氣路徑 -->
+        <div class="science-card">
+          <div class="science-card-header">
+            <span>☀️</span> 1. 瑞利散射與大氣路徑倍增
+          </div>
+          <div class="science-card-body">
+            <p>
+              大氣分子散射光線強度與波長四次方成反比。藍光（約 450nm）散射強度是紅光（約 700nm）的 <strong>5.8 倍</strong>：
+            </p>
+            <div class="formula-badge-box">
+              <span>I ∝ 1 / λ⁴</span>
+              <small>瑞利散射公式（短波藍紫光迅速衰減，長波紅橙光強烈穿透）</small>
+            </div>
+            <p>
+              日落與日出時分，太陽高度角在 0° 至 -6° 之間，陽光穿透大氣層的厚度（大氣質量 Airmass）是正午的 <strong>10 至 38 倍</strong>！所有藍光在途中散射殆盡，僅剩穿透力最強的純淨紅橙光照向台北天際。
+            </p>
+          </div>
+        </div>
+
+        <!-- 卡片 2: 遠方地平線透光窗機制 -->
+        <div class="science-card">
+          <div class="science-card-header">
+            <span>🌅</span> 2. 遠方地平線透光窗 (Horizon Window)
+          </div>
+          <div class="science-card-body">
+            <p>
+              <strong>「決定火燒雲的關鍵往往不在頭頂，而在遠方地平線！」</strong>
+            </p>
+            <p>
+              台北日落時，夕陽是從<strong>台灣海峽、新竹/苗栗外海甚至 200-400 公里外的海平面</strong>射入台北上空：
+            </p>
+            <ul style="padding-left: 18px; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
+              <li><strong>西方海面晴朗（透光窗 &gt; 80%）：</strong>夕陽如舞台探照燈無阻穿透，照亮台北全城雲底。</li>
+              <li><strong>西方海面有厚重低雲或鋒面：</strong>光線在 300 公里外即被攔截，台北即便頭頂有卷雲也只會一片死灰。</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 卡片 3: 三維雲層結構角色 -->
+        <div class="science-card">
+          <div class="science-card-header">
+            <span>☁️</span> 3. 三維雲層結構與光學反射幾何
+          </div>
+          <div class="science-card-body">
+            <table class="cloud-physics-table">
+              <thead>
+                <tr>
+                  <th>高度層級</th>
+                  <th>代表雲種</th>
+                  <th>光學角色與權重</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong style="color: #f43f5e;">高雲 6,000m+</strong></td>
+                  <td>卷雲、卷層雲</td>
+                  <td>天然反光天幕（日落後 20 分鐘依然能接收紅光反火燒，佔 +25 分）</td>
+                </tr>
+                <tr>
+                  <td><strong style="color: #f97316;">中雲 2,000-6,000m</strong></td>
+                  <td>高積雲、高層雲</td>
+                  <td>立體波狀/魚鱗紋理（呈現劇烈金色熔岩雲彩，佔 +20 分）</td>
+                </tr>
+                <tr>
+                  <td><strong style="color: #94a3b8;">低雲 &lt; 2,000m</strong></td>
+                  <td>層雲、碎積雲</td>
+                  <td><strong>出景殺手</strong>（厚低雲會遮擋地平線並投下死灰陰影，最多扣 -50 分）</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 卡片 4: 經典出景大氣系統 -->
+        <div class="science-card">
+          <div class="science-card-header">
+            <span>🌀</span> 4. 經典出景大氣天候規律
+          </div>
+          <div class="science-card-body">
+            <p>
+              <strong>🌪️ 颱風外圍下沉氣流（史詩級大景）：</strong><br>
+              當颱風位於台灣東部或南部海面，北部受外圍沉降氣流籠罩，低空能見度破表（&gt;30km）且無低雲，高空輻散出壯麗卷雲天幕，極易形成漫天火燒。
+            </p>
+            <p>
+              <strong>🌦️ 夏季午後雷陣雨洗刷後：</strong><br>
+              傍晚雷雨停止，大氣懸浮微粒被雨水沖刷乾淨，低空水汽消散，中高空殘留高積雲，極高機率出現雙彩虹與純淨晚霞。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 底部總結算公式 Banner -->
+      <div class="science-banner-full">
+        <h4><span>📐</span> SkyFire Engine 演算法綜合評分模型公式</h4>
+        <div class="formula-badge-box" style="font-size: 1rem;">
+          <span>總分 (0-100) = [高空反射天幕 + 中空積雲] - [低雲遮蔽懲罰] + [地平透光窗] + [能見度純度] + [氣膠微調]</span>
+        </div>
+        <p>
+          當評分達 <strong>82 分以上</strong>，代表高空反射面充足、低空無阻擋且遠方地平透光窗口完全開啟，屬於全台北洗版級的史詩火燒雲！
+        </p>
+      </div>
+    </section>
+
+    <!-- ==========================================
          頁尾資訊
          ========================================== -->
     <footer class="site-footer">
       <div class="footer-links">
         <a href="#taipeiMap">攝影機位地圖</a>
+        <a href="#scienceSection">科學預測原理</a>
         <a href="javascript:void(0)" id="footerOpenSim">氣象沙盒</a>
         <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo API</a>
         <a href="https://www.cwa.gov.tw/" target="_blank" rel="noopener">中央氣象署 CWA</a>
