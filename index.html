@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taipei SkyFire 霞光台北 - 台北日出日落火燒雲即時預報與攝影機位指南</title>
+  <meta name="description" content="全台首創專為台北設計的日出與日落火燒雲（霞光）科學預測平台。結合高空/中空/低空三維雲量大氣光學模型、地平線透光窗指數、Open-Meteo 即時氣象與 12 大熱門機位指南。">
+  <meta name="keywords" content="火燒雲預測, 台北日落, 台北日出, 晚霞預測, 霞光指數, 象山夕陽, 大稻埕碼頭日落, 淡水漁人碼頭, 台北攝影機位, 黃金時刻, 藍調時刻">
+  <meta name="author" content="Taipei SkyFire Team">
+  <meta name="theme-color" content="#0b0f19">
+
+  <!-- Open Graph / 社群分享標籤 -->
+  <meta property="og:title" content="Taipei SkyFire 霞光台北 - 台北日出日落火燒雲預報站">
+  <meta property="og:description" content="今天台北會出大景嗎？即時大氣光學火燒雲預測、高低雲層剖面分析、黃金時刻倒數與 12 大經典機位地圖。">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_TW">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@500;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Leaflet Map CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
+  <!-- 主樣式表 -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 背景動態晨昏光暈 -->
+  <div class="ambient-glow" id="ambientGlow"></div>
+
+  <!-- SVG 漸層定義 -->
+  <svg style="position: absolute; width: 0; height: 0;" aria-hidden="true">
+    <defs>
+      <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FF3366" />
+        <stop offset="50%" stop-color="#FF6B00" />
+        <stop offset="100%" stop-color="#FFB800" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <div class="app-container">
+    
+    <!-- ==========================================
+         網站頂部導航
+         ========================================== -->
+    <header class="site-header">
+      <div class="brand-area">
+        <div class="brand-logo">🔥</div>
+        <div class="brand-text">
+          <h1>
+            Taipei SkyFire 霞光台北
+            <span class="brand-badge">PRO V2.0</span>
+          </h1>
+          <p>台北日出・日落火燒雲大氣光學科學預測平台</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button class="btn-pill" id="btnOpenSimulator" title="開啟氣象參數模擬器">
+          <span>🧪</span> 氣象沙盒模擬
+        </button>
+        <button class="btn-pill primary" id="btnRefreshWeather" title="重新整理氣象數據">
+          <span>🔄</span> 更新預報
+        </button>
+      </div>
+    </header>
+
+    <!-- ==========================================
+         時段切換列 (今日日落 / 明日日出 / 明日日落)
+         ========================================== -->
+    <div class="session-switch-bar">
+      <div class="session-tabs">
+        <button class="tab-btn active" data-session="today-sunset">
+          <span>🌇</span> 今日日落
+        </button>
+        <button class="tab-btn" data-session="tomorrow-sunrise">
+          <span>🌅</span> 明日日出
+        </button>
+        <button class="tab-btn" data-session="tomorrow-sunset">
+          <span>🌆</span> 明日日落
+        </button>
+      </div>
+
+      <div class="live-status-badge">
+        <span class="pulse-dot"></span>
+        <span id="liveStatusText">即時 Open-Meteo 台北大氣觀測數據連線中</span>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         Hero 核心大氣火燒雲儀表板
+         ========================================== -->
+    <section class="hero-dashboard-grid">
+      
+      <!-- 主指數卡片 -->
+      <div class="glass-card main-gauge-card">
+        <div class="gauge-header">
+          <div class="target-time-label" id="currentSessionLabel">
+            <span>📍 台北市中心</span> • <span id="targetDateText">2026/08/16 今日日落火燒雲指數</span>
+          </div>
+          <div class="countdown-box" id="countdownBox">
+            <span>⏱️</span> <span id="countdownText">倒數 03:15:20</span>
+          </div>
+        </div>
+
+        <div class="gauge-content-row">
+          <!-- 圓形儀表 -->
+          <div class="circular-gauge-wrapper">
+            <svg class="circular-gauge-svg" viewBox="0 0 160 160">
+              <circle class="gauge-bg-circle" cx="80" cy="80" r="70"></circle>
+              <circle class="gauge-fill-circle" id="gaugeFillCircle" cx="80" cy="80" r="70"></circle>
+            </svg>
+            <div class="gauge-center-text">
+              <div class="gauge-number" id="gaugeScoreNum">88</div>
+              <div class="gauge-unit">指數 / 100</div>
+            </div>
+          </div>
+
+          <!-- 評級與簡評 -->
+          <div class="gauge-verdict">
+            <div class="rating-badge" id="ratingBadge">
+              <span id="ratingIcon">🌟</span> <span id="ratingBadgeText">史詩級爆發</span>
+            </div>
+            <div class="rating-summary" id="ratingSummary">
+              漫天紅霞・全城燃燒！高中雲層層次極佳，夕陽光線完美穿透。
+            </div>
+            <div class="peak-window-bar">
+              <span>⏰ 最佳出景窗口：</span>
+              <strong id="peakWindowText">18:25 - 19:05 (日落前後 20 分鐘)</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- 底部 4 大關鍵診斷指標 -->
+        <div class="quick-metrics-grid">
+          <div class="metric-pill-item">
+            <div class="metric-pill-label">西方地平透光窗</div>
+            <div class="metric-pill-val" id="metricHorizonWindow">92% (極通透)</div>
+          </div>
+          <div class="metric-pill-item">
+            <div class="metric-pill-label">高空反射雲 (卷雲)</div>
+            <div class="metric-pill-val" id="metricHighCloud">55% (優)</div>
+          </div>
+          <div class="metric-pill-item">
+            <div class="metric-pill-label">低雲遮蔽 (層雲)</div>
+            <div class="metric-pill-val" id="metricLowCloud">12% (無阻擋)</div>
+          </div>
+          <div class="metric-pill-item">
+            <div class="metric-pill-label">大氣能見度</div>
+            <div class="metric-pill-val" id="metricVisibility">25 km (極清澈)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右側：大氣三維垂直雲層剖面卡片 -->
+      <div class="glass-card cloud-cross-card">
+        <div class="card-title-bar">
+          <h3><span>☁️</span> 台北大氣垂直雲層剖面</h3>
+          <span class="info-chip" id="cloudProfileChip">光學穿透模型</span>
+        </div>
+
+        <div class="atmosphere-visualizer">
+          <div class="sunbeam-ray"></div>
+
+          <!-- 高雲層 -->
+          <div class="cloud-level-row">
+            <div class="level-indicator">
+              <div class="level-name"><span>🟣</span> 高空卷雲</div>
+              <div class="level-height">6,000 - 12,000m</div>
+            </div>
+            <div class="level-bar-track">
+              <div class="level-bar-fill high" id="barHighCloud" style="width: 55%;">55%</div>
+            </div>
+            <div class="level-status-tag good" id="tagHighCloud">極佳反射</div>
+          </div>
+
+          <!-- 中雲層 -->
+          <div class="cloud-level-row">
+            <div class="level-indicator">
+              <div class="level-name"><span>🟠</span> 中空積雲</div>
+              <div class="level-height">2,000 - 6,000m</div>
+            </div>
+            <div class="level-bar-track">
+              <div class="level-bar-fill mid" id="barMidCloud" style="width: 42%;">42%</div>
+            </div>
+            <div class="level-status-tag good" id="tagMidCloud">立體魚鱗紋</div>
+          </div>
+
+          <!-- 低雲層 -->
+          <div class="cloud-level-row">
+            <div class="level-indicator">
+              <div class="level-name"><span>⚪</span> 低空層雲</div>
+              <div class="level-height">&lt; 2,000m</div>
+            </div>
+            <div class="level-bar-track">
+              <div class="level-bar-fill low" id="barLowCloud" style="width: 15%;">15%</div>
+            </div>
+            <div class="level-status-tag good" id="tagLowCloud">通透無阻</div>
+          </div>
+        </div>
+
+        <div class="cross-section-footer">
+          <span>💡 物理原理：</span>
+          <span id="physicsExplanation">低雲稀疏使地平線夕陽長波紅光無阻直射，照亮高空卷雲底部形成漫天火燒。</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ==========================================
+         天文日照時間軸 (Solar Timeline)
+         ========================================== -->
+    <section class="solar-timeline-section">
+      <div class="section-header-row">
+        <h2 class="section-title"><span>🧭</span> 台北今日太陽運動與色溫時程表</h2>
+        <span class="info-chip">台北標準時間 (UTC+8)</span>
+      </div>
+
+      <div class="timeline-cards-row">
+        <div class="solar-event-card" id="cardDawn">
+          <div class="event-phase-name"><span>🌌</span> 民用曙光 (Civil Dawn)</div>
+          <div class="event-time-val" id="timeCivilDawn">05:08</div>
+          <div class="event-desc">天際泛微白，晨曦微光</div>
+        </div>
+        <div class="solar-event-card" id="cardSunrise">
+          <div class="event-phase-name"><span>🌅</span> 日出時刻 (Sunrise)</div>
+          <div class="event-time-val" id="timeSunrise">05:32</div>
+          <div class="event-desc">太陽躍出東方地平線</div>
+        </div>
+        <div class="solar-event-card highlight" id="cardSunsetWindow">
+          <div class="event-phase-name"><span>🔥</span> 火燒雲高峰 (Peak Glow)</div>
+          <div class="event-time-val" id="timeSkyfirePeak">18:45</div>
+          <div class="event-desc">全天空色彩最濃郁飽和時段</div>
+        </div>
+        <div class="solar-event-card" id="cardSunset">
+          <div class="event-phase-name"><span>🌇</span> 日落時刻 (Sunset)</div>
+          <div class="event-time-val" id="timeSunset">18:35</div>
+          <div class="event-desc">太陽沒入西方地平線</div>
+        </div>
+        <div class="solar-event-card" id="cardBlueHour">
+          <div class="event-phase-name"><span>🏙️</span> 藍調時刻 (Blue Hour)</div>
+          <div class="event-time-val" id="timeBlueHour">18:55</div>
+          <div class="event-desc">城市點燈與深藍夜空交織</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         未來 5 日火燒雲趨勢預報 (5-Day Deck)
+         ========================================== -->
+    <section class="forecast-5day-section">
+      <div class="section-header-row">
+        <h2 class="section-title"><span>📅</span> 未來一週台北霞光趨勢預報</h2>
+        <span class="info-chip">點擊卡片可切換預報詳情</span>
+      </div>
+
+      <div class="days-forecast-grid" id="daysForecastContainer">
+        <!-- 由 JavaScript 動態渲染 6 天的預報卡片 -->
+      </div>
+    </section>
+
+    <!-- ==========================================
+         台北 12 大火燒雲熱點地圖與機位手冊
+         ========================================== -->
+    <section class="spots-section">
+      <div class="section-header-row">
+        <h2 class="section-title"><span>🗺️</span> 台北 12 大火燒雲經典攝影機位與方位導航</h2>
+        <span class="info-chip">含即時夕陽方位角光錐</span>
+      </div>
+
+      <div class="spots-layout-grid">
+        <!-- 互動地圖 -->
+        <div class="map-container-card">
+          <div class="map-floating-overlay">
+            <span class="azimuth-compass-indicator"></span>
+            <span id="sunAzimuthOverlay">今日日落太陽方位角：292° (西北西)</span>
+          </div>
+          <div id="taipeiMap"></div>
+        </div>
+
+        <!-- 景點手冊列表 -->
+        <div class="spots-list-wrapper">
+          <div class="spots-filter-bar">
+            <button class="filter-chip active" data-filter="all">全部機位 (12)</button>
+            <button class="filter-chip" data-filter="sunset">🌇 日落首選 (8)</button>
+            <button class="filter-chip" data-filter="sunrise">🌅 日出晨曦 (2)</button>
+            <button class="filter-chip" data-filter="both">🔄 晨昏雙絕 (2)</button>
+          </div>
+
+          <div class="spots-scroll-container" id="spotsListContainer">
+            <!-- 由 JavaScript 動態生成機位卡片 -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         攝影師隨身小抄與相機參數指南
+         ========================================== -->
+    <section class="photo-guide-section">
+      <div class="section-header-row">
+        <h2 class="section-title"><span>📷</span> 攝影師隨身小抄：火燒雲拍攝最佳設定</h2>
+      </div>
+
+      <div class="photo-tips-grid">
+        <div class="photo-tip-card">
+          <div class="tip-card-header">
+            <span>⚙️</span> 單眼/微單相機曝光參數
+          </div>
+          <ul class="tip-param-list">
+            <li class="tip-param-item"><strong>拍攝模式：</strong>光圈先決 (A/Av) 或手動 (M)</li>
+            <li class="tip-param-item"><strong>最佳光圈：</strong>f/8 - f/11 (最佳景深與畫質)</li>
+            <li class="tip-param-item"><strong>感光度：</strong>ISO 100 (純淨無雜訊)</li>
+            <li class="tip-param-item"><strong>曝光補償：</strong>-0.7 EV 至 -1.0 EV (保護高光)</li>
+            <li class="tip-param-item"><strong>白平衡：</strong>5800K - 6500K 或陰影白平衡</li>
+          </ul>
+        </div>
+
+        <div class="photo-tip-card">
+          <div class="tip-card-header">
+            <span>🔭</span> 濾鏡與鏡頭焦段搭配
+          </div>
+          <ul class="tip-param-list">
+            <li class="tip-param-item"><strong>減光鏡：</strong>0.9 (3-stop) 軟式漸變減光鏡 (GND)</li>
+            <li class="tip-param-item"><strong>偏光鏡：</strong>CPL 旋轉至適當角度增強對比</li>
+            <li class="tip-param-item"><strong>廣角鏡頭：</strong>16-35mm (捕捉全天空漫天燃燒)</li>
+            <li class="tip-param-item"><strong>望遠鏡頭：</strong>70-200mm (特寫地標夕陽剪影)</li>
+            <li class="tip-param-item"><strong>必備配件：</strong>穩固三腳架、快門線、防潮布</li>
+          </ul>
+        </div>
+
+        <div class="photo-tip-card">
+          <div class="tip-card-header">
+            <span>📱</span> 智慧型手機火燒雲實用技巧
+          </div>
+          <ul class="tip-param-list">
+            <li class="tip-param-item"><strong>測光技巧：</strong>長按對焦在亮部雲彩，下拉小太陽降曝光</li>
+            <li class="tip-param-item"><strong>HDR 模式：</strong>開啟 Smart HDR / 自動 HDR 保留暗部細節</li>
+            <li class="tip-param-item"><strong>廣角切換：</strong>切換至 0.5x 超廣角呈現壯闊張力</li>
+            <li class="tip-param-item"><strong>格式建議：</strong>開啟 Apple ProRAW 或 RAW 格式便於後製</li>
+            <li class="tip-param-item"><strong>延時攝影：</strong>架設手機開啟縮時攝影 (Time-lapse)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         頁尾資訊
+         ========================================== -->
+    <footer class="site-footer">
+      <div class="footer-links">
+        <a href="#taipeiMap">攝影機位地圖</a>
+        <a href="javascript:void(0)" id="footerOpenSim">氣象沙盒</a>
+        <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo API</a>
+        <a href="https://www.cwa.gov.tw/" target="_blank" rel="noopener">中央氣象署 CWA</a>
+      </div>
+      <p>© 2026 Taipei SkyFire 霞光台北 • 專為大台北天空守望者打造 • 數據每 15 分鐘自動刷新</p>
+    </footer>
+
+  </div>
+
+  <!-- ==========================================
+       自訂氣象沙盒模擬器 Modal (Sandbox Modal)
+       ========================================== -->
+  <div class="modal-backdrop" id="simulatorModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><span>🧪</span> 火燒雲氣象物理沙盒模擬器</h3>
+        <button class="modal-close-btn" id="btnCloseSimulator">✕</button>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 18px;">
+        您可以隨意調整下方大氣各高度雲量與能見度滑桿，即時測試不同氣象條件對台北火燒雲形成的影響！
+      </p>
+
+      <div class="slider-group">
+        <div class="slider-header">
+          <span>🟣 高空卷雲量 (6,000m+)</span>
+          <span id="valSimHigh">55%</span>
+        </div>
+        <input type="range" class="slider-input" id="sliderSimHigh" min="0" max="100" value="55">
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-header">
+          <span>🟠 中空積雲量 (2,000 - 6,000m)</span>
+          <span id="valSimMid">40%</span>
+        </div>
+        <input type="range" class="slider-input" id="sliderSimMid" min="0" max="100" value="40">
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-header">
+          <span>⚪ 低空層雲量 (&lt; 2,000m - 遮擋阻礙)</span>
+          <span id="valSimLow">15%</span>
+        </div>
+        <input type="range" class="slider-input" id="sliderSimLow" min="0" max="100" value="15">
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-header">
+          <span>🔭 大氣能見度 (Visibility)</span>
+          <span id="valSimVis">25 km</span>
+        </div>
+        <input type="range" class="slider-input" id="sliderSimVis" min="2" max="35" value="25">
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-header">
+          <span>🌅 遠方地平線透光窗 (Clearance)</span>
+          <span id="valSimHorizon">88%</span>
+        </div>
+        <input type="range" class="slider-input" id="sliderSimHorizon" min="0" max="100" value="88">
+      </div>
+
+      <div class="sim-preview-box">
+        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 6px;">即時模擬火燒雲指數預測結果：</div>
+        <div style="font-size: 2.2rem; font-weight: 900; color: #ff6b00;" id="simResultScore">86 分</div>
+        <div style="font-size: 1.05rem; font-weight: 700;" id="simResultRating">🔥 壯麗火燒雲</div>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 8px;" id="simResultDesc">
+          高雲適量接收晚霞紅光，低雲無遮擋，夕陽可直射雲底！
+        </p>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 20px;">
+        <button class="btn-pill" id="btnResetSimulator">重設為預設理想值</button>
+        <button class="btn-pill primary" id="btnApplySimulator">套用模擬結果至主頁面</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leaflet Map JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <!-- 應用程式模組 -->
+  <script src="js/solar-calc.js"></script>
+  <script src="js/skyfire-engine.js"></script>
+  <script src="js/spots-data.js"></script>
+  <script src="js/weather-service.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
