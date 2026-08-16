@@ -671,6 +671,29 @@ class SkyFireApp {
         this.renderSpotsList(chip.dataset.filter);
       });
     });
+
+    // 今日出景實況眾包回報 (Ground Truth Feedback)
+    document.querySelectorAll('.feedback-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const rating = btn.dataset.rating;
+        const group = document.getElementById('feedbackBtnGroup');
+        const thanks = document.getElementById('feedbackThanksMsg');
+        
+        // 儲存至本機快取
+        try {
+          const feedbackLog = JSON.parse(localStorage.getItem('skyfire_feedback_log') || '[]');
+          feedbackLog.push({
+            timestamp: new Date().toISOString(),
+            reportedRating: rating,
+            modelScore: this.getActiveSessionData()?.skyfire?.score || null
+          });
+          localStorage.setItem('skyfire_feedback_log', JSON.stringify(feedbackLog));
+        } catch (err) {}
+
+        if (group) group.style.display = 'none';
+        if (thanks) thanks.style.display = 'block';
+      });
+    });
   }
 }
 

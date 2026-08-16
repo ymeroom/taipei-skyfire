@@ -63,8 +63,11 @@
         <a href="#scienceSection" class="btn-pill" style="text-decoration: none;">
           <span>🔬</span> 科學原理
         </a>
+        <a href="#verifySection" class="btn-pill" style="text-decoration: none;">
+          <span>🎯</span> 實況驗證
+        </a>
         <button class="btn-pill" id="btnOpenSimulator" title="開啟氣象參數模擬器">
-          <span>🧪</span> 氣象沙盒模擬
+          <span>🧪</span> 氣象沙盒
         </button>
         <button class="btn-pill primary" id="btnRefreshWeather" title="重新整理氣象數據">
           <span>🔄</span> 更新預報
@@ -461,6 +464,70 @@
         <p>
           當評分達 <strong>82 分以上</strong>，代表高空反射面充足、低空無阻擋且遠方地平透光窗口完全開啟，屬於全台北洗版級的史詩火燒雲！
         </p>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         即時出景驗證與社群回饋閉環專區 (Ground Truth Loop)
+         ========================================== -->
+    <section class="science-section" id="verifySection">
+      <div class="section-header-row">
+        <h2 class="section-title"><span>🎯</span> 實況出景驗證與社群持續改進回饋（Ground Truth Loop）</h2>
+        <span class="info-chip">自適應演算法校準</span>
+      </div>
+
+      <div class="science-grid">
+        <!-- 4K 即時攝影機觀測站 -->
+        <div class="science-card">
+          <div class="science-card-header">
+            <span>📹</span> 台北 4K 即時天色影像觀測站
+          </div>
+          <div class="science-card-body">
+            <p>
+              透過台北市公開高畫質 4K 即時攝影機，可隨時線上驗證當前天際線色溫與晚霞燃燒狀況：
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 14px;">
+              <a href="https://www.youtube.com/watch?v=z_fY1pj_SSk" target="_blank" rel="noopener" class="btn-pill" style="text-decoration: none; justify-content: flex-start;">
+                <span>🏙️</span> 象山看台北 101 4K 即時影像（西向全景）
+              </a>
+              <a href="https://www.youtube.com/watch?v=Ndo_8Ruefoc" target="_blank" rel="noopener" class="btn-pill" style="text-decoration: none; justify-content: flex-start;">
+                <span>🚢</span> 大稻埕碼頭 4K 即時影像（淡水河落日）
+              </a>
+              <a href="https://www.youtube.com/watch?v=4rk_Pbg_p9I" target="_blank" rel="noopener" class="btn-pill" style="text-decoration: none; justify-content: flex-start;">
+                <span>🌉</span> 淡水漁人碼頭 4K 即時影像（海平面落日）
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 現場攝影師出景打卡回饋 -->
+        <div class="science-card">
+          <div class="science-card-header">
+            <span>🗳️</span> 今日出景實況眾包回報 (Crowdsourced Feedback)
+          </div>
+          <div class="science-card-body">
+            <p>
+              您正在現場拍火燒雲嗎？請為今日台北出景狀況打分，協助我們的自適應演算法進行誤差校準：
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 14px 0;" id="feedbackBtnGroup">
+              <button class="btn-pill feedback-btn" data-rating="epic" style="justify-content: center;">
+                🌟 史詩級大景
+              </button>
+              <button class="btn-pill feedback-btn" data-rating="great" style="justify-content: center;">
+                🔥 壯麗火燒雲
+              </button>
+              <button class="btn-pill feedback-btn" data-rating="moderate" style="justify-content: center;">
+                ⛅ 局部微霞
+              </button>
+              <button class="btn-pill feedback-btn" data-rating="overcast" style="justify-content: center;">
+                ☁️ 槓龜陰暗
+              </button>
+            </div>
+            <div id="feedbackThanksMsg" style="display: none; padding: 10px; background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: var(--radius-md); font-size: 0.82rem; color: #4ade80; text-align: center;">
+              ✅ 感謝您的現場回報！觀測數據已納入今日模型校準回饋庫。
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
