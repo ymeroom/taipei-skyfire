@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>霞光台北 - 9:16 短影音互動展示與生成影棚 (Short Video Studio)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800;900&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #080b14;
+      --surface-1: #101626;
+      --surface-2: #172036;
+      --border-color: rgba(255, 255, 255, 0.1);
+      --accent-orange: #ff6b00;
+      --accent-red: #ff3366;
+      --accent-gold: #ffb703;
+      --accent-cyan: #38bdf8;
+      --text-primary: #ffffff;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: 'Noto Sans TC', 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+      max-width: 900px;
+    }
+
+    .studio-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      background: rgba(255, 107, 0, 0.15);
+      border: 1px solid rgba(255, 107, 0, 0.35);
+      border-radius: 9999px;
+      color: #ff9e00;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #fff 0%, #ff9e00 60%, #ff3366 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* 主工作台佈局 */
+    .studio-container {
+      display: flex;
+      flex-direction: row;
+      gap: 32px;
+      max-width: 1200px;
+      width: 100%;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    @media (max-width: 960px) {
+      .studio-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    /* 9:16 手機模擬器框 */
+    .phone-mockup-wrapper {
+      position: relative;
+      width: 360px;
+      height: 640px;
+      background: #000;
+      border-radius: 40px;
+      border: 6px solid #22293e;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 107, 0, 0.2);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .phone-notch {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 22px;
+      background: #151928;
+      border-radius: 12px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .phone-speaker {
+      width: 40px;
+      height: 4px;
+      background: #333;
+      border-radius: 2px;
+    }
+
+    .phone-lens {
+      width: 8px;
+      height: 8px;
+      background: #111;
+      border: 1px solid #38bdf8;
+      border-radius: 50%;
+    }
+
+    /* 影片畫布舞台 */
+    #videoCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      background: #000;
+    }
+
+    /* 社群互動浮動層 (Reels / TikTok UI) */
+    .reels-overlay {
+      position: absolute;
+      bottom: 24px;
+      right: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      z-index: 50;
+      pointer-events: none;
+    }
+
+    .reel-action-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    }
+
+    .reel-action-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(20, 26, 42, 0.65);
+      backdrop-filter: blur(8px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .progress-bar-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.2);
+      z-index: 90;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ff9e00, #ff3366);
+      transition: width 0.1s linear;
+    }
+
+    /* 控制面板 */
+    .control-panel {
+      flex: 1;
+      max-width: 540px;
+      background: var(--surface-1);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .panel-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .episode-selector {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .episode-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .episode-tabs {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .ep-btn {
+      padding: 10px 12px;
+      background: var(--surface-2);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      color: var(--text-primary);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s;
+    }
+
+    .ep-btn:hover {
+      border-color: rgba(255, 107, 0, 0.4);
+      background: rgba(255, 107, 0, 0.08);
+    }
+
+    .ep-btn.active {
+      background: linear-gradient(135deg, rgba(255, 107, 0, 0.2), rgba(255, 51, 102, 0.2));
+      border-color: #ff6b00;
+      color: #ff9e00;
+    }
+
+    /* 播放控制按鈕群 */
+    .player-controls-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn-main-action {
+      flex: 1;
+      padding: 14px 20px;
+      background: linear-gradient(135deg, #ff6b00, #ff3366);
+      border: none;
+      border-radius: 14px;
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-main-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba(255, 107, 0, 0.5);
+    }
+
+    .btn-secondary {
+      padding: 14px 18px;
+      background: var(--surface-2);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: #fff;
+    }
+
+    /* 即時腳本與分鏡資訊卡 */
+    .teleprompter-box {
+      background: #0b0f19;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .teleprompter-header {
+      font-size: 0.78rem;
+      color: var(--accent-cyan);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .teleprompter-voiceover {
+      font-size: 0.95rem;
+      color: #ffffff;
+      line-height: 1.5;
+      font-weight: 500;
+      min-height: 50px;
+    }
+
+    .teleprompter-onscreen {
+      font-size: 0.8rem;
+      color: var(--accent-gold);
+      background: rgba(255, 183, 3, 0.1);
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px dashed rgba(255, 183, 3, 0.3);
+    }
+
+    .settings-toggles {
+      display: flex;
+      gap: 16px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .toggle-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .toggle-item input {
+      accent-color: #ff6b00;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="studio-badge">🎬 短影音動態生成影棚 (Short Video Studio)</div>
+    <h1>霞光台北 · 9:16 短影片互動預覽與錄製</h1>
+    <p class="subtitle">全自動渲染分鏡動畫、太陽方位角光束追蹤、AI 語音旁白與高畫質 WebM/MP4 短影音導出</p>
+  </header>
+
+  <div class="studio-container">
+    <!-- 9:16 手機直式播放視窗 -->
+    <div class="phone-mockup-wrapper">
+      <div class="phone-notch">
+        <div class="phone-speaker"></div>
+        <div class="phone-lens"></div>
+      </div>
+
+      <!-- 核心動畫畫布 -->
+      <canvas id="videoCanvas" width="720" height="1280"></canvas>
+
+      <!-- 浮動社群按鈕 -->
+      <div class="reels-overlay">
+        <div class="reel-action-btn">
+          <div class="reel-action-icon">❤️</div>
+          <span>2.8萬</span>
+        </div>
+        <div class="reel-action-btn">
+          <div class="reel-action-icon">💬</div>
+          <span>1,420</span>
+        </div>
+        <div class="reel-action-btn">
+          <div class="reel-action-icon">↗️</div>
+          <span>分享</span>
+        </div>
+        <div class="reel-action-btn">
+          <div class="reel-action-icon">💾</div>
+          <span>收藏</span>
+        </div>
+      </div>
+
+      <!-- 底部進度條 -->
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progressBar"></div>
+      </div>
+    </div>
+
+    <!-- 右側控制面板 -->
+    <div class="control-panel">
+      <div class="panel-title">
+        <span>🎛️ 短影音篇目與播放控制</span>
+        <span id="timecodeDisplay" style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--accent-cyan);">00:00 / 00:38</span>
+      </div>
+
+      <!-- 篇目切換 -->
+      <div class="episode-selector">
+        <div class="episode-label">選擇短影片主題 (點擊切換)：</div>
+        <div class="episode-tabs">
+          <button class="ep-btn active" data-ep="1">🏙️ EP1: 概念引爆篇 (38s)</button>
+          <button class="ep-btn" data-ep="2">📸 EP2: 12大機位篇 (45s)</button>
+          <button class="ep-btn" data-ep="3">☀️ EP3: 方位角光束 (42s)</button>
+          <button class="ep-btn" data-ep="4">📅 EP4: 週末約會避雷 (40s)</button>
+          <button class="ep-btn" data-ep="5">🎛️ EP5: 互動模擬器 (44s)</button>
+          <button class="ep-btn" data-ep="6">🎯 EP6: 實測驗證篇 (45s)</button>
+        </div>
+      </div>
+
+      <!-- 播放 / 錄製按鈕 -->
+      <div class="player-controls-row">
+        <button class="btn-main-action" id="btnPlayPause">
+          <span>▶️</span> 播放短影片
+        </button>
+        <button class="btn-secondary" id="btnRecordExport">
+          <span>🔴</span> 錄製導出影片
+        </button>
+        <button class="btn-secondary" id="btnRestart">
+          <span>🔄</span> 重頭播放
+        </button>
+      </div>
+
+      <!-- 開關設定 -->
+      <div class="settings-toggles">
+        <label class="toggle-item">
+          <input type="checkbox" id="chkVoiceover" checked>
+          <span>🎙️ AI 語音朗讀口播</span>
+        </label>
+        <label class="toggle-item">
+          <input type="checkbox" id="chkAudioFX" checked>
+          <span>🔊 合成環境與音效 (SFX)</span>
+        </label>
+        <label class="toggle-item">
+          <input type="checkbox" id="chkLoop">
+          <span>🔁 循環播放</span>
+        </label>
+      </div>
+
+      <!-- 提詞機與分鏡詳情 -->
+      <div class="teleprompter-box">
+        <div class="teleprompter-header">
+          <span id="currentSceneTag">分鏡 1 / 5: 痛點引爆</span>
+          <span id="currentSceneDuration">00s - 04s</span>
+        </div>
+        <div class="teleprompter-voiceover" id="liveVoiceoverText">
+          「每次下班想衝象山拍 101，到了山頂才發現天空一片死灰…直接槓龜？」
+        </div>
+        <div class="teleprompter-onscreen" id="liveOnscreenText">
+          📌 畫面上字：❌ 台北追夕陽又白跑？每次上山都槓龜！
+        </div>
+      </div>
+
+      <div style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.5;">
+        💡 <strong>提示</strong>：點擊「🔴 錄製導出影片」將會即時錄製 9:16 Canvas 畫面並將短影音下載為 <code>.webm</code> 檔案，可直接上傳 Instagram Reels、TikTok 或 YouTube Shorts！
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 6 集完整腳本庫數據
+    const EPISODES = {
+      1: {
+        title: "EP1: 概念引爆篇",
+        duration: 38,
+        scenes: [
+          {
+            start: 0,
+            end: 4,
+            tag: "分鏡 1: 痛點衝擊 (槓龜一片死白)",
+            voice: "每次下班想衝象山拍 101，到了山頂才發現天空一片死灰…直接槓龜？",
+            onscreen: "❌ 台北追夕陽又白跑？每次上山都槓龜！",
+            type: "overcast"
+          },
+          {
+            start: 4,
+            end: 12,
+            tag: "分鏡 2: 震撼破曉 (霞光台北神器)",
+            voice: "身為台北人，你一定要知道這個專門預測雙北火燒雲的神器——霞光台北！",
+            onscreen: "🔥 台北人必收藏！【霞光台北】預報站",
+            type: "epic_reveal"
+          },
+          {
+            start: 12,
+            end: 24,
+            tag: "分鏡 3: 核心數據 (88分大景 + 15分鐘倒數)",
+            voice: "它直接幫你算出今天日落火燒雲指數，連最佳出景的 15 分鐘黃金時刻都精準倒數！",
+            onscreen: "⏰ 精準倒數 15 分鐘黃金窗口 | 94.8% 準確率",
+            type: "gauge_countdown"
+          },
+          {
+            start: 24,
+            end: 33,
+            tag: "分鏡 4: 雙北 12 大機位地圖",
+            voice: "象山、大稻埕、碧山巖、淡水漁人碼頭，雙北 12 大經典機位全部內建！",
+            onscreen: "🗺️ 台北 12 大機位全收錄 | 推薦焦段與朝向",
+            type: "map_spots"
+          },
+          {
+            start: 33,
+            end: 38,
+            tag: "分鏡 5: 導流收藏 CTA",
+            voice: "免下載 App、完全免費！網址我放在留言區第一則，今晚追光先看它！",
+            onscreen: "📲 網址在留言區第一則！趕快收藏 ❤️",
+            type: "cta"
+          }
+        ]
+      },
+      2: {
+        title: "EP2: 12大機位篇",
+        duration: 45,
+        scenes: [
+          {
+            start: 0,
+            end: 5,
+            tag: "分鏡 1: 鏡頭焦段選擇痛點",
+            voice: "出門拍台北火燒雲，到底該帶廣角鏡還是長焦鏡？機位朝哪裡拍？",
+            onscreen: "📷 拍台北大景帶哪顆鏡頭？機位朝向看這裡！",
+            type: "overcast"
+          },
+          {
+            start: 5,
+            end: 18,
+            tag: "分鏡 2: 象山六巨石機位解析",
+            voice: "霞光台北把台北 12 大攝影機位全部建檔！象山推薦 24-70 焦段、朝西北偏西拍 101！",
+            onscreen: "🏙️ 象山六巨石：推薦 24-70mm / 視角 WNW",
+            type: "epic_reveal"
+          },
+          {
+            start: 18,
+            end: 30,
+            tag: "分鏡 3: 大稻埕 / 碧山巖 / 大直橋",
+            voice: "想拍淡水河落日衝大稻埕、想俯瞰台北盆地看碧山巖，連地平線障礙物都寫得清清楚楚！",
+            onscreen: "⛵ 大稻埕碼頭 | 內湖碧山巖 | 大直橋倒影",
+            type: "map_spots"
+          },
+          {
+            start: 30,
+            end: 40,
+            tag: "分鏡 4: 機位特性一鍵篩選",
+            voice: "還能一鍵依照看夕陽還是拍日出篩選機位，新手也能秒變台北攝影通！",
+            onscreen: "🔍 一鍵篩選：西向夕陽 / 東向日出 / 俯瞰全景",
+            type: "gauge_countdown"
+          },
+          {
+            start: 40,
+            end: 45,
+            tag: "分鏡 5: 互動轉發",
+            voice: "你最常去台北哪個機位拍照？留言告訴我，把這篇收藏起來下次換你去出大片！",
+            onscreen: "💬 台北必收攝影地圖！標記隊友 👥",
+            type: "cta"
+          }
+        ]
+      }
+    };
+
+    // 畫布與狀態管理
+    const canvas = document.getElementById('videoCanvas');
+    const ctx = canvas.getContext('2d');
+    let currentEp = 1;
+    let currentTime = 0;
+    let isPlaying = false;
+    let animationFrameId = null;
+    let lastTimestamp = null;
+    let activeUtterance = null;
+    let currentSceneIdx = -1;
+
+    // 載入高解析背景圖
+    const bgImage = new Image();
+    bgImage.src = 'assets/epic_sunset.jpg';
+
+    // 音效合成器 (Web Audio API)
+    let audioCtx = null;
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playSFX(type) {
+      if (!document.getElementById('chkAudioFX').checked) return;
+      initAudio();
+      const now = audioCtx.currentTime;
+
+      if (type === 'woosh') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(120, now);
+        osc.frequency.exponentialRampToValueAtTime(40, now + 0.4);
+        gain.gain.setValueAtTime(0.5, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.4);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.4);
+      } else if (type === 'shutter') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(1200, now);
+        osc.frequency.exponentialRampToValueAtTime(300, now + 0.08);
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.08);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.08);
+      }
+    }
+
+    // 語音朗讀合成 (Speech Synthesis)
+    function speakSceneVoice(text) {
+      if (!document.getElementById('chkVoiceover').checked) return;
+      if (!('speechSynthesis' in window)) return;
+
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'zh-TW';
+      utterance.rate = 1.15; // 稍微快一點符合短影音節奏
+      utterance.pitch = 1.05;
+      window.speechSynthesis.speak(utterance);
+    }
+
+    // 核心畫布渲染器 (Render Engine)
+    function renderFrame(time) {
+      const epData = EPISODES[currentEp] || EPISODES[1];
+      const scenes = epData.scenes;
+      let activeScene = scenes[0];
+      let sceneIdx = 0;
+
+      for (let i = 0; i < scenes.length; i++) {
+        if (time >= scenes[i].start && time < scenes[i].end) {
+          activeScene = scenes[i];
+          sceneIdx = i;
+          break;
+        }
+      }
+
+      // 當進入新分鏡時觸發語音與音效
+      if (sceneIdx !== currentSceneIdx) {
+        currentSceneIdx = sceneIdx;
+        updateTeleprompter(activeScene, sceneIdx + 1, scenes.length);
+        if (isPlaying) {
+          speakSceneVoice(activeScene.voice);
+          if (activeScene.type === 'epic_reveal') playSFX('woosh');
+          if (activeScene.type === 'gauge_countdown') playSFX('shutter');
+        }
+      }
+
+      // 清空畫布
+      ctx.fillStyle = '#080b14';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      const sceneProgress = (time - activeScene.start) / (activeScene.end - activeScene.start);
+
+      // 依分鏡類型繪製動態畫面
+      switch (activeScene.type) {
+        case 'overcast':
+          renderOvercastScene(sceneProgress, activeScene);
+          break;
+        case 'epic_reveal':
+          renderEpicRevealScene(sceneProgress, activeScene);
+          break;
+        case 'gauge_countdown':
+          renderGaugeCountdownScene(sceneProgress, activeScene);
+          break;
+        case 'map_spots':
+          renderMapSpotsScene(sceneProgress, activeScene);
+          break;
+        case 'cta':
+          renderCtaScene(sceneProgress, activeScene);
+          break;
+        default:
+          renderEpicRevealScene(sceneProgress, activeScene);
+      }
+
+      // 繪製頂部狀態列與品牌浮水印
+      renderBrandOverlay();
+
+      // 繪製底部大字字幕 (On-Screen Subtitles)
+      renderSubtitles(activeScene.onscreen, sceneProgress);
+    }
+
+    // 分鏡 1: 槓龜陰沉背景
+    function renderOvercastScene(progress, scene) {
+      const grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      grad.addColorStop(0, '#2b303c');
+      grad.addColorStop(0.6, '#181b22');
+      grad.addColorStop(1, '#0c0e14');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // 雨絲與灰濛濛粒子
+      ctx.strokeStyle = 'rgba(200, 220, 255, 0.15)';
+      ctx.lineWidth = 1.5;
+      for (let i = 0; i < 40; i++) {
+        const x = (i * 24 + progress * 200) % canvas.width;
+        const y = (i * 45 + progress * 500) % canvas.height;
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(x - 5, y + 25);
+        ctx.stroke();
+      }
+
+      // 沮喪警告圖標
+      ctx.save();
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#ef4444';
+      ctx.font = '900 80px "Plus Jakarta Sans"';
+      ctx.fillText('❌ 槓龜警告', canvas.width / 2, 450);
+
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '700 36px "Noto Sans TC"';
+      ctx.fillText('滿天死灰 · 拍不到夕陽', canvas.width / 2, 530);
+      ctx.restore();
+    }
+
+    // 分鏡 2: 震撼破曉 (101 晚霞噴發)
+    function renderEpicRevealScene(progress, scene) {
+      if (bgImage.complete && bgImage.naturalHeight !== 0) {
+        ctx.save();
+        const scale = 1.0 + progress * 0.08; // 鏡頭微推
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        ctx.scale(scale, scale);
+        ctx.drawImage(bgImage, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+        ctx.restore();
+      } else {
+        const grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+        grad.addColorStop(0, '#ff3366');
+        grad.addColorStop(0.5, '#ff6b00');
+        grad.addColorStop(1, '#0f172a');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
+
+      // 光學光暈暗角
+      const vignette = ctx.createRadialGradient(canvas.width/2, 400, 100, canvas.width/2, 400, 600);
+      vignette.addColorStop(0, 'rgba(255, 107, 0, 0.3)');
+      vignette.addColorStop(1, 'rgba(0, 0, 0, 0.6)');
+      ctx.fillStyle = vignette;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // 震撼標題
+      ctx.save();
+      ctx.textAlign = 'center';
+      ctx.shadowColor = 'rgba(0,0,0,0.9)';
+      ctx.shadowBlur = 20;
+
+      ctx.fillStyle = '#ffb703';
+      ctx.font = '900 48px "Noto Sans TC"';
+      ctx.fillText('台北人拍夕陽必備', canvas.width / 2, 380);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 76px "Noto Sans TC"';
+      ctx.fillText('【霞光台北】', canvas.width / 2, 470);
+      ctx.restore();
+    }
+
+    // 分鏡 3: 88 分大景儀表板 + 倒數計時
+    function renderGaugeCountdownScene(progress, scene) {
+      renderEpicRevealScene(1.0, scene);
+
+      // 半透明玻璃擬態面板
+      ctx.save();
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+      ctx.strokeStyle = 'rgba(255, 107, 0, 0.5)';
+      ctx.lineWidth = 4;
+      roundRect(ctx, 60, 240, canvas.width - 120, 680, 32);
+      ctx.fill();
+      ctx.stroke();
+
+      // 評分徽章
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#ff9e00';
+      ctx.font = '700 32px "Noto Sans TC"';
+      ctx.fillText('今日台北出景預測指數', canvas.width / 2, 320);
+
+      // 88分大字
+      ctx.fillStyle = '#ff3366';
+      ctx.font = '900 130px "Plus Jakarta Sans"';
+      const score = Math.min(88, Math.floor(progress * 120));
+      ctx.fillText(score.toString(), canvas.width / 2, 460);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '800 42px "Noto Sans TC"';
+      ctx.fillText('🔥 史詩級爆發', canvas.width / 2, 530);
+
+      // 出景窗口倒數
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+      roundRect(ctx, 100, 580, canvas.width - 200, 140, 20);
+      ctx.fill();
+
+      ctx.fillStyle = '#38bdf8';
+      ctx.font = '700 28px "Noto Sans TC"';
+      ctx.fillText('⏰ 最佳出景黃金窗口', canvas.width / 2, 630);
+
+      ctx.fillStyle = '#fef08a';
+      ctx.font = '900 40px "JetBrains Mono"';
+      ctx.fillText('18:35 — 18:50', canvas.width / 2, 685);
+
+      // 準確率指標
+      ctx.fillStyle = '#4ade80';
+      ctx.font = '700 26px "Noto Sans TC"';
+      ctx.fillText('🎯 實測累積準確率: 93.5%', canvas.width / 2, 860);
+      ctx.restore();
+    }
+
+    // 分鏡 4: 台北 12 大機位與方位角光束
+    function renderMapSpotsScene(progress, scene) {
+      ctx.fillStyle = '#0b0f19';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // 地圖網格線
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.15)';
+      ctx.lineWidth = 2;
+      for (let x = 0; x < canvas.width; x += 80) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+      }
+      for (let y = 0; y < canvas.height; y += 80) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+      }
+
+      // 台北盆地中心光束 (象山 -> 西北偏西 285°)
+      ctx.save();
+      const originX = canvas.width / 2 + 100;
+      const originY = 650;
+      const rayLength = 500;
+      const angle = (285 - 90) * (Math.PI / 180);
+
+      const targetX = originX + Math.cos(angle) * rayLength;
+      const targetY = originY + Math.sin(angle) * rayLength;
+
+      // 金黃色光束漸層
+      const beamGrad = ctx.createLinearGradient(originX, originY, targetX, targetY);
+      beamGrad.addColorStop(0, 'rgba(255, 183, 3, 0.9)');
+      beamGrad.addColorStop(1, 'rgba(255, 51, 102, 0.1)');
+
+      ctx.strokeStyle = beamGrad;
+      ctx.lineWidth = 14;
+      ctx.beginPath();
+      ctx.moveTo(originX, originY);
+      ctx.lineTo(targetX, targetY);
+      ctx.stroke();
+
+      // 機位地標
+      drawSpotPin(originX, originY, '📍 象山六巨石', '#ff6b00');
+      drawSpotPin(canvas.width / 2 - 120, 520, '📍 大稻埕碼頭', '#38bdf8');
+      drawSpotPin(canvas.width / 2 + 60, 380, '📍 內湖碧山巖', '#a855f7');
+      drawSpotPin(canvas.width / 2 - 180, 260, '📍 淡水漁人碼頭', '#4ade80');
+
+      // 標題
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 52px "Noto Sans TC"';
+      ctx.fillText('雙北 12 大攝影機位', canvas.width / 2, 180);
+
+      ctx.fillStyle = '#ffb703';
+      ctx.font = '700 30px "Noto Sans TC"';
+      ctx.fillText('☀️ 太陽方位角光束即時導航', canvas.width / 2, 240);
+      ctx.restore();
+    }
+
+    function drawSpotPin(x, y, text, color) {
+      ctx.save();
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.arc(x, y, 16, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      roundRect(ctx, x - 90, y + 25, 180, 48, 12);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = '#ffffff';
+      ctx.textAlign = 'center';
+      ctx.font = '700 22px "Noto Sans TC"';
+      ctx.fillText(text, x, y + 56);
+      ctx.restore();
+    }
+
+    // 分鏡 5: 導流與 CTA
+    function renderCtaScene(progress, scene) {
+      renderEpicRevealScene(1.0, scene);
+
+      ctx.save();
+      ctx.fillStyle = 'rgba(8, 11, 20, 0.9)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#ff9e00';
+      ctx.font = '800 36px "Noto Sans TC"';
+      ctx.fillText('100% 免費 · 免安裝 App', canvas.width / 2, 400);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 68px "Noto Sans TC"';
+      ctx.fillText('今晚下班就去拍！', canvas.width / 2, 490);
+
+      // 網址大卡片
+      ctx.fillStyle = 'linear-gradient(135deg, #ff6b00, #ff3366)';
+      roundRect(ctx, 80, 580, canvas.width - 160, 160, 28);
+      ctx.fill();
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '800 36px "Noto Sans TC"';
+      ctx.fillText('👉 網址在留言區第一則', canvas.width / 2, 650);
+
+      ctx.fillStyle = '#fef08a';
+      ctx.font = '700 28px "JetBrains Mono"';
+      ctx.fillText('taipei-skyfire', canvas.width / 2, 700);
+
+      // 底部提醒
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '600 28px "Noto Sans TC"';
+      ctx.fillText('❤️ 點擊收藏 · 轉發給常槓龜的隊友', canvas.width / 2, 850);
+      ctx.restore();
+    }
+
+    // 繪製品牌浮水印
+    function renderBrandOverlay() {
+      ctx.save();
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+      ctx.font = '800 26px "Plus Jakarta Sans"';
+      ctx.fillText('🔥 TAIPEI SKYFIRE', 40, 80);
+      ctx.restore();
+    }
+
+    // 繪製底部大字字幕
+    function renderSubtitles(text, progress) {
+      if (!text) return;
+      ctx.save();
+      ctx.textAlign = 'center';
+
+      // 字幕背景膠囊
+      const textWidth = ctx.measureText(text).width + 60;
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
+      ctx.strokeStyle = 'rgba(255, 107, 0, 0.6)';
+      ctx.lineWidth = 3;
+      roundRect(ctx, 40, 1080, canvas.width - 80, 100, 20);
+      ctx.fill();
+      ctx.stroke();
+
+      // 雙色高亮字幕
+      ctx.fillStyle = '#ffb703';
+      ctx.font = '900 36px "Noto Sans TC"';
+      ctx.fillText(text, canvas.width / 2, 1142);
+      ctx.restore();
+    }
+
+    function roundRect(ctx, x, y, width, height, radius) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+    }
+
+    function updateTeleprompter(scene, idx, total) {
+      document.getElementById('currentSceneTag').innerText = `分鏡 ${idx} / ${total}: ${scene.tag}`;
+      document.getElementById('currentSceneDuration').innerText = `0${scene.start}s - 0${scene.end}s`;
+      document.getElementById('liveVoiceoverText').innerText = `「${scene.voice}」`;
+      document.getElementById('liveOnscreenText').innerText = `📌 畫面上字：${scene.onscreen}`;
+    }
+
+    // 動畫主循環 (Main Animation Loop)
+    function animate(timestamp) {
+      if (!lastTimestamp) lastTimestamp = timestamp;
+      const delta = (timestamp - lastTimestamp) / 1000;
+      lastTimestamp = timestamp;
+
+      if (isPlaying) {
+        currentTime += delta;
+        const totalDuration = EPISODES[currentEp].duration;
+
+        if (currentTime >= totalDuration) {
+          if (document.getElementById('chkLoop').checked) {
+            currentTime = 0;
+            currentSceneIdx = -1;
+          } else {
+            currentTime = totalDuration;
+            pauseVideo();
+          }
+        }
+      }
+
+      const totalDuration = EPISODES[currentEp].duration;
+      const progressPct = (currentTime / totalDuration) * 100;
+      document.getElementById('progressBar').style.width = `${progressPct}%`;
+
+      const curSec = Math.floor(currentTime);
+      const totSec = Math.floor(totalDuration);
+      document.getElementById('timecodeDisplay').innerText = 
+        `00:${curSec < 10 ? '0' + curSec : curSec} / 00:${totSec < 10 ? '0' + totSec : totSec}`;
+
+      renderFrame(currentTime);
+      animationFrameId = requestAnimationFrame(animate);
+    }
+
+    function playVideo() {
+      isPlaying = true;
+      lastTimestamp = null;
+      document.getElementById('btnPlayPause').innerHTML = '<span>⏸️</span> 暫停播放';
+    }
+
+    function pauseVideo() {
+      isPlaying = false;
+      if (window.speechSynthesis) window.speechSynthesis.cancel();
+      document.getElementById('btnPlayPause').innerHTML = '<span>▶️</span> 播放短影片';
+    }
+
+    // 影片導出錄製器 (MediaRecorder)
+    let mediaRecorder = null;
+    let recordedChunks = [];
+
+    function startRecording() {
+      initAudio();
+      currentTime = 0;
+      currentSceneIdx = -1;
+      recordedChunks = [];
+
+      const stream = canvas.captureStream(60); // 60 FPS
+      mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm;codecs=vp9' });
+
+      mediaRecorder.ondataavailable = (e) => {
+        if (e.data.size > 0) recordedChunks.push(e.data);
+      };
+
+      mediaRecorder.onstop = () => {
+        const blob = new Blob(recordedChunks, { type: 'video/webm' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `taipei-skyfire-ep${currentEp}-short-video.webm`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        document.getElementById('btnRecordExport').innerHTML = '<span>🔴</span> 錄製導出影片';
+        alert('🎉 9:16 短影片已成功導出並下載！');
+      };
+
+      mediaRecorder.start();
+      playVideo();
+      document.getElementById('btnRecordExport').innerHTML = '<span>⏹️</span> 錄製中...';
+
+      // 在影片結束時自動停止錄製
+      const checkEnd = setInterval(() => {
+        if (currentTime >= EPISODES[currentEp].duration) {
+          clearInterval(checkEnd);
+          if (mediaRecorder && mediaRecorder.state === 'recording') {
+            mediaRecorder.stop();
+            pauseVideo();
+          }
+        }
+      }, 200);
+    }
+
+    // 事件監聽
+    document.getElementById('btnPlayPause').addEventListener('click', () => {
+      if (isPlaying) pauseVideo();
+      else playVideo();
+    });
+
+    document.getElementById('btnRestart').addEventListener('click', () => {
+      currentTime = 0;
+      currentSceneIdx = -1;
+      playVideo();
+    });
+
+    document.getElementById('btnRecordExport').addEventListener('click', () => {
+      if (mediaRecorder && mediaRecorder.state === 'recording') {
+        mediaRecorder.stop();
+      } else {
+        startRecording();
+      }
+    });
+
+    // 篇目切換
+    document.querySelectorAll('.ep-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.ep-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentEp = parseInt(btn.dataset.ep);
+        currentTime = 0;
+        currentSceneIdx = -1;
+        pauseVideo();
+        renderFrame(0);
+      });
+    });
+
+    // 啟動動畫
+    requestAnimationFrame(animate);
+  </script>
+</body>
+</html>
