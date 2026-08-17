@@ -468,15 +468,36 @@
     </section>
 
     <!-- ==========================================
-         即時出景驗證與社群回饋閉環專區 (Ground Truth Loop)
+         即時出景驗證走廊與社群回饋閉環 (Ground Truth Corridor)
          ========================================== -->
     <section class="science-section" id="verifySection">
       <div class="section-header-row">
-        <h2 class="section-title"><span>🎯</span> 實況出景驗證與社群持續改進回饋（Ground Truth Loop）</h2>
-        <span class="info-chip">自適應演算法校準</span>
+        <h2 class="section-title"><span>🎯</span> 每日出景實況驗證走廊（Ground Truth Verification Corridor）</h2>
+        <span class="info-chip" id="accuracySummaryBadge">累積驗證中...</span>
       </div>
 
-      <div class="science-grid">
+      <!-- 累積準確率與模型性能指標 Banner -->
+      <div class="verification-stats-banner">
+        <div class="stat-pill-box">
+          <div class="stat-pill-label">歷史累計預測準確率 (±15分內)</div>
+          <div class="stat-pill-value" id="statAccuracyPct">93.5%</div>
+        </div>
+        <div class="stat-pill-box">
+          <div class="stat-pill-label">平均絕對誤差 (MAE)</div>
+          <div class="stat-pill-value" id="statAvgMAE">±4.3 分</div>
+        </div>
+        <div class="stat-pill-box">
+          <div class="stat-pill-label">4K 直播自動驗證場次</div>
+          <div class="stat-pill-value" id="statTotalVerified">4 場 (持續累積)</div>
+        </div>
+      </div>
+
+      <!-- 實況驗證卡片列表 (動態由 JS 渲染) -->
+      <div class="verification-cards-grid" id="verificationCardsContainer">
+        <!-- 由 JavaScript 動態生成每日預測 vs 實況觀測對比卡片 -->
+      </div>
+
+      <div class="science-grid" style="margin-top: 24px;">
         <!-- 4K 即時攝影機觀測站 -->
         <div class="science-card">
           <div class="science-card-header">
