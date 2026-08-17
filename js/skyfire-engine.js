@@ -4,6 +4,29 @@
  */
 
 class SkyFireEngine {
+  // 基準預設與自適應校準權重
+  static activeWeights = {
+    highCloudMax: 25.0,
+    highCloudOpt: 50.0,
+    midCloudMax: 20.0,
+    midCloudOpt: 42.0,
+    synergyBonus: 5.0,
+    lowCloudSlope: 0.85,
+    horizonMax: 30.0,
+    visMax: 15.0,
+    moistureMax: 8.0
+  };
+
+  /**
+   * 設定/更新自適應校準權重
+   * @param {Object} weights 
+   */
+  static setWeights(weights) {
+    if (weights && typeof weights === 'object') {
+      this.activeWeights = { ...this.activeWeights, ...weights };
+    }
+  }
+
   /**
    * 計算火燒雲預測評分
    * @param {Object} params 氣象與地理參數
@@ -17,9 +40,11 @@ class SkyFireEngine {
    * @param {number} [params.horizonClearance] 地平線透光度 (0-100%，若無則自動估算)
    * @param {'sunset' | 'sunrise'} [params.type='sunset'] 評估時段 (日落或日出)
    * @param {number} [params.aqi=45] 空氣品質指標
+   * @param {Object} [params.customWeights] 自訂權重微調 (選填)
    * @returns {Object} 完整評分、等級、成因診斷與攝影建議
    */
   static calculate(params) {
+    const w = params.customWeights || this.activeWeights;
     const {
       highCloud = 0,
       midCloud = 0,
@@ -36,63 +61,60 @@ class SkyFireEngine {
     // 高雲 (卷雲/卷層雲 6000-12000m) 能在太陽低於地平線後長時間接收紅橙長波光
     let highCloudScore = 0;
     if (highCloud >= 25 && highCloud <= 75) {
-      highCloudScore = 25 - Math.abs(highCloud - 50) * 0.3; // 最佳 50%
+      highCloudScore = w.highCloudMax - Math.abs(highCloud - w.highCloudOpt) * 0.3;
     } else if (highCloud > 75) {
-      highCloudScore = Math.max(8, 25 - (highCloud - 75) * 0.6);
+      highCloudScore = Math.max(8, w.highCloudMax - (highCloud - 75) * 0.6);
     } else {
-      highCloudScore = highCloud * 0.7;
+      highCloudScore = highCloud * (w.highCloudMax / 35.0);
     }
 
     // 中雲 (高積雲/高層雲 2000-6000m) 提供最具震撼力的魚鱗狀、波狀立體火燒紋理
     let midCloudScore = 0;
     if (midCloud >= 20 && midCloud <= 65) {
-      midCloudScore = 20 - Math.abs(midCloud - 42) * 0.35; // 最佳 40-45%
+      midCloudScore = w.midCloudMax - Math.abs(midCloud - w.midCloudOpt) * 0.35;
     } else if (midCloud > 65) {
-      midCloudScore = Math.max(5, 20 - (midCloud - 65) * 0.5);
+      midCloudScore = Math.max(5, w.midCloudMax - (midCloud - 65) * 0.5);
     } else {
-      midCloudScore = midCloud * 0.6;
+      midCloudScore = midCloud * (w.midCloudMax / 33.0);
     }
 
     // 高中雲搭配加成 (雙層天幕反射)
     let synergyBonus = 0;
     if (highCloud >= 30 && midCloud >= 20 && lowCloud < 40) {
-      synergyBonus = 5;
+      synergyBonus = w.synergyBonus;
     }
 
     const cloudBaseScore = Math.min(45, highCloudScore + midCloudScore + synergyBonus);
 
     // 2. 低雲遮擋與地平線視線懲罰 (扣分項，最高扣 50 分)
-    // 低雲 (<2000m 層雲/碎積雲) 會直接阻擋地平線夕陽光束，或在上方雲底投下死黑陰影
     let lowCloudPenalty = 0;
     if (lowCloud <= 20) {
       lowCloudPenalty = 0;
     } else if (lowCloud <= 40) {
-      lowCloudPenalty = (lowCloud - 20) * 0.5; // 扣 0-10 分
+      lowCloudPenalty = (lowCloud - 20) * 0.45 * w.lowCloudSlope;
     } else if (lowCloud <= 65) {
-      lowCloudPenalty = 10 + (lowCloud - 40) * 1.0; // 扣 10-35 分
+      lowCloudPenalty = 10 + (lowCloud - 40) * 0.95 * w.lowCloudSlope;
     } else {
-      lowCloudPenalty = 35 + (lowCloud - 65) * 0.6; // 扣 35-50 分
+      lowCloudPenalty = 35 + (lowCloud - 65) * 0.6 * w.lowCloudSlope;
     }
 
     // 3. 地平線透光窗指數 (Horizon Sunlight Window) (最高 30 分)
-    // 遠方地平線（日落西側海峽、日出東側太平洋）若有透光縫隙，陽光才能穿透照射到台北上方雲底
     let horizonClearance = params.horizonClearance;
     if (horizonClearance === undefined) {
-      // 依據低雲量與總雲量自動估算透光窗比例
       horizonClearance = Math.max(0, 100 - (lowCloud * 1.1 + Math.max(0, totalCloud - 60) * 0.5));
     }
-    const horizonScore = (horizonClearance / 100) * 30;
+    const horizonScore = (horizonClearance / 100) * w.horizonMax;
 
     // 4. 大氣純淨度與能見度評分 (最高 15 分)
     // 能見度以公里計算
     const visKm = visibility > 1000 ? visibility / 1000 : visibility;
     let visibilityScore = 0;
     if (visKm >= 25) {
-      visibilityScore = 15;
+      visibilityScore = w.visMax;
     } else if (visKm >= 15) {
-      visibilityScore = 11 + (visKm - 15) * 0.4;
+      visibilityScore = (w.visMax * 0.73) + (visKm - 15) * 0.4;
     } else if (visKm >= 8) {
-      visibilityScore = 6 + (visKm - 8) * 0.7;
+      visibilityScore = (w.visMax * 0.4) + (visKm - 8) * 0.7;
     } else {
       visibilityScore = Math.max(0, visKm * 0.7);
     }
@@ -114,9 +136,9 @@ class SkyFireEngine {
     } else {
       // 若無降雨且濕度適中 (55-80%)，高空水氣充足有利折射
       if (humidity >= 50 && humidity <= 82) {
-        moistureScore = 8;
+        moistureScore = w.moistureMax;
       } else {
-        moistureScore = 4;
+        moistureScore = w.moistureMax * 0.5;
       }
     }
 

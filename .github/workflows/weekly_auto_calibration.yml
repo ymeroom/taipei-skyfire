@@ -1,0 +1,34 @@
+name: Weekly Autonomous Model Calibration Loop
+
+on:
+  schedule:
+    # 每週日午夜 (台灣時間週一 00:00 = UTC 週日 16:00)
+    - cron: '0 16 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  auto-calibrate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 檢出程式碼庫 (Checkout)
+        uses: actions/checkout@v4
+
+      - name: ⚙️ 設定 Python 環境
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 🤖 執行物理模型損失函數最佳化與參數微調 (Phase 4)
+        run: |
+          python3 scripts/auto-calibrate-model.py
+
+      - name: 🚀 提交最新校準權重至倉庫 (Commit & Push)
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action [SkyFire Calibration Bot]"
+          git add data/model-calibration-params.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(model): auto-calibrated physics weights from empirical observations [skip ci]" && git push)

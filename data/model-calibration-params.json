@@ -1,0 +1,36 @@
+{
+  "version": "2.5.1-adaptive",
+  "lastCalibratedAt": "2026-08-17T14:40:00+08:00",
+  "calibrationCount": 2,
+  "sampleSize": 4,
+  "metrics": {
+    "initialMAE": 20.0,
+    "calibratedMAE": 17.25,
+    "improvementPct": 13.8
+  },
+  "weights": {
+    "highCloudMax": 23.0,
+    "highCloudOpt": 50.0,
+    "midCloudMax": 18.0,
+    "midCloudOpt": 42.0,
+    "synergyBonus": 5.0,
+    "lowCloudSlope": 0.95,
+    "horizonMax": 30.0,
+    "visMax": 15.0,
+    "moistureMax": 8.0
+  },
+  "history": [
+    {
+      "date": "2026-08-17",
+      "maeBefore": 20.0,
+      "maeAfter": 17.25,
+      "adjustment": "基於 4 場觀測紀錄微調高低雲光學權重，MAE 降低 2.75 分"
+    },
+    {
+      "date": "2026-08-17",
+      "maeBefore": 5.4,
+      "maeAfter": 4.1,
+      "adjustment": "優化低雲懲罰斜率與高雲飽和權重，MAE 降低 1.3 分"
+    }
+  ]
+}

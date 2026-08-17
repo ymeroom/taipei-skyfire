@@ -19,10 +19,27 @@ class SkyFireApp {
   async init() {
     this.bindEvents();
     this.initMap();
+    await this.loadActiveCalibration();
     await this.loadWeatherData();
     this.startCountdownTimer();
     this.initSimulator();
     this.loadVerificationCorridor();
+  }
+
+  /**
+   * 載入最新自適應模型校準參數
+   */
+  async loadActiveCalibration() {
+    try {
+      const res = await fetch('data/model-calibration-params.json');
+      if (res.ok) {
+        const cal = await res.json();
+        if (cal && cal.weights) {
+          SkyFireEngine.setWeights(cal.weights);
+          console.log('✨ 已成功載入最新自適應校準物理權重 (Version: ' + (cal.version || '2.5') + ')');
+        }
+      }
+    } catch (e) {}
   }
 
   /**
