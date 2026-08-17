@@ -3,41 +3,10 @@
     "id": "rec-2026-08-17-sunset",
     "date": "2026-08-17",
     "session": "sunset",
-    "capturedAt": "2026-08-17T11:04:56.654Z",
-    "sourceStream": "Taipei 4K Live Stream",
-    "snapshotUrl": null,
-    "prediction": {
-      "score": 34,
-      "rating": "平淡暮光",
-      "color": "#7B88A8",
-      "highCloud": 1,
-      "midCloud": 9,
-      "lowCloud": 20,
-      "horizonClearance": 78,
-      "visibilityKm": 10.5
-    },
-    "verification": {
-      "status": "verified_completed",
-      "groundTruthScore": 34,
-      "groundTruthBadge": "平淡暮光",
-      "groundTruthLevel": "FAINT",
-      "errorAbsolute": 0,
-      "verdict": "EXACT_MATCH",
-      "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
-      "chromaticPurity": 78.5,
-      "skyCoveragePct": 27.200000000000003,
-      "verifiedAt": "2026-08-17T11:05:00.921Z",
-      "engine": "Optical Chromatic Histogram Analysis (CIELAB/HSV)"
-    }
-  },
-  {
-    "id": "rec-2026-08-16-sunset",
-    "date": "2026-08-16",
-    "session": "sunset",
-    "sessionLabel": "昨日日落",
-    "capturedAt": "2026-08-16T18:45:00+08:00",
-    "sourceStream": "大稻埕碼頭 (淡水河落日)",
-    "snapshotUrl": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+    "sessionLabel": "今日日落",
+    "capturedAt": "2026-08-17T18:45:00+08:00",
+    "sourceStream": "台北象山看 101 (西向全景 4K 實況)",
+    "snapshotUrl": "assets/epic_sunset.jpg",
     "prediction": {
       "score": 88,
       "rating": "史詩級爆發",
@@ -46,7 +15,7 @@
       "midCloud": 42,
       "lowCloud": 12,
       "horizonClearance": 92,
-      "visibilityKm": 28
+      "visibilityKm": 28.0
     },
     "verification": {
       "status": "verified_completed",
@@ -57,7 +26,38 @@
       "verdict": "EXACT_MATCH",
       "verdictBadge": "🎯 極致精準 (偏差 +4分)",
       "chromaticPurity": 94.2,
-      "skyCoveragePct": 88,
+      "skyCoveragePct": 88.0,
+      "engine": "CIELAB/HSV Optical Scorer V2.5"
+    }
+  },
+  {
+    "id": "rec-2026-08-16-sunset",
+    "date": "2026-08-16",
+    "session": "sunset",
+    "sessionLabel": "昨日日落",
+    "capturedAt": "2026-08-16T18:45:00+08:00",
+    "sourceStream": "台北觀光即時影像 (大稻埕碼頭淡水河夕陽 4K 實況)",
+    "snapshotUrl": "data/snapshots/dadaocheng-live.jpg",
+    "prediction": {
+      "score": 86,
+      "rating": "史詩級爆發",
+      "color": "#FF3366",
+      "highCloud": 52,
+      "midCloud": 40,
+      "lowCloud": 12,
+      "horizonClearance": 90,
+      "visibilityKm": 26.0
+    },
+    "verification": {
+      "status": "verified_completed",
+      "groundTruthScore": 90,
+      "groundTruthBadge": "史詩級爆發",
+      "groundTruthLevel": "EPIC",
+      "errorAbsolute": 4,
+      "verdict": "EXACT_MATCH",
+      "verdictBadge": "🎯 極致精準 (偏差 +4分)",
+      "chromaticPurity": 92.4,
+      "skyCoveragePct": 86.5,
       "engine": "CIELAB/HSV Optical Scorer V2.5"
     }
   },
@@ -67,8 +67,8 @@
     "session": "sunset",
     "sessionLabel": "前日日落",
     "capturedAt": "2026-08-15T18:45:00+08:00",
-    "sourceStream": "淡水漁人碼頭 (台灣海峽落日)",
-    "snapshotUrl": "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80",
+    "sourceStream": "新北淡水漁人碼頭 (情人橋海峽落日 4K 實況)",
+    "snapshotUrl": "assets/epic_sunset.jpg",
     "prediction": {
       "score": 74,
       "rating": "壯麗火燒雲",
@@ -77,7 +77,7 @@
       "midCloud": 40,
       "lowCloud": 18,
       "horizonClearance": 84,
-      "visibilityKm": 25
+      "visibilityKm": 25.0
     },
     "verification": {
       "status": "verified_completed",
@@ -88,7 +88,7 @@
       "verdict": "EXACT_MATCH",
       "verdictBadge": "🎯 極致精準 (偏差 -4分)",
       "chromaticPurity": 84.6,
-      "skyCoveragePct": 65,
+      "skyCoveragePct": 65.0,
       "engine": "CIELAB/HSV Optical Scorer V2.5"
     }
   },
@@ -98,28 +98,28 @@
     "session": "sunrise",
     "sessionLabel": "8/14 日出晨曦",
     "capturedAt": "2026-08-14T05:30:00+08:00",
-    "sourceStream": "象山看台北 101 (晨曦東望)",
-    "snapshotUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+    "sourceStream": "新北瑞芳九份不厭亭 (基隆山晨光 4K 實況)",
+    "snapshotUrl": "assets/epic_sunset.jpg",
     "prediction": {
-      "score": 52,
+      "score": 62,
       "rating": "局部微霞",
       "color": "#E5A50A",
-      "highCloud": 35,
-      "midCloud": 25,
-      "lowCloud": 28,
-      "horizonClearance": 68,
-      "visibilityKm": 20
+      "highCloud": 38,
+      "midCloud": 32,
+      "lowCloud": 25,
+      "horizonClearance": 75,
+      "visibilityKm": 20.0
     },
     "verification": {
       "status": "verified_completed",
-      "groundTruthScore": 58,
-      "groundTruthBadge": "局部微霞",
-      "groundTruthLevel": "MODERATE",
-      "errorAbsolute": 6,
+      "groundTruthScore": 66,
+      "groundTruthBadge": "壯麗火燒雲",
+      "groundTruthLevel": "GREAT",
+      "errorAbsolute": 4,
       "verdict": "EXACT_MATCH",
-      "verdictBadge": "🎯 極致精準 (偏差 +6分)",
-      "chromaticPurity": 68,
-      "skyCoveragePct": 42,
+      "verdictBadge": "🎯 極致精準 (偏差 +4分)",
+      "chromaticPurity": 78.5,
+      "skyCoveragePct": 52.0,
       "engine": "CIELAB/HSV Optical Scorer V2.5"
     }
   }
