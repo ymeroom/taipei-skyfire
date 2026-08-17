@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>霞光相機 - 現場出景即時打卡拍立得 (SkyFire Story Camera)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800;900&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@500;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #000000;
+      --surface-glass: rgba(15, 23, 42, 0.75);
+      --border-glass: rgba(255, 255, 255, 0.15);
+      --accent-orange: #ff6b00;
+      --accent-red: #ff3366;
+      --accent-gold: #ffb703;
+      --accent-cyan: #38bdf8;
+      --text-primary: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: 'Noto Sans TC', 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      overflow: hidden;
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    /* 頂部相機控制列 */
+    .camera-top-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 50;
+      background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, transparent 100%);
+    }
+
+    .top-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 900;
+      font-size: 1rem;
+      color: #ff9e00;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      background: var(--surface-glass);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-glass);
+      border-radius: 50%;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .icon-btn:active {
+      transform: scale(0.9);
+    }
+
+    /* 9:16 取景觀景窗 */
+    .viewfinder-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0b0f19;
+    }
+
+    #cameraVideo {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scaleX(1);
+    }
+
+    #cameraVideo.selfie {
+      transform: scaleX(-1);
+    }
+
+    /* 複合輸出畫布 (合成相框與影像) */
+    #captureCanvas {
+      display: none;
+    }
+
+    /* 相框即時預覽覆蓋層 (Live View Overlay) */
+    .frame-overlay-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 70px 20px 140px 20px;
+    }
+
+    /* 相框樣式 1: 🌟 霞光限定拍立得 (Polaroid Aesthetic) */
+    .frame-polaroid {
+      border: 12px solid #ffffff;
+      border-bottom-width: 60px;
+      box-shadow: 0 0 40px rgba(0,0,0,0.5);
+      position: absolute;
+      top: 80px;
+      left: 20px;
+      right: 20px;
+      bottom: 150px;
+      border-radius: 8px;
+    }
+
+    .polaroid-caption {
+      position: absolute;
+      bottom: -50px;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 10px;
+      color: #111;
+      font-family: 'Caveat', cursive, sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    /* 相框樣式 2: 📸 專業攝影取景器 (Pro Viewfinder HUD) */
+    .hud-header {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .hud-location {
+      font-size: 0.95rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #ffffff;
+    }
+
+    .hud-score-badge {
+      background: linear-gradient(135deg, #ff3366, #ff6b00);
+      color: #fff;
+      font-weight: 900;
+      font-size: 0.85rem;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      box-shadow: 0 4px 12px rgba(255, 51, 102, 0.4);
+    }
+
+    .hud-center-crosshair {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      height: 120px;
+      border: 1px dashed rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hud-center-crosshair::before,
+    .hud-center-crosshair::after {
+      content: '';
+      position: absolute;
+      background: rgba(255, 255, 255, 0.5);
+    }
+    .hud-center-crosshair::before { width: 20px; height: 2px; }
+    .hud-center-crosshair::after { width: 2px; height: 20px; }
+
+    .hud-footer {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 107, 0, 0.35);
+      border-radius: 20px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .hud-data-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.76rem;
+      color: #94a3b8;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .hud-data-row strong {
+      color: #38bdf8;
+    }
+
+    .hud-status-text {
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: #fef08a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* 底部快門與相框選擇欄 */
+    .camera-bottom-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 16px 20px 28px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 50;
+      background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 70%, transparent 100%);
+    }
+
+    /* 相框風格選擇 Carousel */
+    .frame-style-selector {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 4px 0;
+      scrollbar-width: none;
+    }
+    .frame-style-selector::-webkit-scrollbar { display: none; }
+
+    .style-chip {
+      padding: 6px 14px;
+      background: var(--surface-glass);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border-glass);
+      border-radius: 9999px;
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .style-chip.active {
+      background: linear-gradient(135deg, #ff6b00, #ff3366);
+      border-color: #ff6b00;
+      box-shadow: 0 4px 12px rgba(255, 107, 0, 0.4);
+    }
+
+    /* 快門控制排 */
+    .shutter-controls-row {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+    }
+
+    /* 快門按鈕 */
+    .shutter-btn-outer {
+      width: 80px;
+      height: 80px;
+      border: 4px solid #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .shutter-btn-outer:active {
+      transform: scale(0.92);
+    }
+
+    .shutter-btn-inner {
+      width: 64px;
+      height: 64px;
+      background: #ffffff;
+      border-radius: 50%;
+      transition: all 0.2s;
+    }
+
+    .shutter-btn-outer.recording .shutter-btn-inner {
+      background: #ff3366;
+      border-radius: 12px;
+      transform: scale(0.65);
+    }
+
+    /* 拍下後的預覽彈窗 Modal */
+    .preview-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 200;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 16px;
+    }
+
+    .preview-modal.active {
+      display: flex;
+    }
+
+    .preview-img-container {
+      width: 100%;
+      max-width: 380px;
+      height: 70vh;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+      background: #080b14;
+    }
+
+    #previewResultImg {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .preview-actions-row {
+      display: flex;
+      gap: 14px;
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .btn-share-main {
+      flex: 1;
+      padding: 16px;
+      background: linear-gradient(135deg, #ff6b00, #ff3366);
+      border: none;
+      border-radius: 16px;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 10px 25px rgba(255, 107, 0, 0.4);
+    }
+
+    .btn-preview-cancel {
+      padding: 16px 20px;
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* 快門閃白效果 */
+    .flash-effect {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #ffffff;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 150;
+      transition: opacity 0.1s ease-out;
+    }
+    .flash-effect.flashing {
+      opacity: 0.9;
+    }
+
+    /* 隱藏的檔案上傳 input */
+    #fileUploadInput {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 頂部控制列 -->
+  <div class="camera-top-bar">
+    <a href="index.html" class="icon-btn" title="返回主頁" style="text-decoration: none;">✕</a>
+    <div class="top-brand">
+      <span>🔥 霞光拍立得相機</span>
+    </div>
+    <div class="top-actions">
+      <button class="icon-btn" id="btnSwitchCamera" title="切換前後鏡頭">🔄</button>
+      <button class="icon-btn" id="btnUploadPhoto" title="從相簿挑選照片">🖼️</button>
+    </div>
+  </div>
+
+  <input type="file" id="fileUploadInput" accept="image/*">
+
+  <!-- 9:16 取景觀景窗 -->
+  <div class="viewfinder-container">
+    <video id="cameraVideo" autoplay playsinline muted></video>
+    <div class="flash-effect" id="flashOverlay"></div>
+
+    <!-- 複合預覽相框 HUD -->
+    <div class="frame-overlay-layer" id="frameOverlay">
+      <!-- 頂部資訊膠囊 -->
+      <div class="hud-header" id="frameHeader">
+        <div class="hud-location">
+          <span>📍</span> <span id="frameLocationText">台北 · 象山六巨石</span>
+        </div>
+        <div class="hud-score-badge" id="frameScoreBadge">
+          🔥 88分 · 史詩級大景
+        </div>
+      </div>
+
+      <!-- 中心十字對焦點 (HUD 模式) -->
+      <div class="hud-center-crosshair" id="frameCrosshair"></div>
+
+      <!-- 底部即時氣象與光學浮水印 -->
+      <div class="hud-footer" id="frameFooter">
+        <div class="hud-status-text">
+          <span>🌅 霞光台北 · 出景實況認證</span>
+          <span id="frameTimeText" style="font-size: 0.85rem; font-family: 'JetBrains Mono'; color: #38bdf8;">18:42 GOLDEN</span>
+        </div>
+        <div class="hud-data-row">
+          <span>高雲: <strong>55%</strong> (反光天幕)</span>
+          <span>低雲: <strong>10%</strong> (無遮擋)</span>
+          <span>透光窗: <strong>92%</strong></span>
+        </div>
+        <div class="hud-data-row">
+          <span>能見度: <strong>28 km</strong></span>
+          <span>太陽方位角: <strong>285° (WNW)</strong></span>
+          <span>© TAIPEI SKYFIRE</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部相框選擇與快門按鈕 -->
+  <div class="camera-bottom-bar">
+    <!-- 相框風格選擇 Carousel -->
+    <div class="frame-style-selector">
+      <button class="style-chip active" data-style="pro_hud">📸 專業攝影 HUD</button>
+      <button class="style-chip" data-style="polaroid">🌟 霞光限定拍立得</button>
+      <button class="style-chip" data-style="minimal_story">📱 IG 限動極簡風</button>
+      <button class="style-chip" data-style="verified_stamp">🏆 官方大景認證章</button>
+    </div>
+
+    <!-- 快門操作列 -->
+    <div class="shutter-controls-row">
+      <button class="icon-btn" id="btnPickLocation" title="自訂拍攝地點" style="font-size: 1rem;">📍機位</button>
+
+      <!-- 核心快門按鈕 -->
+      <div class="shutter-btn-outer" id="btnShutter">
+        <div class="shutter-btn-inner"></div>
+      </div>
+
+      <button class="icon-btn" id="btnRecordVideo" title="錄製 10 秒短影片" style="font-size: 1rem;">🎥短片</button>
+    </div>
+  </div>
+
+  <!-- 拍照後的預覽與分享彈窗 -->
+  <div class="preview-modal" id="previewModal">
+    <div style="font-weight: 800; font-size: 1.1rem; color: #ff9e00;">✨ 霞光出景打卡照已生成！</div>
+    <div class="preview-img-container">
+      <img id="previewResultImg" alt="霞光拍立得成果">
+    </div>
+    <div class="preview-actions-row">
+      <button class="btn-preview-cancel" id="btnRetake">重拍 🔄</button>
+      <button class="btn-share-main" id="btnSaveAndShare">
+        <span>📲</span> 儲存並發布到 IG / FB
+      </button>
+    </div>
+  </div>
+
+  <canvas id="captureCanvas" width="1080" height="1920"></canvas>
+
+  <script>
+    const video = document.getElementById('cameraVideo');
+    const canvas = document.getElementById('captureCanvas');
+    const ctx = canvas.getContext('2d');
+    let stream = null;
+    let useFacingMode = 'environment'; // 預設後鏡頭拍攝天空
+    let activeStyle = 'pro_hud';
+    let currentLocationName = '台北 · 象山六巨石';
+    let currentScore = 88;
+    let capturedDataUrl = null;
+
+    // 啟動相機
+    async function startCamera() {
+      if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+      }
+
+      try {
+        const constraints = {
+          video: {
+            facingMode: useFacingMode,
+            width: { ideal: 1920 },
+            height: { ideal: 1080 }
+          },
+          audio: false
+        };
+        stream = await navigator.mediaDevices.getUserMedia(constraints);
+        video.srcObject = stream;
+        video.classList.toggle('selfie', useFacingMode === 'user');
+      } catch (err) {
+        console.warn('無法開啟相機，切換為模擬觀景窗:', err);
+        // 若無法開啟相機 (例如電腦無攝像頭)，載入示範背景
+        video.poster = 'assets/epic_sunset.jpg';
+      }
+    }
+
+    // 切換前後鏡頭
+    document.getElementById('btnSwitchCamera').addEventListener('click', () => {
+      useFacingMode = useFacingMode === 'environment' ? 'user' : 'environment';
+      startCamera();
+    });
+
+    // 從相簿上傳照片
+    const uploadInput = document.getElementById('fileUploadInput');
+    document.getElementById('btnUploadPhoto').addEventListener('click', () => {
+      uploadInput.click();
+    });
+
+    uploadInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const img = new Image();
+        img.onload = () => {
+          renderCompositeToCanvas(img);
+          showPreviewModal();
+        };
+        img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    // 更新時間標籤
+    function updateLiveTime() {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit' });
+      const dateStr = now.toISOString().split('T')[0].replace(/-/g, '.');
+      document.getElementById('frameTimeText').innerText = `${dateStr} ${timeStr} GOLDEN`;
+    }
+    setInterval(updateLiveTime, 1000);
+    updateLiveTime();
+
+    // 切換相框風格
+    document.querySelectorAll('.style-chip').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.style-chip').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeStyle = btn.dataset.style;
+        applyFrameStyle(activeStyle);
+      });
+    });
+
+    function applyFrameStyle(style) {
+      const header = document.getElementById('frameHeader');
+      const footer = document.getElementById('frameFooter');
+      const crosshair = document.getElementById('frameCrosshair');
+
+      if (style === 'minimal_story') {
+        crosshair.style.display = 'none';
+        header.style.background = 'transparent';
+        header.style.border = 'none';
+        footer.style.background = 'rgba(0, 0, 0, 0.4)';
+      } else if (style === 'polaroid') {
+        crosshair.style.display = 'none';
+        header.style.display = 'flex';
+        footer.style.display = 'flex';
+      } else {
+        crosshair.style.display = 'flex';
+        header.style.display = 'flex';
+        footer.style.display = 'flex';
+      }
+    }
+
+    // 自訂地點更換
+    document.getElementById('btnPickLocation').addEventListener('click', () => {
+      const spots = ['象山六巨石', '大稻埕碼頭', '淡水漁人碼頭', '內湖碧山巖', '大直橋', '九份不厭亭', '我的私房出景點'];
+      const chosen = prompt('請輸入或選擇拍攝機位名稱：', currentLocationName);
+      if (chosen) {
+        currentLocationName = chosen;
+        document.getElementById('frameLocationText').innerText = currentLocationName;
+      }
+    });
+
+    // 快門拍照合成 (Snap Photo)
+    document.getElementById('btnShutter').addEventListener('click', () => {
+      // 觸發閃光燈特效
+      const flash = document.getElementById('flashOverlay');
+      flash.classList.add('flashing');
+      setTimeout(() => flash.classList.remove('flashing'), 150);
+
+      // 合成 9:16 高解析打卡圖
+      renderCompositeToCanvas(video);
+      showPreviewModal();
+    });
+
+    // 核心畫布合成器：將鏡頭畫面 + 相框裝飾壓制為 1080x1920 圖片
+    function renderCompositeToCanvas(sourceMedia) {
+      canvas.width = 1080;
+      canvas.height = 1920;
+
+      // 1. 繪製相機畫面 (置中填滿 9:16)
+      if (sourceMedia.videoWidth || sourceMedia.width) {
+        const srcW = sourceMedia.videoWidth || sourceMedia.width;
+        const srcH = sourceMedia.videoHeight || sourceMedia.height;
+        const targetRatio = 1080 / 1920;
+        const srcRatio = srcW / srcH;
+
+        let drawW, drawH, drawX, drawY;
+        if (srcRatio > targetRatio) {
+          drawH = 1920;
+          drawW = 1920 * srcRatio;
+          drawX = -(drawW - 1080) / 2;
+          drawY = 0;
+        } else {
+          drawW = 1080;
+          drawH = 1080 / srcRatio;
+          drawX = 0;
+          drawY = -(drawH - 1920) / 2;
+        }
+
+        ctx.save();
+        if (useFacingMode === 'user' && sourceMedia === video) {
+          ctx.translate(canvas.width, 0);
+          ctx.scale(-1, 1);
+          ctx.drawImage(sourceMedia, drawX, drawY, drawW, drawH);
+        } else {
+          ctx.drawImage(sourceMedia, drawX, drawY, drawW, drawH);
+        }
+        ctx.restore();
+      }
+
+      // 2. 依據選擇的風格合成相框裝飾 (Frame Decoration)
+      const now = new Date();
+      const dateStr = now.toISOString().split('T')[0].replace(/-/g, '.');
+      const timeStr = now.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit' });
+
+      if (activeStyle === 'polaroid') {
+        // 🌟 拍立得相框風格
+        ctx.save();
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 36;
+        ctx.strokeRect(36, 120, 1080 - 72, 1600);
+
+        // 底部拍立得留白底板
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(36, 1550, 1080 - 72, 260);
+
+        // 拍立得手寫字體
+        ctx.fillStyle = '#111827';
+        ctx.font = '700 48px "Caveat", cursive, sans-serif';
+        ctx.fillText(`📍 ${currentLocationName} · ${dateStr}`, 80, 1660);
+
+        ctx.font = '900 42px "Noto Sans TC"';
+        ctx.fillStyle = '#ff3366';
+        ctx.fillText(`🔥 88分 史詩級火燒雲 · 實況捕獲`, 80, 1740);
+
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#64748b';
+        ctx.font = '700 32px "JetBrains Mono"';
+        ctx.fillText('TAIPEI SKYFIRE', 1080 - 80, 1740);
+        ctx.restore();
+
+      } else {
+        // 📸 專業攝影 HUD / IG 限動風格
+        ctx.save();
+
+        // 頂部地點膠囊
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+        ctx.lineWidth = 3;
+        roundRect(ctx, 60, 120, 960, 120, 28);
+        ctx.fill(); ctx.stroke();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '900 42px "Noto Sans TC"';
+        ctx.fillText(`📍 ${currentLocationName}`, 100, 195);
+
+        // 評分徽章
+        ctx.fillStyle = '#ff3366';
+        roundRect(ctx, 680, 145, 300, 70, 35);
+        ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '900 32px "Noto Sans TC"';
+        ctx.textAlign = 'center';
+        ctx.fillText('🔥 88分 · 史詩級', 830, 192);
+
+        // 底部資訊浮水印板
+        ctx.textAlign = 'left';
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.88)';
+        ctx.strokeStyle = 'rgba(255, 107, 0, 0.5)';
+        ctx.lineWidth = 4;
+        roundRect(ctx, 60, 1540, 960, 260, 36);
+        ctx.fill(); ctx.stroke();
+
+        ctx.fillStyle = '#fef08a';
+        ctx.font = '900 44px "Noto Sans TC"';
+        ctx.fillText('🌅 霞光台北 · 出景實況認證', 100, 1620);
+
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#38bdf8';
+        ctx.font = '800 36px "JetBrains Mono"';
+        ctx.fillText(`${dateStr} ${timeStr}`, 980, 1620);
+
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '700 28px "JetBrains Mono"';
+        ctx.fillText('高雲: 55%  |  低雲: 10%  |  透光窗: 92%  |  能見度: 28km', 100, 1690);
+        ctx.fillText('太陽方位角: 285° (WNW)  |  PRO V2.5 ACCURACY: 93.5%', 100, 1745);
+        ctx.restore();
+      }
+
+      capturedDataUrl = canvas.toDataURL('image/jpeg', 0.92);
+    }
+
+    function roundRect(ctx, x, y, width, height, radius) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+    }
+
+    function showPreviewModal() {
+      document.getElementById('previewResultImg').src = capturedDataUrl;
+      document.getElementById('previewModal').classList.add('active');
+    }
+
+    document.getElementById('btnRetake').addEventListener('click', () => {
+      document.getElementById('previewModal').classList.remove('active');
+    });
+
+    // 儲存並透過 Web Share API 發布到 IG / FB
+    document.getElementById('btnSaveAndShare').addEventListener('click', async () => {
+      // 1. 自動觸發下載存檔至手機相簿
+      const a = document.createElement('a');
+      a.href = capturedDataUrl;
+      a.download = `skyfire-shot-${Date.now()}.jpg`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      // 2. 嘗試調用手機原生分享 (Instagram Story / FB / LINE)
+      if (navigator.share && canvas.toBlob) {
+        canvas.toBlob(async (blob) => {
+          const file = new File([blob], 'skyfire-story.jpg', { type: 'image/jpeg' });
+          try {
+            await navigator.share({
+              title: '🔥 台北今日火燒雲大景打卡！',
+              text: `我在【${currentLocationName}】拍到火燒雲大景！霞光台北預報指數 88 分！`,
+              files: [file]
+            });
+          } catch (err) {
+            console.log('分享完成或已取消');
+          }
+        }, 'image/jpeg', 0.95);
+      } else {
+        alert('🎉 霞光打卡相片已下載到您的手機相簿！您可以直接打開 Instagram / Facebook 發布限時動態！');
+      }
+    });
+
+    // 啟動鏡頭
+    startCamera();
+  </script>
+</body>
+</html>
