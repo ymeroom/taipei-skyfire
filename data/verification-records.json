@@ -3,31 +3,31 @@
     "id": "rec-2026-08-17-sunset",
     "date": "2026-08-17",
     "session": "sunset",
-    "sessionLabel": "今日日落",
-    "capturedAt": "2026-08-17T18:45:00+08:00",
-    "sourceStream": "象山看台北 101 (西向全景)",
-    "snapshotUrl": "https://images.unsplash.com/photo-1509803874385-db7c23652552?auto=format&fit=crop&w=600&q=80",
+    "capturedAt": "2026-08-17T11:04:56.654Z",
+    "sourceStream": "Taipei 4K Live Stream",
+    "snapshotUrl": null,
     "prediction": {
-      "score": 35,
+      "score": 34,
       "rating": "平淡暮光",
       "color": "#7B88A8",
-      "highCloud": 25,
-      "midCloud": 15,
-      "lowCloud": 30,
-      "horizonClearance": 60,
-      "visibilityKm": 22.0
+      "highCloud": 1,
+      "midCloud": 9,
+      "lowCloud": 20,
+      "horizonClearance": 78,
+      "visibilityKm": 10.5
     },
     "verification": {
       "status": "verified_completed",
-      "groundTruthScore": 30,
+      "groundTruthScore": 34,
       "groundTruthBadge": "平淡暮光",
       "groundTruthLevel": "FAINT",
-      "errorAbsolute": 5,
+      "errorAbsolute": 0,
       "verdict": "EXACT_MATCH",
-      "verdictBadge": "🎯 極致精準 (偏差 -5分)",
-      "chromaticPurity": 62.4,
-      "skyCoveragePct": 28.5,
-      "engine": "CIELAB/HSV Optical Scorer V2.5"
+      "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "chromaticPurity": 78.5,
+      "skyCoveragePct": 27.200000000000003,
+      "verifiedAt": "2026-08-17T11:05:00.921Z",
+      "engine": "Optical Chromatic Histogram Analysis (CIELAB/HSV)"
     }
   },
   {
@@ -46,7 +46,7 @@
       "midCloud": 42,
       "lowCloud": 12,
       "horizonClearance": 92,
-      "visibilityKm": 28.0
+      "visibilityKm": 28
     },
     "verification": {
       "status": "verified_completed",
@@ -57,7 +57,7 @@
       "verdict": "EXACT_MATCH",
       "verdictBadge": "🎯 極致精準 (偏差 +4分)",
       "chromaticPurity": 94.2,
-      "skyCoveragePct": 88.0,
+      "skyCoveragePct": 88,
       "engine": "CIELAB/HSV Optical Scorer V2.5"
     }
   },
@@ -77,7 +77,7 @@
       "midCloud": 40,
       "lowCloud": 18,
       "horizonClearance": 84,
-      "visibilityKm": 25.0
+      "visibilityKm": 25
     },
     "verification": {
       "status": "verified_completed",
@@ -88,7 +88,7 @@
       "verdict": "EXACT_MATCH",
       "verdictBadge": "🎯 極致精準 (偏差 -4分)",
       "chromaticPurity": 84.6,
-      "skyCoveragePct": 65.0,
+      "skyCoveragePct": 65,
       "engine": "CIELAB/HSV Optical Scorer V2.5"
     }
   },
@@ -108,7 +108,7 @@
       "midCloud": 25,
       "lowCloud": 28,
       "horizonClearance": 68,
-      "visibilityKm": 20.0
+      "visibilityKm": 20
     },
     "verification": {
       "status": "verified_completed",
@@ -118,8 +118,8 @@
       "errorAbsolute": 6,
       "verdict": "EXACT_MATCH",
       "verdictBadge": "🎯 極致精準 (偏差 +6分)",
-      "chromaticPurity": 68.0,
-      "skyCoveragePct": 42.0,
+      "chromaticPurity": 68,
+      "skyCoveragePct": 42,
       "engine": "CIELAB/HSV Optical Scorer V2.5"
     }
   }
