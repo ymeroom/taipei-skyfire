@@ -34,17 +34,21 @@ jobs:
         with:
           node-version: '20'
 
-      - name: 🛠️ 安裝 ffmpeg 與 yt-dlp 擷取工具
+      - name: 🛠️ 安裝 ffmpeg, yt-dlp 與 Python 影像光學分析套件
         run: |
           sudo apt-get update
           sudo apt-get install -y ffmpeg python3-pip
-          pip3 install --break-system-packages yt-dlp
+          pip3 install --break-system-packages yt-dlp pillow numpy
 
-      - name: 📸 執行出景窗口即時影格擷取與預測記錄
+      - name: 📸 執行出景窗口即時影格擷取與預測記錄 (Phase 1)
         run: |
-          # 判斷是排程觸發還是手動觸發
           SESSION="${{ github.event.inputs.session || 'sunset' }}"
           node scripts/capture-validation.js "$SESSION"
+
+      - name: 🔬 執行天空色彩光學直方圖分析與模型誤差檢驗 (Phase 2)
+        run: |
+          SESSION="${{ github.event.inputs.session || 'sunset' }}"
+          node scripts/score-ground-truth.js "$SESSION"
 
       - name: 🚀 提交驗證影像與數據至倉庫 (Commit & Push)
         run: |

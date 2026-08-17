@@ -17,10 +17,17 @@
       "visibilityKm": 23.1
     },
     "verification": {
-      "status": "pending_capture",
-      "groundTruthScore": null,
-      "errorAbsolute": null,
-      "verifiedBy": null
+      "status": "verified_completed",
+      "groundTruthScore": 30,
+      "groundTruthBadge": "平淡暮光",
+      "groundTruthLevel": "FAINT",
+      "errorAbsolute": 5,
+      "verdict": "EXACT_MATCH",
+      "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "chromaticPurity": 78.5,
+      "skyCoveragePct": 24,
+      "verifiedAt": "2026-08-17T03:55:50.290Z",
+      "engine": "Optical Chromatic Histogram Analysis (CIELAB/HSV)"
     }
   }
 ]
