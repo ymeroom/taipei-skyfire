@@ -2,6 +2,9 @@
  * WeatherService - 串接 Open-Meteo 即時氣象 API 與多層雲量解析
  */
 
+const SolarCalcModule = typeof window !== 'undefined' ? window.SolarCalc : (typeof global !== 'undefined' && global.SolarCalc ? global.SolarCalc : require('./solar-calc.js'));
+const SkyFireEngineModule = typeof window !== 'undefined' ? window.SkyFireEngine : (typeof global !== 'undefined' && global.SkyFireEngine ? global.SkyFireEngine : require('./skyfire-engine.js'));
+
 class WeatherService {
   static TAIPEI_COORDS = { lat: 25.0330, lng: 121.5654 };
   static CACHE_KEY = 'taipei_skyfire_weather_cache';
@@ -70,14 +73,14 @@ class WeatherService {
     // 取未來 6 天
     for (let d = 0; d < 6; d++) {
       const targetDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + d);
-      const solarTimes = SolarCalc.getTimes(targetDate);
+      const solarTimes = SolarCalcModule.getTimes(targetDate);
 
       // 提取日出時段與日落時段的最近氣象小時數據
       const sunriseHourData = this.getClosestHourData(hourlyList, solarTimes.sunrise);
       const sunsetHourData = this.getClosestHourData(hourlyList, solarTimes.sunset);
 
       // 運行 SkyFireEngine 計算
-      const sunriseSkyfire = SkyFireEngine.calculate({
+      const sunriseSkyfire = SkyFireEngineModule.calculate({
         highCloud: sunriseHourData.cloudHigh,
         midCloud: sunriseHourData.cloudMid,
         lowCloud: sunriseHourData.cloudLow,
@@ -88,7 +91,7 @@ class WeatherService {
         type: 'sunrise'
       });
 
-      const sunsetSkyfire = SkyFireEngine.calculate({
+      const sunsetSkyfire = SkyFireEngineModule.calculate({
         highCloud: sunsetHourData.cloudHigh,
         midCloud: sunsetHourData.cloudMid,
         lowCloud: sunsetHourData.cloudLow,
@@ -165,7 +168,7 @@ class WeatherService {
         data.lastUpdated = new Date(data.lastUpdated);
         data.daysForecast.forEach(d => {
           d.date = new Date(d.date);
-          d.solarTimes = SolarCalc.getTimes(d.date);
+          d.solarTimes = SolarCalcModule.getTimes(d.date);
           d.sunrise.time = new Date(d.sunrise.time);
           d.sunset.time = new Date(d.sunset.time);
         });
@@ -208,11 +211,11 @@ class WeatherService {
 
     for (let d = 0; d < 6; d++) {
       const targetDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + d);
-      const solarTimes = SolarCalc.getTimes(targetDate);
+      const solarTimes = SolarCalcModule.getTimes(targetDate);
       const scnSunset = sampleScenarios[d % sampleScenarios.length];
       const scnSunrise = sampleScenarios[(d + 2) % sampleScenarios.length];
 
-      const sunsetSkyfire = SkyFireEngine.calculate({
+      const sunsetSkyfire = SkyFireEngineModule.calculate({
         highCloud: scnSunset.high,
         midCloud: scnSunset.mid,
         lowCloud: scnSunset.low,
@@ -223,7 +226,7 @@ class WeatherService {
         type: 'sunset'
       });
 
-      const sunriseSkyfire = SkyFireEngine.calculate({
+      const sunriseSkyfire = SkyFireEngineModule.calculate({
         highCloud: scnSunrise.high,
         midCloud: scnSunrise.mid,
         lowCloud: scnSunrise.low,
