@@ -1,0 +1,54 @@
+name: Auto Ground-Truth YouTube Capture & Validation
+
+on:
+  schedule:
+    # 每日日落時段 (台灣時間 18:45 = UTC 10:45)
+    - cron: '45 10 * * *'
+    # 每日日出時段 (台灣時間 05:30 = UTC 21:30)
+    - cron: '30 21 * * *'
+  # 支援手動在 GitHub Actions 頁面一鍵觸發測試
+  workflow_dispatch:
+    inputs:
+      session:
+        description: '驗證時段 (sunset 或 sunrise)'
+        required: true
+        default: 'sunset'
+        type: choice
+        options:
+          - sunset
+          - sunrise
+
+permissions:
+  contents: write
+
+jobs:
+  capture-and-record:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 檢出程式碼庫 (Checkout)
+        uses: actions/checkout@v4
+
+      - name: ⚙️ 設定 Node.js 環境
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 🛠️ 安裝 ffmpeg 與 yt-dlp 擷取工具
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg python3-pip
+          pip3 install --break-system-packages yt-dlp
+
+      - name: 📸 執行出景窗口即時影格擷取與預測記錄
+        run: |
+          # 判斷是排程觸發還是手動觸發
+          SESSION="${{ github.event.inputs.session || 'sunset' }}"
+          node scripts/capture-validation.js "$SESSION"
+
+      - name: 🚀 提交驗證影像與數據至倉庫 (Commit & Push)
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action [SkyFire Bot]"
+          git add data/
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(validation): record live sky snapshot and prediction [skip ci]" && git push)

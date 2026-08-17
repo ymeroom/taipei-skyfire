@@ -1,0 +1,26 @@
+[
+  {
+    "id": "rec-2026-08-17-sunset",
+    "date": "2026-08-17",
+    "session": "sunset",
+    "capturedAt": "2026-08-17T03:30:22.918Z",
+    "sourceStream": "Taipei 4K Live Stream",
+    "snapshotUrl": null,
+    "prediction": {
+      "score": 35,
+      "rating": "平淡暮光",
+      "color": "#7B88A8",
+      "highCloud": 0,
+      "midCloud": 1,
+      "lowCloud": 4,
+      "horizonClearance": 96,
+      "visibilityKm": 23.1
+    },
+    "verification": {
+      "status": "pending_capture",
+      "groundTruthScore": null,
+      "errorAbsolute": null,
+      "verifiedBy": null
+    }
+  }
+]
