@@ -12,6 +12,8 @@ try {
   require('./test-weather-service.js');
   require('./test-spots-data.js');
   require('./test-dom-bindings.js');
+  require('./test-live-capture-core.js');
+  require('./test-live-frame-capture.js');
 
   console.log('====================================================');
   console.log('🏆 恭喜！Taipei SkyFire 所有測試案例 100% 全數通過！');

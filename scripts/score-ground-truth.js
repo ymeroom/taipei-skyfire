@@ -1,124 +1,129 @@
 /**
- * score-ground-truth.js - Phase 2: 執行光學色彩分析並更新驗證資料庫
+ * Phase 2: score only a provenance-validated real livestream frame.
  */
 
+const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+const { spawnSync } = require('child_process');
+const {
+  getTaipeiDateString,
+  resolveSessionType,
+  isValidatedLiveCaptureRecord,
+  validateOpticalResult
+} = require('./live-capture-core.js');
 
-function runGroundTruthScoring(targetDateStr = null, targetSession = 'sunset') {
-  console.log('====================================================');
-  console.log('🔬 啟動 Phase 2: 天空光學色彩直方圖分析與誤差檢驗');
-  console.log('====================================================\n');
+function runPythonAnalyzer(scriptPath, snapshotPath) {
+  const pythonBin = process.env.PYTHON_BIN || (process.platform === 'win32' ? 'python' : 'python3');
+  const result = spawnSync(pythonBin, [scriptPath, snapshotPath], {
+    encoding: 'utf8',
+    timeout: 60000,
+    maxBuffer: 10 * 1024 * 1024,
+    windowsHide: true
+  });
+  if (result.error) throw result.error;
+  if (result.status !== 0) {
+    throw new Error(String(result.stderr || result.stdout || `analyzer exited with ${result.status}`).trim());
+  }
+  return validateOpticalResult(JSON.parse(result.stdout));
+}
 
+function assertSnapshotIntegrity(snapshotPath, expectedSha256) {
+  if (!fs.existsSync(snapshotPath)) {
+    throw new Error(`validated snapshot is missing: ${snapshotPath}`);
+  }
+  const actualSha256 = crypto.createHash('sha256').update(fs.readFileSync(snapshotPath)).digest('hex');
+  if (actualSha256 !== expectedSha256) {
+    throw new Error('snapshot SHA-256 does not match capture provenance');
+  }
+}
+
+function runGroundTruthScoring(targetDateStr = '', inputSession = '', options = {}) {
   const dataDir = path.join(__dirname, '../data');
   const recordsFile = path.join(dataDir, 'verification-records.json');
-  const snapshotsDir = path.join(dataDir, 'snapshots');
+  const dateStr = targetDateStr || getTaipeiDateString(options.now || new Date());
+  const sessionType = resolveSessionType(
+    inputSession,
+    options.schedule || process.env.GITHUB_EVENT_SCHEDULE || ''
+  );
+  const targetId = `rec-${dateStr}-${sessionType}`;
 
   if (!fs.existsSync(recordsFile)) {
-    console.log('⚠️ 尚未找到 verification-records.json，請先執行 Phase 1 擷取影像。');
-    return;
+    throw new Error('verification-records.json does not exist');
   }
 
-  let records = JSON.parse(fs.readFileSync(recordsFile, 'utf8'));
-  const nowStr = targetDateStr || new Date().toISOString().split('T')[0];
-  const targetId = `rec-${nowStr}-${targetSession}`;
-
-  // 尋找當前紀錄
-  let record = records.find(r => r.id === targetId) || records[0];
-
+  const records = JSON.parse(fs.readFileSync(recordsFile, 'utf8'));
+  const record = records.find(item => item.id === targetId);
   if (!record) {
-    console.log('⚠️ 尚無可驗證的紀錄。');
-    return;
+    throw new Error(`exact capture record not found: ${targetId}`);
+  }
+  if (!isValidatedLiveCaptureRecord(record)) {
+    throw new Error(`record is not a validated livestream frame: ${targetId}`);
   }
 
-  const snapshotFile = path.join(snapshotsDir, `${record.date}-${record.session}.jpg`);
-  console.log(`📸 分析目標檔案: ${snapshotFile}`);
-
-  let opticalResult = null;
-
-  // 1. 若存在真實截圖，調用 Python 光學色彩分析腳本
-  if (fs.existsSync(snapshotFile)) {
-    try {
-      const scriptPath = path.join(__dirname, 'analyze_sky_ground_truth.py');
-      const output = execSync(`python "${scriptPath}" "${snapshotFile}"`, { encoding: 'utf8' });
-      opticalResult = JSON.parse(output);
-      console.log('✅ Python 光學色彩直方圖分析成功！');
-    } catch (err) {
-      console.warn('⚠️ Python 光學分析執行失敗，切換為智慧光學備援演算法:', err.message);
-    }
+  const snapshotPath = path.resolve(path.join(__dirname, '..'), record.snapshotUrl);
+  const snapshotsRoot = path.resolve(path.join(dataDir, 'snapshots'));
+  if (!snapshotPath.startsWith(`${snapshotsRoot}${path.sep}`)) {
+    throw new Error('snapshot path escapes the validated snapshots directory');
   }
+  assertSnapshotIntegrity(snapshotPath, record.capture.sha256);
 
-  // 2. 備援或無圖模擬：依據預測值加入真實大氣擾動高斯分佈
-  if (!opticalResult) {
-    console.log('ℹ️ 使用內建光學色彩分析模擬器計算...');
-    const predScore = record.prediction.score;
-    // 模擬真實觀測值（在預測值附近 ±8 分微幅擺動）
-    const noise = Math.round((Math.random() - 0.45) * 12);
-    const gtScore = Math.max(5, Math.min(100, predScore + noise));
+  console.log('====================================================');
+  console.log('🔬 Phase 2: 實況天空光學色彩分析');
+  console.log(`📸 影像: ${record.snapshotUrl}`);
+  console.log(`🔗 來源: ${record.youtubeLiveUrl}`);
 
-    opticalResult = {
-      score: gtScore,
-      level: gtScore >= 82 ? 'EPIC' : gtScore >= 68 ? 'GREAT' : gtScore >= 48 ? 'MODERATE' : gtScore >= 30 ? 'FAINT' : 'OVERCAST',
-      badge: gtScore >= 82 ? '史詩級爆發' : gtScore >= 68 ? '壯麗火燒雲' : gtScore >= 48 ? '局部微霞' : gtScore >= 30 ? '平淡暮光' : '陰沉沉寂',
-      chromatic_purity: 78.5,
-      sky_coverage_pct: Math.min(95, gtScore * 0.8),
-      is_simulated: true
-    };
-  }
+  const analyzer = options.runAnalyzer || runPythonAnalyzer;
+  const opticalResult = validateOpticalResult(analyzer(
+    path.join(__dirname, 'analyze_sky_ground_truth.py'),
+    snapshotPath
+  ));
 
-  // 3. 計算誤差與準確度指標
   const predictedScore = record.prediction.score;
   const groundTruthScore = opticalResult.score;
   const errorAbsolute = Math.abs(predictedScore - groundTruthScore);
-
-  let accuracyVerdict = 'EXACT_MATCH';
-  let verdictBadge = '✅ 預測極精準';
+  let verdict = 'MISMATCH';
+  let verdictBadge = '⚠️ 出現偏差需校準';
   if (errorAbsolute <= 8) {
-    accuracyVerdict = 'EXACT_MATCH';
+    verdict = 'EXACT_MATCH';
     verdictBadge = '🎯 極致精準 (誤差 ≤ 8分)';
   } else if (errorAbsolute <= 18) {
-    accuracyVerdict = 'SLIGHT_DEVIATION';
+    verdict = 'SLIGHT_DEVIATION';
     verdictBadge = '⚡ 輕微偏差 (誤差 ≤ 18分)';
-  } else {
-    accuracyVerdict = 'MISMATCH';
-    verdictBadge = '⚠️ 出現偏差需校準';
   }
 
-  // 4. 更新該筆紀錄
   record.verification = {
     status: 'verified_completed',
-    groundTruthScore: groundTruthScore,
+    groundTruthScore,
     groundTruthBadge: opticalResult.badge,
     groundTruthLevel: opticalResult.level,
-    errorAbsolute: errorAbsolute,
-    verdict: accuracyVerdict,
-    verdictBadge: verdictBadge,
+    errorAbsolute,
+    verdict,
+    verdictBadge,
     chromaticPurity: opticalResult.chromatic_purity,
     skyCoveragePct: opticalResult.sky_coverage_pct,
     verifiedAt: new Date().toISOString(),
-    engine: 'Optical Chromatic Histogram Analysis (CIELAB/HSV)'
+    engine: 'Optical Chromatic Histogram Analysis (CIELAB/HSV)',
+    isSimulated: false
   };
 
-  // 5. 計算全庫統計指標 (Overall Accuracy Metrics)
-  const verifiedList = records.filter(r => r.verification && r.verification.groundTruthScore !== null);
-  const totalVerified = verifiedList.length;
-  const totalError = verifiedList.reduce((acc, cur) => acc + cur.verification.errorAbsolute, 0);
-  const avgMAE = totalVerified > 0 ? (totalError / totalVerified).toFixed(1) : 0;
-  const withinToleranceCount = verifiedList.filter(r => r.verification.errorAbsolute <= 15).length;
-  const accuracyPct = totalVerified > 0 ? ((withinToleranceCount / totalVerified) * 100).toFixed(1) : 100;
-
-  console.log('\n📊 驗證結果對比 summary:');
-  console.log(`- 模型預測分數: ${predictedScore} 分 (${record.prediction.rating})`);
-  console.log(`- 實況觀測分數: ${groundTruthScore} 分 (${opticalResult.badge})`);
-  console.log(`- 絕對誤差 (MAE): ${errorAbsolute} 分 [${verdictBadge}]`);
-  console.log(`- 歷史累計觀測天數: ${totalVerified} 場`);
-  console.log(`- 歷史累計準確率 (±15分內): ${accuracyPct}%\n`);
-
   fs.writeFileSync(recordsFile, JSON.stringify(records, null, 2), 'utf8');
-  console.log('💾 驗證紀錄與評分已更新至 data/verification-records.json');
+  console.log(`✅ 實況觀測 ${groundTruthScore} 分；與預測絕對誤差 ${errorAbsolute} 分`);
   console.log('====================================================\n');
+  return record;
 }
 
-const sessionArg = process.argv[2] || 'sunset';
-runGroundTruthScoring(null, sessionArg);
+if (require.main === module) {
+  try {
+    runGroundTruthScoring('', process.argv[2] || '');
+  } catch (error) {
+    console.error(`❌ 實況光學評分失敗，未產生模擬驗證值: ${error.message}`);
+    process.exitCode = 1;
+  }
+}
+
+module.exports = {
+  runPythonAnalyzer,
+  assertSnapshotIntegrity,
+  runGroundTruthScoring
+};

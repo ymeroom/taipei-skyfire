@@ -1,199 +1,145 @@
 /**
- * capture-validation.js - Phase 1: 霞光台北 台北攝影機位出景窗口 YouTube 實況影格自動擷取與預測記錄器
+ * Phase 1: capture a real frame from an official YouTube livestream inside
+ * the Taipei sunrise/sunset validation window, then record its provenance.
  */
 
 const fs = require('fs');
 const path = require('path');
-const https = require('https');
-const http = require('http');
 
 const SolarCalc = require('../js/solar-calc.js');
-const SkyFireEngine = require('../js/skyfire-engine.js');
 const WeatherService = require('../js/weather-service.js');
-const TAIPEI_SPOTS = require('../js/spots-data.js');
+const {
+  OFFICIAL_STREAMS,
+  getTaipeiDateString,
+  resolveSessionType,
+  assertCaptureWindow
+} = require('./live-capture-core.js');
+const { captureLiveFrame } = require('./live-frame-capture.js');
 
-const TARGET_STREAMS = [
-  {
-    id: 'xiangshan_101',
-    name: '台北象山看 101 (4K 官方即時影像)',
-    query: '台北 象山 即時影像 4K live',
-    staticFile: 'xiangshan-live.jpg'
-  },
-  {
-    id: 'dadaocheng',
-    name: '台北大稻埕碼頭 (4K 官方即時影像)',
-    query: '台北 大稻埕 即時影像 4K live',
-    staticFile: 'dadaocheng-live.jpg'
-  },
-  {
-    id: 'tamsui',
-    name: '新北淡水漁人碼頭 (4K 官方即時影像)',
-    query: '淡水漁人碼頭 4K 即時影像 live',
-    staticFile: 'tamsui-live.jpg'
+const MAX_CAPTURE_OFFSET_MINUTES = 30;
+
+function loadRecords(recordsFile) {
+  if (!fs.existsSync(recordsFile)) return [];
+  try {
+    const parsed = JSON.parse(fs.readFileSync(recordsFile, 'utf8'));
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (error) {
+    throw new Error(`cannot read verification records: ${error.message}`);
   }
-];
+}
 
-function fetchUrl(url) {
-  return new Promise((resolve, reject) => {
-    const client = url.startsWith('https') ? https : http;
-    const req = client.get(url, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-      }
-    }, (res) => {
-      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-        return fetchUrl(res.headers.location).then(resolve).catch(reject);
-      }
-      const chunks = [];
-      res.on('data', chunk => chunks.push(chunk));
-      res.on('end', () => resolve(Buffer.concat(chunks)));
-    });
-    req.on('error', reject);
-    req.setTimeout(12000, () => {
-      req.destroy();
-      reject(new Error('連線逾時'));
-    });
+function writeRecord(recordsFile, record) {
+  const records = loadRecords(recordsFile);
+  const existingIndex = records.findIndex(item => item.id === record.id);
+  if (existingIndex >= 0) {
+    records[existingIndex] = record;
+  } else {
+    records.unshift(record);
+  }
+  fs.writeFileSync(recordsFile, JSON.stringify(records.slice(0, 90), null, 2), 'utf8');
+}
+
+async function runCapturePipeline(inputSession = '', options = {}) {
+  const now = options.now instanceof Date ? options.now : new Date();
+  const sessionType = resolveSessionType(
+    inputSession,
+    options.schedule || process.env.GITHUB_EVENT_SCHEDULE || ''
+  );
+  const source = OFFICIAL_STREAMS[sessionType];
+  const dateStr = getTaipeiDateString(now);
+  const targetDate = new Date(`${dateStr}T12:00:00+08:00`);
+  const solarTimes = SolarCalc.getTimes(targetDate);
+  const eventTime = sessionType === 'sunrise' ? solarTimes.sunrise : solarTimes.sunset;
+  const preflightWindow = assertCaptureWindow({
+    now,
+    eventTime,
+    sessionType,
+    maxOffsetMinutes: MAX_CAPTURE_OFFSET_MINUTES
   });
-}
 
-async function extractYouTubeLiveVideoId(query) {
-  try {
-    const searchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
-    const buffer = await fetchUrl(searchUrl);
-    const html = buffer.toString('utf8');
-    const matches = html.match(/"videoId":"([a-zA-Z0-9_-]{11})"/g);
-    if (matches && matches.length > 0) {
-      const vid = matches[0].replace(/"videoId":"|"/g, '');
-      return vid;
-    }
-  } catch (err) {
-    console.warn(`⚠️ 檢索 YouTube 直播 [${query}] 失敗:`, err.message);
-  }
-  return null;
-}
+  console.log('====================================================');
+  console.log(`📸 啟動實況影格擷取管線 [${sessionType}]`);
+  console.log(`📅 台北觀測日期: ${dateStr}`);
+  console.log(`⏰ 天文時刻: ${SolarCalc.formatTime(eventTime)} / 啟動偏移: ${preflightWindow.offsetMinutes} 分鐘`);
+  console.log(`📍 官方直播: ${source.name}`);
 
-async function runCapturePipeline(sessionType = 'sunset') {
-  console.log(`====================================================`);
-  console.log(`📸 啟動 霞光台北 官方 YouTube 4K 實況影格自動擷取管線 [時段: ${sessionType}]`);
-  console.log(`====================================================\n`);
-
-  const now = new Date();
-  const dateStr = now.toISOString().split('T')[0];
-  const solarTimes = SolarCalc.getTimes(now);
-  
-  const outputDir = path.join(__dirname, '../data/snapshots');
   const dataDir = path.join(__dirname, '../data');
-  if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
-
-  const targetStream = TARGET_STREAMS[0];
-
-  console.log(`📅 今日觀測日期: ${dateStr}`);
-  console.log(`📍 標的站點: ${targetStream.name}`);
-
-  let forecastData;
-  try {
-    forecastData = await WeatherService.fetchForecast(true);
-  } catch (err) {
-    forecastData = WeatherService.generateSimulatedForecast();
-  }
-
-  const todaySessionData = sessionType === 'sunrise' 
-    ? forecastData.daysForecast[0].sunrise 
-    : forecastData.daysForecast[0].sunset;
-
-  const predictedScore = todaySessionData.skyfire.score;
-  const predictedRating = todaySessionData.skyfire.rating;
-
-  console.log(`🔥 標的站點模型預測評分: ${predictedScore} 分 (${predictedRating.badge})`);
-
+  const outputDir = path.join(dataDir, 'snapshots');
   const snapshotFileName = `${dateStr}-${sessionType}.jpg`;
   const snapshotPath = path.join(outputDir, snapshotFileName);
-  let captureSuccess = false;
-  let liveVideoId = null;
-  let watchUrl = null;
-
-  console.log(`🎥 正在透過 YouTube 搜尋擷取 [${targetStream.name}] 即時 4K 影格...`);
-  liveVideoId = await extractYouTubeLiveVideoId(targetStream.query);
-
-  if (liveVideoId) {
-    watchUrl = `https://www.youtube.com/watch?v=${liveVideoId}`;
-    console.log(`✅ 成功尋獲 YouTube 官方直播 Video ID: ${liveVideoId}`);
-    console.log(`   直播網址: ${watchUrl}`);
-
-    const maxresUrl = `https://i.ytimg.com/vi/${liveVideoId}/maxresdefault.jpg`;
-    const hqUrl = `https://i.ytimg.com/vi/${liveVideoId}/hqdefault.jpg`;
-
-    try {
-      let imgBuf = await fetchUrl(maxresUrl);
-      if (!imgBuf || imgBuf.length < 5000) {
-        imgBuf = await fetchUrl(hqUrl);
-      }
-      if (imgBuf && imgBuf.length > 5000) {
-        fs.writeFileSync(snapshotPath, imgBuf);
-        captureSuccess = true;
-        console.log(`🎉 官方 YouTube 4K 即時影格已儲存！大小: ${imgBuf.length} bytes -> data/snapshots/${snapshotFileName}`);
-      }
-    } catch (e) {
-      console.warn(`⚠️ 下載 YouTube 影格失敗:`, e.message);
-    }
-  }
-
-  if (!captureSuccess) {
-    const localFallback = path.join(outputDir, targetStream.staticFile);
-    if (fs.existsSync(localFallback)) {
-      fs.copyFileSync(localFallback, snapshotPath);
-      captureSuccess = true;
-      console.log(`🔄 已使用真實 YouTube 官方 4K 實景影格: ${targetStream.staticFile}`);
-    }
-  }
-
   const recordsFile = path.join(dataDir, 'verification-records.json');
-  let records = [];
-  if (fs.existsSync(recordsFile)) {
-    try {
-      records = JSON.parse(fs.readFileSync(recordsFile, 'utf8'));
-    } catch (e) {
-      records = [];
-    }
-  }
 
-  const newRecord = {
+  const forecastData = await WeatherService.fetchForecast(true);
+  const matchingDay = forecastData.daysForecast.find(day =>
+    getTaipeiDateString(new Date(day.date)) === dateStr
+  ) || forecastData.daysForecast[0];
+  const sessionForecast = matchingDay[sessionType];
+
+  console.log(`🔥 模型預測: ${sessionForecast.skyfire.score} 分 (${sessionForecast.skyfire.rating.badge})`);
+  console.log('🎥 以 yt-dlp 驗證直播並以 ffmpeg 擷取當下影格...');
+
+  const capturedAt = options.now instanceof Date ? options.now : new Date();
+  const captureWindow = assertCaptureWindow({
+    now: capturedAt,
+    eventTime,
+    sessionType,
+    maxOffsetMinutes: MAX_CAPTURE_OFFSET_MINUTES
+  });
+
+  const capture = captureLiveFrame({
+    source,
+    outputPath: snapshotPath,
+    windowEvidence: captureWindow,
+    capturedAt,
+    runTool: options.runTool
+  });
+
+  const record = {
     id: `rec-${dateStr}-${sessionType}`,
     date: dateStr,
     session: sessionType,
-    sessionLabel: sessionType === 'sunset' ? '今日日落' : '今日日出',
-    capturedAt: now.toISOString(),
-    sourceStream: targetStream.name,
-    youtubeLiveUrl: watchUrl || `https://www.youtube.com/results?search_query=${encodeURIComponent(targetStream.query)}`,
+    sessionLabel: sessionType === 'sunrise' ? '日出實景' : '日落實景',
+    capturedAt: capture.capturedAt,
+    sourceStream: source.name,
+    youtubeLiveUrl: source.url,
     snapshotUrl: `data/snapshots/${snapshotFileName}`,
+    capture,
     prediction: {
-      score: predictedScore,
-      rating: predictedRating.badge,
-      color: predictedRating.color,
-      highCloud: todaySessionData.weather.cloudHigh,
-      midCloud: todaySessionData.weather.cloudMid,
-      lowCloud: todaySessionData.weather.cloudLow
+      score: sessionForecast.skyfire.score,
+      rating: sessionForecast.skyfire.rating.badge,
+      color: sessionForecast.skyfire.rating.color,
+      highCloud: sessionForecast.weather.cloudHigh,
+      midCloud: sessionForecast.weather.cloudMid,
+      lowCloud: sessionForecast.weather.cloudLow,
+      horizonClearance: sessionForecast.skyfire.metrics.horizonClearance,
+      visibilityKm: sessionForecast.skyfire.metrics.visKm,
+      isSimulated: forecastData.isSimulated === true
     },
     verification: {
-      status: captureSuccess ? 'captured_ready_for_scoring' : 'pending_capture',
+      status: 'captured_ready_for_scoring',
       groundTruthScore: null,
-      errorAbsolute: null
+      errorAbsolute: null,
+      isSimulated: false
     }
   };
 
-  const existingIdx = records.findIndex(r => r.id === newRecord.id);
-  if (existingIdx >= 0) {
-    records[existingIdx] = newRecord;
-  } else {
-    records.unshift(newRecord);
-  }
-
-  if (records.length > 90) records = records.slice(0, 90);
-
-  fs.writeFileSync(recordsFile, JSON.stringify(records, null, 2), 'utf8');
-  console.log(`💾 驗證紀錄已更新至 data/verification-records.json`);
-  console.log(`====================================================\n`);
+  writeRecord(recordsFile, record);
+  console.log(`✅ 實況影格已驗證: ${capture.width}x${capture.height}, SHA-256 ${capture.sha256}`);
+  console.log('💾 驗證紀錄已更新: data/verification-records.json');
+  console.log('====================================================\n');
+  return record;
 }
 
-const sessionArg = process.argv[2] || 'sunset';
-runCapturePipeline(sessionArg);
+if (require.main === module) {
+  runCapturePipeline(process.argv[2] || '').catch(error => {
+    console.error(`❌ 實況擷取失敗，未寫入驗證紀錄: ${error.message}`);
+    process.exitCode = 1;
+  });
+}
+
+module.exports = {
+  MAX_CAPTURE_OFFSET_MINUTES,
+  loadRecords,
+  writeRecord,
+  runCapturePipeline
+};

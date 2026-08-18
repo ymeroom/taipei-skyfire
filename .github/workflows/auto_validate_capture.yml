@@ -24,6 +24,8 @@ permissions:
 jobs:
   capture-and-record:
     runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Taipei
 
     steps:
       - name: 📥 檢出程式碼庫 (Checkout)
@@ -34,6 +36,19 @@ jobs:
         with:
           node-version: '20'
 
+      - name: 🧪 執行擷取與預測單元測試
+        run: node tests/run-all-tests.js
+
+      - name: 🌅 解析本次天文驗證時段
+        id: session
+        env:
+          MANUAL_SESSION: ${{ inputs.session }}
+          EVENT_SCHEDULE: ${{ github.event.schedule }}
+        run: |
+          SESSION="$(node -e "const { resolveSessionType } = require('./scripts/live-capture-core.js'); process.stdout.write(resolveSessionType(process.env.MANUAL_SESSION, process.env.EVENT_SCHEDULE));")"
+          echo "value=$SESSION" >> "$GITHUB_OUTPUT"
+          echo "Resolved capture session: $SESSION"
+
       - name: 🛠️ 安裝 ffmpeg, yt-dlp 與 Python 影像光學分析套件
         run: |
           sudo apt-get update
@@ -41,14 +56,10 @@ jobs:
           pip3 install --break-system-packages yt-dlp pillow numpy
 
       - name: 📸 執行出景窗口即時影格擷取與預測記錄 (Phase 1)
-        run: |
-          SESSION="${{ github.event.inputs.session || 'sunset' }}"
-          node scripts/capture-validation.js "$SESSION"
+        run: node scripts/capture-validation.js "${{ steps.session.outputs.value }}"
 
       - name: 🔬 執行天空色彩光學直方圖分析與模型誤差檢驗 (Phase 2)
-        run: |
-          SESSION="${{ github.event.inputs.session || 'sunset' }}"
-          node scripts/score-ground-truth.js "$SESSION"
+        run: node scripts/score-ground-truth.js "${{ steps.session.outputs.value }}"
 
       - name: 🚀 提交驗證影像與數據至倉庫 (Commit & Push)
         run: |

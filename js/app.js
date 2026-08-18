@@ -679,13 +679,33 @@ class SkyFireApp {
         return;
       }
 
-      // 計算全庫指標
-      const verifiedList = records.filter(r => r.verification && r.verification.groundTruthScore !== null);
+      // 只接受具備完整來源證據的真實 YouTube 直播影格。
+      // 舊的封面圖、縮圖、生成圖或模擬評分繼續保留在資料檔，但不納入走廊與指標。
+      const verifiedList = records.filter(r =>
+        typeof r.snapshotUrl === 'string' &&
+        r.snapshotUrl.startsWith('data/snapshots/') &&
+        r.capture?.kind === 'youtube-live-frame' &&
+        r.capture?.validated === true &&
+        r.verification?.status === 'verified_completed' &&
+        r.verification?.isSimulated !== true &&
+        Number.isFinite(r.verification?.groundTruthScore)
+      );
+
+      if (verifiedList.length === 0) {
+        if (badgeEl) badgeEl.innerText = '等待下一個日出／日落實景';
+        if (statAcc) statAcc.innerText = '--';
+        if (statMAE) statMAE.innerText = '--';
+        if (statTotal) statTotal.innerText = '0 場';
+        container.innerHTML = '<div style="color: var(--text-muted); font-size: 0.85rem;">現有紀錄未具備「直播中、日出／日落時窗內、實際影格」的完整證據，已排除不顯示。完成下一個天文時窗的真實擷取後會自動出現。</div>';
+        return;
+      }
+
+      // 計算有效實況影格指標
       const totalVerified = verifiedList.length;
       const totalError = verifiedList.reduce((acc, cur) => acc + (cur.verification.errorAbsolute || 0), 0);
-      const avgMAE = totalVerified > 0 ? (totalError / totalVerified).toFixed(1) : '4.2';
+      const avgMAE = (totalError / totalVerified).toFixed(1);
       const withinTolerance = verifiedList.filter(r => r.verification.errorAbsolute <= 15).length;
-      const accuracyPct = totalVerified > 0 ? ((withinTolerance / totalVerified) * 100).toFixed(1) : '94.2';
+      const accuracyPct = ((withinTolerance / totalVerified) * 100).toFixed(1);
 
       if (badgeEl) badgeEl.innerText = `歷史累計準確率 ${accuracyPct}%`;
       if (statAcc) statAcc.innerText = `${accuracyPct}%`;
@@ -694,10 +714,18 @@ class SkyFireApp {
 
       container.innerHTML = '';
 
-      records.forEach(rec => {
+      verifiedList.forEach(rec => {
         const v = rec.verification || {};
         const p = rec.prediction || {};
         const isVerified = v.groundTruthScore !== null;
+        const capturedTime = rec.capturedAt
+          ? new Date(rec.capturedAt).toLocaleTimeString('zh-TW', {
+              timeZone: 'Asia/Taipei',
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit'
+            })
+          : '--:--:--';
 
         const card = document.createElement('div');
         card.className = 'verification-card-item';
@@ -711,7 +739,7 @@ class SkyFireApp {
           <div class="verification-body">
             <div class="verification-title-row">
               <span class="verification-date">📅 ${rec.date} ${rec.sessionLabel || (rec.session === 'sunset' ? '日落' : '日出')}</span>
-              <span class="verification-source">📹 ${rec.sourceStream || '4K 即時串流'}</span>
+              <span class="verification-source">📹 ${rec.sourceStream || '4K 即時串流'} · 🕐 ${capturedTime}</span>
             </div>
             <div class="score-compare-bar">
               <div class="compare-score-box">
