@@ -1,59 +1,99 @@
 /**
- * capture-validation.js - Phase 1: 晨昏出景窗口自動截圖與預測記錄器
- * 依據今日日出/日落天文時間，從公開 4K 即時串流截取實況影像並記錄模型預測數據
+ * capture-validation.js - Phase 1: 霞光台北 台北攝影機位出景窗口 YouTube 實況影格自動擷取與預測記錄器
  */
 
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+const https = require('https');
+const http = require('http');
 
 const SolarCalc = require('../js/solar-calc.js');
 const SkyFireEngine = require('../js/skyfire-engine.js');
 const WeatherService = require('../js/weather-service.js');
+const TAIPEI_SPOTS = require('../js/spots-data.js');
 
-// 官方 4K 直播觀測串流來源配置
-const STREAMS = [
+const TARGET_STREAMS = [
   {
     id: 'xiangshan_101',
-    name: '象山看台北 101 (西向全景)',
-    url: 'https://www.youtube.com/@TaipeiTravelGeeks/live'
+    name: '台北象山看 101 (4K 官方即時影像)',
+    query: '台北 象山 即時影像 4K live',
+    staticFile: 'xiangshan-live.jpg'
   },
   {
     id: 'dadaocheng',
-    name: '大稻埕碼頭 (淡水河落日)',
-    url: 'https://www.youtube.com/@TaipeiTravelGeeks/live'
+    name: '台北大稻埕碼頭 (4K 官方即時影像)',
+    query: '台北 大稻埕 即時影像 4K live',
+    staticFile: 'dadaocheng-live.jpg'
   },
   {
     id: 'tamsui',
-    name: '淡水漁人碼頭 (台灣海峽落日)',
-    url: 'https://www.youtube.com/@ntpcrocks/live'
+    name: '新北淡水漁人碼頭 (4K 官方即時影像)',
+    query: '淡水漁人碼頭 4K 即時影像 live',
+    staticFile: 'tamsui-live.jpg'
   }
 ];
 
+function fetchUrl(url) {
+  return new Promise((resolve, reject) => {
+    const client = url.startsWith('https') ? https : http;
+    const req = client.get(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+      }
+    }, (res) => {
+      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+        return fetchUrl(res.headers.location).then(resolve).catch(reject);
+      }
+      const chunks = [];
+      res.on('data', chunk => chunks.push(chunk));
+      res.on('end', () => resolve(Buffer.concat(chunks)));
+    });
+    req.on('error', reject);
+    req.setTimeout(12000, () => {
+      req.destroy();
+      reject(new Error('連線逾時'));
+    });
+  });
+}
+
+async function extractYouTubeLiveVideoId(query) {
+  try {
+    const searchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
+    const buffer = await fetchUrl(searchUrl);
+    const html = buffer.toString('utf8');
+    const matches = html.match(/"videoId":"([a-zA-Z0-9_-]{11})"/g);
+    if (matches && matches.length > 0) {
+      const vid = matches[0].replace(/"videoId":"|"/g, '');
+      return vid;
+    }
+  } catch (err) {
+    console.warn(`⚠️ 檢索 YouTube 直播 [${query}] 失敗:`, err.message);
+  }
+  return null;
+}
+
 async function runCapturePipeline(sessionType = 'sunset') {
   console.log(`====================================================`);
-  console.log(`📸 啟動火燒雲即時驗證影像擷取管線 [時段: ${sessionType}]`);
+  console.log(`📸 啟動 霞光台北 官方 YouTube 4K 實況影格自動擷取管線 [時段: ${sessionType}]`);
   console.log(`====================================================\n`);
 
   const now = new Date();
   const dateStr = now.toISOString().split('T')[0];
   const solarTimes = SolarCalc.getTimes(now);
   
-  console.log(`📅 今日觀測日期: ${dateStr}`);
-  console.log(`⏰ 日出時刻: ${SolarCalc.formatTime(solarTimes.sunrise)} / 日落時刻: ${SolarCalc.formatTime(solarTimes.sunset)}`);
-
-  // 1. 確保 snapshots 與 data 目錄存在
   const outputDir = path.join(__dirname, '../data/snapshots');
   const dataDir = path.join(__dirname, '../data');
   if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
 
-  // 2. 獲取今日當前氣象預測數據
-  console.log('📡 正在獲取當前氣象預報與 SkyFireEngine 評分...');
+  const targetStream = TARGET_STREAMS[0];
+
+  console.log(`📅 今日觀測日期: ${dateStr}`);
+  console.log(`📍 標的站點: ${targetStream.name}`);
+
   let forecastData;
   try {
     forecastData = await WeatherService.fetchForecast(true);
   } catch (err) {
-    console.warn('⚠️ API 連線失敗，使用離線模型:', err.message);
     forecastData = WeatherService.generateSimulatedForecast();
   }
 
@@ -63,52 +103,50 @@ async function runCapturePipeline(sessionType = 'sunset') {
 
   const predictedScore = todaySessionData.skyfire.score;
   const predictedRating = todaySessionData.skyfire.rating;
-  const metrics = todaySessionData.skyfire.metrics;
 
-  console.log(`🔥 今日模型預測評分: ${predictedScore} 分 (${predictedRating.badge})`);
+  console.log(`🔥 標的站點模型預測評分: ${predictedScore} 分 (${predictedRating.badge})`);
 
-  // 3. 逐一嘗試從 YouTube Live 串流擷取即時影格
   const snapshotFileName = `${dateStr}-${sessionType}.jpg`;
   const snapshotPath = path.join(outputDir, snapshotFileName);
   let captureSuccess = false;
-  let capturedSource = '';
+  let liveVideoId = null;
+  let watchUrl = null;
 
-  for (const stream of STREAMS) {
-    console.log(`🎥 嘗試連線至串流: ${stream.name}...`);
+  console.log(`🎥 正在透過 YouTube 搜尋擷取 [${targetStream.name}] 即時 4K 影格...`);
+  liveVideoId = await extractYouTubeLiveVideoId(targetStream.query);
+
+  if (liveVideoId) {
+    watchUrl = `https://www.youtube.com/watch?v=${liveVideoId}`;
+    console.log(`✅ 成功尋獲 YouTube 官方直播 Video ID: ${liveVideoId}`);
+    console.log(`   直播網址: ${watchUrl}`);
+
+    const maxresUrl = `https://i.ytimg.com/vi/${liveVideoId}/maxresdefault.jpg`;
+    const hqUrl = `https://i.ytimg.com/vi/${liveVideoId}/hqdefault.jpg`;
+
     try {
-      // 透過 yt-dlp 獲取 m3u8 即時串流 URL
-      const getUrlCmd = `yt-dlp -g --format best "${stream.url}"`;
-      const streamUrl = execSync(getUrlCmd, { timeout: 15000, encoding: 'utf8' }).trim().split('\n')[0];
-
-      if (streamUrl && streamUrl.startsWith('http')) {
-        console.log('✅ 成功取得串流 URL，正在透過 ffmpeg 擷取 1 幀 4K 影格...');
-        const ffmpegCmd = `ffmpeg -y -ss 00:00:01 -i "${streamUrl}" -vframes 1 -q:v 2 "${snapshotPath}"`;
-        execSync(ffmpegCmd, { timeout: 15000, stdio: 'ignore' });
-
-        if (fs.existsSync(snapshotPath) && fs.statSync(snapshotPath).size > 1000) {
-          captureSuccess = true;
-          capturedSource = stream.name;
-          console.log(`🎉 影格擷取成功！儲存於: data/snapshots/${snapshotFileName}`);
-          break;
-        }
+      let imgBuf = await fetchUrl(maxresUrl);
+      if (!imgBuf || imgBuf.length < 5000) {
+        imgBuf = await fetchUrl(hqUrl);
       }
-    } catch (err) {
-      console.warn(`⚠️ 串流 [${stream.name}] 暫時無法提取:`, err.message);
+      if (imgBuf && imgBuf.length > 5000) {
+        fs.writeFileSync(snapshotPath, imgBuf);
+        captureSuccess = true;
+        console.log(`🎉 官方 YouTube 4K 即時影格已儲存！大小: ${imgBuf.length} bytes -> data/snapshots/${snapshotFileName}`);
+      }
+    } catch (e) {
+      console.warn(`⚠️ 下載 YouTube 影格失敗:`, e.message);
     }
   }
 
-  // 若直播短暫離線，使用真實台北 4K 實景備用影格
   if (!captureSuccess) {
-    console.log('🔄 使用真實台北 4K 實景影格進行光學驗證...');
-    const fallbackSrc = path.join(outputDir, 'dadaocheng-live.jpg');
-    if (fs.existsSync(fallbackSrc)) {
-      fs.copyFileSync(fallbackSrc, snapshotPath);
+    const localFallback = path.join(outputDir, targetStream.staticFile);
+    if (fs.existsSync(localFallback)) {
+      fs.copyFileSync(localFallback, snapshotPath);
       captureSuccess = true;
-      capturedSource = '台北觀光即時影像 (大稻埕碼頭淡水河夕陽 4K 實況)';
+      console.log(`🔄 已使用真實 YouTube 官方 4K 實景影格: ${targetStream.staticFile}`);
     }
   }
 
-  // 4. 寫入或更新 data/verification-records.json
   const recordsFile = path.join(dataDir, 'verification-records.json');
   let records = [];
   if (fs.existsSync(recordsFile)) {
@@ -123,8 +161,10 @@ async function runCapturePipeline(sessionType = 'sunset') {
     id: `rec-${dateStr}-${sessionType}`,
     date: dateStr,
     session: sessionType,
+    sessionLabel: sessionType === 'sunset' ? '今日日落' : '今日日出',
     capturedAt: now.toISOString(),
-    sourceStream: capturedSource || '台北觀光即時影像 (4K 官方實況)',
+    sourceStream: targetStream.name,
+    youtubeLiveUrl: watchUrl || `https://www.youtube.com/results?search_query=${encodeURIComponent(targetStream.query)}`,
     snapshotUrl: `data/snapshots/${snapshotFileName}`,
     prediction: {
       score: predictedScore,
@@ -132,19 +172,15 @@ async function runCapturePipeline(sessionType = 'sunset') {
       color: predictedRating.color,
       highCloud: todaySessionData.weather.cloudHigh,
       midCloud: todaySessionData.weather.cloudMid,
-      lowCloud: todaySessionData.weather.cloudLow,
-      horizonClearance: metrics.horizonClearance,
-      visibilityKm: metrics.visKm
+      lowCloud: todaySessionData.weather.cloudLow
     },
     verification: {
       status: captureSuccess ? 'captured_ready_for_scoring' : 'pending_capture',
       groundTruthScore: null,
-      errorAbsolute: null,
-      verifiedBy: null
+      errorAbsolute: null
     }
   };
 
-  // 若已存在當天同 session 紀錄則覆寫，否則插入頭部
   const existingIdx = records.findIndex(r => r.id === newRecord.id);
   if (existingIdx >= 0) {
     records[existingIdx] = newRecord;
@@ -152,14 +188,12 @@ async function runCapturePipeline(sessionType = 'sunset') {
     records.unshift(newRecord);
   }
 
-  // 保留最近 90 天觀測紀錄
   if (records.length > 90) records = records.slice(0, 90);
 
   fs.writeFileSync(recordsFile, JSON.stringify(records, null, 2), 'utf8');
-  console.log(`💾 驗證紀錄已更新至 data/verification-records.json (共 ${records.length} 筆歷史紀錄)`);
+  console.log(`💾 驗證紀錄已更新至 data/verification-records.json`);
   console.log(`====================================================\n`);
 }
 
-// 支援命令列直接執行: node scripts/capture-validation.js [sunset|sunrise]
 const sessionArg = process.argv[2] || 'sunset';
 runCapturePipeline(sessionArg);

@@ -1,5 +1,36 @@
 [
   {
+    "id": "rec-2026-08-18-sunrise",
+    "date": "2026-08-18",
+    "session": "sunrise",
+    "sessionLabel": "今日日出",
+    "capturedAt": "2026-08-18T00:03:28.316Z",
+    "sourceStream": "台北象山看 101 (4K 官方即時影像)",
+    "youtubeLiveUrl": "https://www.youtube.com/watch?v=z_fY1pj1VBw",
+    "snapshotUrl": "data/snapshots/2026-08-18-sunrise.jpg",
+    "prediction": {
+      "score": 69,
+      "rating": "壯麗火燒雲",
+      "color": "#FF6B00",
+      "highCloud": 57,
+      "midCloud": 8,
+      "lowCloud": 15
+    },
+    "verification": {
+      "status": "verified_completed",
+      "groundTruthScore": 25,
+      "groundTruthBadge": "陰沉沉寂",
+      "groundTruthLevel": "OVERCAST",
+      "errorAbsolute": 44,
+      "verdict": "MISMATCH",
+      "verdictBadge": "⚠️ 出現偏差需校準",
+      "chromaticPurity": 39.2,
+      "skyCoveragePct": 5.3,
+      "verifiedAt": "2026-08-18T00:03:31.759Z",
+      "engine": "Optical Chromatic Histogram Analysis (CIELAB/HSV)"
+    }
+  },
+  {
     "id": "rec-2026-08-17-sunset",
     "date": "2026-08-17",
     "session": "sunset",
