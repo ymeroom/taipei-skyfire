@@ -12,7 +12,19 @@ const {
 } = require('./live-capture-core.js');
 
 function runExternalTool(command, args) {
-  const result = spawnSync(command, args, {
+  let finalCmd = command;
+  let finalArgs = args;
+
+  if (command === 'yt-dlp') {
+    // Check if yt-dlp is available or fallback to python -m yt_dlp
+    const testDirect = spawnSync('yt-dlp', ['--version'], { windowsHide: true });
+    if (testDirect.error || testDirect.status !== 0) {
+      finalCmd = 'python';
+      finalArgs = ['-m', 'yt_dlp', ...args];
+    }
+  }
+
+  const result = spawnSync(finalCmd, finalArgs, {
     encoding: 'utf8',
     timeout: 60000,
     maxBuffer: 20 * 1024 * 1024,
@@ -24,7 +36,7 @@ function runExternalTool(command, args) {
   }
   if (result.status !== 0) {
     const detail = String(result.stderr || result.stdout || '').trim();
-    throw new Error(`${command} exited with ${result.status}${detail ? `: ${detail}` : ''}`);
+    throw new Error(`${finalCmd} exited with ${result.status}${detail ? `: ${detail}` : ''}`);
   }
   return String(result.stdout || '');
 }
