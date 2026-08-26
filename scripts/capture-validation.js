@@ -16,7 +16,7 @@ const {
 } = require('./live-capture-core.js');
 const { captureLiveFrame } = require('./live-frame-capture.js');
 
-const MAX_CAPTURE_OFFSET_MINUTES = 30;
+const MAX_CAPTURE_OFFSET_MINUTES = 600; // 支援 10 小時 YouTube DVR 時光機回溯窗口
 
 function loadRecords(recordsFile) {
   if (!fs.existsSync(recordsFile)) return [];

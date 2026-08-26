@@ -82,16 +82,53 @@ function captureLiveFrame({
     const metadata = JSON.parse(metadataText);
     const liveEvidence = validateLiveMetadata(metadata, source);
 
-    runTool('ffmpeg', [
-      '-hide_banner',
-      '-loglevel', 'error',
-      '-y',
-      '-rw_timeout', '15000000',
-      '-i', metadata.url,
-      '-frames:v', '1',
-      '-q:v', '2',
-      temporaryPath
-    ]);
+    const streamUrl = metadata.url;
+    const offsetSeconds = windowEvidence && windowEvidence.offsetMinutes ? Math.max(0, windowEvidence.offsetMinutes * 60) : 0;
+
+    // 若延遲超過 60 秒且有 m3u8 串流，透過 DVR Sequence / Index 倒帶精準抓取天文事件時刻
+    if (offsetSeconds > 60 && metadata.manifest_url) {
+      try {
+        const https = require('https');
+        const m3u8Content = runTool('curl', ['-s', metadata.manifest_url]) || '';
+        const lines = m3u8Content.split('\n').filter(l => l.startsWith('http'));
+        if (lines.length > 0) {
+          const durMatch = lines[lines.length - 1].match(/\/dur\/([\d\.]+)\//);
+          const dur = durMatch ? parseFloat(durMatch[1]) : 5.0;
+          const totalSecs = lines.length * dur;
+          const secsFromStart = Math.max(0, totalSecs - offsetSeconds);
+          const targetIdx = Math.max(0, Math.min(lines.length - 1, Math.floor(secsFromStart / dur)));
+          const targetSegUrl = lines[targetIdx];
+
+          const tempTs = `${temporaryPath}.ts`;
+          runTool('curl', ['-s', '-L', '-o', tempTs, targetSegUrl]);
+          runTool('ffmpeg', [
+            '-hide_banner',
+            '-loglevel', 'error',
+            '-y',
+            '-i', tempTs,
+            '-frames:v', '1',
+            '-q:v', '2',
+            temporaryPath
+          ]);
+          if (fs.existsSync(tempTs)) fs.rmSync(tempTs, { force: true });
+        }
+      } catch (dvrErr) {
+        console.warn('DVR segment seek fallback to live edge:', dvrErr.message);
+      }
+    }
+
+    if (!fs.existsSync(temporaryPath) || fs.statSync(temporaryPath).size < 10000) {
+      runTool('ffmpeg', [
+        '-hide_banner',
+        '-loglevel', 'error',
+        '-y',
+        '-rw_timeout', '15000000',
+        '-i', streamUrl,
+        '-frames:v', '1',
+        '-q:v', '2',
+        temporaryPath
+      ]);
+    }
 
     const jpegBuffer = assertJpegFile(temporaryPath);
     const probeText = runTool('ffprobe', [
