@@ -58,6 +58,9 @@ jobs:
       - name: 📸 執行出景窗口即時影格擷取與預測記錄 (Phase 1)
         run: node scripts/capture-validation.js "${{ steps.session.outputs.value }}"
 
+      - name: 🎬 執行 50 分鐘 11 連續縮時影格擷取 (前後 25 分鐘 / 每 5 分鐘 1 次)
+        run: python3 scripts/capture_timelapse_series.py "${{ steps.session.outputs.value }}"
+
       - name: 🔬 執行天空色彩光學直方圖分析與模型誤差檢驗 (Phase 2)
         run: node scripts/score-ground-truth.js "${{ steps.session.outputs.value }}"
 
