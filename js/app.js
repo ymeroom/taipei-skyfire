@@ -5,7 +5,7 @@
 class SkyFireApp {
   constructor() {
     this.currentForecastData = null;
-    this.activeSessionType = 'today-sunset'; // 'today-sunset' | 'tomorrow-sunrise' | 'tomorrow-sunset' | 'custom'
+    this.activeSessionType = 'auto'; // 'auto' (自動判定最近時段) | 'today-sunrise' | 'today-sunset' | 'tomorrow-sunrise' | 'tomorrow-sunset' | 'custom'
     this.selectedDayIndex = 0;
     this.map = null;
     this.markers = [];
@@ -69,6 +69,7 @@ class SkyFireApp {
   render() {
     if (!this.currentForecastData || !this.currentForecastData.daysForecast) return;
 
+    this.renderSessionSwitcher();
     const currentData = this.getActiveSessionData();
     if (!currentData) return;
 
@@ -81,11 +82,81 @@ class SkyFireApp {
   }
 
   /**
+   * 動態時段切換器渲染（依據當前時間智慧判定最近即將到來的天文事件）
+   */
+  renderSessionSwitcher() {
+    const container = document.getElementById('sessionSwitcher');
+    if (!container || !this.currentForecastData || !this.currentForecastData.daysForecast) return;
+
+    const days = this.currentForecastData.daysForecast;
+    const now = new Date();
+    const todaySunrise = days[0].sunrise.time;
+    const todaySunset = days[0].sunset.time;
+
+    let tabs = [];
+    if (now < todaySunrise) {
+      // 凌晨時段 (00:00 ~ 日出前): 第一優先是「今日清晨日出」！
+      tabs = [
+        { id: 'today-sunrise', icon: '🌅', label: `今日日出 (${SolarCalc.formatTime(todaySunrise)})` },
+        { id: 'today-sunset', icon: '🌇', label: `今日日落 (${SolarCalc.formatTime(todaySunset)})` },
+        { id: 'tomorrow-sunrise', icon: '🌅', label: `明日日出 (${SolarCalc.formatTime(days[1].sunrise.time)})` }
+      ];
+      if (this.activeSessionType === 'auto') {
+        this.activeSessionType = 'today-sunrise';
+      }
+    } else if (now < todaySunset) {
+      // 白天時段 (日出後 ~ 日落前): 第一優先是「今日傍晚日落」
+      tabs = [
+        { id: 'today-sunset', icon: '🌇', label: `今日日落 (${SolarCalc.formatTime(todaySunset)})` },
+        { id: 'tomorrow-sunrise', icon: '🌅', label: `明日日出 (${SolarCalc.formatTime(days[1].sunrise.time)})` },
+        { id: 'tomorrow-sunset', icon: '🌆', label: `明日日落 (${SolarCalc.formatTime(days[1].sunset.time)})` }
+      ];
+      if (this.activeSessionType === 'auto') {
+        this.activeSessionType = 'today-sunset';
+      }
+    } else {
+      // 入夜時段 (日落後 ~ 午夜): 第一優先是「明日清晨日出」
+      tabs = [
+        { id: 'tomorrow-sunrise', icon: '🌅', label: `明日日出 (${SolarCalc.formatTime(days[1].sunrise.time)})` },
+        { id: 'tomorrow-sunset', icon: '🌆', label: `明日日落 (${SolarCalc.formatTime(days[1].sunset.time)})` },
+        { id: 'day2-sunrise', icon: '🌅', label: `後日日出 (${SolarCalc.formatTime(days[2].sunrise.time)})` }
+      ];
+      if (this.activeSessionType === 'auto') {
+        this.activeSessionType = 'tomorrow-sunrise';
+      }
+    }
+
+    if (!tabs.some(t => t.id === this.activeSessionType) && !this.activeSessionType.startsWith('custom')) {
+      this.activeSessionType = tabs[0].id;
+    }
+
+    container.innerHTML = tabs.map(tab => `
+      <button class="tab-btn ${this.activeSessionType === tab.id ? 'active' : ''}" data-session="${tab.id}">
+        <span>${tab.icon}</span> ${tab.label}
+      </button>
+    `).join('');
+
+    container.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        this.activeSessionType = btn.dataset.session;
+        this.render();
+      });
+    });
+  }
+
+  /**
    * 獲取當前所選時段的資料
    */
   getActiveSessionData() {
     const days = this.currentForecastData.daysForecast;
-    if (this.activeSessionType === 'today-sunset') {
+    if (this.activeSessionType === 'today-sunrise') {
+      return {
+        ...days[0].sunrise,
+        dayMeta: days[0],
+        type: 'sunrise',
+        label: '今日日出 (Today Sunrise)'
+      };
+    } else if (this.activeSessionType === 'today-sunset') {
       return {
         ...days[0].sunset,
         dayMeta: days[0],
@@ -106,14 +177,22 @@ class SkyFireApp {
         type: 'sunset',
         label: '明日日落 (Tomorrow Sunset)'
       };
+    } else if (this.activeSessionType === 'day2-sunrise') {
+      return {
+        ...days[2].sunrise,
+        dayMeta: days[2],
+        type: 'sunrise',
+        label: `${days[2].dateFormatted} 日出`
+      };
     } else {
       // 點擊 5 天預報特定天
       const day = days[this.selectedDayIndex] || days[0];
+      const sessType = this.selectedSessionSubtype || 'sunset';
       return {
-        ...day.sunset,
+        ...day[sessType],
         dayMeta: day,
-        type: 'sunset',
-        label: `${day.dateFormatted} 日落`
+        type: sessType,
+        label: `${day.dateFormatted} ${sessType === 'sunrise' ? '日出' : '日落'}`
       };
     }
   }
