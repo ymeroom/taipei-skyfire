@@ -69,14 +69,58 @@ async function runCapturePipeline(inputSession = '', options = {}) {
   const snapshotPath = path.join(outputDir, snapshotFileName);
   const recordsFile = path.join(dataDir, 'verification-records.json');
 
-  const forecastData = await WeatherService.fetchForecast(true);
-  const matchingDay = forecastData.daysForecast.find(day =>
-    getTaipeiDateString(new Date(day.date)) === dateStr
-  ) || forecastData.daysForecast[0];
-  const sessionForecast = matchingDay[sessionType];
+  let predictionScore = null;
+  let predictionData = {};
+  
+  // 嘗試讀取提前鎖定的預測
+  const lockFile = path.join(dataDir, `locked-${sessionType}-forecast.json`);
+  if (fs.existsSync(lockFile)) {
+    try {
+      const lockedData = JSON.parse(fs.readFileSync(lockFile, 'utf8'));
+      if (lockedData.date === dateStr && lockedData.skyfire) {
+        console.log(`[Lock Forecast] 成功讀取提前鎖定的預測分數: ${lockedData.skyfire.score}`);
+        predictionScore = lockedData.skyfire.score;
+        predictionData = {
+          score: lockedData.skyfire.score,
+          rating: lockedData.skyfire.rating.badge,
+          color: lockedData.skyfire.rating.color,
+          highCloud: lockedData.skyfire.diagnostics?.highCloud || 0,
+          midCloud: lockedData.skyfire.diagnostics?.midCloud || 0,
+          lowCloud: lockedData.skyfire.diagnostics?.lowCloud || 0,
+          horizonClearance: lockedData.skyfire.metrics.horizonClearance,
+          visibilityKm: lockedData.skyfire.metrics.visKm,
+          isSimulated: false,
+          lockedAt: lockedData.lockedAt
+        };
+      }
+    } catch (e) {
+      console.warn('讀取鎖定預測失敗，降級為即時預測', e.message);
+    }
+  }
 
-  console.log(`🔥 模型預測: ${sessionForecast.skyfire.score} 分 (${sessionForecast.skyfire.rating.badge})`);
-  console.log('🎥 以 yt-dlp 驗證直播並以 ffmpeg 擷取當下影格...');
+  // 如果沒有鎖定資料，則抓取即時資料
+  if (!predictionScore) {
+    const forecastData = await WeatherService.fetchForecast(true);
+    const matchingDay = forecastData.daysForecast.find(day =>
+      getTaipeiDateString(new Date(day.date)) === dateStr
+    ) || forecastData.daysForecast[0];
+    const sessionForecast = matchingDay[sessionType];
+    console.log(`即時預測分數: ${sessionForecast.skyfire.score} 分 (${sessionForecast.skyfire.rating.badge})`);
+    
+    predictionData = {
+      score: sessionForecast.skyfire.score,
+      rating: sessionForecast.skyfire.rating.badge,
+      color: sessionForecast.skyfire.rating.color,
+      highCloud: sessionForecast.weather.cloudHigh,
+      midCloud: sessionForecast.weather.cloudMid,
+      lowCloud: sessionForecast.weather.cloudLow,
+      horizonClearance: sessionForecast.skyfire.metrics.horizonClearance,
+      visibilityKm: sessionForecast.skyfire.metrics.visKm,
+      isSimulated: forecastData.isSimulated === true
+    };
+  }
+
+  console.log('準備利用 yt-dlp 擷取影片，再以 ffmpeg 輸出為截圖...');
 
   const capturedAt = options.now instanceof Date ? options.now : new Date();
   const captureWindow = assertCaptureWindow({
@@ -98,23 +142,17 @@ async function runCapturePipeline(inputSession = '', options = {}) {
     id: `rec-${dateStr}-${sessionType}`,
     date: dateStr,
     session: sessionType,
-    sessionLabel: sessionType === 'sunrise' ? '日出實景' : '日落實景',
-    capturedAt: capture.capturedAt,
-    sourceStream: source.name,
-    youtubeLiveUrl: source.url,
-    snapshotUrl: `data/snapshots/${snapshotFileName}`,
-    capture,
-    prediction: {
-      score: sessionForecast.skyfire.score,
-      rating: sessionForecast.skyfire.rating.badge,
-      color: sessionForecast.skyfire.rating.color,
-      highCloud: sessionForecast.weather.cloudHigh,
-      midCloud: sessionForecast.weather.cloudMid,
-      lowCloud: sessionForecast.weather.cloudLow,
-      horizonClearance: sessionForecast.skyfire.metrics.horizonClearance,
-      visibilityKm: sessionForecast.skyfire.metrics.visKm,
-      isSimulated: forecastData.isSimulated === true
+    targetTime: eventTime.toISOString(),
+    source: source.name,
+    capture: {
+      width: capture.width,
+      height: capture.height,
+      fileName: snapshotFileName,
+      sha256: capture.sha256,
+      capturedAt: capturedAt.toISOString(),
+      offsetMinutes: captureWindow.offsetMinutes
     },
+    prediction: predictionData,
     verification: {
       status: 'captured_ready_for_scoring',
       groundTruthScore: null,

@@ -1,0 +1,49 @@
+name: Lock Forecast Prediction
+
+on:
+  schedule:
+    # 台灣時間 16:30 (UTC 08:30) 鎖定當日日落預測
+    - cron: '30 8 * * *'
+    # 台灣時間 23:50 (UTC 15:50) 鎖定隔日日出預測
+    - cron: '50 15 * * *'
+  workflow_dispatch:
+    inputs:
+      session:
+        description: '鎖定的時段 (sunset 或 sunrise)'
+        required: true
+        default: 'sunset'
+        type: choice
+        options:
+          - sunset
+          - sunrise
+
+permissions:
+  contents: write
+
+jobs:
+  lock-forecast:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Taipei
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Lock Forecast Script
+        env:
+          MANUAL_SESSION: ${{ inputs.session }}
+          EVENT_SCHEDULE: ${{ github.event.schedule }}
+        run: node scripts/lock-forecast.js
+
+      - name: Commit & Push Locked Forecast
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action [SkyFire Bot]"
+          git add data/
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(forecast): lock prediction score in advance [skip ci]" && git push)
