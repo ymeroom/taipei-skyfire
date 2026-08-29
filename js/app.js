@@ -879,6 +879,20 @@ class SkyFireApp {
         <p><strong>☁️ 雲層與大氣結構：</strong>${report.summaryAnalysis?.atmosphericReason || '觀測總結記錄中。'}</p>
         <p><strong>🎯 模型預測準確度：</strong>${report.summaryAnalysis?.modelPerformance || '模型持續精準校準中。'}</p>
       </div>
+
+      ${report.id === 'report-2026-08-27-sunset' ? `
+        <div style="margin-top: 16px; padding: 14px 20px; background: rgba(244, 63, 94, 0.15); border: 1px solid rgba(244, 63, 94, 0.4); border-radius: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <strong style="color: #fda4af; font-size: 0.95rem; display: flex; align-items: center; gap: 6px;">
+              <span>🔥</span> 歷史級別大景特刊：2026-08-27 傍晚火燒雲巔峰（18:45:00）
+            </strong>
+            <div style="font-size: 0.8rem; color: #cbd5e1; margin-top: 2px;">本場 8/27 暮光二次散射巔峰已收錄至獨立高畫質圖冊（內嵌 4K 官方即時時間碼影格）</div>
+          </div>
+          <a href="peak_sunset_1845_show.html" target="_blank" class="btn-pill" style="text-decoration: none; padding: 7px 18px; background: #f43f5e; color: #fff; border-color: #f43f5e; font-weight: 700; font-size: 0.84rem; box-shadow: 0 4px 12px rgba(244, 63, 94, 0.4);">
+            🌟 開啟 18:45 史詩大景圖冊 ➔
+          </a>
+        </div>
+      ` : ''}
     `;
   }
 
@@ -906,6 +920,7 @@ class SkyFireApp {
             <span>${isSunrise ? '🌅' : '🌇'}</span> ${rep.date} ${rep.sessionLabel} • ${rep.prediction?.score || '--'}分 (${rep.prediction?.rating || ''})
           </div>
           <div class="archive-item-badges">
+            ${rep.id === 'report-2026-08-27-sunset' ? '<span class="report-tag-pill" style="background: rgba(244, 63, 94, 0.25); color: #f43f5e; border-color: rgba(244, 63, 94, 0.5); font-weight: 800;">🔥 史詩大景</span>' : ''}
             <span class="report-tag-pill">${rep.publishTimeLabel}</span>
             <span class="report-tag-pill highlight">${rep.groundTruth?.verdictBadge || '🎯 驗證通過'}</span>
             <span style="font-size: 0.8rem; color: #ff9e00;">${isSelected ? '📖 現正展示中' : '點擊查看 ➔'}</span>
