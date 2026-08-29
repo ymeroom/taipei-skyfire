@@ -1,0 +1,55 @@
+{
+  "date": "2026-08-31",
+  "session": "sunrise",
+  "lockedAt": "2026-08-29T18:53:30.713Z",
+  "skyfire": {
+    "score": 35,
+    "rating": {
+      "level": "FAINT",
+      "badge": "平淡暮光",
+      "icon": "🌤️",
+      "color": "#7B88A8",
+      "secondaryColor": "#A0AEC0",
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
+      "bgGradient": "linear-gradient(135deg, rgba(123,136,168,0.2) 0%, rgba(160,174,192,0.1) 100%)"
+    },
+    "metrics": {
+      "cloudQualityScore": 0,
+      "lowCloudPenalty": 3,
+      "horizonScore": 21,
+      "visibilityScore": 14,
+      "horizonClearance": 71,
+      "visKm": 22.1
+    },
+    "diagnostics": [
+      {
+        "label": "高空卷雲 (6,000m+)",
+        "status": "low",
+        "desc": "高雲量僅 0%，上方缺少大面積紅色漫射反光板。"
+      },
+      {
+        "label": "中空雲層 (2,000-6,000m)",
+        "status": "low",
+        "desc": "中雲量稀疏 (0%)，雲彩層次感較為單純。"
+      },
+      {
+        "label": "遠方東方（太平洋/宜蘭外海）透光窗",
+        "status": "fair",
+        "desc": "低雲量約 27%，地平線具有部分透光縫隙，呈現局部霞光。"
+      },
+      {
+        "label": "大氣能見度與通透度",
+        "status": "optimal",
+        "desc": "能見度優異（22.1 公里），大氣清澈通透，晚霞色彩飽和純淨。"
+      }
+    ],
+    "photoTips": {
+      "bestTime": "日出前 35-20 分鐘之藍調時段",
+      "whiteBalance": "色溫設為 3800K - 4500K 拍出城市冷冽深藍氛圍",
+      "filter": "長曝減光鏡 (ND64/ND1000) 霧化雲流或車軌",
+      "exposure": "建議使用腳架進行 10-30 秒慢速長曝",
+      "lens": "廣角至中望遠，適合捕捉台北夜景、橋樑車軌與建築點燈",
+      "mobileTip": "切換至手機「夜景模式 (Night Mode)」，藉由多幀降噪紀錄城市藍調夜景。"
+    }
+  }
+}
