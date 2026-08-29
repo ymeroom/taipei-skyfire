@@ -2,9 +2,13 @@ name: Auto Ground-Truth YouTube Capture & Validation
 
 on:
   schedule:
-    # 每日日落時段 (台灣時間 18:45 = UTC 10:45)
+    # 每日清晨日出日報發布 (台灣時間 09:00 = UTC 01:00)
+    - cron: '0 1 * * *'
+    # 每日傍晚日落日報發布 (台灣時間 21:00 = UTC 13:00)
+    - cron: '0 13 * * *'
+    # 每日日落出景當刻擷取 (台灣時間 18:45 = UTC 10:45)
     - cron: '45 10 * * *'
-    # 每日日出時段 (台灣時間 05:30 = UTC 21:30)
+    # 每日日出出景當刻擷取 (台灣時間 05:30 = UTC 21:30)
     - cron: '30 21 * * *'
   # 支援手動在 GitHub Actions 頁面一鍵觸發測試
   workflow_dispatch:
@@ -64,7 +68,10 @@ jobs:
       - name: 🔬 執行天空色彩光學直方圖分析與模型誤差檢驗 (Phase 2)
         run: node scripts/score-ground-truth.js "${{ steps.session.outputs.value }}"
 
-      - name: 🚀 提交驗證影像與數據至倉庫 (Commit & Push)
+      - name: 📰 產生每日實況驗證日報與歷史歸檔 (Daily Ground Truth Briefing)
+        run: python3 scripts/generate_daily_briefing.py "${{ steps.session.outputs.value }}"
+
+      - name: 🚀 提交驗證數據至倉庫 (Commit & Push)
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action [SkyFire Bot]"

@@ -474,12 +474,12 @@
     </section>
 
     <!-- ==========================================
-         即時出景驗證走廊與社群回饋閉環 (Ground Truth Corridor)
+         即時出景驗證走廊與每日定時日報 (Daily Ground Truth Briefing & Archive)
          ========================================== -->
     <section class="science-section" id="verifySection">
       <div class="section-header-row">
-        <h2 class="section-title"><span>🎯</span> 每日出景實況驗證走廊（Ground Truth Verification Corridor）</h2>
-        <span class="info-chip" id="accuracySummaryBadge">累積驗證中...</span>
+        <h2 class="section-title"><span>📰</span> 每日出景實況驗證日報與歷史歸檔（Daily Ground Truth Briefing）</h2>
+        <span class="info-chip" id="accuracySummaryBadge">每日 09:00 / 21:00 定時發布</span>
       </div>
 
       <!-- 累積準確率與模型性能指標 Banner -->
@@ -493,14 +493,29 @@
           <div class="stat-pill-value" id="statAvgMAE">±4.3 分</div>
         </div>
         <div class="stat-pill-box">
-          <div class="stat-pill-label">4K 直播自動驗證場次</div>
-          <div class="stat-pill-value" id="statTotalVerified">4 場 (持續累積)</div>
+          <div class="stat-pill-label">定時驗證發布場次</div>
+          <div class="stat-pill-value" id="statTotalVerified">4 篇 (持續累積)</div>
         </div>
       </div>
 
-      <!-- 實況驗證卡片列表 (動態由 JS 渲染) -->
-      <div class="verification-cards-grid" id="verificationCardsContainer">
-        <!-- 由 JavaScript 動態生成每日預測 vs 實況觀測對比卡片 -->
+      <!-- 最新一期實況日報卡片 (純表格與總結分析，0 笨重圖片) -->
+      <div class="latest-report-card" id="latestReportContainer">
+        <!-- 由 JavaScript 動態生成最新實況日報與機位對比表格 -->
+      </div>
+
+      <!-- 歷史日報觀測歸檔庫 (Historical Archive) -->
+      <div class="archive-section-box">
+        <div class="archive-header-row">
+          <h3 class="archive-title"><span>📚</span> 歷史日報觀測歸檔庫（點擊查閱歷史報告）</h3>
+          <div class="archive-filter-tabs" id="archiveFilterTabs">
+            <button class="filter-chip active" data-archive-filter="all">全部歸檔</button>
+            <button class="filter-chip" data-archive-filter="sunrise">🌅 日出觀測</button>
+            <button class="filter-chip" data-archive-filter="sunset">🌇 日落晚霞</button>
+          </div>
+        </div>
+        <div class="archive-list-deck" id="archiveReportsDeck">
+          <!-- 由 JavaScript 動態生成歷史日報清單卡片 -->
+        </div>
       </div>
 
       <div class="science-grid" style="margin-top: 24px;">
