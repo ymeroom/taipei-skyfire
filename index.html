@@ -97,19 +97,6 @@
         </button>
       </div>
 
-      <!-- 雙版本預測演算法模式切換開關 -->
-      <div class="model-algorithm-switcher" id="modelAlgorithmSwitcher">
-        <span class="switcher-title"><span>🧠</span> 預測演算法模式：</span>
-        <div class="model-tabs">
-          <button class="model-tab-btn active" data-model-mode="rayPath" id="btnModelRayPath">
-            <span>🎯</span> 向量光路雙點模型 (上游 60km 開窗率)
-          </button>
-          <button class="model-tab-btn" data-model-mode="singlePoint" id="btnModelSinglePoint">
-            <span>📍</span> 經典單點大氣模型 (本地垂直柱)
-          </button>
-        </div>
-      </div>
-
       <div class="live-status-badge">
         <span class="pulse-dot"></span>
         <span id="liveStatusText">即時 Open-Meteo 台北大氣觀測數據連線中</span>
@@ -163,7 +150,7 @@
         <!-- 底部 4 大關鍵診斷指標 -->
         <div class="quick-metrics-grid">
           <div class="metric-pill-item">
-            <div class="metric-pill-label">地平透光穿透度</div>
+            <div class="metric-pill-label">西方地平透光窗</div>
             <div class="metric-pill-val" id="metricHorizonWindow">92% (極通透)</div>
           </div>
           <div class="metric-pill-item">
@@ -171,36 +158,12 @@
             <div class="metric-pill-val" id="metricHighCloud">55% (優)</div>
           </div>
           <div class="metric-pill-item">
-            <div class="metric-pill-label">頭頂低雲遮蔽</div>
+            <div class="metric-pill-label">低雲遮蔽 (層雲)</div>
             <div class="metric-pill-val" id="metricLowCloud">12% (無阻擋)</div>
           </div>
           <div class="metric-pill-item">
             <div class="metric-pill-label">大氣能見度</div>
             <div class="metric-pill-val" id="metricVisibility">25 km (極清澈)</div>
-          </div>
-        </div>
-
-        <!-- 雙版本預測對比與光路通道 Banner -->
-        <div class="raypath-channel-banner" id="raypathChannelBanner">
-          <div class="raypath-channel-header">
-            <div class="raypath-channel-title">
-              <span>🧭</span> <strong id="channelTitleText">日落光路進光通道分析</strong>
-            </div>
-            <span class="raypath-tag" id="channelAzimuthTag">方位角 280.9° (WNW) · 延伸 60km</span>
-          </div>
-          <div class="raypath-grid">
-            <div class="raypath-cell">
-              <span class="raypath-cell-label">📍 觀測點頭頂天幕</span>
-              <strong class="raypath-cell-val" id="valLocalClouds">卷雲 55% · 低雲 12%</strong>
-            </div>
-            <div class="raypath-cell">
-              <span class="raypath-cell-label">🌅 遠方地平進光窗 (上游)</span>
-              <strong class="raypath-cell-val" id="valUpstreamWindow">海面低雲 3% · 開窗率 97%</strong>
-            </div>
-            <div class="raypath-cell highlight">
-              <span class="raypath-cell-label">🤖 雙版本評分對比</span>
-              <strong class="raypath-cell-val" id="valDualScoreCompare">向量光路 88分 vs 單點 74分</strong>
-            </div>
           </div>
         </div>
       </div>

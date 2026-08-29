@@ -6,9 +6,7 @@ class SkyFireApp {
   constructor() {
     this.currentForecastData = null;
     this.activeSessionType = 'auto'; // 'auto' (自動判定最近時段) | 'today-sunrise' | 'today-sunset' | 'tomorrow-sunrise' | 'tomorrow-sunset' | 'custom'
-    this.activeModelMode = 'rayPath'; // 'rayPath' (向量光路雙點模型) | 'singlePoint' (經典單點模型)
     this.selectedDayIndex = 0;
-    this.selectedSessionSubtype = 'sunset';
     this.map = null;
     this.markers = [];
     this.azimuthRayLine = null;
@@ -151,38 +149,36 @@ class SkyFireApp {
    */
   getActiveSessionData() {
     const days = this.currentForecastData.daysForecast;
-    let targetData = null;
-
     if (this.activeSessionType === 'today-sunrise') {
-      targetData = {
+      return {
         ...days[0].sunrise,
         dayMeta: days[0],
         type: 'sunrise',
         label: '今日日出 (Today Sunrise)'
       };
     } else if (this.activeSessionType === 'today-sunset') {
-      targetData = {
+      return {
         ...days[0].sunset,
         dayMeta: days[0],
         type: 'sunset',
         label: '今日日落 (Today Sunset)'
       };
     } else if (this.activeSessionType === 'tomorrow-sunrise') {
-      targetData = {
+      return {
         ...days[1].sunrise,
         dayMeta: days[1],
         type: 'sunrise',
         label: '明日日出 (Tomorrow Sunrise)'
       };
     } else if (this.activeSessionType === 'tomorrow-sunset') {
-      targetData = {
+      return {
         ...days[1].sunset,
         dayMeta: days[1],
         type: 'sunset',
         label: '明日日落 (Tomorrow Sunset)'
       };
     } else if (this.activeSessionType === 'day2-sunrise') {
-      targetData = {
+      return {
         ...days[2].sunrise,
         dayMeta: days[2],
         type: 'sunrise',
@@ -192,34 +188,26 @@ class SkyFireApp {
       // 點擊 5 天預報特定天
       const day = days[this.selectedDayIndex] || days[0];
       const sessType = this.selectedSessionSubtype || 'sunset';
-      targetData = {
+      return {
         ...day[sessType],
         dayMeta: day,
         type: sessType,
         label: `${day.dateFormatted} ${sessType === 'sunrise' ? '日出' : '日落'}`
       };
     }
-
-    if (targetData) {
-      targetData.skyfire = this.activeModelMode === 'singlePoint'
-        ? (targetData.singlePoint || targetData.skyfire)
-        : (targetData.rayPath || targetData.skyfire);
-    }
-    return targetData;
   }
 
   /**
    * 渲染 Hero 儀表板
    */
   renderHeroGauge(data) {
-    const { skyfire, time, weather, dayMeta, type, upstream, singlePoint, rayPath } = data;
+    const { skyfire, time, weather, dayMeta, type } = data;
     const { score, rating, metrics } = skyfire;
 
     // 標籤與日期
     const targetDateText = document.getElementById('targetDateText');
     if (targetDateText) {
-      const modeLabel = this.activeModelMode === 'singlePoint' ? '【📍 經典單點模型】' : '【🎯 向量光路雙點模型】';
-      targetDateText.innerText = `${dayMeta.dateFormatted} ${type === 'sunset' ? '日落' : '日出'}火燒雲預報 ${modeLabel}`;
+      targetDateText.innerText = `${dayMeta.dateFormatted} ${type === 'sunset' ? '日落' : '日出'}火燒雲預報`;
     }
 
     // 圓形計量表動畫 (周長 440)
@@ -271,31 +259,6 @@ class SkyFireApp {
     if (highEl) highEl.innerText = `${weather.cloudHigh}% (${weather.cloudHigh >= 30 && weather.cloudHigh <= 70 ? '最佳' : '一般'})`;
     if (lowEl) lowEl.innerText = `${weather.cloudLow}% (${weather.cloudLow <= 25 ? '無阻擋' : weather.cloudLow <= 50 ? '輕微' : '遮蔽厚重'})`;
     if (visEl) visEl.innerText = `${metrics.visKm} km (${metrics.visKm >= 20 ? '清澈' : '普通'})`;
-
-    // 雙版本與光路進光通道 Banner 數據渲染
-    const channelTitle = document.getElementById('channelTitleText');
-    const channelTag = document.getElementById('channelAzimuthTag');
-    const valLocal = document.getElementById('valLocalClouds');
-    const valUpstream = document.getElementById('valUpstreamWindow');
-    const valCompare = document.getElementById('valDualScoreCompare');
-
-    if (channelTitle) channelTitle.innerText = `${type === 'sunrise' ? '🌅 日出' : '🌇 日落'}光路進光通道分析`;
-    if (channelTag && upstream) {
-      channelTag.innerText = `方位角 ${upstream.coords?.azimuth || '--'}° · 延伸 60km (${upstream.locationLabel || '上游進光點'})`;
-    }
-    if (valLocal) {
-      valLocal.innerText = `高空卷雲 ${weather.cloudHigh}% · 頭頂低雲 ${weather.cloudLow}%`;
-    }
-    if (valUpstream && upstream) {
-      const upLow = upstream.weather?.cloudLow ?? '--';
-      const upClear = upstream.horizonClearance ?? '--';
-      valUpstream.innerText = `海面低雲 ${upLow}% · 開窗率 ${upClear}%`;
-    }
-    if (valCompare) {
-      const rayScore = rayPath?.score ?? '--';
-      const singleScore = singlePoint?.score ?? '--';
-      valCompare.innerText = `🎯 向量光路 ${rayScore}分 vs 📍 單點 ${singleScore}分`;
-    }
 
     // 調整動態背景光暈色調
     const ambient = document.getElementById('ambientGlow');
@@ -441,7 +404,7 @@ class SkyFireApp {
       card.addEventListener('click', () => {
         this.activeSessionType = 'custom';
         this.selectedDayIndex = idx;
-        this.selectedSessionSubtype = 'sunset';
+        // 移除其他按鈕 active
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         this.render();
       });
@@ -986,16 +949,6 @@ class SkyFireApp {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         this.activeSessionType = btn.dataset.session;
-        this.render();
-      });
-    });
-
-    // 演算法模式切換 (向量光路雙點 vs 經典單點)
-    document.querySelectorAll('[data-model-mode]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('[data-model-mode]').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        this.activeModelMode = btn.dataset.modelMode;
         this.render();
       });
     });
