@@ -1,13 +1,13 @@
 /**
- * test-spots-data.js - 測試台北 13 大攝影機位資料庫
+ * test-spots-data.js - 測試台北 7 大攝影機位資料庫
  */
 
 const assert = require('assert');
 const TAIPEI_SPOTS = require('../js/spots-data.js');
 
-console.log('--- 🧪 測試 4: 台北 13 大攝影機位資料庫測試 ---');
+console.log('--- 🧪 測試 4: 台北 7 大攝影機位資料庫測試 ---');
 
-assert.strictEqual(TAIPEI_SPOTS.length, 13, '應包含 13 大台北經典攝影熱點');
+assert.strictEqual(TAIPEI_SPOTS.length, 7, '應包含 7 大台北經典攝影熱點');
 
 TAIPEI_SPOTS.forEach(spot => {
   assert(spot.name, '機位應有名稱');
@@ -17,6 +17,6 @@ TAIPEI_SPOTS.forEach(spot => {
   assert(spot.traffic, '機位應有交通指南');
 });
 
-console.log('✅ 台北 13 大攝影機位經緯度與資訊完整性校驗合格');
+console.log('✅ 台北 7 大攝影機位經緯度與資訊完整性校驗合格');
 
 console.log('🎉 台北攝影機位資料庫測試全數 PASS!\n');
