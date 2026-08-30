@@ -1,5 +1,92 @@
 [
   {
+    "id": "rec-2026-08-30-sunset",
+    "date": "2026-08-30",
+    "session": "sunset",
+    "targetTime": "2026-08-30T10:16:47.828Z",
+    "source": "大稻埕碼頭（4K 官方即時影像）",
+    "capture": {
+      "width": 1920,
+      "height": 1080,
+      "fileName": "2026-08-30-sunset.jpg",
+      "sha256": "d454dbc7c820cc33e297eadb74d1804c8b0be8dbd5d56109db88fee76266ba36",
+      "capturedAt": "2026-08-30T11:12:17.706Z",
+      "offsetMinutes": 55,
+      "kind": "youtube-live-frame",
+      "validated": true
+    },
+    "prediction": {
+      "score": 5,
+      "rating": "陰沉沉寂",
+      "color": "#5A6275",
+      "highCloud": 0,
+      "midCloud": 0,
+      "lowCloud": 0,
+      "horizonClearance": 0,
+      "visibilityKm": 6,
+      "isSimulated": false,
+      "lockedAt": "2026-08-30T08:40:26.987Z"
+    },
+    "verification": {
+      "status": "verified_completed",
+      "groundTruthScore": 17,
+      "groundTruthBadge": "陰沉沉寂",
+      "groundTruthLevel": "OVERCAST",
+      "errorAbsolute": 12,
+      "verdict": "SLIGHT_DEVIATION",
+      "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "chromaticPurity": 31,
+      "skyCoveragePct": 2.4,
+      "verifiedAt": "2026-08-30T11:12:52.635Z",
+      "engine": "Optical Chromatic Histogram Analysis (CIELAB/HSV)",
+      "isSimulated": false
+    },
+    "snapshotUrl": "data/snapshots/2026-08-30-sunset.jpg"
+  },
+  {
+    "id": "rec-2026-08-30-sunrise",
+    "date": "2026-08-30",
+    "session": "sunrise",
+    "targetTime": "2026-08-29T21:35:10.010Z",
+    "source": "象山看台北 101（4K 官方即時影像）",
+    "capture": {
+      "width": 1920,
+      "height": 1080,
+      "fileName": "2026-08-30-sunrise.jpg",
+      "sha256": "fb5f594d742e41a66610cc80b14562509145dd61dc91325551aafa0fcbbc0d1e",
+      "capturedAt": "2026-08-30T00:59:24.802Z",
+      "offsetMinutes": 204,
+      "kind": "youtube-live-frame",
+      "validated": true
+    },
+    "prediction": {
+      "score": 51,
+      "rating": "局部霞光",
+      "color": "#E5A50A",
+      "highCloud": 2,
+      "midCloud": 7,
+      "lowCloud": 17,
+      "horizonClearance": 91,
+      "visibilityKm": 18.6,
+      "isSimulated": false
+    },
+    "verification": {
+      "status": "verified_completed",
+      "groundTruthScore": 16,
+      "groundTruthBadge": "陰沉沉寂",
+      "groundTruthLevel": "OVERCAST",
+      "errorAbsolute": 35,
+      "verdict": "MISMATCH",
+      "verdictBadge": "⚠️ 出現偏差需校準",
+      "chromaticPurity": 34.3,
+      "skyCoveragePct": 0.4,
+      "verifiedAt": "2026-08-30T01:01:07.683Z",
+      "engine": "Optical Chromatic Histogram Analysis (CIELAB/HSV)",
+      "isSimulated": false
+    },
+    "snapshotUrl": "data/snapshots/2026-08-30-sunrise.jpg"
+  },
+  {
     "id": "rec-2026-08-18-sunrise",
     "date": "2026-08-18",
     "session": "sunrise",
