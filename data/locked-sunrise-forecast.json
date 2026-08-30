@@ -1,7 +1,7 @@
 {
   "date": "2026-08-31",
   "session": "sunrise",
-  "lockedAt": "2026-08-29T18:53:30.713Z",
+  "lockedAt": "2026-08-30T16:05:22.634Z",
   "skyfire": {
     "score": 35,
     "rating": {
@@ -14,12 +14,12 @@
       "bgGradient": "linear-gradient(135deg, rgba(123,136,168,0.2) 0%, rgba(160,174,192,0.1) 100%)"
     },
     "metrics": {
-      "cloudQualityScore": 0,
-      "lowCloudPenalty": 3,
-      "horizonScore": 21,
-      "visibilityScore": 14,
-      "horizonClearance": 71,
-      "visKm": 22.1
+      "cloudQualityScore": 1,
+      "lowCloudPenalty": 0,
+      "horizonScore": 24,
+      "visibilityScore": 7,
+      "horizonClearance": 80,
+      "visKm": 9.5
     },
     "diagnostics": [
       {
@@ -30,17 +30,17 @@
       {
         "label": "中空雲層 (2,000-6,000m)",
         "status": "low",
-        "desc": "中雲量稀疏 (0%)，雲彩層次感較為單純。"
+        "desc": "中雲量稀疏 (1%)，雲彩層次感較為單純。"
       },
       {
         "label": "遠方東方（太平洋/宜蘭外海）透光窗",
-        "status": "fair",
-        "desc": "低雲量約 27%，地平線具有部分透光縫隙，呈現局部霞光。"
+        "status": "optimal",
+        "desc": "低雲遮蔽極低 (13%)，透光窗達 80%，夕陽/晨光無阻直射雲底！"
       },
       {
         "label": "大氣能見度與通透度",
-        "status": "optimal",
-        "desc": "能見度優異（22.1 公里），大氣清澈通透，晚霞色彩飽和純淨。"
+        "status": "bad",
+        "desc": "能見度受限（9.46 公里），霧霾或水氣可能使天色偏灰白。"
       }
     ],
     "photoTips": {

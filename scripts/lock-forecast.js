@@ -26,9 +26,13 @@ async function lockForecast() {
 
   const now = new Date();
   let targetDate = new Date(now);
+  
   if (sessionType === 'sunrise') {
-    // 如果是晚上 23:50 鎖定日出，那目標是「明天」的日出
-    targetDate.setDate(targetDate.getDate() + 1);
+    // 鎖定日出預測：如果是在午夜 (0點~12點) 執行，目標就是「今天」的日出
+    // 如果是在下午/晚上 (12點~24點) 執行，目標就是「明天」的日出
+    if (now.getHours() >= 12) {
+      targetDate.setDate(targetDate.getDate() + 1);
+    }
   }
   const dateStr = getTaipeiDateString(targetDate);
 
