@@ -1,9 +1,9 @@
 {
   "date": "2026-08-31",
   "session": "sunrise",
-  "lockedAt": "2026-08-30T16:05:22.634Z",
+  "lockedAt": "2026-08-30T18:48:52.821Z",
   "skyfire": {
-    "score": 35,
+    "score": 43,
     "rating": {
       "level": "FAINT",
       "badge": "平淡暮光",
@@ -14,11 +14,11 @@
       "bgGradient": "linear-gradient(135deg, rgba(123,136,168,0.2) 0%, rgba(160,174,192,0.1) 100%)"
     },
     "metrics": {
-      "cloudQualityScore": 1,
+      "cloudQualityScore": 5,
       "lowCloudPenalty": 0,
-      "horizonScore": 24,
+      "horizonScore": 25,
       "visibilityScore": 7,
-      "horizonClearance": 80,
+      "horizonClearance": 83,
       "visKm": 9.5
     },
     "diagnostics": [
@@ -30,12 +30,12 @@
       {
         "label": "中空雲層 (2,000-6,000m)",
         "status": "low",
-        "desc": "中雲量稀疏 (1%)，雲彩層次感較為單純。"
+        "desc": "中雲量稀疏 (9%)，雲彩層次感較為單純。"
       },
       {
         "label": "遠方東方（太平洋/宜蘭外海）透光窗",
         "status": "optimal",
-        "desc": "低雲遮蔽極低 (13%)，透光窗達 80%，夕陽/晨光無阻直射雲底！"
+        "desc": "低雲遮蔽極低 (9%)，透光窗達 82.5%，夕陽/晨光無阻直射雲底！"
       },
       {
         "label": "大氣能見度與通透度",
