@@ -21,8 +21,10 @@ const OFFICIAL_STREAMS = Object.freeze({
 });
 
 const SCHEDULE_TO_SESSION = Object.freeze({
-  '30 21 * * *': 'sunrise',
-  '45 10 * * *': 'sunset'
+  '30 21 * * *': 'sunrise', // 05:30 TPE
+  '0 1 * * *': 'sunrise',   // 09:00 TPE (fallback/定稿)
+  '45 10 * * *': 'sunset',  // 18:45 TPE
+  '0 13 * * *': 'sunset'    // 21:00 TPE (fallback/定稿)
 });
 
 function getTaipeiDateString(date = new Date()) {
