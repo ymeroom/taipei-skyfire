@@ -144,13 +144,16 @@ async function runCapturePipeline(inputSession = '', options = {}) {
     session: sessionType,
     targetTime: eventTime.toISOString(),
     source: source.name,
+      snapshotUrl: data/snapshots/\,
     capture: {
       width: capture.width,
       height: capture.height,
       fileName: snapshotFileName,
       sha256: capture.sha256,
       capturedAt: capturedAt.toISOString(),
-      offsetMinutes: captureWindow.offsetMinutes
+      offsetMinutes: captureWindow.offsetMinutes,
+        kind: 'youtube-live-frame',
+        validated: true
     },
     prediction: predictionData,
     verification: {

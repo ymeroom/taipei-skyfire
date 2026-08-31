@@ -1,5 +1,48 @@
 [
   {
+    "id": "rec-2026-08-31-sunset",
+    "date": "2026-08-31",
+    "session": "sunset",
+    "targetTime": "2026-08-31T10:15:47.762Z",
+    "source": "大稻埕碼頭（4K 官方即時影像）",
+    "capture": {
+      "width": 640,
+      "height": 360,
+      "fileName": "2026-08-31-sunset.jpg",
+      "sha256": "0a765b68463e27e977d72ba8458d5c5c9ea667d929be0413e760294e8d577610",
+      "capturedAt": "2026-08-31T15:41:45.096Z",
+      "offsetMinutes": 326,
+      "kind": "youtube-live-frame",
+      "validated": true
+    },
+    "prediction": {
+      "score": 39,
+      "rating": "平淡暮光",
+      "color": "#7B88A8",
+      "highCloud": 98,
+      "midCloud": 9,
+      "lowCloud": 15,
+      "horizonClearance": 0,
+      "visibilityKm": 19.5,
+      "isSimulated": false
+    },
+    "verification": {
+      "status": "verified_completed",
+      "groundTruthScore": 28,
+      "groundTruthBadge": "陰沉沉寂",
+      "groundTruthLevel": "OVERCAST",
+      "errorAbsolute": 11,
+      "verdict": "SLIGHT_DEVIATION",
+      "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "chromaticPurity": 50.8,
+      "skyCoveragePct": 3.2,
+      "verifiedAt": "2026-08-31T15:42:39.671Z",
+      "engine": "Optical Chromatic Histogram Analysis (CIELAB/HSV)",
+      "isSimulated": false
+    },
+    "snapshotUrl": "data/snapshots/2026-08-31-sunset.jpg"
+  },
+  {
     "id": "rec-2026-08-30-sunset",
     "date": "2026-08-30",
     "session": "sunset",
