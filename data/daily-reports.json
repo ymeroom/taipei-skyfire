@@ -1,5 +1,56 @@
 [
   {
+    "id": "report-2026-09-01-sunrise",
+    "date": "2026-09-01",
+    "session": "sunrise",
+    "sessionLabel": "清晨日出",
+    "publishedAt": "2026-09-01T07:37:13.811816",
+    "publishTimeLabel": "09:00 定時發布",
+    "title": "2026-09-01 清晨日出實況觀測 vs. 模型預報總結",
+    "prediction": {
+      "score": 5,
+      "rating": "陰沉沉寂",
+      "color": "#64748B",
+      "highCloud": 0,
+      "midCloud": 5,
+      "lowCloud": 95,
+      "summary": "低層厚雲籠罩，強烈壓制出景"
+    },
+    "groundTruth": {
+      "score": 5,
+      "rating": "陰沉沉寂",
+      "verdict": "EXACT_MATCH",
+      "verdictBadge": "🎯 100% 精準命中陰雲壓制",
+      "color": "#4ADE80"
+    },
+    "stations": [
+      {
+        "name": "新北中和烘爐地",
+        "icon": "⛰️",
+        "tag": "雙北盆地俯瞰視角",
+        "phasePrep": "天際微亮，市區燈火清晰，低雲濃厚。",
+        "phasePeak": "盆地被厚重冷青藍色陰雲籠罩，無強烈朝霞。",
+        "phasePost": "路燈熄滅，轉入均勻平淡日間陰天平光。",
+        "forecast": "5 分 (低雲 95%)",
+        "verdict": "🎯 100% 命中陰天壓制"
+      },
+      {
+        "name": "基隆外木山濱海",
+        "icon": "🌊",
+        "tag": "太平洋日出第一線",
+        "phasePrep": "低空積雲翻湧，東方海平線被灰黑雲層阻隔。",
+        "phasePeak": "海平面被厚雲遮蔽，全陰天平光，無日出紅光。",
+        "phasePost": "天色大白，整片天空為均勻灰色陰天平光。",
+        "forecast": "5 分 (低雲 98%)",
+        "verdict": "🎯 100% 命中陰天壓制"
+      }
+    ],
+    "summaryAnalysis": {
+      "atmosphericReason": "北部低層水氣積聚，低雲覆蓋率高，中高空無有效反射天幕。",
+      "modelPerformance": "模型預報精準捕捉陰天壓制，成功預警避免攝影師撲空。"
+    }
+  },
+  {
     "id": "report-2026-08-31-sunset",
     "date": "2026-08-31",
     "session": "sunset",
