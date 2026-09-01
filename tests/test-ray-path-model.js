@@ -206,4 +206,87 @@ assert.strictEqual(
 
 console.log('✅ Open-Meteo 批次請求座標組裝正確');
 
+// ----------------------------------------------------------------
+// G. 地形判斷：光路可能跨越山脈，該處的低雲語意與海面完全不同，
+//    而且山體本身就會直接遮斷射線。
+//    註：Open-Meteo 的 elevation 對台北盆地也回傳 0，因此「高度 0」只能
+//    判定為「海面或平原」，不能斷言是海。真正可計算的是地形遮蔽。
+// ----------------------------------------------------------------
+assert.strictEqual(WeatherService.classifyTerrain(0).kind, 'sea_level', '高度 0 應歸類為海面／平原');
+assert.strictEqual(WeatherService.classifyTerrain(120).kind, 'lowland', '120m 應歸類為平原丘陵');
+assert.strictEqual(WeatherService.classifyTerrain(2136).kind, 'mountain', '2136m（阿里山）應歸類為山區');
+
+// 抵達 6km 高雲的射線在上游 160km 處僅約 1.07km 高 → 3000m 山體完全擋死
+assert.strictEqual(
+  WeatherService.computeTerrainBlocking({ elevationM: 3000, distanceKm: 160, targetAltitudeKm: 6 }),
+  100,
+  '射線高度 1.07km 處的 3000m 山體應完全遮斷'
+);
+
+// 同一條射線在上游 60km 處已爬到 3.68km → 2136m 的山擋不到
+assert.strictEqual(
+  WeatherService.computeTerrainBlocking({ elevationM: 2136, distanceKm: 60, targetAltitudeKm: 6 }),
+  0,
+  '射線高度 3.68km 處的 2136m 山體不應造成遮蔽'
+);
+
+assert.strictEqual(
+  WeatherService.computeTerrainBlocking({ elevationM: 0, distanceKm: 160, targetAltitudeKm: 6 }),
+  0,
+  '海面高度不應造成地形遮蔽'
+);
+
+// 射線高度已貼近地表時，該處地形就是「日落地平線」本身，
+// 而地平線已由 SolarCalc 的日落時刻反映，再扣一次即為重複計算。
+// 例：台北日落光路 260km 處為福建丘陵 475m，射線僅 21m 高。
+assert.strictEqual(
+  WeatherService.computeTerrainBlocking({ elevationM: 475, distanceKm: 260, targetAltitudeKm: 6 }),
+  0,
+  '射線貼近地平線處的地形屬日落地平線本身，不應重複扣分'
+);
+
+console.log('✅ 地形分類與地形遮蔽計算正確');
+
+// 帶狀遮蔽必須同時考慮雲與山，取兩者較嚴重者
+const terrainSamples = [
+  { distanceKm: 60,  cloudLow: 0, cloudTotal: 0, elevationM: 0 },
+  { distanceKm: 110, cloudLow: 0, cloudTotal: 0, elevationM: 0 },
+  { distanceKm: 160, cloudLow: 0, cloudTotal: 0, elevationM: 3000 },
+  { distanceKm: 210, cloudLow: 0, cloudTotal: 0, elevationM: 0 },
+  { distanceKm: 260, cloudLow: 0, cloudTotal: 0, elevationM: 0 }
+];
+assert.strictEqual(
+  WeatherService.computeBandBlocking(terrainSamples, 'high'),
+  100,
+  '晴空無雲但光路穿越 3000m 山脈時，天幕帶仍應判定為完全遮斷'
+);
+assert.strictEqual(
+  WeatherService.computeBandBlocking(terrainSamples, 'low'),
+  0,
+  '160km 的山體不在低雲染色帶範圍內，不應汙染該帶'
+);
+
+console.log('✅ 帶狀遮蔽同時涵蓋雲層與地形');
+
+// 端到端：取樣點必須揭露地形資訊
+const makeRawTerrain = (cloudLow, elevation) => {
+  const raw = makeRaw(cloudLow);
+  raw.elevation = elevation;
+  return raw;
+};
+const mountainPath = ladder.map(km => makeRawTerrain(0, km === 160 ? 3000 : 0));
+const parsedTerrain = WeatherService.processRawData(clearLocal, mountainPath, mountainPath);
+const terrainSunset = parsedTerrain.daysForecast[0].sunset;
+
+const at160 = terrainSunset.upstream.samples.find(x => x.distanceKm === 160);
+assert.strictEqual(at160.terrain.kind, 'mountain', '160km 取樣點應標記為山區');
+assert.strictEqual(at160.elevationM, 3000, '取樣點應保留地形高度');
+assert.strictEqual(
+  terrainSunset.upstream.bands.high,
+  100,
+  '穿越山脈的光路應反映在天幕帶遮蔽率上'
+);
+
+console.log('✅ 光路取樣點地形資訊端到端揭露正確');
+
 console.log('🎉 向量光路分層帶狀取樣模型測試全數 PASS!\n');

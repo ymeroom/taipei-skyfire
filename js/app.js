@@ -289,8 +289,13 @@ class SkyFireApp {
     if (valUpstream && upstream) {
       const bands = upstream.bands || {};
       const upClear = upstream.horizonClearance ?? '--';
+      // 光路跨越山區時，該處的低雲多為地形雲，語意與海面層雲不同，需標示提醒
+      const mountainHops = (upstream.samples || []).filter(x => x.terrain?.kind === 'mountain');
+      const terrainNote = mountainHops.length
+        ? ` · ⛰️ 光路穿越山區 (${mountainHops.map(x => `${x.distanceKm}km`).join('、')})`
+        : '';
       valUpstream.innerText =
-        `光路遮蔽 染色帶${bands.low ?? '--'}% · 中雲帶${bands.mid ?? '--'}% · 天幕帶${bands.high ?? '--'}% · 開窗率 ${upClear}%`;
+        `光路遮蔽 染色帶${bands.low ?? '--'}% · 中雲帶${bands.mid ?? '--'}% · 天幕帶${bands.high ?? '--'}% · 開窗率 ${upClear}%${terrainNote}`;
     }
     if (valCompare) {
       const rayScore = rayPath?.score ?? '--';

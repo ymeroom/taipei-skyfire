@@ -106,12 +106,75 @@ class WeatherService {
   });
 
   /**
+   * 依地形高度分類取樣點
+   *
+   * 注意：Open-Meteo 的 elevation 是網格平均高度，台北盆地同樣回傳 0，
+   * 因此高度 0 只能判定為「海面或平原」，不能斷言是海面。
+   * 真正可嚴謹計算的是地形遮蔽 (computeTerrainBlocking)，此分類僅供診斷標示。
+   *
+   * @param {number} elevationM 地形高度 (公尺)
+   */
+  static classifyTerrain(elevationM) {
+    const m = Number(elevationM);
+    if (!Number.isFinite(m) || m <= 0) {
+      return { kind: 'sea_level', label: '海面／平原', elevationM: 0 };
+    }
+    if (m <= 500) {
+      return { kind: 'lowland', label: '平原丘陵', elevationM: m };
+    }
+    return { kind: 'mountain', label: '山區', elevationM: m };
+  }
+
+  // 地形遮蔽軟化門檻：地形高度達射線高度的此比例時開始遮蔽。
+  // 網格高度是格點平均值，實際山峰高於平均，故不等到 100% 才開始扣。
+  static TERRAIN_BLOCKING_ONSET_RATIO = 0.6;
+
+  // 射線高度地板 (公里)：低於此高度的取樣點不計地形遮蔽。
+  // 該處的地形實質上就是「日出／日落地平線」本身，已由 SolarCalc 的
+  // 日出日落時刻反映；再扣一次即為重複計算。
+  // 例：台北日落光路 260km 處為福建丘陵，射線僅約 21m 高，若計入
+  // 地形遮蔽會使天幕帶每天恆為 100%，模型完全失去鑑別力。
+  static TERRAIN_RAY_ALTITUDE_FLOOR_KM = 0.1;
+
+  /**
+   * 計算地形對光路的遮蔽率 (0-100)
+   *
+   * 光路跨越山脈時，擋住陽光的是山體本身而非雲。將取樣點的地形高度
+   * 與射線在該處的高度相比：地形達射線高度即完全遮斷，達 60% 起開始線性遞增。
+   *
+   * 僅計算「超出地平線之外的額外障礙」：射線已貼近地表 (低於
+   * TERRAIN_RAY_ALTITUDE_FLOOR_KM) 的取樣點不計，因為該處地形就是
+   * 日出／日落地平線本身，已由天文時刻反映。
+   *
+   * @param {Object} params
+   * @param {number} params.elevationM 取樣點地形高度 (公尺)
+   * @param {number} params.distanceKm 取樣點的上游距離 (公里)
+   * @param {number} params.targetAltitudeKm 該光路帶要照亮的雲高 (公里)
+   * @returns {number} 地形遮蔽率 (0-100)
+   */
+  static computeTerrainBlocking({ elevationM, distanceKm, targetAltitudeKm }) {
+    const terrainKm = Math.max(0, (Number(elevationM) || 0) / 1000);
+    if (terrainKm === 0) return 0;
+
+    const rayAltKm = this.rayAltitudeAtDistanceKm(targetAltitudeKm, distanceKm);
+    // 射線已貼近地平線：此處地形即為日出／日落地平線本身，不重複扣分
+    if (rayAltKm <= this.TERRAIN_RAY_ALTITUDE_FLOOR_KM) return 0;
+
+    const onset = this.TERRAIN_BLOCKING_ONSET_RATIO;
+    const ratio = terrainKm / rayAltKm;
+    if (ratio <= onset) return 0;
+    if (ratio >= 1) return 100;
+    return Math.round(((ratio - onset) / (1 - onset)) * 100);
+  }
+
+  /**
    * 計算某一光路帶的遮蔽率 (0-100)
    *
-   * 視線被擋住是「或」的關係：整條光路上只要有任何一個取樣點被低雲塞住，
+   * 視線被擋住是「或」的關係：整條光路上只要有任何一個取樣點被低雲或山體塞住，
    * 光就到不了。因此帶內取最差點 (max)，取平均會把單一片致命的雲稀釋掉。
+   * 每個取樣點同時檢查雲層遮蔽與地形遮蔽，取兩者較嚴重者。
    *
-   * @param {Array<{distanceKm:number, cloudLow:number}>} samples 各取樣距離的氣象
+   * @param {Array<{distanceKm:number, cloudLow:number, elevationM:number}>} samples 各取樣距離的氣象與地形
    * @param {'low'|'mid'|'high'} bandKey 光路帶代號
    * @returns {number} 該帶的遮蔽率 (0-100)
    */
@@ -125,10 +188,15 @@ class WeatherService {
     const inBand = samples.filter(sample => band.distancesKm.includes(sample.distanceKm));
     if (inBand.length === 0) return 0;
 
-    return inBand.reduce(
-      (worst, sample) => Math.max(worst, Number(sample.cloudLow) || 0),
-      0
-    );
+    return inBand.reduce((worst, sample) => {
+      const cloudBlocking = Number(sample.cloudLow) || 0;
+      const terrainBlocking = this.computeTerrainBlocking({
+        elevationM: sample.elevationM,
+        distanceKm: sample.distanceKm,
+        targetAltitudeKm: band.targetAltitudeKm
+      });
+      return Math.max(worst, cloudBlocking, terrainBlocking);
+    }, 0);
   }
 
   /**
@@ -288,17 +356,27 @@ class WeatherService {
     // 兩者一律正規化成 [{ distanceKm, hourly }]，下游邏輯不必分岔。
     const toUpstreamSeries = (raw) => {
       if (!raw) {
-        return this.RAY_PATH_LADDER_KM.map(distanceKm => ({ distanceKm, hourly: hourlyLocal }));
+        return this.RAY_PATH_LADDER_KM.map(distanceKm => ({
+          distanceKm,
+          hourly: hourlyLocal,
+          elevationM: 0
+        }));
       }
       if (Array.isArray(raw)) {
         return raw.map((item, i) => ({
           distanceKm: this.RAY_PATH_LADDER_KM[i],
-          hourly: parseHourly(item)
+          hourly: parseHourly(item),
+          elevationM: Number(item && item.elevation) || 0
         })).filter(item => item.distanceKm !== undefined);
       }
       // 單點資料：整條光路共用同一組觀測，退化為舊版行為
       const shared = parseHourly(raw);
-      return this.RAY_PATH_LADDER_KM.map(distanceKm => ({ distanceKm, hourly: shared }));
+      const sharedElevation = Number(raw.elevation) || 0;
+      return this.RAY_PATH_LADDER_KM.map(distanceKm => ({
+        distanceKm,
+        hourly: shared,
+        elevationM: sharedElevation
+      }));
     };
 
     const sunsetUpstreamSeries = toUpstreamSeries(rawUpstreamSunset);
@@ -324,7 +402,9 @@ class WeatherService {
       // 沿整條光路取樣，再依雲層高度分帶計算遮蔽率
       const sampleRayPath = (series, eventTime) => series.map(item => ({
         distanceKm: item.distanceKm,
-        ...this.getClosestHourData(item.hourly, eventTime)
+        ...this.getClosestHourData(item.hourly, eventTime),
+        elevationM: item.elevationM,
+        terrain: this.classifyTerrain(item.elevationM)
       }));
       const blockingOf = (samples) => ({
         low: this.computeBandBlocking(samples, 'low'),
