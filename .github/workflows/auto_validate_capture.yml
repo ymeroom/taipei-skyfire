@@ -10,7 +10,6 @@ on:
     - cron: '45 10 * * *'
     # 每日日出出景當刻擷取 (台灣時間 05:30 = UTC 21:30)
     - cron: '30 21 * * *'
-  # 支援手動在 GitHub Actions 頁面一鍵觸發測試
   workflow_dispatch:
     inputs:
       session:
@@ -27,7 +26,12 @@ permissions:
 
 jobs:
   capture-and-record:
-    runs-on: ubuntu-latest
+    # 預設使用 GitHub 託管 runner。YouTube 對資料中心 IP 施行 bot check，
+    # 因此託管 runner 上 yt-dlp 精確影格 (Tier A) 必然失敗、自動降級為
+    # i.ytimg.com 海報影格 (Tier B)。
+    # 若要取得精確影格，於 repo 設定 Variables 新增 CAPTURE_RUNNER=self-hosted
+    # 並在台灣住宅網路架設 runner，或設定 YT_COOKIES secret。
+    runs-on: ${{ vars.CAPTURE_RUNNER || 'ubuntu-latest' }}
     env:
       TZ: Asia/Taipei
 
@@ -38,7 +42,7 @@ jobs:
       - name: ⚙️ 設定 Node.js 環境
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: 🧪 執行擷取與預測單元測試
         run: node tests/run-all-tests.js
@@ -59,19 +63,41 @@ jobs:
           sudo apt-get install -y ffmpeg python3-pip
           pip3 install --break-system-packages yt-dlp pillow numpy
 
+      - name: 🍪 寫入 YouTube cookies (若已設定 secret)
+        # secrets context 不可用於 step-level if，故以 env 判斷是否已設定
+        env:
+          YT_COOKIES: ${{ secrets.YT_COOKIES }}
+        run: |
+          if [ -n "$YT_COOKIES" ]; then
+            printf '%s' "$YT_COOKIES" > "$RUNNER_TEMP/yt-cookies.txt"
+            echo "YT_COOKIES_FILE=$RUNNER_TEMP/yt-cookies.txt" >> "$GITHUB_ENV"
+            echo "已載入 YouTube cookies，Tier A 精確影格可用"
+          else
+            echo "未設定 YT_COOKIES secret：託管 runner 上 Tier A 會因 bot check 失敗，自動降級為 Tier B 海報影格"
+          fi
+
       - name: 📸 執行出景窗口即時影格擷取與預測記錄 (Phase 1)
         run: node scripts/capture-validation.js "${{ steps.session.outputs.value }}"
 
+      # 以下步驟一律執行：擷取若失敗，仍須產出每日日報。
+      # 2026-08-18 起排程連續 33 次全紅，就是因為擷取步驟一失敗，
+      # 後面的光學評分與日報全被連坐跳過。
       - name: 🎬 執行 50 分鐘 11 連續縮時影格擷取 (前後 25 分鐘 / 每 5 分鐘 1 次)
+        if: always()
+        continue-on-error: true
         run: python3 scripts/capture_timelapse_series.py "${{ steps.session.outputs.value }}"
 
       - name: 🔬 執行天空色彩光學直方圖分析與模型誤差檢驗 (Phase 2)
+        if: always()
+        continue-on-error: true
         run: node scripts/score-ground-truth.js "${{ steps.session.outputs.value }}"
 
       - name: 📰 產生每日實況驗證日報與歷史歸檔 (Daily Ground Truth Briefing)
+        if: always()
         run: python3 scripts/generate_daily_briefing.py "${{ steps.session.outputs.value }}"
 
       - name: 🚀 提交驗證數據至倉庫 (Commit & Push)
+        if: always()
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action [SkyFire Bot]"
