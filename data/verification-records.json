@@ -23,8 +23,8 @@
       "height": 720,
       "fileName": "2026-09-01-sunset.jpg",
       "sha256": "88c62c9fc59f82eb2a2f817e6ec6528e4072d089c2161d9a96c03c52e71015fa",
-      "capturedAt": "2026-09-01T11:06:11.330Z",
-      "offsetMinutes": 51,
+      "capturedAt": "2026-09-01T12:07:23.221Z",
+      "offsetMinutes": 113,
       "kind": "youtube-live-poster",
       "fidelity": "degraded",
       "posterQuality": "maxresdefault",
@@ -43,7 +43,7 @@
       "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "chromaticPurity": 49.5,
       "skyCoveragePct": 3,
-      "verifiedAt": "2026-09-01T11:06:13.386Z",
+      "verifiedAt": "2026-09-01T12:07:25.260Z",
       "engine": "Optical Chromatic Histogram Analysis (CIELAB/HSV)",
       "isSimulated": false
     }
