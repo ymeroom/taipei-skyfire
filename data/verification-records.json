@@ -23,8 +23,8 @@
       "height": 720,
       "fileName": "2026-09-01-sunset.jpg",
       "sha256": "88c62c9fc59f82eb2a2f817e6ec6528e4072d089c2161d9a96c03c52e71015fa",
-      "capturedAt": "2026-09-01T05:06:39.257Z",
-      "offsetMinutes": -308,
+      "capturedAt": "2026-09-01T05:10:48.356Z",
+      "offsetMinutes": -304,
       "kind": "youtube-live-poster",
       "fidelity": "degraded",
       "posterQuality": "maxresdefault",
@@ -32,9 +32,19 @@
       "validated": true
     },
     "verification": {
-      "status": "captured_ready_for_scoring",
-      "groundTruthScore": null,
-      "errorAbsolute": null,
+      "captureFidelity": "degraded",
+      "captureKind": "youtube-live-poster",
+      "status": "verified_completed",
+      "groundTruthScore": 27,
+      "groundTruthBadge": "陰沉沉寂",
+      "groundTruthLevel": "OVERCAST",
+      "errorAbsolute": 3,
+      "verdict": "EXACT_MATCH",
+      "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "chromaticPurity": 49.5,
+      "skyCoveragePct": 3,
+      "verifiedAt": "2026-09-01T05:10:53.684Z",
+      "engine": "Optical Chromatic Histogram Analysis (CIELAB/HSV)",
       "isSimulated": false
     }
   },
