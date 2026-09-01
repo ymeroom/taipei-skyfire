@@ -35,4 +35,21 @@ assert.strictEqual(parsed.daysForecast.length, 6);
 
 console.log('✅ 台北 Open-Meteo 原始數據解析正確');
 
+// ----------------------------------------------------------------
+// 上游取樣座標一致性 (Ray-Path Sampling Provenance)
+// processRawData 收到的上游氣象資料只來自「一組」座標，
+// 因此每一天回報的 upstream.coords 必須是那個實際被取樣的點，
+// 不可每天用當天方位角重算出一個沒有對應氣象資料的座標。
+// ----------------------------------------------------------------
+const parsedProvenance = WeatherService.processRawData(mockRaw, mockRaw, mockRaw, WeatherService.TAIPEI_COORDS);
+const provenanceDay0 = parsedProvenance.daysForecast[0].sunset.upstream.coords;
+const provenanceDay5 = parsedProvenance.daysForecast[5].sunset.upstream.coords;
+assert.deepStrictEqual(
+  provenanceDay5,
+  provenanceDay0,
+  '各日回報的上游取樣座標必須一致（等於實際取樣點），不可逐日重算'
+);
+
+console.log('✅ 上游取樣座標與實際取樣點一致');
+
 console.log('🎉 Taipei WeatherService 測試案例全數 PASS!\n');

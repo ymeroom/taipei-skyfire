@@ -281,15 +281,16 @@ class SkyFireApp {
 
     if (channelTitle) channelTitle.innerText = `${type === 'sunrise' ? '🌅 日出' : '🌇 日落'}光路進光通道分析`;
     if (channelTag && upstream) {
-      channelTag.innerText = `方位角 ${upstream.coords?.azimuth || '--'}° · 延伸 60km (${upstream.locationLabel || '上游進光點'})`;
+      channelTag.innerText = upstream.locationLabel || '上游進光點';
     }
     if (valLocal) {
       valLocal.innerText = `高空卷雲 ${weather.cloudHigh}% · 頭頂低雲 ${weather.cloudLow}%`;
     }
     if (valUpstream && upstream) {
-      const upLow = upstream.weather?.cloudLow ?? '--';
+      const bands = upstream.bands || {};
       const upClear = upstream.horizonClearance ?? '--';
-      valUpstream.innerText = `海面低雲 ${upLow}% · 開窗率 ${upClear}%`;
+      valUpstream.innerText =
+        `光路遮蔽 染色帶${bands.low ?? '--'}% · 中雲帶${bands.mid ?? '--'}% · 天幕帶${bands.high ?? '--'}% · 開窗率 ${upClear}%`;
     }
     if (valCompare) {
       const rayScore = rayPath?.score ?? '--';
