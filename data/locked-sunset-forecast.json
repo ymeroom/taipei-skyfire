@@ -1,9 +1,9 @@
 {
   "date": "2026-09-01",
   "session": "sunset",
-  "lockedAt": "2026-08-31T16:17:35.174Z",
+  "lockedAt": "2026-09-01T13:37:33.149Z",
   "skyfire": {
-    "score": 24,
+    "score": 5,
     "rating": {
       "level": "OVERCAST",
       "badge": "陰沉沉寂",
@@ -14,33 +14,33 @@
       "bgGradient": "linear-gradient(135deg, rgba(90,98,117,0.2) 0%, rgba(57,65,80,0.1) 100%)"
     },
     "metrics": {
-      "cloudQualityScore": 26,
-      "lowCloudPenalty": 0,
-      "horizonScore": 11,
-      "visibilityScore": 8,
-      "horizonClearance": 35,
-      "visKm": 10.3
+      "cloudQualityScore": 18,
+      "lowCloudPenalty": 53,
+      "horizonScore": 0,
+      "visibilityScore": 2,
+      "horizonClearance": 0,
+      "visKm": 3.1
     },
     "diagnostics": [
       {
         "label": "高空卷層雲 (6,000m+)",
         "status": "fair",
-        "desc": "高雲量偏高 (96%)，漫射面積大但光線穿透度可能稍微受限。"
+        "desc": "高雲量偏高 (95%)，漫射面積大但光線穿透度可能稍微受限。"
       },
       {
         "label": "中空雲層 (2,000-6,000m)",
         "status": "fair",
-        "desc": "中雲量厚實 (87%)，層次豐富但需留意下方陰影。"
+        "desc": "中雲量厚實 (100%)，層次豐富但需留意下方陰影。"
       },
       {
         "label": "遠方西方（台灣海峽/海平面）透光窗",
-        "status": "fair",
-        "desc": "低雲量約 6%，地平線具有部分透光縫隙，呈現局部霞光。"
+        "status": "bad",
+        "desc": "低雲遮蔽高達 100%，厚雲層恐阻斷地平線入射光，投下暗灰色陰影。"
       },
       {
         "label": "大氣能見度與通透度",
-        "status": "fair",
-        "desc": "能見度正常（10.34 公里），色彩呈現良好。"
+        "status": "bad",
+        "desc": "能見度受限（3.08 公里），霧霾或水氣可能使天色偏灰白。"
       }
     ],
     "photoTips": {
