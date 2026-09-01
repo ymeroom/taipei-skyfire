@@ -79,14 +79,17 @@ jobs:
       - name: 📸 執行出景窗口即時影格擷取與預測記錄 (Phase 1)
         run: node scripts/capture-validation.js "${{ steps.session.outputs.value }}"
 
+      # 註：50 分鐘 11 連續縮時擷取 (scripts/capture_timelapse_series.py)
+      # 已自排程移除。它同時受制於兩個獨立問題：
+      #   1. 走 yt-dlp，在託管 runner 上必被 YouTube bot check 擋下；
+      #   2. 需在出景前後 25 分鐘內每 5 分鐘擷取一次，但 GitHub 排程
+      #      實測延遲 4-7 小時，根本無法命中該時間窗。
+      # 腳本保留，待設定 YT_COOKIES 或改用自架 runner 後，改以 DVR
+      # 回溯 (MAX_CAPTURE_OFFSET_MINUTES = 600) 於 09:00/21:00 事後補抓。
+      #
       # 以下步驟一律執行：擷取若失敗，仍須產出每日日報。
       # 2026-08-18 起排程連續 33 次全紅，就是因為擷取步驟一失敗，
       # 後面的光學評分與日報全被連坐跳過。
-      - name: 🎬 執行 50 分鐘 11 連續縮時影格擷取 (前後 25 分鐘 / 每 5 分鐘 1 次)
-        if: always()
-        continue-on-error: true
-        run: python3 scripts/capture_timelapse_series.py "${{ steps.session.outputs.value }}"
-
       - name: 🔬 執行天空色彩光學直方圖分析與模型誤差檢驗 (Phase 2)
         if: always()
         continue-on-error: true
