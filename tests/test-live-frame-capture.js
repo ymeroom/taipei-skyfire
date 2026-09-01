@@ -207,8 +207,36 @@ module.exports = runCapturePipeline('sunset', {
   assert.match(record.capture.error, /bot|cdn/i, '應保留兩層失敗的原因');
   console.log('✅ 兩層擷取皆失敗時誠實記錄且不中斷管線');
 
-  fs.rmSync(degradedDir, { recursive: true, force: true });
-  fs.rmSync(unavailableDir, { recursive: true, force: true });
+  // 自架 runner 的機器可能關機，job 會排隊到開機才執行。
+  // 實際情境：21:00 那班在 PC 關機時排隊，隔天清晨開機才跑，
+  // 此時目標日期已重算為當天，距離當天日落還有 13 小時 —— 遠在窗口外。
+  // 這種情況必須誠實記錄而非 exit 1，否則每次關機隔天就是一個紅叉。
+  const staleDir = makePipelineDir('sunset', 55);
+  const wayOutside = new Date(sunsetEvent.getTime() - 13 * 60 * 60000); // 日落前 13 小時
+  return runCapturePipeline('sunset', {
+    now: wayOutside,
+    dataDir: staleDir,
+    runTool: botCheckError,
+    fetchImage: () => buildJpeg(1280, 720)
+  }).then(staleRecord => {
+    assert.strictEqual(
+      staleRecord.verification.status,
+      'capture_unavailable',
+      '超出擷取窗口應誠實記錄不可用，而非拋出中斷管線'
+    );
+    assert.match(
+      staleRecord.capture.error,
+      /outside .* capture window/i,
+      '應保留超出窗口的原因'
+    );
+    assert.strictEqual(staleRecord.snapshotUrl, null, '超出窗口時不得指向任何快照');
+    console.log('✅ 超出擷取窗口時誠實記錄且不中斷管線');
+
+    fs.rmSync(staleDir, { recursive: true, force: true });
+    fs.rmSync(degradedDir, { recursive: true, force: true });
+    fs.rmSync(unavailableDir, { recursive: true, force: true });
+  });
+}).then(() => {
   console.log('🎉 真實直播影格擷取邊界測試全數 PASS!\n');
 }).catch(err => {
   console.error('❌ 擷取降級測試未通過:', err.message);

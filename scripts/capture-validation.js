@@ -50,17 +50,31 @@ async function runCapturePipeline(inputSession = '', options = {}) {
   const targetDate = new Date(`${dateStr}T12:00:00+08:00`);
   const solarTimes = SolarCalc.getTimes(targetDate);
   const eventTime = sessionType === 'sunrise' ? solarTimes.sunrise : solarTimes.sunset;
-  const preflightWindow = assertCaptureWindow({
-    now,
-    eventTime,
-    sessionType,
-    maxOffsetMinutes: MAX_CAPTURE_OFFSET_MINUTES
-  });
+  // 自架 runner 的機器可能關機，job 會排隊到開機才執行；GitHub 排程本身
+  // 也有數小時延遲。超出擷取窗口是可預期的營運狀況，不該讓整個 job 變紅，
+  // 但也絕不能拿窗口外的影格充當出景當刻的 ground truth。
+  // 因此：不擷取、誠實記錄，並以 exit 0 讓後續日報照常產出。
+  const offsetMinutes = Math.round((now.getTime() - eventTime.getTime()) / 60000);
+  let windowError = null;
+  try {
+    assertCaptureWindow({
+      now,
+      eventTime,
+      sessionType,
+      maxOffsetMinutes: MAX_CAPTURE_OFFSET_MINUTES
+    });
+  } catch (error) {
+    windowError = error.message;
+  }
 
   console.log('====================================================');
   console.log(`📸 啟動實況影格擷取管線 [${sessionType}]`);
   console.log(`📅 台北觀測日期: ${dateStr}`);
-  console.log(`⏰ 天文時刻: ${SolarCalc.formatTime(eventTime)} / 啟動偏移: ${preflightWindow.offsetMinutes} 分鐘`);
+  console.log(`⏰ 天文時刻: ${SolarCalc.formatTime(eventTime)} / 啟動偏移: ${offsetMinutes} 分鐘`);
+  if (windowError) {
+    console.warn(`⚠️ ${windowError}`);
+    console.warn('   跳過擷取：窗口外的影格不能充當出景當刻的實況證據');
+  }
   console.log(`📍 官方直播: ${source.name}`);
 
   const dataDir = options.dataDir || path.join(__dirname, '../data');
@@ -123,12 +137,14 @@ async function runCapturePipeline(inputSession = '', options = {}) {
   console.log('準備利用 yt-dlp 擷取影片，再以 ffmpeg 輸出為截圖...');
 
   const capturedAt = options.now instanceof Date ? options.now : new Date();
-  const captureWindow = assertCaptureWindow({
-    now: capturedAt,
-    eventTime,
-    sessionType,
-    maxOffsetMinutes: MAX_CAPTURE_OFFSET_MINUTES
-  });
+  const captureWindow = windowError
+    ? { eventTime: eventTime.toISOString(), offsetMinutes, maxOffsetMinutes: MAX_CAPTURE_OFFSET_MINUTES }
+    : assertCaptureWindow({
+        now: capturedAt,
+        eventTime,
+        sessionType,
+        maxOffsetMinutes: MAX_CAPTURE_OFFSET_MINUTES
+      });
 
   // ------------------------------------------------------------------
   // 分層擷取策略
@@ -142,9 +158,12 @@ async function runCapturePipeline(inputSession = '', options = {}) {
   // 也絕不拋出 —— 否則後續的光學評分與每日日報會被整串跳過。
   // ------------------------------------------------------------------
   let capture = null;
-  let fallbackReason = null;
+  let fallbackReason = windowError;
 
   try {
+    if (windowError) {
+      throw new Error(windowError);
+    }
     const exact = captureLiveFrame({
       source,
       outputPath: snapshotPath,
@@ -156,6 +175,11 @@ async function runCapturePipeline(inputSession = '', options = {}) {
     console.log(`Tier A 精確影格已驗證: ${capture.width}x${capture.height}`);
   } catch (error) {
     fallbackReason = error.message;
+    if (windowError) {
+      // 窗口外不做任何擷取：海報影格同樣無法代表出景當刻，
+      // 保持 capture = null，後續會產出 capture_unavailable 紀錄。
+      console.warn('已超出擷取窗口，不進行降級擷取');
+    } else {
     console.warn(`Tier A (yt-dlp 精確影格) 失敗: ${error.message}`);
     console.warn('降級嘗試 Tier B: i.ytimg.com 直播海報影格...');
     try {
@@ -170,6 +194,7 @@ async function runCapturePipeline(inputSession = '', options = {}) {
     } catch (posterError) {
       console.error(`Tier B 亦失敗: ${posterError.message}`);
       fallbackReason = `${fallbackReason} | poster: ${posterError.message}`;
+    }
     }
   }
 

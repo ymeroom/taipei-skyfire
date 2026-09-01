@@ -1,5 +1,9 @@
 name: Auto Ground-Truth YouTube Capture & Validation
 
+# ⚠️ 安全性：本 repo 為 PUBLIC，且本 workflow 可能在自架 runner (你的個人電腦)
+# 上執行。絕對不要為本 workflow 加上 pull_request 觸發 —— 任何人 fork 後開 PR
+# 就能在你的機器上執行任意程式碼。目前僅有 schedule 與 workflow_dispatch，
+# 後者需要 repo 寫入權限，外部人士無法觸發。
 on:
   schedule:
     # 每日清晨日出日報發布 (台灣時間 09:00 = UTC 01:00)
@@ -26,12 +30,16 @@ permissions:
 
 jobs:
   capture-and-record:
-    # 預設使用 GitHub 託管 runner。YouTube 對資料中心 IP 施行 bot check，
-    # 因此託管 runner 上 yt-dlp 精確影格 (Tier A) 必然失敗、自動降級為
-    # i.ytimg.com 海報影格 (Tier B)。
-    # 若要取得精確影格，於 repo 設定 Variables 新增 CAPTURE_RUNNER=self-hosted
-    # 並在台灣住宅網路架設 runner，或設定 YT_COOKIES secret。
+    # 設定 repo variable CAPTURE_RUNNER=self-hosted 即可切換到自架 runner，
+    # 取得 Tier A 精確影格 (住宅 IP 不受 YouTube bot check 影響)。
+    # 未設定時使用 GitHub 託管 runner，Tier A 必失敗並降級為 Tier B 海報影格。
     runs-on: ${{ vars.CAPTURE_RUNNER || 'ubuntu-latest' }}
+    timeout-minutes: 20
+    defaults:
+      run:
+        # 自架 Windows runner 預設為 pwsh，明確指定 bash 讓兩種平台共用同一份語法
+        # (Windows 上由 Git for Windows 提供的 Git Bash 執行)
+        shell: bash
     env:
       TZ: Asia/Taipei
 
@@ -57,35 +65,59 @@ jobs:
           echo "value=$SESSION" >> "$GITHUB_OUTPUT"
           echo "Resolved capture session: $SESSION"
 
-      - name: 🛠️ 安裝 ffmpeg, yt-dlp 與 Python 影像光學分析套件
+      - name: 🛠️ 安裝相依工具 (GitHub 託管 Linux runner)
+        if: runner.os == 'Linux'
         run: |
           sudo apt-get update
           sudo apt-get install -y ffmpeg python3-pip
           pip3 install --break-system-packages yt-dlp pillow numpy
 
+      - name: 🔍 檢查自架 runner 相依工具
+        if: runner.os != 'Linux'
+        run: |
+          # 自架 runner 上不自動安裝套件，只回報缺什麼。
+          # 缺工具不讓 job 失敗：擷取會自動降級，日報照常產出。
+          MISSING=""
+          for tool in ffmpeg ffprobe yt-dlp; do
+            if command -v "$tool" >/dev/null 2>&1; then
+              echo "✅ $tool: $($tool -version 2>&1 | head -1 || $tool --version 2>&1 | head -1)"
+            else
+              echo "❌ $tool 未安裝"
+              MISSING="$MISSING $tool"
+            fi
+          done
+          if [ -n "$MISSING" ]; then
+            echo "::warning::自架 runner 缺少工具:$MISSING —— Tier A 精確影格將無法使用，會自動降級"
+          fi
+
+      - name: 🐍 解析 Python 執行檔與影像分析套件
+        run: |
+          if command -v python3 >/dev/null 2>&1; then PY=python3; else PY=python; fi
+          echo "PYTHON_BIN=$PY" >> "$GITHUB_ENV"
+          echo "使用 $PY: $($PY --version 2>&1)"
+          "$PY" -c "import PIL, numpy; print('pillow', PIL.__version__, '/ numpy', numpy.__version__)" \
+            || echo "::warning::缺少 pillow 或 numpy，光學色彩分析將無法執行 (pip install pillow numpy)"
+
+      # secrets context 不可用於 step-level if，故以 env 判斷是否已設定
       - name: 🍪 寫入 YouTube cookies (若已設定 secret)
-        # secrets context 不可用於 step-level if，故以 env 判斷是否已設定
         env:
           YT_COOKIES: ${{ secrets.YT_COOKIES }}
         run: |
           if [ -n "$YT_COOKIES" ]; then
             printf '%s' "$YT_COOKIES" > "$RUNNER_TEMP/yt-cookies.txt"
             echo "YT_COOKIES_FILE=$RUNNER_TEMP/yt-cookies.txt" >> "$GITHUB_ENV"
-            echo "已載入 YouTube cookies，Tier A 精確影格可用"
+            echo "已載入 YouTube cookies"
           else
-            echo "未設定 YT_COOKIES secret：託管 runner 上 Tier A 會因 bot check 失敗，自動降級為 Tier B 海報影格"
+            echo "未設定 YT_COOKIES secret (自架 runner 使用住宅 IP 時通常不需要)"
           fi
 
       - name: 📸 執行出景窗口即時影格擷取與預測記錄 (Phase 1)
         run: node scripts/capture-validation.js "${{ steps.session.outputs.value }}"
 
       # 註：50 分鐘 11 連續縮時擷取 (scripts/capture_timelapse_series.py)
-      # 已自排程移除。它同時受制於兩個獨立問題：
-      #   1. 走 yt-dlp，在託管 runner 上必被 YouTube bot check 擋下；
-      #   2. 需在出景前後 25 分鐘內每 5 分鐘擷取一次，但 GitHub 排程
-      #      實測延遲 4-7 小時，根本無法命中該時間窗。
-      # 腳本保留，待設定 YT_COOKIES 或改用自架 runner 後，改以 DVR
-      # 回溯 (MAX_CAPTURE_OFFSET_MINUTES = 600) 於 09:00/21:00 事後補抓。
+      # 已自排程移除。它需在出景前後 25 分鐘內每 5 分鐘擷取一次，但 GitHub
+      # 排程實測延遲 4-7 小時，無法命中該時間窗。腳本保留，待改以 DVR 回溯
+      # (MAX_CAPTURE_OFFSET_MINUTES = 600) 於 09:00/21:00 事後補抓再接回。
       #
       # 以下步驟一律執行：擷取若失敗，仍須產出每日日報。
       # 2026-08-18 起排程連續 33 次全紅，就是因為擷取步驟一失敗，
@@ -97,7 +129,8 @@ jobs:
 
       - name: 📰 產生每日實況驗證日報與歷史歸檔 (Daily Ground Truth Briefing)
         if: always()
-        run: python3 scripts/generate_daily_briefing.py "${{ steps.session.outputs.value }}"
+        run: |
+          "$PYTHON_BIN" scripts/generate_daily_briefing.py "${{ steps.session.outputs.value }}"
 
       - name: 🚀 提交驗證數據至倉庫 (Commit & Push)
         if: always()
