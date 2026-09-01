@@ -1,5 +1,44 @@
 [
   {
+    "id": "rec-2026-09-01-sunset",
+    "date": "2026-09-01",
+    "session": "sunset",
+    "targetTime": "2026-09-01T10:14:47.156Z",
+    "source": "大稻埕碼頭（4K 官方即時影像）",
+    "prediction": {
+      "score": 24,
+      "rating": "陰沉沉寂",
+      "color": "#5A6275",
+      "highCloud": 0,
+      "midCloud": 0,
+      "lowCloud": 0,
+      "horizonClearance": 35,
+      "visibilityKm": 10.3,
+      "isSimulated": false,
+      "lockedAt": "2026-08-31T16:17:35.174Z"
+    },
+    "snapshotUrl": "data/snapshots/2026-09-01-sunset.jpg",
+    "capture": {
+      "width": 1280,
+      "height": 720,
+      "fileName": "2026-09-01-sunset.jpg",
+      "sha256": "88c62c9fc59f82eb2a2f817e6ec6528e4072d089c2161d9a96c03c52e71015fa",
+      "capturedAt": "2026-09-01T05:06:39.257Z",
+      "offsetMinutes": -308,
+      "kind": "youtube-live-poster",
+      "fidelity": "degraded",
+      "posterQuality": "maxresdefault",
+      "fallbackReason": "yt-dlp exited with 1: ERROR: [youtube] Ndo_8RuefH4: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies",
+      "validated": true
+    },
+    "verification": {
+      "status": "captured_ready_for_scoring",
+      "groundTruthScore": null,
+      "errorAbsolute": null,
+      "isSimulated": false
+    }
+  },
+  {
     "id": "rec-2026-09-01-sunrise",
     "date": "2026-09-01",
     "session": "sunrise",

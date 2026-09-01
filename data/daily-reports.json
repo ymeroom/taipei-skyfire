@@ -1,5 +1,96 @@
 [
   {
+    "id": "report-2026-09-01-sunset",
+    "date": "2026-09-01",
+    "session": "sunset",
+    "sessionLabel": "傍晚日落",
+    "publishedAt": "2026-09-01T13:06:45.146287",
+    "publishTimeLabel": "21:00 定時發布",
+    "title": "2026-09-01 傍晚日落實況觀測 vs. 模型預報總結",
+    "prediction": {
+      "score": 5,
+      "rating": "陰沉沉寂",
+      "color": "#64748B",
+      "highCloud": 0,
+      "midCloud": 5,
+      "lowCloud": 95,
+      "summary": "低層厚雲籠罩，強烈壓制出景"
+    },
+    "groundTruth": {
+      "score": 5,
+      "rating": "陰沉沉寂",
+      "verdict": "EXACT_MATCH",
+      "verdictBadge": "🎯 100% 精準命中陰雲壓制",
+      "color": "#4ADE80"
+    },
+    "stations": [
+      {
+        "name": "新北淡水漁人碼頭",
+        "icon": "🌉",
+        "tag": "情人橋海口",
+        "phasePrep": "天色蒼白，低層雲層覆蓋海面。",
+        "phasePeak": "正日落海平面低空微弱泛粉；18:42 暮光窗口轉為均勻冷調深藍夜景，無火燒雲。",
+        "phasePost": "完全進入冷調港灣夜景模式。",
+        "forecast": "5 分 (低雲 99%)",
+        "verdict": "🎯 100% 命中"
+      },
+      {
+        "name": "新北八里左岸",
+        "icon": "🌊",
+        "tag": "淡江大橋河海交界",
+        "phasePrep": "台北港上空低雲厚重，海口微弱光感。",
+        "phasePeak": "淡江大橋點燈，海天交界暗黃平光；18:42 呈暗藍灰冷調，無高空火紅卷雲。",
+        "phasePost": "夜景燈光倒映水面，天幕暗化。",
+        "forecast": "5 分 (低雲 99%)",
+        "verdict": "🎯 100% 命中"
+      },
+      {
+        "name": "台北大稻埕碼頭",
+        "icon": "⛵",
+        "tag": "淡水河畔",
+        "phasePrep": "河岸天色陰沉，對岸三重天際厚雲。",
+        "phasePeak": "水面平靜，天色暗灰藍；18:42 呈現純藍調夜景，無天空二次散射反光。",
+        "phasePost": "市集夜燈明亮，完全進入夜景模式。",
+        "forecast": "5 分 (低雲 99%)",
+        "verdict": "🎯 100% 命中"
+      },
+      {
+        "name": "台北象山看 101",
+        "icon": "🏙️",
+        "tag": "信義區俯瞰",
+        "phasePrep": "台北 101 與信義區天際線呈現均勻灰白雲層。",
+        "phasePeak": "101 點燈，後方觀音山輪廓灰暗；18:42 天空為均勻青灰色冷調夜景，無霞光暮色。",
+        "phasePost": "純粹都市夜景模式。",
+        "forecast": "5 分 (低雲 99%)",
+        "verdict": "🎯 100% 命中"
+      },
+      {
+        "name": "台北貓空指南宮",
+        "icon": "⛩️",
+        "tag": "木柵山頂俯瞰",
+        "phasePrep": "俯瞰台北盆地，天際一片蒼白陰雲。",
+        "phasePeak": "雙北盆地被厚雲與冷青調覆蓋，萬家燈火亮起，上方無高空反光層。",
+        "phasePost": "盆地夜景全面鋪開。",
+        "forecast": "5 分 (低雲 99%)",
+        "verdict": "🎯 100% 命中"
+      },
+      {
+        "name": "新北九份即時影像",
+        "icon": "🏮",
+        "tag": "東北角山海交界",
+        "phasePrep": "俯瞰基隆嶼海域與山城，厚雲密佈。",
+        "phasePeak": "山城紅色燈籠與山海漁火亮起，天空無霞光色彩。",
+        "phasePost": "九份璀璨山城夜景成形。",
+        "forecast": "5 分 (低雲 99%)",
+        "verdict": "🎯 100% 命中"
+      }
+    ],
+    "summaryAnalysis": {
+      "atmosphericReason": "北部低層水氣積聚，低雲覆蓋率高，中高空無有效反射天幕。",
+      "modelPerformance": "模型預報精準捕捉陰天壓制，成功預警避免攝影師撲空。"
+    }
+  },
+  {
     "id": "report-2026-09-01-sunrise",
     "date": "2026-09-01",
     "session": "sunrise",
