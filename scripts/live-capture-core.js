@@ -42,6 +42,113 @@ function getTaipeiDateString(date = new Date()) {
   return `${values.year}-${values.month}-${values.day}`;
 }
 
+// 鎖定預測的排程對照：由 cron 決定「要鎖哪一天的哪個時段」。
+// dayOffset 是相對於「排定時刻的台北日期」的天數位移。
+const SCHEDULE_TO_LOCK_TARGET = Object.freeze({
+  '30 8 * * *': Object.freeze({ session: 'sunset', dayOffset: 0 }),   // 16:30 TPE → 當日日落
+  '50 15 * * *': Object.freeze({ session: 'sunrise', dayOffset: 1 })  // 23:50 TPE → 隔日日出
+});
+
+function addDaysToDateString(dateStr, days) {
+  const [year, month, day] = String(dateStr).split('-').map(Number);
+  const shifted = new Date(Date.UTC(year, month - 1, day + days));
+  const pad = (n) => String(n).padStart(2, '0');
+  return `${shifted.getUTCFullYear()}-${pad(shifted.getUTCMonth() + 1)}-${pad(shifted.getUTCDate())}`;
+}
+
+/**
+ * 把實際執行時間往回吸附到最近一次符合 cron 的 UTC 時刻。
+ *
+ * GitHub 的排程是 best-effort，實測延遲可達 4-7 小時。任何「用執行時刻
+ * 推算目標日期」的邏輯都會在延遲跨過台北午夜時鎖錯天。cron 字串本身
+ * 帶有排定的時刻，據此回推才是穩定的基準。
+ *
+ * @param {string} cronExpression 形如 'm h * * *' 的每日 cron
+ * @param {Date} now 實際執行時間
+ * @returns {Date} 最近一次排定的 UTC 時刻 (<= now)
+ */
+function resolveScheduledInstant(cronExpression, now = new Date()) {
+  if (!(now instanceof Date) || Number.isNaN(now.getTime())) {
+    throw new TypeError('now must be a valid Date');
+  }
+  const fields = String(cronExpression || '').trim().split(/\s+/);
+  if (fields.length !== 5) {
+    throw new Error(`unsupported cron expression: ${cronExpression || '(empty)'}`);
+  }
+  const [minuteField, hourField, dayField, monthField, weekdayField] = fields;
+  const minute = Number(minuteField);
+  const hour = Number(hourField);
+  const isDailyFixedTime =
+    Number.isInteger(minute) && minute >= 0 && minute <= 59 &&
+    Number.isInteger(hour) && hour >= 0 && hour <= 23 &&
+    dayField === '*' && monthField === '*' && weekdayField === '*';
+
+  if (!isDailyFixedTime) {
+    throw new Error(`only daily cron at a fixed time is supported: ${cronExpression}`);
+  }
+
+  const candidate = new Date(Date.UTC(
+    now.getUTCFullYear(),
+    now.getUTCMonth(),
+    now.getUTCDate(),
+    hour,
+    minute,
+    0,
+    0
+  ));
+  if (candidate.getTime() > now.getTime()) {
+    candidate.setUTCDate(candidate.getUTCDate() - 1);
+  }
+  return candidate;
+}
+
+/**
+ * 決定本次要鎖定哪一天、哪個時段的預測。
+ *
+ * 有 cron 時一律以「排定時刻」為基準，執行時刻只用來回報延遲；
+ * 手動觸發沒有 cron，才退回以執行時刻判斷。
+ *
+ * @param {Object} params
+ * @param {string} [params.schedule] github.event.schedule 的 cron 字串
+ * @param {string} [params.manualSession] 手動觸發指定的時段
+ * @param {Date} [params.now] 實際執行時間
+ * @returns {{session:string, dateStr:string, scheduledAt:(string|null), delayMinutes:number}}
+ */
+function resolveLockTarget({ schedule = '', manualSession = '', now = new Date() } = {}) {
+  const cron = String(schedule || '').trim();
+  const target = SCHEDULE_TO_LOCK_TARGET[cron];
+
+  if (target && !manualSession) {
+    const scheduledAt = resolveScheduledInstant(cron, now);
+    const baseDate = getTaipeiDateString(scheduledAt);
+    return {
+      session: target.session,
+      dateStr: addDaysToDateString(baseDate, target.dayOffset),
+      scheduledAt: scheduledAt.toISOString(),
+      delayMinutes: Math.round((now.getTime() - scheduledAt.getTime()) / 60000)
+    };
+  }
+
+  // 手動觸發：沒有排定時刻可依據，以執行時刻推算。
+  const session = String(manualSession || '').trim().toLowerCase() || 'sunset';
+  if (session !== 'sunrise' && session !== 'sunset') {
+    throw new Error(`cannot resolve lock session from input: ${manualSession}`);
+  }
+  const taipeiHour = Number(new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Asia/Taipei', hour12: false, hour: '2-digit'
+  }).format(now));
+  const baseDate = getTaipeiDateString(now);
+  // 下午之後鎖日出，目標是隔天的日出；其餘情況鎖當天。
+  const dayOffset = session === 'sunrise' && taipeiHour >= 12 ? 1 : 0;
+
+  return {
+    session,
+    dateStr: addDaysToDateString(baseDate, dayOffset),
+    scheduledAt: null,
+    delayMinutes: 0
+  };
+}
+
 function resolveSessionType(inputSession = '', schedule = '') {
   const normalized = String(inputSession || '').trim().toLowerCase();
   if (normalized) {
@@ -212,6 +319,10 @@ function isVerifiedLiveFrameRecord(record) {
 module.exports = {
   OFFICIAL_STREAMS,
   SCHEDULE_TO_SESSION,
+  SCHEDULE_TO_LOCK_TARGET,
+  addDaysToDateString,
+  resolveScheduledInstant,
+  resolveLockTarget,
   getTaipeiDateString,
   resolveSessionType,
   assertCaptureWindow,

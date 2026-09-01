@@ -7,34 +7,30 @@
 const fs = require('fs');
 const path = require('path');
 const WeatherService = require('../js/weather-service.js');
-const { getTaipeiDateString } = require('./live-capture-core.js');
+const { getTaipeiDateString, resolveLockTarget } = require('./live-capture-core.js');
 
 async function lockForecast() {
-  const schedule = process.env.EVENT_SCHEDULE || '';
-  const manualSession = process.env.MANUAL_SESSION || '';
-  
-  let sessionType = 'sunset';
-  if (manualSession) {
-    sessionType = manualSession;
-  } else if (schedule.includes('50 15')) {
-    // 23:50 (UTC 15:50) 鎖定隔日日出
-    sessionType = 'sunrise';
-  } else if (schedule.includes('30 8')) {
-    // 16:30 (UTC 08:30) 鎖定當日日落
-    sessionType = 'sunset';
-  }
-
+  // 目標日期一律由 cron 的「排定時刻」推算，而非實際執行時刻。
+  // GitHub 排程延遲實測可達 4-7 小時，用執行時刻會在跨過台北午夜時鎖錯天：
+  // 08-31 16:30 的日落鎖定延遲到台北 09-01 00:17 執行，舊邏輯會鎖成
+  // 09-01 的日落，08-31 當天完全沒鎖到，隔日驗證因此找不到對應預測。
+  const target = resolveLockTarget({
+    schedule: process.env.EVENT_SCHEDULE || '',
+    manualSession: process.env.MANUAL_SESSION || '',
+    now: new Date()
+  });
+  const sessionType = target.session;
+  const dateStr = target.dateStr;
   const now = new Date();
-  let targetDate = new Date(now);
-  
-  if (sessionType === 'sunrise') {
-    // 鎖定日出預測：如果是在午夜 (0點~12點) 執行，目標就是「今天」的日出
-    // 如果是在下午/晚上 (12點~24點) 執行，目標就是「明天」的日出
-    if (now.getHours() >= 12) {
-      targetDate.setDate(targetDate.getDate() + 1);
+
+  if (target.scheduledAt) {
+    console.log(`[Lock Forecast] 排定時刻: ${target.scheduledAt} / 實際延遲: ${target.delayMinutes} 分鐘`);
+    if (target.delayMinutes > 120) {
+      console.warn(`[Lock Forecast] 注意：本次排程延遲 ${target.delayMinutes} 分鐘，已依排定時刻校正目標日期`);
     }
+  } else {
+    console.log('[Lock Forecast] 手動觸發，依執行時刻推算目標日期');
   }
-  const dateStr = getTaipeiDateString(targetDate);
 
   console.log(`[Lock Forecast] 準備鎖定 ${dateStr} 的 ${sessionType} 預測`);
 
