@@ -133,4 +133,40 @@ assert.strictEqual(isVerifiedLiveFrameRecord({
   verification: { status: 'verified_completed', isSimulated: false, groundTruthScore: 70 }
 }), true);
 
+// ----------------------------------------------------------------
+// 降級海報影格 (Tier B) 的驗證政策
+// 海報影格是真實影像，只是可能落後數分鐘，與「捏造 ground truth」不同，
+// 因此允許進入光學評分；但它不得冒充精確影格計入招牌準確率統計。
+// ----------------------------------------------------------------
+const posterRecord = {
+  snapshotUrl: 'data/snapshots/2026-09-01-sunset.jpg',
+  capture: {
+    kind: 'youtube-live-poster',
+    fidelity: 'degraded',
+    validated: true,
+    capturedAt: '2026-09-01T18:19:00+08:00',
+    sha256: 'a'.repeat(64),
+    width: 1280,
+    height: 720
+  },
+  verification: { status: 'captured_ready_for_scoring' }
+};
+
+assert.strictEqual(
+  isValidatedLiveCaptureRecord(posterRecord),
+  true,
+  '降級海報影格為真實影像，應可進入光學評分'
+);
+
+assert.strictEqual(
+  isVerifiedLiveFrameRecord({
+    ...posterRecord,
+    verification: { status: 'verified_completed', isSimulated: false, groundTruthScore: 70 }
+  }),
+  false,
+  '降級海報影格不得計入精確實況影格的準確率統計'
+);
+
+console.log('✅ 降級海報影格驗證政策正確');
+
 console.log('🎉 真實直播影格驗證政策測試全數 PASS!\n');

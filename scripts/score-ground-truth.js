@@ -93,6 +93,8 @@ function runGroundTruthScoring(targetDateStr = '', inputSession = '', options = 
   }
 
   record.verification = {
+    captureFidelity: record.capture.fidelity || 'exact',
+    captureKind: record.capture.kind,
     status: 'verified_completed',
     groundTruthScore,
     groundTruthBadge: opticalResult.badge,

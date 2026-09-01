@@ -166,20 +166,42 @@ function validateOpticalResult(result) {
   return result;
 }
 
+// Tier A 取得的精確直播影格
+const EXACT_CAPTURE_KIND = 'youtube-live-frame';
+// Tier B 取得的直播海報影格：真實影像但可能落後數分鐘
+const DEGRADED_CAPTURE_KIND = 'youtube-live-poster';
+const SCORABLE_CAPTURE_KINDS = Object.freeze([EXACT_CAPTURE_KIND, DEGRADED_CAPTURE_KIND]);
+
+/**
+ * 該紀錄是否具備可供光學評分的真實影像證據。
+ * 海報影格屬真實影像（與捏造的模擬值不同），因此允許評分，
+ * 但其 fidelity 標示為 degraded，不得冒充精確影格。
+ */
 function isValidatedLiveCaptureRecord(record) {
   return Boolean(
     record &&
     typeof record.snapshotUrl === 'string' &&
     record.snapshotUrl.startsWith('data/snapshots/') &&
     record.capture &&
-    record.capture.kind === 'youtube-live-frame' &&
+    SCORABLE_CAPTURE_KINDS.includes(record.capture.kind) &&
     record.capture.validated === true
+  );
+}
+
+/**
+ * 該紀錄是否為 Tier A 精確影格。招牌準確率統計只採計這一級。
+ */
+function isExactLiveFrameRecord(record) {
+  return Boolean(
+    isValidatedLiveCaptureRecord(record) &&
+    record.capture.kind === EXACT_CAPTURE_KIND &&
+    record.capture.fidelity !== 'degraded'
   );
 }
 
 function isVerifiedLiveFrameRecord(record) {
   return Boolean(
-    isValidatedLiveCaptureRecord(record) &&
+    isExactLiveFrameRecord(record) &&
     record.verification &&
     record.verification.status === 'verified_completed' &&
     record.verification.isSimulated !== true &&
@@ -197,5 +219,9 @@ module.exports = {
   finalizeCaptureEvidence,
   validateOpticalResult,
   isValidatedLiveCaptureRecord,
-  isVerifiedLiveFrameRecord
+  isExactLiveFrameRecord,
+  isVerifiedLiveFrameRecord,
+  EXACT_CAPTURE_KIND,
+  DEGRADED_CAPTURE_KIND,
+  SCORABLE_CAPTURE_KINDS
 };
