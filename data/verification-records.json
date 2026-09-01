@@ -54,17 +54,6 @@
     "session": "sunrise",
     "targetTime": "2026-08-31T21:35:55.982Z",
     "source": "象山看台北 101（4K 官方即時影像）",
-    "snapshotUrl": "data/snapshots/2026-09-01-sunrise.jpg",
-    "capture": {
-      "width": 1920,
-      "height": 1080,
-      "fileName": "2026-09-01-sunrise.jpg",
-      "sha256": "914d2949eddd6f3d722d040e196a7dc370605859fa8e066fda45345fe4a874df",
-      "capturedAt": "2026-08-31T23:37:01.357Z",
-      "offsetMinutes": 121,
-      "kind": "youtube-live-frame",
-      "validated": true
-    },
     "prediction": {
       "score": 30,
       "rating": "平淡暮光",
@@ -77,17 +66,33 @@
       "isSimulated": false,
       "lockedAt": "2026-08-31T21:06:08.157Z"
     },
+    "snapshotUrl": "data/snapshots/2026-09-01-sunrise.jpg",
+    "capture": {
+      "width": 1280,
+      "height": 720,
+      "fileName": "2026-09-01-sunrise.jpg",
+      "sha256": "b82f769506282e19a556ef48393b7617d9793e780892219dc59a6a9a745afd3c",
+      "capturedAt": "2026-09-01T05:55:39.967Z",
+      "offsetMinutes": 500,
+      "kind": "youtube-live-poster",
+      "fidelity": "degraded",
+      "posterQuality": "maxresdefault",
+      "fallbackReason": "yt-dlp exited with 1: ERROR: [youtube] z_fY1pj1VBw: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies",
+      "validated": true
+    },
     "verification": {
+      "captureFidelity": "degraded",
+      "captureKind": "youtube-live-poster",
       "status": "verified_completed",
-      "groundTruthScore": 14,
+      "groundTruthScore": 25,
       "groundTruthBadge": "陰沉沉寂",
       "groundTruthLevel": "OVERCAST",
-      "errorAbsolute": 16,
-      "verdict": "SLIGHT_DEVIATION",
-      "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-      "chromaticPurity": 29.1,
-      "skyCoveragePct": 0.1,
-      "verifiedAt": "2026-08-31T23:37:13.424Z",
+      "errorAbsolute": 5,
+      "verdict": "EXACT_MATCH",
+      "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "chromaticPurity": 39.2,
+      "skyCoveragePct": 5.3,
+      "verifiedAt": "2026-09-01T05:55:41.977Z",
       "engine": "Optical Chromatic Histogram Analysis (CIELAB/HSV)",
       "isSimulated": false
     }
