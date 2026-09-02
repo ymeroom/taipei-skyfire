@@ -1,5 +1,87 @@
 [
   {
+    "id": "rec-2026-09-02-sunset",
+    "date": "2026-09-02",
+    "session": "sunset",
+    "targetTime": "2026-09-02T10:13:46.036Z",
+    "source": "大稻埕碼頭（4K 官方即時影像）",
+    "prediction": {
+      "score": 43,
+      "rating": "平淡暮光",
+      "color": "#7B88A8",
+      "highCloud": 97,
+      "midCloud": 22,
+      "lowCloud": 38,
+      "horizonClearance": 35,
+      "visibilityKm": 20.3,
+      "isSimulated": false
+    },
+    "snapshotUrl": "data/snapshots/2026-09-02-sunset.jpg",
+    "capture": {
+      "width": 640,
+      "height": 360,
+      "fileName": "2026-09-02-sunset.jpg",
+      "sha256": "aa7616df43af0da212090cc87fc96a51fd64ec492b2c68b8483adfa9121b2a66",
+      "capturedAt": "2026-09-02T11:10:03.169Z",
+      "offsetMinutes": 56,
+      "kind": "youtube-live-frame",
+      "fidelity": "exact",
+      "posterQuality": null,
+      "fallbackReason": null,
+      "validated": true
+    },
+    "verification": {
+      "captureFidelity": "exact",
+      "captureKind": "youtube-live-frame",
+      "status": "verified_completed",
+      "groundTruthScore": 17,
+      "groundTruthBadge": "陰沉沉寂",
+      "groundTruthLevel": "OVERCAST",
+      "errorAbsolute": 26,
+      "verdict": "MISMATCH",
+      "verdictBadge": "⚠️ 出現偏差需校準",
+      "chromaticPurity": 30,
+      "skyCoveragePct": 2.6,
+      "verifiedAt": "2026-09-02T11:10:10.327Z",
+      "engine": "Optical Chromatic Histogram Analysis (CIELAB/HSV)",
+      "isSimulated": false
+    }
+  },
+  {
+    "id": "rec-2026-09-02-sunrise",
+    "date": "2026-09-02",
+    "session": "sunrise",
+    "targetTime": "2026-09-01T21:36:18.672Z",
+    "source": "象山看台北 101（4K 官方即時影像）",
+    "prediction": {
+      "score": 52,
+      "rating": "局部霞光",
+      "color": "#E5A50A",
+      "highCloud": 0,
+      "midCloud": 0,
+      "lowCloud": 0,
+      "horizonClearance": 42,
+      "visibilityKm": 860,
+      "isSimulated": false,
+      "lockedAt": "2026-09-01T18:51:13.227Z"
+    },
+    "snapshotUrl": null,
+    "capture": {
+      "kind": null,
+      "fidelity": "none",
+      "validated": false,
+      "capturedAt": "2026-09-02T11:09:54.889Z",
+      "offsetMinutes": 814,
+      "error": "outside sunrise capture window: offset 814 minutes exceeds ±600"
+    },
+    "verification": {
+      "status": "capture_unavailable",
+      "groundTruthScore": null,
+      "errorAbsolute": null,
+      "isSimulated": false
+    }
+  },
+  {
     "id": "rec-2026-09-01-sunset",
     "date": "2026-09-01",
     "session": "sunset",
