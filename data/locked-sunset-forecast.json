@@ -1,55 +1,55 @@
 {
-  "date": "2026-09-01",
+  "date": "2026-09-02",
   "session": "sunset",
-  "lockedAt": "2026-09-01T13:37:33.149Z",
+  "lockedAt": "2026-09-02T12:54:01.808Z",
   "skyfire": {
-    "score": 5,
+    "score": 67,
     "rating": {
-      "level": "OVERCAST",
-      "badge": "陰沉沉寂",
-      "icon": "☁️",
-      "color": "#5A6275",
-      "secondaryColor": "#394150",
-      "summary": "厚重低雲覆蓋天際或有陣雨，天色灰暗難見彩霞。",
-      "bgGradient": "linear-gradient(135deg, rgba(90,98,117,0.2) 0%, rgba(57,65,80,0.1) 100%)"
+      "level": "MODERATE",
+      "badge": "局部霞光",
+      "icon": "⛅",
+      "color": "#E5A50A",
+      "secondaryColor": "#3A86FF",
+      "summary": "局部泛紅・唯美溫潤。地平線或天際線邊緣可見金橘色光芒。",
+      "bgGradient": "linear-gradient(135deg, rgba(229,165,10,0.25) 0%, rgba(58,134,255,0.15) 100%)"
     },
     "metrics": {
-      "cloudQualityScore": 18,
-      "lowCloudPenalty": 53,
-      "horizonScore": 0,
-      "visibilityScore": 2,
-      "horizonClearance": 0,
-      "visKm": 3.1
+      "cloudQualityScore": 40,
+      "lowCloudPenalty": 0,
+      "horizonScore": 17,
+      "visibilityScore": 13,
+      "horizonClearance": 56,
+      "visKm": 20.2
     },
     "diagnostics": [
       {
         "label": "高空卷層雲 (6,000m+)",
         "status": "fair",
-        "desc": "高雲量偏高 (95%)，漫射面積大但光線穿透度可能稍微受限。"
+        "desc": "高雲量偏高 (78%)，漫射面積大但光線穿透度可能稍微受限。"
       },
       {
         "label": "中空雲層 (2,000-6,000m)",
         "status": "fair",
-        "desc": "中雲量厚實 (100%)，層次豐富但需留意下方陰影。"
+        "desc": "中雲量厚實 (82%)，層次豐富但需留意下方陰影。"
       },
       {
         "label": "遠方西方（台灣海峽/海平面）透光窗",
-        "status": "bad",
-        "desc": "低雲遮蔽高達 100%，厚雲層恐阻斷地平線入射光，投下暗灰色陰影。"
+        "status": "fair",
+        "desc": "低雲量約 14%，地平線具有部分透光縫隙，呈現局部霞光。"
       },
       {
         "label": "大氣能見度與通透度",
-        "status": "bad",
-        "desc": "能見度受限（3.08 公里），霧霾或水氣可能使天色偏灰白。"
+        "status": "optimal",
+        "desc": "能見度優異（20.22 公里），大氣清澈通透，晚霞色彩飽和純淨。"
       }
     ],
     "photoTips": {
-      "bestTime": "日落後 20-35 分鐘之「藍調時刻 (Blue Hour)」",
-      "whiteBalance": "色溫設為 3800K - 4500K 拍出城市冷冽深藍氛圍",
-      "filter": "長曝減光鏡 (ND64/ND1000) 霧化雲流或車軌",
-      "exposure": "建議使用腳架進行 10-30 秒慢速長曝",
-      "lens": "廣角至中望遠，適合捕捉台北夜景、橋樑車軌與建築點燈",
-      "mobileTip": "切換至手機「夜景模式 (Night Mode)」，藉由多幀降噪紀錄城市藍調夜景。"
+      "bestTime": "日落當刻至日落後 15 分鐘",
+      "whiteBalance": "建議 6000K - 7000K 增強夕陽色彩飽和度",
+      "filter": "可搭配 CPL 偏光鏡增強雲層對比度",
+      "exposure": "曝光補償 -0.3 EV 至 -0.7 EV",
+      "lens": "標準變焦鏡頭 (24-70mm)，取景聚焦於地平線光芒交會處與地景輪廓",
+      "mobileTip": "建議開啟手機 HDR 模式，並利用三分法將地平線置於下 1/3 處。"
     }
   }
 }
