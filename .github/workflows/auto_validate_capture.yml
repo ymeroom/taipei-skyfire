@@ -47,6 +47,17 @@ jobs:
       - name: 📥 檢出程式碼庫 (Checkout)
         uses: actions/checkout@v5
 
+      # 自架 Windows runner (NETWORK SERVICE 服務帳號) 的 PATH 只有 Git\cmd，
+      # 沒有 Git\bin，導致 runner 解析 shell: bash 時 which('bash') 失敗、
+      # 所有 run 步驟開場即 `bash: command not found`。用不需要 bash 的
+      # powershell (5.1 內建，非 pwsh) 把 Git\bin 寫進 $GITHUB_PATH，
+      # 供後續步驟的 shell 解析使用。
+      - name: 🔧 補上 Git Bash 路徑 (自架 Windows runner)
+        if: runner.os == 'Windows'
+        shell: powershell
+        run: |
+          "C:\Program Files\Git\bin" | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
+
       - name: ⚙️ 設定 Node.js 環境
         uses: actions/setup-node@v5
         with:
