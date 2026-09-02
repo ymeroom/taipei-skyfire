@@ -49,14 +49,13 @@ jobs:
 
       # 自架 Windows runner (NETWORK SERVICE 服務帳號) 的 PATH 只有 Git\cmd，
       # 沒有 Git\bin，導致 runner 解析 shell: bash 時 which('bash') 失敗、
-      # 所有 run 步驟開場即 `bash: command not found`。用不需要 bash 的
-      # powershell (5.1 內建，非 pwsh) 把 Git\bin 寫進 $GITHUB_PATH，
-      # 供後續步驟的 shell 解析使用。
+      # 所有 run 步驟開場即 `bash: command not found`。用 cmd (不受 PowerShell
+      # 執行原則限制，該機器為 Restricted) 把 Git\bin 寫進 $GITHUB_PATH，
+      # 供後續步驟的 shell 解析使用。echo 前後不留空白以免混入路徑。
       - name: 🔧 補上 Git Bash 路徑 (自架 Windows runner)
         if: runner.os == 'Windows'
-        shell: powershell
-        run: |
-          "C:\Program Files\Git\bin" | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
+        shell: cmd
+        run: echo C:\Program Files\Git\bin>>"%GITHUB_PATH%"
 
       - name: ⚙️ 設定 Node.js 環境
         uses: actions/setup-node@v5
