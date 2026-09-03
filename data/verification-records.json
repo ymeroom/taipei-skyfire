@@ -1,5 +1,44 @@
 [
   {
+    "id": "rec-2026-09-03-sunrise",
+    "date": "2026-09-03",
+    "session": "sunrise",
+    "targetTime": "2026-09-02T21:36:41.177Z",
+    "source": "象山看台北 101（4K 官方即時影像）",
+    "prediction": {
+      "score": 26,
+      "rating": "陰沉沉寂",
+      "color": "#5A6275",
+      "highCloud": 0,
+      "midCloud": 0,
+      "lowCloud": 0,
+      "horizonClearance": 1,
+      "visibilityKm": 8.3,
+      "isSimulated": false,
+      "lockedAt": "2026-09-02T18:57:24.503Z"
+    },
+    "snapshotUrl": "data/snapshots/2026-09-03-sunrise.jpg",
+    "capture": {
+      "width": 1280,
+      "height": 720,
+      "fileName": "2026-09-03-sunrise.jpg",
+      "sha256": "b82f769506282e19a556ef48393b7617d9793e780892219dc59a6a9a745afd3c",
+      "capturedAt": "2026-09-03T05:23:25.205Z",
+      "offsetMinutes": 467,
+      "kind": "youtube-live-poster",
+      "fidelity": "degraded",
+      "posterQuality": "maxresdefault",
+      "fallbackReason": "spawnSync python ENOENT",
+      "validated": true
+    },
+    "verification": {
+      "status": "captured_ready_for_scoring",
+      "groundTruthScore": null,
+      "errorAbsolute": null,
+      "isSimulated": false
+    }
+  },
+  {
     "id": "rec-2026-09-02-sunset",
     "date": "2026-09-02",
     "session": "sunset",
