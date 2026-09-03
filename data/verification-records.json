@@ -6,7 +6,7 @@
     "targetTime": "2026-09-04T10:11:42.353Z",
     "source": "大稻埕碼頭（4K 官方即時影像）",
     "prediction": {
-      "score": 14,
+      "score": 15,
       "rating": "陰沉沉寂",
       "color": "#5A6275",
       "highCloud": 99,
@@ -21,9 +21,9 @@
       "kind": null,
       "fidelity": "none",
       "validated": false,
-      "capturedAt": "2026-09-03T16:11:51.464Z",
-      "offsetMinutes": -1080,
-      "error": "outside sunset capture window: offset -1080 minutes exceeds ±600"
+      "capturedAt": "2026-09-03T16:52:06.111Z",
+      "offsetMinutes": -1040,
+      "error": "outside sunset capture window: offset -1040 minutes exceeds ±600"
     },
     "verification": {
       "status": "capture_unavailable",
