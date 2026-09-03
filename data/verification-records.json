@@ -21,9 +21,9 @@
       "kind": null,
       "fidelity": "none",
       "validated": false,
-      "capturedAt": "2026-09-03T16:52:06.111Z",
-      "offsetMinutes": -1040,
-      "error": "outside sunset capture window: offset -1040 minutes exceeds ±600"
+      "capturedAt": "2026-09-03T17:29:53.607Z",
+      "offsetMinutes": -1002,
+      "error": "outside sunset capture window: offset -1002 minutes exceeds ±600"
     },
     "verification": {
       "status": "capture_unavailable",
