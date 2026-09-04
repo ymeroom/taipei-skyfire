@@ -8,6 +8,8 @@ import sys
 import os
 import json
 import math
+import subprocess
+import datetime
 
 if sys.platform == 'win32':
     try:
@@ -15,6 +17,9 @@ if sys.platform == 'win32':
         sys.stderr.reconfigure(encoding='utf-8', errors='replace')
     except Exception:
         pass
+
+REPO_ROOT = os.path.join(os.path.dirname(__file__), "..")
+TAIPEI_TZ = datetime.timezone(datetime.timedelta(hours=8))
 
 try:
     from PIL import Image
@@ -48,7 +53,91 @@ def rgb_to_hsv(r, g, b):
 
     return h, s, v
 
-def analyze_image_optics(image_path):
+def get_twilight_window(date_str, session):
+    """透過 js/solar-calc.js (單一事實來源) 取得暮光窗口邊界。
+
+    火燒雲物理上只可能出現在「日出前民用曙光起 ~ 日出後黃金時刻結束」或
+    「日落前黃金時刻起 ~ 日落後民用暮光結束」這段窗口內；窗口外看到的暖色調
+    高飽和度像素只可能是路燈、船燈、燈籠等人工光源，不是真的燒天。
+    回傳 (window_start_utc, window_end_utc)，皆為 tz-aware datetime。
+    """
+    node_script = (
+        "const SolarCalc = require('./js/solar-calc.js');"
+        "const t = SolarCalc.getTimes(new Date(process.argv[1] + 'T12:00:00+08:00'));"
+        "console.log(JSON.stringify({"
+        "civilDawn: t.civilDawn, sunriseGoldenEnd: t.sunriseGoldenEnd,"
+        "sunsetGoldenStart: t.sunsetGoldenStart, civilDusk: t.civilDusk"
+        "}));"
+    )
+    r = subprocess.run(
+        ["node", "-e", node_script, date_str],
+        cwd=REPO_ROOT, capture_output=True, text=True, timeout=30
+    )
+    if r.returncode != 0:
+        raise RuntimeError(f"SolarCalc 呼叫失敗: {r.stderr.strip()}")
+    times = json.loads(r.stdout)
+
+    def parse(iso):
+        return datetime.datetime.fromisoformat(iso.replace("Z", "+00:00"))
+
+    if session == "sunrise":
+        return parse(times["civilDawn"]), parse(times["sunriseGoldenEnd"])
+    return parse(times["sunsetGoldenStart"]), parse(times["civilDusk"])
+
+
+def apply_night_gate(result, capture_time=None, twilight_window=None):
+    """暗夜閘門：暮光窗口外一律強制低分，避免人工光源被誤判為火燒雲。
+
+    capture_time: tz-aware UTC datetime，代表影格畫面實際所屬的時刻
+                  (不是程式執行時刻)。未提供則不套用閘門 (向後相容)。
+    twilight_window: 可選的 (start, end) tuple，避免重複呼叫 node/SolarCalc
+                      (例如同一場次多張影格共用同一個窗口時)。
+    """
+    result["nightGate"] = {"applied": False, "reason": "no capture_time provided"}
+    if capture_time is None:
+        return result
+
+    try:
+        if twilight_window is not None:
+            window_start, window_end = twilight_window
+        else:
+            local = capture_time.astimezone(TAIPEI_TZ)
+            session = "sunrise" if local.hour < 12 else "sunset"
+            date_str = local.strftime("%Y-%m-%d")
+            window_start, window_end = get_twilight_window(date_str, session)
+
+        if window_start <= capture_time <= window_end:
+            result["nightGate"] = {
+                "applied": False,
+                "reason": "within twilight window",
+                "windowStart": window_start.isoformat(),
+                "windowEnd": window_end.isoformat()
+            }
+            return result
+
+        raw_score = result.get("score", 0)
+        gated_score = min(raw_score, 12)
+        result["nightGate"] = {
+            "applied": True,
+            "reason": "capture time falls outside the twilight window — "
+                      "warm/saturated pixels here are almost certainly artificial "
+                      "light (street lamps, boat lights, lanterns), not afterglow",
+            "rawScoreBeforeGate": raw_score,
+            "rawLevelBeforeGate": result.get("level"),
+            "windowStart": window_start.isoformat(),
+            "windowEnd": window_end.isoformat()
+        }
+        result["score"] = gated_score
+        result["level"] = "OVERCAST"
+        result["badge"] = "暮光窗外 (人工光源判定)"
+    except Exception as e:
+        result["nightGate"] = {"applied": False, "reason": f"gate check failed, fail-open: {e}"}
+        print(f"⚠️ 暗夜閘門檢查失敗，本次不套用: {e}", file=sys.stderr)
+
+    return result
+
+
+def analyze_image_optics(image_path, capture_time=None, twilight_window=None):
     """分析天空區域的火燒雲光學特徵"""
     if not os.path.exists(image_path) or Image is None:
         return {
@@ -144,7 +233,7 @@ def analyze_image_optics(image_path):
             level = "OVERCAST"
             badge = "陰沉沉寂"
 
-        return {
+        result = {
             "score": final_score,
             "level": level,
             "badge": badge,
@@ -154,6 +243,7 @@ def analyze_image_optics(image_path):
             "avg_brightness_pct": round(avg_warm_brightness * 100, 1),
             "is_simulated": False
         }
+        return apply_night_gate(result, capture_time, twilight_window)
 
     except Exception as e:
         print(f"光學分析失敗: {e}", file=sys.stderr)
@@ -167,9 +257,16 @@ def analyze_image_optics(image_path):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python analyze_sky_ground_truth.py <snapshot_path>")
+        print("Usage: python analyze_sky_ground_truth.py <snapshot_path> [captured_at_iso_utc]")
         sys.exit(1)
 
     img_path = sys.argv[1]
-    result = analyze_image_optics(img_path)
+    cap_time = None
+    if len(sys.argv) > 2:
+        try:
+            cap_time = datetime.datetime.fromisoformat(sys.argv[2].replace("Z", "+00:00"))
+        except Exception as e:
+            print(f"⚠️ 無法解析 captured_at 參數 '{sys.argv[2]}'，暗夜閘門將不套用: {e}", file=sys.stderr)
+
+    result = analyze_image_optics(img_path, capture_time=cap_time)
     print(json.dumps(result, ensure_ascii=False, indent=2))

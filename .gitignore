@@ -4,3 +4,8 @@ node_modules/
 .vscode/
 .idea/
 *.log
+__pycache__/
+*.pyc
+
+# 多機位縮時擷取本機產出 (影格+報告)，資料量大且僅供本機查看，不進版控
+data/timelapse/

@@ -13,9 +13,10 @@ const {
   validateOpticalResult
 } = require('./live-capture-core.js');
 
-function runPythonAnalyzer(scriptPath, snapshotPath) {
+function runPythonAnalyzer(scriptPath, snapshotPath, capturedAtIso) {
   const pythonBin = process.env.PYTHON_BIN || (process.platform === 'win32' ? 'python' : 'python3');
-  const result = spawnSync(pythonBin, [scriptPath, snapshotPath], {
+  const args = capturedAtIso ? [scriptPath, snapshotPath, capturedAtIso] : [scriptPath, snapshotPath];
+  const result = spawnSync(pythonBin, args, {
     encoding: 'utf8',
     timeout: 60000,
     maxBuffer: 10 * 1024 * 1024,
@@ -73,10 +74,14 @@ function runGroundTruthScoring(targetDateStr = '', inputSession = '', options = 
   console.log(`📸 影像: ${record.snapshotUrl}`);
   console.log(`🔗 來源: ${record.youtubeLiveUrl}`);
 
+  // targetTime (非 capture.capturedAt) 才是影格畫面實際所屬的天文時刻 ——
+  // capturedAt 記的是腳本執行的當下，DVR 回溯量大時兩者可能差到數小時。
+  // 用 targetTime 餵暗夜閘門，暮光窗口外的暖色像素 (路燈/船燈/燈籠) 一律強制低分。
   const analyzer = options.runAnalyzer || runPythonAnalyzer;
   const opticalResult = validateOpticalResult(analyzer(
     path.join(__dirname, 'analyze_sky_ground_truth.py'),
-    snapshotPath
+    snapshotPath,
+    record.targetTime
   ));
 
   const predictedScore = record.prediction.score;
@@ -104,6 +109,7 @@ function runGroundTruthScoring(targetDateStr = '', inputSession = '', options = 
     verdictBadge,
     chromaticPurity: opticalResult.chromatic_purity,
     skyCoveragePct: opticalResult.sky_coverage_pct,
+    nightGate: opticalResult.nightGate || null,
     verifiedAt: new Date().toISOString(),
     engine: 'Optical Chromatic Histogram Analysis (CIELAB/HSV)',
     isSimulated: false
