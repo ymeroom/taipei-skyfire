@@ -1,7 +1,7 @@
 {
-  "date": "2026-09-03",
+  "date": "2026-09-04",
   "session": "sunset",
-  "lockedAt": "2026-09-03T12:56:59.704Z",
+  "lockedAt": "2026-09-04T12:51:56.850Z",
   "skyfire": {
     "score": 5,
     "rating": {
@@ -14,12 +14,12 @@
       "bgGradient": "linear-gradient(135deg, rgba(90,98,117,0.2) 0%, rgba(57,65,80,0.1) 100%)"
     },
     "metrics": {
-      "cloudQualityScore": 20,
-      "lowCloudPenalty": 7,
-      "horizonScore": 3,
-      "visibilityScore": 5,
-      "horizonClearance": 11,
-      "visKm": 7.2
+      "cloudQualityScore": 15,
+      "lowCloudPenalty": 29,
+      "horizonScore": 2,
+      "visibilityScore": 2,
+      "horizonClearance": 8,
+      "visKm": 3.1
     },
     "diagnostics": [
       {
@@ -34,13 +34,13 @@
       },
       {
         "label": "遠方西方（台灣海峽/海平面）透光窗",
-        "status": "fair",
-        "desc": "低雲量約 38%，地平線具有部分透光縫隙，呈現局部霞光。"
+        "status": "bad",
+        "desc": "低雲遮蔽高達 63%，厚雲層恐阻斷地平線入射光，投下暗灰色陰影。"
       },
       {
         "label": "大氣能見度與通透度",
         "status": "bad",
-        "desc": "能見度受限（7.24 公里），霧霾或水氣可能使天色偏灰白。"
+        "desc": "能見度受限（3.14 公里），霧霾或水氣可能使天色偏灰白。"
       }
     ],
     "photoTips": {
