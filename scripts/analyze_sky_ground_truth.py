@@ -10,6 +10,7 @@ import json
 import math
 import subprocess
 import datetime
+import urllib.request
 
 if sys.platform == 'win32':
     try:
@@ -20,6 +21,15 @@ if sys.platform == 'win32':
 
 REPO_ROOT = os.path.join(os.path.dirname(__file__), "..")
 TAIPEI_TZ = datetime.timezone(datetime.timedelta(hours=8))
+
+# 正式驗證管線 (auto_validate_capture.yml) 目前固定用這兩台實體攝影機，
+# 座標取自 js/spots-data.js 對應機位 (象山看101 ≈ taipei-101 站點，
+# 大稻埕即同名站點)。多機位縮時工具 (capture_timelapse_multi_station.py)
+# 會直接帶入各站真實座標，這裡僅作為「未指定座標時」的預設回退值。
+DEFAULT_STATION_COORDS_BY_SESSION = {
+    "sunrise": {"lat": 25.029049882166394, "lng": 121.57276615548665},  # 象山看台北101
+    "sunset": {"lat": 25.057045046459375, "lng": 121.50771810454582},   # 大稻埕
+}
 
 try:
     from PIL import Image
@@ -137,7 +147,116 @@ def apply_night_gate(result, capture_time=None, twilight_window=None):
     return result
 
 
-def analyze_image_optics(image_path, capture_time=None, twilight_window=None):
+# WMO weathercode：雨/毛毛雨/陣雨/雷雨 (51-67, 80-82, 95-99)
+_RAIN_WEATHER_CODES = frozenset([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82, 95, 96, 99])
+
+
+def fetch_hourly_weather_series(lat, lng):
+    """一次抓某站點過去 2 天~未來 1 天的逐小時降雨資料 (Open-Meteo)。
+
+    同一場次 9 張影格共用同一次查詢結果 (呼叫端傳入 rain_series 即可)，
+    避免對同一站點重複打 API。查詢失敗回傳 None (呼叫端 fail-open，不套用雨天閘門)。
+    """
+    try:
+        url = (
+            f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lng}"
+            "&hourly=precipitation,weathercode&past_days=2&forecast_days=1&timezone=UTC"
+        )
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            data = json.loads(resp.read().decode('utf-8'))
+        hourly = data.get("hourly") or {}
+        times = hourly.get("time") or []
+        if not times:
+            return None
+        return {
+            "times": times,
+            "precip": hourly.get("precipitation") or [],
+            "codes": hourly.get("weathercode") or []
+        }
+    except Exception as e:
+        print(f"⚠️ 降雨資料查詢失敗，雨天閘門本次不套用: {e}", file=sys.stderr)
+        return None
+
+
+def lookup_rain_at(series, capture_time):
+    """從 fetch_hourly_weather_series 的結果中，找出離 capture_time 最近的整點降雨狀態。"""
+    if series is None or capture_time is None:
+        return None
+    times = series.get("times") or []
+    if not times:
+        return None
+
+    target_ts = capture_time.timestamp()
+    best_i, best_diff = 0, float("inf")
+    for i, t in enumerate(times):
+        try:
+            t_dt = datetime.datetime.fromisoformat(t).replace(tzinfo=datetime.timezone.utc)
+        except Exception:
+            continue
+        diff = abs(t_dt.timestamp() - target_ts)
+        if diff < best_diff:
+            best_diff, best_i = diff, i
+
+    precip_list = series.get("precip") or []
+    code_list = series.get("codes") or []
+    precip = precip_list[best_i] if best_i < len(precip_list) else 0
+    code = code_list[best_i] if best_i < len(code_list) else 0
+    is_raining = bool((precip or 0) >= 0.1) or code in _RAIN_WEATHER_CODES
+    return {"isRaining": is_raining, "precipitationMm": precip, "weatherCode": code}
+
+
+def apply_rain_gate(result, rain_info):
+    """雨天閘門：下雨時暖色像素多半是濕路面/車燈反光，而非真正火燒雲，分數封頂 30 分。
+
+    與暗夜閘門疊加時取更嚴格者 (min)：暗夜閘門已封頂 12 分的話，雨天閘門
+    (30 分封頂) 不會再放寬回去。
+    """
+    if rain_info is None:
+        result["rainGate"] = {"applied": False, "reason": "no rain data available"}
+        return result
+
+    if not rain_info.get("isRaining"):
+        result["rainGate"] = {"applied": False, "reason": "not raining", **rain_info}
+        return result
+
+    raw_score = result.get("score", 0)
+    gated_score = min(raw_score, 30)
+    if gated_score >= raw_score:
+        result["rainGate"] = {"applied": False, "reason": "already at or below rain cap", **rain_info}
+        return result
+
+    result["rainGate"] = {
+        "applied": True,
+        "reason": "raining at capture time — wet pavement / vehicle-light reflections and "
+                  "low ambient contrast are more likely to read as false warm-color signal "
+                  "than genuine afterglow",
+        "rawScoreBeforeGate": raw_score,
+        "rawLevelBeforeGate": result.get("level"),
+        **rain_info
+    }
+    result["score"] = gated_score
+    level, badge = classify_score(gated_score)
+    result["level"] = level
+    result["badge"] = f"{badge} (雨天反光判定)"
+    return result
+
+
+def classify_score(score):
+    """依既有 5 級門檻分類分數，供主流程與各閘門共用，避免各處各自硬編門檻值。"""
+    if score >= 82:
+        return "EPIC", "史詩級爆發"
+    elif score >= 68:
+        return "GREAT", "壯麗火燒雲"
+    elif score >= 48:
+        return "MODERATE", "局部微霞"
+    elif score >= 30:
+        return "FAINT", "平淡暮光"
+    else:
+        return "OVERCAST", "陰沉沉寂"
+
+
+def analyze_image_optics(image_path, capture_time=None, twilight_window=None, rain_series=None, station_coords=None):
     """分析天空區域的火燒雲光學特徵"""
     if not os.path.exists(image_path) or Image is None:
         return {
@@ -215,23 +334,7 @@ def analyze_image_optics(image_path, capture_time=None, twilight_window=None):
 
         raw_score = coverage_score + saturation_score + vivid_bonus
         final_score = int(np.clip(np.round(raw_score), 5, 100))
-
-        # 評定等級
-        if final_score >= 82:
-            level = "EPIC"
-            badge = "史詩級爆發"
-        elif final_score >= 68:
-            level = "GREAT"
-            badge = "壯麗火燒雲"
-        elif final_score >= 48:
-            level = "MODERATE"
-            badge = "局部微霞"
-        elif final_score >= 30:
-            level = "FAINT"
-            badge = "平淡暮光"
-        else:
-            level = "OVERCAST"
-            badge = "陰沉沉寂"
+        level, badge = classify_score(final_score)
 
         result = {
             "score": final_score,
@@ -243,7 +346,23 @@ def analyze_image_optics(image_path, capture_time=None, twilight_window=None):
             "avg_brightness_pct": round(avg_warm_brightness * 100, 1),
             "is_simulated": False
         }
-        return apply_night_gate(result, capture_time, twilight_window)
+        result = apply_night_gate(result, capture_time, twilight_window)
+
+        if capture_time is not None:
+            coords = station_coords
+            if coords is None:
+                local = capture_time.astimezone(TAIPEI_TZ)
+                session = "sunrise" if local.hour < 12 else "sunset"
+                coords = DEFAULT_STATION_COORDS_BY_SESSION.get(session)
+            series = rain_series
+            if series is None and coords is not None:
+                series = fetch_hourly_weather_series(coords["lat"], coords["lng"])
+            rain_info = lookup_rain_at(series, capture_time)
+            result = apply_rain_gate(result, rain_info)
+        else:
+            result["rainGate"] = {"applied": False, "reason": "no capture_time provided"}
+
+        return result
 
     except Exception as e:
         print(f"光學分析失敗: {e}", file=sys.stderr)

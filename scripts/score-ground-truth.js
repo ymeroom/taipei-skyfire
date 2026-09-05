@@ -110,6 +110,7 @@ function runGroundTruthScoring(targetDateStr = '', inputSession = '', options = 
     chromaticPurity: opticalResult.chromatic_purity,
     skyCoveragePct: opticalResult.sky_coverage_pct,
     nightGate: opticalResult.nightGate || null,
+    rainGate: opticalResult.rainGate || null,
     verifiedAt: new Date().toISOString(),
     engine: 'Optical Chromatic Histogram Analysis (CIELAB/HSV)',
     isSimulated: false

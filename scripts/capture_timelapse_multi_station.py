@@ -42,23 +42,35 @@ if sys.platform == 'win32':
 
 REPO_ROOT = os.path.join(os.path.dirname(__file__), "..")
 sys.path.insert(0, os.path.dirname(__file__))
-from analyze_sky_ground_truth import analyze_image_optics, get_twilight_window  # noqa: E402
+from analyze_sky_ground_truth import (  # noqa: E402
+    analyze_image_optics,
+    get_twilight_window,
+    fetch_hourly_weather_series,
+)
 
 OFFSETS_MIN = [-40, -30, -20, -10, 0, 10, 20, 30, 40]
 
 # 站點沿用 capture_standard_stations.py 已驗證可直播的頻道 ID，
 # 僅保留使用者指定的 7 站 (排除該檔案裡多出的「八里左岸」)。
+# lat/lng 取自 js/spots-data.js 同名機位，供雨天閘門查詢當地降雨用。
 SUNRISE_STATIONS = [
-    {"id": "waimushan", "name": "外木山", "url": "https://www.youtube.com/watch?v=A9pluEagLD4"},
-    {"id": "hongludi", "name": "烘爐地", "url": "https://www.youtube.com/watch?v=xxMRjVwCQ3o"},
+    {"id": "waimushan", "name": "外木山", "url": "https://www.youtube.com/watch?v=A9pluEagLD4",
+     "lat": 25.17594381403899, "lng": 121.70593771941236},
+    {"id": "hongludi", "name": "烘爐地", "url": "https://www.youtube.com/watch?v=xxMRjVwCQ3o",
+     "lat": 24.972013872318254, "lng": 121.4976771944775},
 ]
 
 SUNSET_STATIONS = [
-    {"id": "xiangshan", "name": "101大樓", "url": "https://www.youtube.com/watch?v=z_fY1pj1VBw"},
-    {"id": "dadaocheng", "name": "大稻埕", "url": "https://www.youtube.com/watch?v=Ndo_8RuefH4"},
-    {"id": "tamsui", "name": "淡水漁人碼頭", "url": "https://www.youtube.com/watch?v=xwAWSh35uuw"},
-    {"id": "jiufen", "name": "九份", "url": "https://www.youtube.com/watch?v=XSD5ptYisw8"},
-    {"id": "maokong", "name": "貓空", "url": "https://www.youtube.com/watch?v=215ahZ_0rTg"},
+    {"id": "xiangshan", "name": "101大樓", "url": "https://www.youtube.com/watch?v=z_fY1pj1VBw",
+     "lat": 25.029049882166394, "lng": 121.57276615548665},
+    {"id": "dadaocheng", "name": "大稻埕", "url": "https://www.youtube.com/watch?v=Ndo_8RuefH4",
+     "lat": 25.057045046459375, "lng": 121.50771810454582},
+    {"id": "tamsui", "name": "淡水漁人碼頭", "url": "https://www.youtube.com/watch?v=xwAWSh35uuw",
+     "lat": 25.18325188330396, "lng": 121.41209767613158},
+    {"id": "jiufen", "name": "九份", "url": "https://www.youtube.com/watch?v=XSD5ptYisw8",
+     "lat": 25.110048954642046, "lng": 121.83829071730524},
+    {"id": "maokong", "name": "貓空", "url": "https://www.youtube.com/watch?v=215ahZ_0rTg",
+     "lat": 24.98421427814147, "lng": 121.58655991120213},
 ]
 
 
@@ -147,6 +159,11 @@ def offset_label(offset_min):
 def run_station(station, anchor_utc, now_utc, out_dir, twilight_window):
     print(f"  📡 {station['name']} ({station['id']})")
     frames = []
+
+    rain_series = None
+    if "lat" in station and "lng" in station:
+        rain_series = fetch_hourly_weather_series(station["lat"], station["lng"])
+
     try:
         latest_sq, dur, latest_url = fetch_stream_manifest(station["url"])
     except Exception as e:
@@ -172,9 +189,20 @@ def run_station(station, anchor_utc, now_utc, out_dir, twilight_window):
 
         try:
             capture_frame_at(latest_url, latest_sq, dur, seconds_ago, out_jpg)
-            optics = analyze_image_optics(out_jpg, capture_time=target_dt, twilight_window=twilight_window)
-            gated = optics.get("nightGate", {}).get("applied")
-            tag = " 🌙 暗夜閘門已套用" if gated else ""
+            optics = analyze_image_optics(
+                out_jpg,
+                capture_time=target_dt,
+                twilight_window=twilight_window,
+                rain_series=rain_series,
+                station_coords={"lat": station["lat"], "lng": station["lng"]} if "lat" in station else None
+            )
+            night_gated = optics.get("nightGate", {}).get("applied")
+            rain_gated = optics.get("rainGate", {}).get("applied")
+            tag = ""
+            if night_gated:
+                tag += " 🌙 暗夜閘門已套用"
+            if rain_gated:
+                tag += " 🌧️ 雨天閘門已套用"
             print(f"    ✅ {label}: score={optics['score']} ({optics.get('level')}){tag}")
             frames.append({
                 "offsetMin": offset_min,
@@ -221,13 +249,18 @@ def build_html_report(report, html_path):
             if fr.get("ok"):
                 uri = img_data_uri(fr["imagePath"])
                 score = fr.get("score")
-                gate = fr.get("nightGate") or {}
-                gated = gate.get("applied")
+                night_gate = fr.get("nightGate") or {}
+                rain_gate = fr.get("rainGate") or {}
+                night_gated = night_gate.get("applied")
+                rain_gated = rain_gate.get("applied")
+                gated = night_gated or rain_gated
                 chart_pts.append(score if score is not None else 0)
-                gate_note = (
-                    f'<div class="cell-gate" title="原始分數 {gate.get("rawScoreBeforeGate")}">🌙 暗夜閘門 (原 {gate.get("rawScoreBeforeGate")})</div>'
-                    if gated else ""
-                )
+                gate_notes = []
+                if night_gated:
+                    gate_notes.append(f'<div class="cell-gate" title="原始分數 {night_gate.get("rawScoreBeforeGate")}">🌙 暗夜閘門 (原 {night_gate.get("rawScoreBeforeGate")})</div>')
+                if rain_gated:
+                    gate_notes.append(f'<div class="cell-gate" title="降雨量 {rain_gate.get("precipitationMm")}mm">🌧️ 雨天閘門 (原 {rain_gate.get("rawScoreBeforeGate")})</div>')
+                gate_note = "".join(gate_notes)
                 cells.append(f'''
                 <div class="cell{' cell-gated' if gated else ''}">
                   <div class="thumb"><img src="{uri}" loading="lazy" alt="{st['name']} {label}"></div>
