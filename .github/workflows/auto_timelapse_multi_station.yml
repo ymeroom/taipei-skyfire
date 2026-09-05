@@ -1,0 +1,76 @@
+name: Auto Multi-Station Timelapse Capture
+
+# ⚠️ 安全性：本 repo 為 PUBLIC，且本 workflow 在自架 runner (個人電腦) 上執行。
+# 絕對不要為本 workflow 加上 pull_request 觸發 —— 任何人 fork 後開 PR 就能在
+# 你的機器上執行任意程式碼。僅有 schedule 與 workflow_dispatch，後者需要
+# repo 寫入權限，外部人士無法觸發。
+on:
+  schedule:
+    # 日出 T-40 ~ T+40 全部窗口關閉後補跑 (台灣時間約 06:30，涵蓋外木山/烘爐地)
+    - cron: '30 22 * * *'
+    # 日落 T-40 ~ T+40 全部窗口關閉後補跑 (台灣時間約 19:00，涵蓋 101大樓/大稻埕/淡水漁人碼頭/九份/貓空)
+    - cron: '0 11 * * *'
+  workflow_dispatch:
+    inputs:
+      session:
+        description: '縮時時段 (sunset 或 sunrise)'
+        required: true
+        default: 'sunset'
+        type: choice
+        options:
+          - sunset
+          - sunrise
+
+permissions:
+  contents: read
+
+jobs:
+  multi-station-timelapse:
+    # 僅供自架 runner 使用：需要住宅 IP 通過 YouTube bot check 才能靠 DVR
+    # sq 回溯抓到 9 張歷史影格。GitHub 託管 runner 會全數擷取失敗，故強制指定。
+    runs-on: ${{ vars.CAPTURE_RUNNER || 'self-hosted' }}
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+    env:
+      TZ: Asia/Taipei
+
+    steps:
+      - name: 📥 檢出程式碼庫 (Checkout)
+        uses: actions/checkout@v5
+
+      - name: 🔧 補上 Git Bash 路徑 (自架 Windows runner)
+        if: runner.os == 'Windows'
+        shell: cmd
+        run: echo C:\Program Files\Git\bin>>"%GITHUB_PATH%"
+
+      - name: 🌅 解析本次縮時時段
+        id: session
+        env:
+          MANUAL_SESSION: ${{ inputs.session }}
+          EVENT_SCHEDULE: ${{ github.event.schedule }}
+        run: |
+          if [ -n "$MANUAL_SESSION" ]; then
+            SESSION="$MANUAL_SESSION"
+          elif [ "$EVENT_SCHEDULE" = "30 22 * * *" ]; then
+            SESSION="sunrise"
+          else
+            SESSION="sunset"
+          fi
+          echo "value=$SESSION" >> "$GITHUB_OUTPUT"
+          echo "Resolved timelapse session: $SESSION"
+
+      - name: 🐍 解析 Python 執行檔
+        run: |
+          if command -v python3 >/dev/null 2>&1; then PY=python3; else PY=python; fi
+          echo "PYTHON_BIN=$PY" >> "$GITHUB_ENV"
+          echo "使用 $PY: $($PY --version 2>&1)"
+
+      - name: 🎞️ 執行多機位縮時擷取 (T-40 ~ T+40，每 10 分鐘一張)
+        run: |
+          "$PYTHON_BIN" scripts/capture_timelapse_multi_station.py "${{ steps.session.outputs.value }}"
+
+      # 產出寫入 data/timelapse/ (已加入 .gitignore)，只留在本機供人工檢視，
+      # 不進版控、不 commit/push —— 與 auto_validate_capture.yml 的正式驗證
+      # 管線完全分開，互不影響。
