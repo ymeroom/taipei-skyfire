@@ -22,9 +22,9 @@
       "width": 640,
       "height": 360,
       "fileName": "2026-09-05-sunrise.jpg",
-      "sha256": "1b81d4b936b12e2fc273555adf0fc8c39af735120980c65afba9d4228cff3118",
-      "capturedAt": "2026-09-04T23:09:19.716Z",
-      "offsetMinutes": 92,
+      "sha256": "cd6436a64caa2ee919e159587adac361a39bffde1b9f09fc8328107cb3c7fd88",
+      "capturedAt": "2026-09-05T05:07:14.826Z",
+      "offsetMinutes": 450,
       "kind": "youtube-live-frame",
       "fidelity": "exact",
       "posterQuality": null,
@@ -41,7 +41,7 @@
       "errorAbsolute": 10,
       "verdict": "SLIGHT_DEVIATION",
       "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-      "chromaticPurity": 32.5,
+      "chromaticPurity": 32.6,
       "skyCoveragePct": 0,
       "nightGate": {
         "applied": false,
@@ -49,7 +49,14 @@
         "windowStart": "2026-09-04T21:14:18.995000+00:00",
         "windowEnd": "2026-09-04T22:07:47.146000+00:00"
       },
-      "verifiedAt": "2026-09-04T23:09:26.803Z",
+      "rainGate": {
+        "applied": false,
+        "reason": "already at or below rain cap",
+        "isRaining": true,
+        "precipitationMm": 0.3,
+        "weatherCode": 51
+      },
+      "verifiedAt": "2026-09-05T05:07:28.961Z",
       "engine": "Optical Chromatic Histogram Analysis (CIELAB/HSV)",
       "isSimulated": false
     }
