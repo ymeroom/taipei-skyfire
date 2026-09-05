@@ -1,7 +1,7 @@
 {
-  "date": "2026-09-05",
+  "date": "2026-09-06",
   "session": "sunrise",
-  "lockedAt": "2026-09-04T18:33:56.255Z",
+  "lockedAt": "2026-09-05T17:40:53.632Z",
   "skyfire": {
     "score": 5,
     "rating": {
@@ -14,33 +14,33 @@
       "bgGradient": "linear-gradient(135deg, rgba(90,98,117,0.2) 0%, rgba(57,65,80,0.1) 100%)"
     },
     "metrics": {
-      "cloudQualityScore": 33,
-      "lowCloudPenalty": 52,
+      "cloudQualityScore": 6,
+      "lowCloudPenalty": 53,
       "horizonScore": 0,
-      "visibilityScore": 1,
+      "visibilityScore": 2,
       "horizonClearance": 0,
-      "visKm": 1.2
+      "visKm": 3
     },
     "diagnostics": [
       {
-        "label": "高空卷雲天幕 (6,000m+)",
-        "status": "optimal",
-        "desc": "高雲量達 68%，呈現完美的天然反射天幕，極利於接收低仰角紅光。"
+        "label": "高空卷雲 (6,000m+)",
+        "status": "low",
+        "desc": "高雲量僅 2%，上方缺少大面積紅色漫射反光板。"
       },
       {
         "label": "中空雲層 (2,000-6,000m)",
-        "status": "low",
-        "desc": "中雲量稀疏 (24%)，雲彩層次感較為單純。"
+        "status": "fair",
+        "desc": "中雲量厚實 (100%)，層次豐富但需留意下方陰影。"
       },
       {
         "label": "遠方東方（太平洋/宜蘭外海）透光窗",
         "status": "bad",
-        "desc": "低雲遮蔽高達 98%，厚雲層恐阻斷地平線入射光，投下暗灰色陰影。"
+        "desc": "低雲遮蔽高達 100%，厚雲層恐阻斷地平線入射光，投下暗灰色陰影。"
       },
       {
         "label": "大氣能見度與通透度",
         "status": "bad",
-        "desc": "能見度受限（1.18 公里），霧霾或水氣可能使天色偏灰白。"
+        "desc": "能見度受限（2.96 公里），霧霾或水氣可能使天色偏灰白。"
       }
     ],
     "photoTips": {
