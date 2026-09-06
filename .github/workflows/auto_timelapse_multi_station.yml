@@ -35,6 +35,9 @@ jobs:
         shell: bash
     env:
       TZ: Asia/Taipei
+      # checkout 目錄「之外」的產出路徑。放在 workspace 內的話，下一個在同一台
+      # 自架 runner 上跑的 workflow 其 actions/checkout `git clean -ffdx` 會清掉。
+      SKYFIRE_TIMELAPSE_DIR: C:/skyfire-timelapse
 
     steps:
       - name: 📥 檢出程式碼庫 (Checkout)
@@ -68,9 +71,27 @@ jobs:
           echo "使用 $PY: $($PY --version 2>&1)"
 
       - name: 🎞️ 執行多機位縮時擷取 (T-40 ~ T+40，每 10 分鐘一張)
+        id: capture
         run: |
           "$PYTHON_BIN" scripts/capture_timelapse_multi_station.py "${{ steps.session.outputs.value }}"
 
-      # 產出寫入 data/timelapse/ (已加入 .gitignore)，只留在本機供人工檢視，
-      # 不進版控、不 commit/push —— 與 auto_validate_capture.yml 的正式驗證
-      # 管線完全分開，互不影響。
+      # 產出在 $SKYFIRE_TIMELAPSE_DIR (checkout 之外)，git clean 碰不到，可長期
+      # 留在自架 runner 本機供人工檢視。以下兩步再複製一份到 workspace 並上傳成
+      # workflow artifact，讓沒登入該台電腦時也能從 GitHub 下載。腳本自身會修剪
+      # 超過 14 天的舊資料夾。與 auto_validate_capture.yml 的正式驗證管線互不影響。
+      - name: 📦 複製產出到 workspace 供上傳
+        id: stage
+        run: |
+          STAGE="$GITHUB_WORKSPACE/_timelapse_artifact"
+          rm -rf "$STAGE"
+          mkdir -p "$STAGE"
+          cp -r "${{ steps.capture.outputs.bundle_dir }}/." "$STAGE/"
+          echo "dir=$STAGE" >> "$GITHUB_OUTPUT"
+
+      - name: ☁️ 上傳縮時產出為 workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: timelapse-${{ steps.session.outputs.value }}-${{ github.run_id }}
+          path: ${{ steps.stage.outputs.dir }}
+          if-no-files-found: error
+          retention-days: 14

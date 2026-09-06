@@ -14,10 +14,14 @@ capture_timelapse_multi_station.py
 在直播 DVR 緩衝範圍內）執行一次，靠 yt-dlp 抓到的 m3u8 用 /sq/<n>/ 序號往回抓
 9 個不同時間點的切片，一次 yt-dlp -J 呼叫打完 9 張，不必真的等 80 分鐘。
 
-輸出:
-  data/timelapse/<date>-<session>/<station>-t±NN.jpg   (原始影格，本機用，不進 git)
-  data/timelapse/<date>-<session>.json                 (結構化評分資料)
-  data/timelapse/<date>-<session>-report.html          (單檔 HTML 報告，圖片皆內嵌 base64)
+輸出 (單一資料夾，可整包搬移 / 上傳成 CI artifact):
+  <base>/<date>-<session>/<station>-t±NN.jpg            (原始影格)
+  <base>/<date>-<session>/<date>-<session>.json         (結構化評分資料)
+  <base>/<date>-<session>/<date>-<session>-report.html  (單檔 HTML 報告，圖片皆內嵌 base64)
+
+  <base> 預設 = data/timelapse/ (本機檢視用、不進 git)。CI 以環境變數
+  SKYFIRE_TIMELAPSE_DIR 覆寫成 checkout 目錄「之外」的位置，否則下一個在同一台
+  自架 runner 上跑的 workflow 其 actions/checkout `git clean -ffdx` 會把產出清掉。
 
 用法:
   python scripts/capture_timelapse_multi_station.py sunrise [YYYY-MM-DD]
@@ -29,8 +33,10 @@ import datetime
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
+import time
 import urllib.request
 
 if sys.platform == 'win32':
@@ -40,7 +46,7 @@ if sys.platform == 'win32':
     except Exception:
         pass
 
-REPO_ROOT = os.path.join(os.path.dirname(__file__), "..")
+REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, os.path.dirname(__file__))
 from analyze_sky_ground_truth import (  # noqa: E402
     analyze_image_optics,
@@ -49,6 +55,41 @@ from analyze_sky_ground_truth import (  # noqa: E402
 )
 
 OFFSETS_MIN = [-40, -30, -20, -10, 0, 10, 20, 30, 40]
+
+# 縮時產出根目錄。預設寫進 repo 內的 data/timelapse/（本機手動檢視、已 .gitignore）；
+# CI 用 SKYFIRE_TIMELAPSE_DIR 覆寫成 checkout 目錄外的路徑。詳見檔頭 docstring。
+BUNDLE_RETENTION_DAYS = 14
+
+
+def output_base_dir():
+    env_dir = os.environ.get("SKYFIRE_TIMELAPSE_DIR", "").strip()
+    return os.path.abspath(env_dir) if env_dir else os.path.join(REPO_ROOT, "data", "timelapse")
+
+
+def prune_old_bundles(base_dir, keep_days=BUNDLE_RETENTION_DAYS):
+    """刪除 base_dir 下超過 keep_days 天沒更新的 <date>-<session> 資料夾。
+
+    產出搬到 checkout 之外後就沒有 actions/checkout 的 `git clean` 幫忙回收，
+    改由本函式自行修剪，避免自架 runner 磁碟被歷史報告（base64 內嵌，單檔可達
+    1-2 MB）長期堆積。
+    """
+    cutoff = time.time() - keep_days * 86400
+    try:
+        names = os.listdir(base_dir)
+    except FileNotFoundError:
+        return
+    removed = 0
+    for name in names:
+        path = os.path.join(base_dir, name)
+        if not os.path.isdir(path):
+            continue
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}-(sunrise|sunset)", name):
+            continue
+        if os.path.getmtime(path) < cutoff:
+            shutil.rmtree(path, ignore_errors=True)
+            removed += 1
+    if removed:
+        print(f"    🧹 已清除 {removed} 個超過 {keep_days} 天的舊縮時資料夾")
 
 # 站點沿用 capture_standard_stations.py 已驗證可直播的頻道 ID，
 # 僅保留使用者指定的 7 站 (排除該檔案裡多出的「八里左岸」)。
@@ -208,7 +249,7 @@ def run_station(station, anchor_utc, now_utc, out_dir, twilight_window):
                 "offsetMin": offset_min,
                 "ok": True,
                 "capturedAtUtc": target_dt.isoformat(),
-                "imagePath": os.path.relpath(out_jpg, REPO_ROOT).replace("\\", "/"),
+                "imagePath": os.path.relpath(out_jpg, out_dir).replace("\\", "/"),
                 **optics
             })
         except Exception as e:
@@ -219,13 +260,13 @@ def run_station(station, anchor_utc, now_utc, out_dir, twilight_window):
 
 
 def build_html_report(report, html_path):
+    report_dir = os.path.dirname(os.path.abspath(html_path))
+
     def img_data_uri(rel_path):
-        abs_path = os.path.join(REPO_ROOT, rel_path)
-        try:
-            with open(abs_path, "rb") as f:
-                return "data:image/jpeg;base64," + base64.b64encode(f.read()).decode("ascii")
-        except Exception:
-            return ""
+        # 影格與報告同一資料夾；讀不到就讓它炸，不要默默產出一堆空 <img>
+        abs_path = os.path.join(report_dir, rel_path)
+        with open(abs_path, "rb") as f:
+            return "data:image/jpeg;base64," + base64.b64encode(f.read()).decode("ascii")
 
     session_label = "日出" if report["session"] == "sunrise" else "日落"
     accent = "#f0b93d" if report["session"] == "sunrise" else "#e0592c"
@@ -392,8 +433,10 @@ def run(session, date_str=None):
     print(f"    錨點 T = {anchor_local.strftime('%Y-%m-%d %H:%M:%S')} (台北時間)")
     print(f"    暗夜閘門窗口 = {window_start_local.strftime('%H:%M:%S')} ~ {window_end_local.strftime('%H:%M:%S')} (台北時間)，窗外強制低分")
 
-    out_dir = os.path.join(REPO_ROOT, "data", "timelapse", f"{date_str}-{session}")
+    base_dir = output_base_dir()
+    out_dir = os.path.join(base_dir, f"{date_str}-{session}")
     os.makedirs(out_dir, exist_ok=True)
+    print(f"    產出目錄 = {out_dir}")
 
     report = {
         "date": date_str,
@@ -409,17 +452,28 @@ def run(session, date_str=None):
         frames = run_station(station, anchor_utc, now_utc, out_dir, twilight_window)
         report["stations"].append({"id": station["id"], "name": station["name"], "frames": frames})
 
-    reports_dir = os.path.join(REPO_ROOT, "data", "timelapse")
-    json_path = os.path.join(reports_dir, f"{date_str}-{session}.json")
+    json_path = os.path.join(out_dir, f"{date_str}-{session}.json")
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
 
-    html_path = os.path.join(reports_dir, f"{date_str}-{session}-report.html")
+    html_path = os.path.join(out_dir, f"{date_str}-{session}-report.html")
     build_html_report(report, html_path)
+
+    prune_old_bundles(base_dir)
 
     total = sum(len(s["frames"]) for s in report["stations"])
     ok = sum(1 for s in report["stations"] for fr in s["frames"] if fr.get("ok"))
     print(f"=== ✅ 完成 {ok}/{total} 張。報告: {html_path} ===")
+
+    # 供 CI 接手上傳 (auto_timelapse_multi_station.yml 的 upload-artifact 步驟)。
+    # 用 GITHUB_OUTPUT 而非在 YAML 重算日期 —— 排程可能延遲數小時而跨越台北午夜。
+    bundle_fwd = out_dir.replace("\\", "/")
+    print(f"BUNDLE_DIR={bundle_fwd}")
+    gh_output = os.environ.get("GITHUB_OUTPUT")
+    if gh_output:
+        with open(gh_output, "a", encoding="utf-8") as f:
+            f.write(f"bundle_dir={bundle_fwd}\n")
+
     return report
 
 

@@ -7,5 +7,6 @@ node_modules/
 __pycache__/
 *.pyc
 
-# 多機位縮時擷取本機產出 (影格+報告)，資料量大且僅供本機查看，不進版控
+# 多機位縮時擷取的本機產出 (影格+報告)。CI 改寫到 $SKYFIRE_TIMELAPSE_DIR
+# (checkout 外) 並上傳成 artifact；這裡只擋本機手動執行時的預設輸出目錄。
 data/timelapse/
