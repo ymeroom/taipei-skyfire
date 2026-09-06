@@ -1,5 +1,67 @@
 [
   {
+    "id": "rec-2026-09-06-sunset",
+    "date": "2026-09-06",
+    "session": "sunset",
+    "targetTime": "2026-09-06T10:09:36.923Z",
+    "source": "大稻埕碼頭（4K 官方即時影像）",
+    "prediction": {
+      "score": 5,
+      "rating": "陰沉沉寂",
+      "color": "#5A6275",
+      "highCloud": 0,
+      "midCloud": 0,
+      "lowCloud": 0,
+      "horizonClearance": 0,
+      "visibilityKm": 4.1,
+      "isSimulated": false,
+      "lockedAt": "2026-09-06T12:15:51.031Z"
+    },
+    "snapshotUrl": "data/snapshots/2026-09-06-sunset.jpg",
+    "capture": {
+      "width": 640,
+      "height": 360,
+      "fileName": "2026-09-06-sunset.jpg",
+      "sha256": "76abde3db9a482b8f65fe7ca442801f49e0d6945dacaf03597d8640c271c2235",
+      "capturedAt": "2026-09-06T13:49:31.404Z",
+      "offsetMinutes": 220,
+      "kind": "youtube-live-frame",
+      "fidelity": "exact",
+      "posterQuality": null,
+      "fallbackReason": null,
+      "validated": true
+    },
+    "verification": {
+      "captureFidelity": "exact",
+      "captureKind": "youtube-live-frame",
+      "status": "verified_completed",
+      "groundTruthScore": 23,
+      "groundTruthBadge": "陰沉沉寂",
+      "groundTruthLevel": "OVERCAST",
+      "errorAbsolute": 18,
+      "verdict": "SLIGHT_DEVIATION",
+      "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "chromaticPurity": 42.5,
+      "skyCoveragePct": 2.4,
+      "nightGate": {
+        "applied": false,
+        "reason": "within twilight window",
+        "windowStart": "2026-09-06T09:39:16.864000+00:00",
+        "windowEnd": "2026-09-06T10:32:42.018000+00:00"
+      },
+      "rainGate": {
+        "applied": false,
+        "reason": "already at or below rain cap",
+        "isRaining": true,
+        "precipitationMm": 1.3,
+        "weatherCode": 80
+      },
+      "verifiedAt": "2026-09-06T13:49:49.079Z",
+      "engine": "Optical Chromatic Histogram Analysis (CIELAB/HSV)",
+      "isSimulated": false
+    }
+  },
+  {
     "id": "rec-2026-09-06-sunrise",
     "date": "2026-09-06",
     "session": "sunrise",
