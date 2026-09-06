@@ -1,12 +1,12 @@
 {
   "version": "2.5.1-adaptive",
   "lastCalibratedAt": "2026-08-17T14:40:00+08:00",
-  "calibrationCount": 4,
-  "sampleSize": 7,
+  "calibrationCount": 5,
+  "sampleSize": 17,
   "metrics": {
-    "initialMAE": 23.86,
-    "calibratedMAE": 23.0,
-    "improvementPct": 3.6
+    "initialMAE": 15.59,
+    "calibratedMAE": 15.47,
+    "improvementPct": 0.8
   },
   "weights": {
     "highCloudMax": 20.0,
@@ -14,12 +14,18 @@
     "midCloudMax": 15.0,
     "midCloudOpt": 42.0,
     "synergyBonus": 5.0,
-    "lowCloudSlope": 0.85,
+    "lowCloudSlope": 1.0,
     "horizonMax": 30.0,
     "visMax": 15.0,
     "moistureMax": 8.0
   },
   "history": [
+    {
+      "date": "2026-09-06",
+      "maeBefore": 15.59,
+      "maeAfter": 15.47,
+      "adjustment": "基於 17 場觀測紀錄微調高低雲光學權重，MAE 降低 0.12 分"
+    },
     {
       "date": "2026-08-30",
       "maeBefore": 23.86,
