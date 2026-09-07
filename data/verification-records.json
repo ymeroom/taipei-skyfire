@@ -1,5 +1,72 @@
 [
   {
+    "id": "rec-2026-09-08-sunrise",
+    "date": "2026-09-08",
+    "session": "sunrise",
+    "targetTime": "2026-09-07T21:38:31.316Z",
+    "source": "象山看台北 101（4K 官方即時影像）",
+    "prediction": {
+      "score": 43,
+      "rating": "平淡暮光",
+      "color": "#7B88A8",
+      "highCloud": 0,
+      "midCloud": 6,
+      "lowCloud": 2,
+      "totalCloud": 8,
+      "humidity": 98,
+      "precipProb": 0,
+      "horizonClearance": 84,
+      "visibilityKm": 11,
+      "isSimulated": false,
+      "lockedAt": "2026-09-07T19:23:28.640Z"
+    },
+    "snapshotUrl": "data/snapshots/2026-09-08-sunrise.jpg",
+    "capture": {
+      "width": 640,
+      "height": 360,
+      "fileName": "2026-09-08-sunrise.jpg",
+      "sha256": "94d99b890d352085c36c45b45cad00ca462964992d85ec63a7b2f36c88a9e815",
+      "capturedAt": "2026-09-07T23:38:46.875Z",
+      "frameEffectiveTimeUtc": "2026-09-07T21:38:31.316Z",
+      "offsetMinutes": 120,
+      "dvrRewindMinutes": 120,
+      "kind": "youtube-live-frame",
+      "fidelity": "exact",
+      "posterQuality": null,
+      "fallbackReason": null,
+      "validated": true
+    },
+    "verification": {
+      "captureFidelity": "exact",
+      "captureKind": "youtube-live-frame",
+      "status": "verified_completed",
+      "groundTruthScore": 18,
+      "groundTruthBadge": "陰沉沉寂",
+      "groundTruthLevel": "OVERCAST",
+      "errorAbsolute": 25,
+      "verdict": "MISMATCH",
+      "verdictBadge": "⚠️ 出現偏差需校準",
+      "chromaticPurity": 38.2,
+      "skyCoveragePct": 0.1,
+      "nightGate": {
+        "applied": false,
+        "reason": "within twilight window",
+        "windowStart": "2026-09-07T21:15:29.186000+00:00",
+        "windowEnd": "2026-09-07T22:08:48.821000+00:00"
+      },
+      "rainGate": {
+        "applied": false,
+        "reason": "not raining",
+        "isRaining": false,
+        "precipitationMm": 0,
+        "weatherCode": 0
+      },
+      "verifiedAt": "2026-09-07T23:38:57.208Z",
+      "engine": "Optical Chromatic Histogram Analysis (CIELAB/HSV)",
+      "isSimulated": false
+    }
+  },
+  {
     "id": "rec-2026-09-08-sunset",
     "date": "2026-09-08",
     "session": "sunset",
