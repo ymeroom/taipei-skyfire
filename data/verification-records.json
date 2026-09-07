@@ -14,7 +14,7 @@
       "lowCloud": 5,
       "totalCloud": 5,
       "humidity": 74,
-      "precipProb": 11,
+      "precipProb": 7,
       "horizonClearance": 87,
       "visibilityKm": 27.3,
       "isSimulated": false
@@ -24,9 +24,9 @@
       "kind": null,
       "fidelity": "none",
       "validated": false,
-      "capturedAt": "2026-09-07T16:06:22.336Z",
-      "offsetMinutes": -1081,
-      "error": "outside sunset capture window: offset -1081 minutes exceeds ±600"
+      "capturedAt": "2026-09-07T18:00:46.010Z",
+      "offsetMinutes": -967,
+      "error": "outside sunset capture window: offset -967 minutes exceeds ±600"
     },
     "verification": {
       "status": "capture_unavailable",
