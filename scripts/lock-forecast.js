@@ -45,11 +45,26 @@ async function lockForecast() {
     throw new Error('無法取得預測資料');
   }
 
+  // skyfire 物件本身不回傳雲量三頻 (只有 metrics 與文字 diagnostics)，
+  // 但日後 auto-calibrate-model.py 重算候選權重的 sim_pred 需要原始雲量輸入。
+  // 舊版驗證管線改讀 skyfire.diagnostics?.highCloud (diagnostics 是陣列 →
+  // 永遠 undefined→0)，導致每筆鎖定路徑紀錄雲量全 0、校準對噪音調參。
+  // 這裡把 WeatherService 已算好的原始氣象輸入一併鎖存為結構化欄位。
+  const w = sessionForecast.weather || {};
   const scoreData = {
     date: dateStr,
     session: sessionType,
     lockedAt: now.toISOString(),
-    skyfire: sessionForecast.skyfire
+    skyfire: sessionForecast.skyfire,
+    weather: {
+      cloudHigh: w.cloudHigh ?? null,
+      cloudMid: w.cloudMid ?? null,
+      cloudLow: w.cloudLow ?? null,
+      cloudTotal: w.cloudTotal ?? null,
+      humidity: w.humidity ?? null,
+      precipProb: w.precipProb ?? null,
+      visibilityKm: sessionForecast.skyfire.metrics?.visKm ?? null
+    }
   };
 
   const dataDir = path.join(__dirname, '../data');
