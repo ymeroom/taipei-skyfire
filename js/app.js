@@ -855,7 +855,7 @@ class SkyFireApp {
         <td><strong style="color: ${st.phasePeak && st.phasePeak.includes('🔥') ? '#f43f5e' : '#e2e8f0'};">${st.phasePeak || '--'}</strong></td>
         <td>${st.phasePost || '--'}</td>
         <td><span style="color: #ff9e00; font-weight: 700;">${st.forecast || '--'}</span></td>
-        <td><span class="report-tag-pill" style="color: #4ade80; border-color: rgba(74, 222, 128, 0.4);">${st.verdict || '🎯 驗證通過'}</span></td>
+        <td><span class="report-tag-pill" style="color: ${st.verdictColor || '#94a3b8'}; border-color: rgba(148, 163, 184, 0.4);">${st.verdict || '⏳ 待實測驗證'}</span></td>
       </tr>
     `).join('');
 
@@ -891,7 +891,7 @@ class SkyFireApp {
           <div class="report-score-unit-icon">👁️</div>
           <div class="report-score-info-box">
             <span>實況光學觀測判定</span>
-            <strong style="color: ${report.groundTruth?.color || '#4ade80'};">${report.groundTruth?.verdictBadge || '🎯 驗證命中'}</strong>
+            <strong style="color: ${report.groundTruth?.color || '#94a3b8'};">${report.groundTruth?.verdictBadge || '⏳ 待實測驗證'}</strong>
             <span style="font-size: 0.7rem; color: var(--text-muted);">多機位全時序光學觀測判定</span>
           </div>
         </div>
@@ -965,7 +965,7 @@ class SkyFireApp {
           <div class="archive-item-badges">
             ${rep.id === 'report-2026-08-27-sunset' ? '<span class="report-tag-pill" style="background: rgba(244, 63, 94, 0.25); color: #f43f5e; border-color: rgba(244, 63, 94, 0.5); font-weight: 800;">🔥 史詩大景</span>' : ''}
             <span class="report-tag-pill">${rep.publishTimeLabel}</span>
-            <span class="report-tag-pill highlight">${rep.groundTruth?.verdictBadge || '🎯 驗證通過'}</span>
+            <span class="report-tag-pill highlight">${rep.groundTruth?.verdictBadge || '⏳ 待實測驗證'}</span>
             <span style="font-size: 0.8rem; color: #ff9e00;">${isSelected ? '📖 現正展示中' : '點擊查看 ➔'}</span>
           </div>
         </div>

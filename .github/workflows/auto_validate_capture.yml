@@ -65,6 +65,15 @@ jobs:
       - name: 🧪 執行擷取與預測單元測試
         run: node tests/run-all-tests.js
 
+      # 與本檔其他步驟一致：測試掛掉不連坐整條日報管線 (見下方 2026-08-18 註解)。
+      - name: 🐍 執行日報產生器與校準守門測試
+        continue-on-error: true
+        run: |
+          if command -v python3 >/dev/null 2>&1; then PY=python3
+          elif command -v python >/dev/null 2>&1; then PY=python
+          else echo "::warning::找不到 python，跳過日報產生器測試"; exit 0; fi
+          "$PY" tests/test_daily_briefing.py || echo "::warning::日報產生器／校準守門測試未通過"
+
       - name: 🌅 解析本次天文驗證時段
         id: session
         env:

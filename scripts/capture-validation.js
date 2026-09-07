@@ -18,6 +18,38 @@ const { captureLiveFrame, capturePosterFrame } = require('./live-frame-capture.j
 
 const MAX_CAPTURE_OFFSET_MINUTES = 600; // 支援 10 小時 YouTube DVR 時光機回溯窗口
 
+/**
+ * 從提前鎖定的預測 JSON 取出「驗證與日後校準」所需的預測欄位。
+ *
+ * 雲量三頻 (highCloud/midCloud/lowCloud) 是重點：auto-calibrate-model.py 會拿
+ * 這些值重算候選權重下的 sim_pred。舊版讀 lockedData.skyfire.diagnostics?.highCloud
+ * —— diagnostics 是 [{label,status,desc}] 陣列，該存取永遠 undefined，`|| 0`
+ * 讓每筆鎖定路徑紀錄的雲量都變 0，校準因此在對噪音調參 (MAE 每次只降 ~0.1)。
+ * 現改讀 lock-forecast.js 寫入的結構化 weather 區塊；缺欄位時填 null，
+ * 讓下游 (校準) 能明確跳過而非誤用 0。
+ */
+function buildPredictionFromLock(lockedData) {
+  const w = lockedData.weather || {};
+  const m = lockedData.skyfire.metrics || {};
+  const num = v => (typeof v === 'number' && Number.isFinite(v) ? v : null);
+  const visKm = num(w.visibilityKm);
+  return {
+    score: lockedData.skyfire.score,
+    rating: lockedData.skyfire.rating.badge,
+    color: lockedData.skyfire.rating.color,
+    highCloud: num(w.cloudHigh),
+    midCloud: num(w.cloudMid),
+    lowCloud: num(w.cloudLow),
+    totalCloud: num(w.cloudTotal),
+    humidity: num(w.humidity),
+    precipProb: num(w.precipProb),
+    horizonClearance: num(m.horizonClearance),
+    visibilityKm: visKm !== null ? visKm : num(m.visKm),
+    isSimulated: false,
+    lockedAt: lockedData.lockedAt
+  };
+}
+
 function loadRecords(recordsFile) {
   if (!fs.existsSync(recordsFile)) return [];
   try {
@@ -93,19 +125,8 @@ async function runCapturePipeline(inputSession = '', options = {}) {
       const lockedData = JSON.parse(fs.readFileSync(lockFile, 'utf8'));
       if (lockedData.date === dateStr && lockedData.skyfire) {
         console.log(`[Lock Forecast] 成功讀取提前鎖定的預測分數: ${lockedData.skyfire.score}`);
-        predictionScore = lockedData.skyfire.score;
-        predictionData = {
-          score: lockedData.skyfire.score,
-          rating: lockedData.skyfire.rating.badge,
-          color: lockedData.skyfire.rating.color,
-          highCloud: lockedData.skyfire.diagnostics?.highCloud || 0,
-          midCloud: lockedData.skyfire.diagnostics?.midCloud || 0,
-          lowCloud: lockedData.skyfire.diagnostics?.lowCloud || 0,
-          horizonClearance: lockedData.skyfire.metrics.horizonClearance,
-          visibilityKm: lockedData.skyfire.metrics.visKm,
-          isSimulated: false,
-          lockedAt: lockedData.lockedAt
-        };
+        predictionData = buildPredictionFromLock(lockedData);
+        predictionScore = predictionData.score;
       }
     } catch (e) {
       console.warn('讀取鎖定預測失敗，降級為即時預測', e.message);
@@ -121,13 +142,17 @@ async function runCapturePipeline(inputSession = '', options = {}) {
     const sessionForecast = matchingDay[sessionType];
     console.log(`即時預測分數: ${sessionForecast.skyfire.score} 分 (${sessionForecast.skyfire.rating.badge})`);
     
+    const w = sessionForecast.weather || {};
     predictionData = {
       score: sessionForecast.skyfire.score,
       rating: sessionForecast.skyfire.rating.badge,
       color: sessionForecast.skyfire.rating.color,
-      highCloud: sessionForecast.weather.cloudHigh,
-      midCloud: sessionForecast.weather.cloudMid,
-      lowCloud: sessionForecast.weather.cloudLow,
+      highCloud: w.cloudHigh ?? null,
+      midCloud: w.cloudMid ?? null,
+      lowCloud: w.cloudLow ?? null,
+      totalCloud: w.cloudTotal ?? null,
+      humidity: w.humidity ?? null,
+      precipProb: w.precipProb ?? null,
       horizonClearance: sessionForecast.skyfire.metrics.horizonClearance,
       visibilityKm: sessionForecast.skyfire.metrics.visKm,
       isSimulated: forecastData.isSimulated === true
@@ -216,8 +241,14 @@ async function runCapturePipeline(inputSession = '', options = {}) {
           height: capture.height,
           fileName: snapshotFileName,
           sha256: capture.sha256,
+          // capturedAt = 腳本執行當下；frameEffectiveTimeUtc = 影格畫面實際所屬的
+          // 天文時刻 (== targetTime，DVR 已回溯至此)；offsetMinutes = 兩者之間、
+          // 亦即本次 DVR 回溯的分鐘數。三者不同義，勿混用。fidelity: 'exact' 時
+          // 影格即代表 frameEffectiveTimeUtc 當刻，不受 offsetMinutes 大小影響。
           capturedAt: capturedAt.toISOString(),
+          frameEffectiveTimeUtc: eventTime.toISOString(),
           offsetMinutes: captureWindow.offsetMinutes,
+          dvrRewindMinutes: captureWindow.offsetMinutes,
           kind: capture.kind || 'youtube-live-frame',
           fidelity: capture.fidelity || 'exact',
           posterQuality: capture.posterQuality || null,
@@ -267,6 +298,7 @@ if (require.main === module) {
 
 module.exports = {
   MAX_CAPTURE_OFFSET_MINUTES,
+  buildPredictionFromLock,
   loadRecords,
   writeRecord,
   runCapturePipeline

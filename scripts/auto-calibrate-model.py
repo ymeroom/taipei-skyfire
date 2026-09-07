@@ -88,8 +88,29 @@ def calculate_score(params, weights):
 
     return max(5, min(100, int(round(raw))))
 
+def has_usable_cloud_inputs(prediction):
+    """判斷一筆紀錄的雲量輸入是否足以重算 sim_pred。
+
+    calculate_score() 完全靠 high/mid/low 雲量三頻驅動；若三頻缺失或剛好
+    全為 0，多半是擷取管線的欄位擷取 bug (舊版誤讀 diagnostics 陣列，
+    `|| 0` 讓每筆鎖定路徑紀錄雲量全 0)，而非真實通透晴空。拿這種紀錄調參
+    等於對噪音最佳化，必須排除。
+    """
+    bands = [prediction.get(k) for k in ('highCloud', 'midCloud', 'lowCloud')]
+    if any(b is None for b in bands):
+        return False
+    # 新格式紀錄一定帶 humidity (來自結構化 weather 區塊)；舊「|| 0」bug 紀錄沒有。
+    # 三頻剛好全 0 且無此標記 → 幾乎確定是欄位擷取 bug，不是真的通透晴空。
+    if all((b or 0) == 0 for b in bands) and prediction.get('humidity') is None:
+        return False
+    return True
+
+
 def evaluate_mae(dataset, weights):
-    """計算指定權重在觀測數據集上的平均絕對誤差 (MAE)"""
+    """計算指定權重在觀測數據集上的平均絕對誤差 (MAE)。
+
+    dataset 已在呼叫端過濾為「雲量輸入可用」的紀錄。
+    """
     errors = []
     for item in dataset:
         p = item['prediction']
@@ -116,13 +137,19 @@ def run_calibration(records_path, params_path):
         records = json.load(f)
 
     # 篩選已完成驗證之紀錄
-    verified_records = [r for r in records if r.get('verification', {}).get('groundTruthScore') is not None]
-    n_samples = len(verified_records)
+    ground_truthed = [r for r in records if r.get('verification', {}).get('groundTruthScore') is not None]
 
-    print(f"📊 載入已驗證出景場次樣本數: {n_samples} 場")
+    # 再排除雲量輸入不可用者 —— calculate_score 全靠雲量三頻驅動，
+    # 輸入是壞的就無法重算候選權重的 sim_pred (見 has_usable_cloud_inputs)。
+    verified_records = [r for r in ground_truthed if has_usable_cloud_inputs(r.get('prediction', {}))]
+    n_samples = len(verified_records)
+    n_excluded = len(ground_truthed) - n_samples
+
+    print(f"📊 已驗證出景場次: {len(ground_truthed)} 場；雲量輸入可用: {n_samples} 場", end="")
+    print(f"（排除 {n_excluded} 場雲量輸入缺失／全 0）" if n_excluded else "")
 
     if n_samples < 2:
-        print("ℹ️ 樣本數不足 2 場，維持當前基礎權重。")
+        print("ℹ️ 可用樣本不足 2 場，維持當前基礎權重。")
         return
 
     # 載入當前參數
