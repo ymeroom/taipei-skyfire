@@ -1,46 +1,46 @@
 {
-  "date": "2026-09-06",
+  "date": "2026-09-07",
   "session": "sunset",
-  "lockedAt": "2026-09-06T12:15:51.031Z",
+  "lockedAt": "2026-09-07T14:22:47.265Z",
   "skyfire": {
-    "score": 5,
+    "score": 35,
     "rating": {
-      "level": "OVERCAST",
-      "badge": "陰沉沉寂",
-      "icon": "☁️",
-      "color": "#5A6275",
-      "secondaryColor": "#394150",
-      "summary": "厚重低雲覆蓋天際或有陣雨，天色灰暗難見彩霞。",
-      "bgGradient": "linear-gradient(135deg, rgba(90,98,117,0.2) 0%, rgba(57,65,80,0.1) 100%)"
+      "level": "FAINT",
+      "badge": "平淡暮光",
+      "icon": "🌤️",
+      "color": "#7B88A8",
+      "secondaryColor": "#A0AEC0",
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
+      "bgGradient": "linear-gradient(135deg, rgba(123,136,168,0.2) 0%, rgba(160,174,192,0.1) 100%)"
     },
     "metrics": {
-      "cloudQualityScore": 24,
-      "lowCloudPenalty": 52,
-      "horizonScore": 0,
-      "visibilityScore": 3,
-      "horizonClearance": 0,
-      "visKm": 4.1
+      "cloudQualityScore": 1,
+      "lowCloudPenalty": 0,
+      "horizonScore": 15,
+      "visibilityScore": 15,
+      "horizonClearance": 50,
+      "visKm": 27.9
     },
     "diagnostics": [
       {
         "label": "高空卷雲 (6,000m+)",
         "status": "low",
-        "desc": "高雲量僅 7%，上方缺少大面積紅色漫射反光板。"
+        "desc": "高雲量僅 0%，上方缺少大面積紅色漫射反光板。"
       },
       {
         "label": "中空雲層 (2,000-6,000m)",
-        "status": "fair",
-        "desc": "中雲量厚實 (67%)，層次豐富但需留意下方陰影。"
+        "status": "low",
+        "desc": "中雲量稀疏 (2%)，雲彩層次感較為單純。"
       },
       {
         "label": "遠方西方（台灣海峽/海平面）透光窗",
-        "status": "bad",
-        "desc": "低雲遮蔽高達 98%，厚雲層恐阻斷地平線入射光，投下暗灰色陰影。"
+        "status": "fair",
+        "desc": "低雲量約 0%，地平線具有部分透光縫隙，呈現局部霞光。"
       },
       {
         "label": "大氣能見度與通透度",
-        "status": "bad",
-        "desc": "能見度受限（4.14 公里），霧霾或水氣可能使天色偏灰白。"
+        "status": "optimal",
+        "desc": "能見度優異（27.86 公里），大氣清澈通透，晚霞色彩飽和純淨。"
       }
     ],
     "photoTips": {
@@ -51,5 +51,14 @@
       "lens": "廣角至中望遠，適合捕捉台北夜景、橋樑車軌與建築點燈",
       "mobileTip": "切換至手機「夜景模式 (Night Mode)」，藉由多幀降噪紀錄城市藍調夜景。"
     }
+  },
+  "weather": {
+    "cloudHigh": 0,
+    "cloudMid": 2,
+    "cloudLow": 0,
+    "cloudTotal": 2,
+    "humidity": 70,
+    "precipProb": 0,
+    "visibilityKm": 27.9
   }
 }
