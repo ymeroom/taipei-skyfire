@@ -1,7 +1,7 @@
 {
-  "date": "2026-09-07",
+  "date": "2026-09-08",
   "session": "sunset",
-  "lockedAt": "2026-09-07T14:22:47.265Z",
+  "lockedAt": "2026-09-08T13:00:02.865Z",
   "skyfire": {
     "score": 35,
     "rating": {
@@ -14,12 +14,12 @@
       "bgGradient": "linear-gradient(135deg, rgba(123,136,168,0.2) 0%, rgba(160,174,192,0.1) 100%)"
     },
     "metrics": {
-      "cloudQualityScore": 1,
+      "cloudQualityScore": 2,
       "lowCloudPenalty": 0,
-      "horizonScore": 15,
+      "horizonScore": 26,
       "visibilityScore": 15,
-      "horizonClearance": 50,
-      "visKm": 27.9
+      "horizonClearance": 85,
+      "visKm": 25
     },
     "diagnostics": [
       {
@@ -30,17 +30,17 @@
       {
         "label": "中空雲層 (2,000-6,000m)",
         "status": "low",
-        "desc": "中雲量稀疏 (2%)，雲彩層次感較為單純。"
+        "desc": "中雲量稀疏 (3%)，雲彩層次感較為單純。"
       },
       {
         "label": "遠方西方（台灣海峽/海平面）透光窗",
-        "status": "fair",
-        "desc": "低雲量約 0%，地平線具有部分透光縫隙，呈現局部霞光。"
+        "status": "optimal",
+        "desc": "低雲遮蔽極低 (5%)，透光窗達 85%，夕陽/晨光無阻直射雲底！"
       },
       {
         "label": "大氣能見度與通透度",
         "status": "optimal",
-        "desc": "能見度優異（27.86 公里），大氣清澈通透，晚霞色彩飽和純淨。"
+        "desc": "能見度優異（24.96 公里），大氣清澈通透，晚霞色彩飽和純淨。"
       }
     ],
     "photoTips": {
@@ -54,11 +54,11 @@
   },
   "weather": {
     "cloudHigh": 0,
-    "cloudMid": 2,
-    "cloudLow": 0,
-    "cloudTotal": 2,
-    "humidity": 70,
-    "precipProb": 0,
-    "visibilityKm": 27.9
+    "cloudMid": 3,
+    "cloudLow": 5,
+    "cloudTotal": 6,
+    "humidity": 77,
+    "precipProb": 43,
+    "visibilityKm": 25
   }
 }
