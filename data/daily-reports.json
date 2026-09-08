@@ -55,17 +55,17 @@
       "rating": "平淡暮光",
       "color": "#7B88A8",
       "highCloud": 0,
-      "midCloud": 2,
+      "midCloud": 3,
       "lowCloud": 5,
-      "summary": ""
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
     },
     "groundTruth": {
-      "score": null,
-      "rating": null,
-      "verdict": "PENDING",
-      "verdictBadge": "⏳ 實測待驗證",
-      "color": "#94A3B8",
-      "captureStatus": "capture_unavailable"
+      "score": 19,
+      "rating": "陰沉沉寂",
+      "verdict": "SLIGHT_DEVIATION",
+      "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "color": "#FBBF24",
+      "chromaticPurity": 28.7
     },
     "stations": [
       {
@@ -73,16 +73,16 @@
         "icon": "📸",
         "tag": "官方 4K 直播・DVR 回溯精確影格",
         "phasePrep": "—",
-        "phasePeak": "出景窗口外或擷取失敗，本場無實測影格",
+        "phasePeak": "光學觀測判定 19 分（陰沉沉寂）",
         "phasePost": "—",
         "forecast": "35 分（低雲 5%）",
-        "verdict": "⏳ 實測待驗證",
-        "verdictColor": "#94A3B8"
+        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "verdictColor": "#FBBF24"
       }
     ],
     "summaryAnalysis": {
-      "atmosphericReason": "預報雲量：高空 0% ／ 中空 2% ／ 低空 5%。",
-      "modelPerformance": "本場實測影格擷取失敗或光學評分尚未完成，暫無模型誤差判定。"
+      "atmosphericReason": "預報雲量：高空 0% ／ 中空 3% ／ 低空 5%。",
+      "modelPerformance": "模型預報 35 分，實況光學觀測 19 分，絕對誤差 16 分（SLIGHT_DEVIATION）。"
     }
   },
   {
