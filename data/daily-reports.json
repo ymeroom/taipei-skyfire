@@ -1,5 +1,48 @@
 [
   {
+    "id": "report-2026-09-09-sunrise",
+    "date": "2026-09-09",
+    "session": "sunrise",
+    "sessionLabel": "清晨日出",
+    "publishedAt": "2026-09-09T07:31:24.459917",
+    "publishTimeLabel": "09:00 定時發布",
+    "title": "2026-09-09 清晨日出實況觀測 vs. 模型預報總結",
+    "prediction": {
+      "score": 46,
+      "rating": "平淡暮光",
+      "color": "#7B88A8",
+      "highCloud": 0,
+      "midCloud": 9,
+      "lowCloud": 2,
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
+    },
+    "groundTruth": {
+      "score": 15,
+      "rating": "陰沉沉寂",
+      "verdict": "MISMATCH",
+      "verdictBadge": "⚠️ 出現偏差需校準",
+      "color": "#F87171",
+      "chromaticPurity": 31.6
+    },
+    "stations": [
+      {
+        "name": "象山看台北 101（4K 官方即時影像）",
+        "icon": "📸",
+        "tag": "官方 4K 直播・DVR 回溯精確影格",
+        "phasePrep": "—",
+        "phasePeak": "光學觀測判定 15 分（陰沉沉寂）",
+        "phasePost": "—",
+        "forecast": "46 分（低雲 2%）",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171"
+      }
+    ],
+    "summaryAnalysis": {
+      "atmosphericReason": "預報雲量：高空 0% ／ 中空 9% ／ 低空 2%。",
+      "modelPerformance": "模型預報 46 分，實況光學觀測 15 分，絕對誤差 31 分（MISMATCH）。"
+    }
+  },
+  {
     "id": "report-2026-09-09-sunset",
     "date": "2026-09-09",
     "session": "sunset",
