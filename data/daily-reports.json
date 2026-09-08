@@ -1,5 +1,48 @@
 [
   {
+    "id": "report-2026-09-09-sunset",
+    "date": "2026-09-09",
+    "session": "sunset",
+    "sessionLabel": "傍晚日落",
+    "publishedAt": "2026-09-09T00:56:07.049721",
+    "publishTimeLabel": "21:00 定時發布",
+    "title": "2026-09-09 傍晚日落實況觀測 vs. 模型預報總結",
+    "prediction": {
+      "score": 39,
+      "rating": "平淡暮光",
+      "color": "#7B88A8",
+      "highCloud": 0,
+      "midCloud": 14,
+      "lowCloud": 8,
+      "summary": ""
+    },
+    "groundTruth": {
+      "score": null,
+      "rating": null,
+      "verdict": "PENDING",
+      "verdictBadge": "⏳ 實測待驗證",
+      "color": "#94A3B8",
+      "captureStatus": "capture_unavailable"
+    },
+    "stations": [
+      {
+        "name": "大稻埕碼頭（4K 官方即時影像）",
+        "icon": "📸",
+        "tag": "官方 4K 直播・DVR 回溯精確影格",
+        "phasePrep": "—",
+        "phasePeak": "出景窗口外或擷取失敗，本場無實測影格",
+        "phasePost": "—",
+        "forecast": "39 分（低雲 8%）",
+        "verdict": "⏳ 實測待驗證",
+        "verdictColor": "#94A3B8"
+      }
+    ],
+    "summaryAnalysis": {
+      "atmosphericReason": "預報雲量：高空 0% ／ 中空 14% ／ 低空 8%。",
+      "modelPerformance": "本場實測影格擷取失敗或光學評分尚未完成，暫無模型誤差判定。"
+    }
+  },
+  {
     "id": "report-2026-09-08-sunrise",
     "date": "2026-09-08",
     "session": "sunrise",
