@@ -45,8 +45,8 @@ function getTaipeiDateString(date = new Date()) {
 // 鎖定預測的排程對照：由 cron 決定「要鎖哪一天的哪個時段」。
 // dayOffset 是相對於「排定時刻的台北日期」的天數位移。
 const SCHEDULE_TO_LOCK_TARGET = Object.freeze({
-  '30 8 * * *': Object.freeze({ session: 'sunset', dayOffset: 0 }),   // 16:30 TPE → 當日日落
-  '50 15 * * *': Object.freeze({ session: 'sunrise', dayOffset: 1 })  // 23:50 TPE → 隔日日出
+  '30 7 * * *': Object.freeze({ session: 'sunset', dayOffset: 0 }),   // 15:30 TPE → 當日日落
+  '45 15 * * *': Object.freeze({ session: 'sunrise', dayOffset: 1 })  // 23:45 TPE → 隔日日出
 });
 
 function addDaysToDateString(dateStr, days) {

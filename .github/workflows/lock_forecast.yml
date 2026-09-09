@@ -2,10 +2,10 @@ name: Lock Forecast Prediction
 
 on:
   schedule:
-    # 台灣時間 16:30 (UTC 08:30) 鎖定當日日落預測
-    - cron: '30 8 * * *'
-    # 台灣時間 23:50 (UTC 15:50) 鎖定隔日日出預測
-    - cron: '50 15 * * *'
+    # 台灣時間 15:30 (UTC 07:30) 鎖定當日日落預測
+    - cron: '30 7 * * *'
+    # 台灣時間 23:45 (UTC 15:45) 鎖定隔日日出預測
+    - cron: '45 15 * * *'
   workflow_dispatch:
     inputs:
       session:
