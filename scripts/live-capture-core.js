@@ -226,7 +226,7 @@ function validateLiveMetadata(metadata, source) {
   };
 }
 
-function finalizeCaptureEvidence({ liveEvidence, windowEvidence, probe, sha256, capturedAt }) {
+function finalizeCaptureEvidence({ liveEvidence, windowEvidence, probe, sha256, capturedAt, dvrSeekApplied = false }) {
   if (!liveEvidence || liveEvidence.validated !== true) {
     throw new Error('live metadata was not validated');
   }
@@ -256,7 +256,8 @@ function finalizeCaptureEvidence({ liveEvidence, windowEvidence, probe, sha256, 
     width: videoStream.width,
     height: videoStream.height,
     codec: videoStream.codec_name || null,
-    sha256: String(sha256).toLowerCase()
+    sha256: String(sha256).toLowerCase(),
+    dvrSeekApplied: dvrSeekApplied === true
   };
 }
 
