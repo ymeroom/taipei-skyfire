@@ -1,5 +1,72 @@
 [
   {
+    "id": "rec-2026-09-10-sunrise",
+    "date": "2026-09-10",
+    "session": "sunrise",
+    "targetTime": "2026-09-09T21:39:14.489Z",
+    "source": "象山看台北 101（4K 官方即時影像）",
+    "prediction": {
+      "score": 38,
+      "rating": "平淡暮光",
+      "color": "#7B88A8",
+      "highCloud": 0,
+      "midCloud": 6,
+      "lowCloud": 20,
+      "totalCloud": 20,
+      "humidity": 98,
+      "precipProb": 0,
+      "horizonClearance": 70,
+      "visibilityKm": 9.3,
+      "isSimulated": false,
+      "lockedAt": "2026-09-09T18:50:40.291Z"
+    },
+    "snapshotUrl": "data/snapshots/2026-09-10-sunrise.jpg",
+    "capture": {
+      "width": 640,
+      "height": 360,
+      "fileName": "2026-09-10-sunrise.jpg",
+      "sha256": "e6fdad05038241aaf8cff603260af249ae71938a10d4de23b5f7fc5d6ed1d78d",
+      "capturedAt": "2026-09-09T23:25:12.857Z",
+      "frameEffectiveTimeUtc": "2026-09-09T21:39:14.489Z",
+      "offsetMinutes": 106,
+      "dvrRewindMinutes": 106,
+      "kind": "youtube-live-frame",
+      "fidelity": "exact",
+      "posterQuality": null,
+      "fallbackReason": null,
+      "validated": true
+    },
+    "verification": {
+      "captureFidelity": "exact",
+      "captureKind": "youtube-live-frame",
+      "status": "verified_completed",
+      "groundTruthScore": 18,
+      "groundTruthBadge": "陰沉沉寂",
+      "groundTruthLevel": "OVERCAST",
+      "errorAbsolute": 20,
+      "verdict": "MISMATCH",
+      "verdictBadge": "⚠️ 出現偏差需校準",
+      "chromaticPurity": 39.5,
+      "skyCoveragePct": 0,
+      "nightGate": {
+        "applied": false,
+        "reason": "within twilight window",
+        "windowStart": "2026-09-09T21:16:15.041000+00:00",
+        "windowEnd": "2026-09-09T22:09:29.807000+00:00"
+      },
+      "rainGate": {
+        "applied": false,
+        "reason": "not raining",
+        "isRaining": false,
+        "precipitationMm": 0,
+        "weatherCode": 0
+      },
+      "verifiedAt": "2026-09-09T23:25:25.138Z",
+      "engine": "Optical Chromatic Histogram Analysis (CIELAB/HSV)",
+      "isSimulated": false
+    }
+  },
+  {
     "id": "rec-2026-09-10-sunset",
     "date": "2026-09-10",
     "session": "sunset",
