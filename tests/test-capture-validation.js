@@ -133,61 +133,67 @@ const goodJpeg = () => Buffer.concat([
   Buffer.from([0xff, 0xd8, 0xff]), Buffer.alloc(12000, 0x42), Buffer.from([0xff, 0xd9])
 ]);
 const ffprobeJson = JSON.stringify({ streams: [{ codec_name: 'mjpeg', width: 1920, height: 1080 }] });
+const { STATIONS } = require('../js/stations.js');
+const UID = Object.fromEntries(STATIONS.map(s => [s.videoId, s.uploaderId]));
+const parseVid = args => (String(args).match(/v=([\w-]{11})/) || [])[1];
 
-// Tier-A 成功但 metadata 無 formats → seek 直接跳過 → dvrSeekApplied 維持 false
-function tierANoSeek(command, args) {
-  if (command === 'yt-dlp') return JSON.stringify({
-    id: 'Ndo_8RuefH4', is_live: true, live_status: 'is_live', uploader_id: '@taipeitravelofficial',
-    protocol: 'm3u8_native', url: 'https://live.example/stream.m3u8', width: 1920, height: 1080, format_id: '95'
-  });
-  if (command === 'ffmpeg') { fs.writeFileSync(args[args.length - 1], goodJpeg()); return ''; }
-  if (command === 'ffprobe') return ffprobeJson;
-  throw new Error(`unexpected tool: ${command}`);
-}
-
-// Tier-A 且 seek 成功轉出影格 → dvrSeekApplied:true
-function tierASeekOk(command, args) {
-  if (command === 'yt-dlp') return JSON.stringify({
-    id: 'Ndo_8RuefH4', is_live: true, live_status: 'is_live', uploader_id: '@taipeitravelofficial',
-    protocol: 'm3u8_native', url: 'https://live.example/stream.m3u8', width: 1920, height: 1080, format_id: '95',
-    formats: [{ format_id: '95', url: 'https://hls.example/95.m3u8' }]
-  });
-  if (command === 'curl' && !args.includes('-o')) return 'https://seg.example/sq/100000/dur/5.0/segment.ts\n';
-  if (command === 'curl' && args.includes('-o')) { fs.writeFileSync(args[args.indexOf('-o') + 1], Buffer.alloc(50000, 0x11)); return ''; }
-  if (command === 'ffmpeg') { fs.writeFileSync(args[args.length - 1], goodJpeg()); return ''; }
-  if (command === 'ffprobe') return ffprobeJson;
-  throw new Error(`unexpected tool: ${command}`);
+// 每站 Tier-A 影格；withFormats=true 才走 DVR seek 分支
+function tierAStub({ withFormats, tsBytes }) {
+  return (command, args) => {
+    if (command === 'yt-dlp') {
+      const vid = parseVid(args);
+      const meta = {
+        id: vid, is_live: true, live_status: 'is_live', uploader_id: UID[vid],
+        protocol: 'm3u8_native', url: 'https://live.example/stream.m3u8',
+        width: 1920, height: 1080, format_id: '95'
+      };
+      if (withFormats) meta.formats = [{ format_id: '95', url: 'https://hls.example/95.m3u8' }];
+      return JSON.stringify(meta);
+    }
+    if (command === 'curl' && !args.includes('-o')) return 'https://seg.example/sq/100000/dur/5.0/segment.ts\n';
+    if (command === 'curl' && args.includes('-o')) { fs.writeFileSync(args[args.indexOf('-o') + 1], Buffer.alloc(tsBytes, 0x11)); return ''; }
+    if (command === 'ffmpeg') { fs.writeFileSync(args[args.length - 1], goodJpeg()); return ''; }
+    if (command === 'ffprobe') return ffprobeJson;
+    throw new Error(`unexpected tool: ${command}`);
+  };
 }
 
 const sunsetEvent = SolarCalc.getTimes(new Date()).sunset;
 const dirLiveEdge = makeLockedDir('sunset', 55);
 const dirSeekOk = makeLockedDir('sunset', 55);
+const findPrimary = records => records.find(r => r.station === 'dadaocheng');
 
 module.exports = runCapturePipeline('sunset', {
   now: new Date(sunsetEvent.getTime() + 40 * 60000),   // 日落後 40 分：窗口內、回溯量 40 分 > 15
   dataDir: dirLiveEdge,
-  runTool: tierANoSeek
-}).then(record => {
+  runTool: tierAStub({ withFormats: false, tsBytes: 4 })   // 無 formats → seek 跳過
+}).then(records => {
+  assert.strictEqual(records.length, 6, '日落 6 站各一筆紀錄');
+  const record = findPrimary(records);
   assert.strictEqual(record.capture.fidelity, 'live-edge', 'seek 沒落地 + 回溯 > 15 分 → live-edge');
   assert.strictEqual(record.capture.dvrRewindMinutes, 0, 'live-edge 不宣稱回溯');
   assert.strictEqual(record.capture.frameEffectiveTimeUtc, record.capture.capturedAt, 'live-edge 畫面時刻 = 擷取當下');
   assert.notStrictEqual(record.capture.frameEffectiveTimeUtc, record.targetTime, 'live-edge 不得冒充 targetTime');
   assert.strictEqual(isExactLiveFrameRecord(record), false, 'live-edge 不算 exact 影格');
-  console.log('✅ live-edge 影格誠實標記正確');
+  assert.strictEqual(record.id, 'rec-' + record.date + '-sunset-dadaocheng', '每站紀錄 id 帶 station 後綴');
+  assert.strictEqual(record.station, 'dadaocheng');
+  assert.ok(!records.some(r => r.id === 'rec-' + record.date + '-sunset'), '不寫 bare-id 別名');
+  console.log('✅ 每站擷取迴圈 + live-edge 誠實標記正確');
   fs.rmSync(dirLiveEdge, { recursive: true, force: true });
 
   return runCapturePipeline('sunset', {
     now: new Date(sunsetEvent.getTime() + 40 * 60000),
     dataDir: dirSeekOk,
-    runTool: tierASeekOk
+    runTool: tierAStub({ withFormats: true, tsBytes: 50000 })   // seek 成功
   });
-}).then(record => {
+}).then(records => {
+  const record = findPrimary(records);
   assert.strictEqual(record.capture.fidelity, 'exact', 'seek 確實落地 → 維持 exact');
   assert.strictEqual(record.capture.frameEffectiveTimeUtc, record.targetTime, 'exact 影格畫面時刻 = targetTime');
   assert.strictEqual(isExactLiveFrameRecord(record), true);
   console.log('✅ 確認 DVR seek 落地時維持 exact');
   fs.rmSync(dirSeekOk, { recursive: true, force: true });
 }).catch(err => {
-  console.error('❌ live-edge 標記測試未通過:', err.message);
+  console.error('❌ 每站擷取 / live-edge 標記測試未通過:', err.message);
   process.exit(1);
 });

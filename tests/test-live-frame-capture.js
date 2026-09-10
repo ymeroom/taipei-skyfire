@@ -249,7 +249,9 @@ module.exports = runCapturePipeline('sunset', {
   dataDir: degradedDir,
   runTool: botCheckError,
   fetchImage: () => buildJpeg(1280, 720)
-}).then(record => {
+}).then(records => {
+  assert.strictEqual(records.length, 6, '日落 6 站各一筆');
+  const record = records[0];
   assert.strictEqual(record.capture.kind, 'youtube-live-poster', 'yt-dlp 失敗後應降級為海報影格');
   assert.strictEqual(record.capture.fidelity, 'degraded', '降級證據必須明確標示');
   assert.match(record.capture.fallbackReason, /bot/i, '必須記錄降級原因');
@@ -264,7 +266,8 @@ module.exports = runCapturePipeline('sunset', {
     runTool: botCheckError,
     fetchImage: () => { throw new Error('cdn unreachable'); }
   });
-}).then(record => {
+}).then(records => {
+  const record = records[0];
   assert.strictEqual(record.verification.status, 'capture_unavailable', '應誠實記錄擷取不可用');
   assert.strictEqual(record.snapshotUrl, null, '無影像時不得指向任何快照檔');
   assert.strictEqual(record.verification.groundTruthScore, null, '不得捏造 ground truth');
@@ -282,7 +285,8 @@ module.exports = runCapturePipeline('sunset', {
     dataDir: staleDir,
     runTool: botCheckError,
     fetchImage: () => buildJpeg(1280, 720)
-  }).then(staleRecord => {
+  }).then(staleRecords => {
+    const staleRecord = staleRecords[0];
     assert.strictEqual(
       staleRecord.verification.status,
       'capture_unavailable',
