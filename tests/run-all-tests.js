@@ -18,6 +18,7 @@ const SUITES = [
   './test-capture-validation.js',
   './test-score-ground-truth.js',
   './test-lock-forecast.js',
+  './test-build-tonight-stations.js',
   './test-ray-path-model.js'
 ];
 
