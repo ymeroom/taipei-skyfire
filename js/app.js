@@ -26,6 +26,37 @@ class SkyFireApp {
     this.startCountdownTimer();
     this.initSimulator();
     this.loadDailyReportsAndArchive();
+    this.loadTonightStations();
+  }
+
+  /**
+   * 載入並渲染「今晚各機位預測排名」面板 (資料來自 CI 產生的 tonight-stations.json)
+   */
+  async loadTonightStations() {
+    const el = document.getElementById('tonightStationsContainer');
+    const sub = document.getElementById('tonightStationsSub');
+    if (!el) return;
+    try {
+      const res = await fetch('data/tonight-stations.json');
+      if (!res.ok) return;
+      const data = await res.json();
+      if (!data.stations || !data.stations.length) return;
+      if (sub) {
+        const label = data.session === 'sunrise' ? '今晨日出 2 站' : '今晚日落 6 站';
+        sub.textContent = `${data.date}・${label}・依模型鎖定預測排序`;
+      }
+      el.innerHTML = data.stations.map((s, i) => `
+        <a class="tonight-station-card" href="${s.youtubeUrl}" target="_blank" rel="noopener">
+          <span class="tonight-station-rank">${i + 1}</span>
+          <span class="tonight-station-body">
+            ${s.icon} <strong>${s.name}</strong><br>
+            <span class="tonight-station-meta">${s.tag} ・ 方位 ${Math.round(s.viewAzimuth)}°</span>
+          </span>
+          <span class="tonight-station-score" style="color:${s.color};">${s.score}</span>
+        </a>`).join('');
+    } catch (err) {
+      console.warn('載入今晚機位排名失敗:', err);
+    }
   }
 
   /**

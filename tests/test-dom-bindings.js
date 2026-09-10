@@ -21,6 +21,11 @@ while ((match = getElementRegex.exec(jsContent)) !== null) {
 
 console.log(`在 app.js 中檢測到 ${usedIds.size} 個 DOM ID 引用。`);
 
+// 今晚機位排名面板：容器與渲染函式
+assert(htmlContent.includes('id="tonightStationsContainer"'), '首頁應有今晚機位排名容器');
+assert(/loadTonightStations\s*\(/.test(jsContent), 'app.js 應定義並呼叫 loadTonightStations');
+console.log('✅ 今晚機位排名面板：容器 + 渲染函式已綁定');
+
 const missingIds = [];
 usedIds.forEach(id => {
   const idRegex = new RegExp(`id=['"]${id}['"]`);
