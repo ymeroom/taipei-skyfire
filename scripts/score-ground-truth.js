@@ -10,8 +10,32 @@ const {
   getTaipeiDateString,
   resolveSessionType,
   isValidatedLiveCaptureRecord,
-  validateOpticalResult
+  validateOpticalResult,
+  LIVE_EDGE_FIDELITY
 } = require('./live-capture-core.js');
+const SolarCalc = require('../js/solar-calc.js');
+
+// 影格畫面所屬時刻是否落在 targetTime 當天的民用曙暮光窗口內。
+// 與 analyze_sky_ground_truth.py 的 get_twilight_window 同定義：
+//   sunrise → [civilDawn, sunriseGoldenEnd]；sunset → [sunsetGoldenStart, civilDusk]
+function twilightWindow(targetIso, session) {
+  const dateStr = getTaipeiDateString(new Date(targetIso));
+  const t = SolarCalc.getTimes(new Date(`${dateStr}T12:00:00+08:00`));
+  return session === 'sunrise'
+    ? [new Date(t.civilDawn), new Date(t.sunriseGoldenEnd)]
+    : [new Date(t.sunsetGoldenStart), new Date(t.civilDusk)];
+}
+
+// live-edge 影格 (DVR seek 沒落地) 一律排除；其餘用 frameEffectiveTimeUtc 對窗口。
+// 沒有 frameEffectiveTimeUtc 的舊紀錄維持原行為 (視為在窗口內)。
+function frameIsInWindow(record) {
+  const cap = record.capture || {};
+  if (cap.fidelity === LIVE_EDGE_FIDELITY) return false;
+  if (!cap.frameEffectiveTimeUtc) return true;
+  const [start, end] = twilightWindow(record.targetTime, record.session);
+  const t = new Date(cap.frameEffectiveTimeUtc).getTime();
+  return t >= start.getTime() && t <= end.getTime();
+}
 
 function runPythonAnalyzer(scriptPath, snapshotPath, capturedAtIso) {
   const pythonBin = process.env.PYTHON_BIN || (process.platform === 'win32' ? 'python' : 'python3');
@@ -40,7 +64,7 @@ function assertSnapshotIntegrity(snapshotPath, expectedSha256) {
 }
 
 function runGroundTruthScoring(targetDateStr = '', inputSession = '', options = {}) {
-  const dataDir = path.join(__dirname, '../data');
+  const dataDir = options.dataDir || path.join(__dirname, '../data');
   const recordsFile = path.join(dataDir, 'verification-records.json');
   const dateStr = targetDateStr || getTaipeiDateString(options.now || new Date());
   const sessionType = resolveSessionType(
@@ -62,7 +86,26 @@ function runGroundTruthScoring(targetDateStr = '', inputSession = '', options = 
     throw new Error(`record is not a validated livestream frame: ${targetId}`);
   }
 
-  const snapshotPath = path.resolve(path.join(__dirname, '..'), record.snapshotUrl);
+  // 暮光窗口守門：live-edge 影格、或畫面時刻落在 targetTime 曙暮光窗口外者，
+  // 不是出景當刻的實況證據 —— 標記跳過、不評分、不捏造 ground truth，也不讓 job 失敗。
+  if (!frameIsInWindow(record)) {
+    const reason = (record.capture || {}).fidelity === LIVE_EDGE_FIDELITY
+      ? 'live-edge 影格不代表出景當刻，畫面時刻約為擷取當下'
+      : 'frameEffectiveTimeUtc 落在 targetTime 的民用曙暮光窗口之外';
+    record.verification = {
+      status: 'skipped_out_of_window',
+      groundTruthScore: null,
+      errorAbsolute: null,
+      reason,
+      verifiedAt: new Date().toISOString(),
+      isSimulated: false
+    };
+    fs.writeFileSync(recordsFile, JSON.stringify(records, null, 2), 'utf8');
+    console.log(`⏭️  ${record.id}: ${reason} —— 跳過光學評分`);
+    return record;
+  }
+
+  const snapshotPath = path.resolve(dataDir, '..', record.snapshotUrl);
   const snapshotsRoot = path.resolve(path.join(dataDir, 'snapshots'));
   if (!snapshotPath.startsWith(`${snapshotsRoot}${path.sep}`)) {
     throw new Error('snapshot path escapes the validated snapshots directory');
