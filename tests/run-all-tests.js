@@ -7,6 +7,7 @@ console.log('🚀 開始執行 Taipei SkyFire 專業全功能自動化測試套�
 console.log('====================================================\n');
 
 const SUITES = [
+  './test-stations.js',
   './test-solar-calc.js',
   './test-skyfire-engine.js',
   './test-weather-service.js',
