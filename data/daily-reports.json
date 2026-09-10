@@ -51,38 +51,112 @@
     "publishTimeLabel": "21:00 定時發布",
     "title": "2026-09-10 傍晚日落實況觀測 vs. 模型預報總結",
     "prediction": {
-      "score": 32,
-      "rating": "平淡暮光",
-      "color": "#7B88A8",
+      "score": 59,
+      "rating": "局部霞光",
+      "color": "#E5A50A",
       "highCloud": 0,
-      "midCloud": 98,
-      "lowCloud": 16,
-      "summary": ""
+      "midCloud": 26,
+      "lowCloud": 10,
+      "summary": "局部泛紅・唯美溫潤。地平線或天際線邊緣可見金橘色光芒。"
     },
     "groundTruth": {
-      "score": null,
-      "rating": null,
-      "verdict": "PENDING",
-      "verdictBadge": "⏳ 實測待驗證",
-      "color": "#94A3B8",
-      "captureStatus": "capture_unavailable"
+      "score": 22,
+      "rating": "陰沉沉寂",
+      "verdict": "MISMATCH",
+      "verdictBadge": "⚠️ 出現偏差需校準",
+      "color": "#F87171",
+      "chromaticPurity": 42
     },
     "stations": [
       {
+        "name": "台北大稻埕碼頭",
+        "icon": "⛵",
+        "tag": "臺北旅遊網 4K 直播・淡水河倒影晚霞",
+        "phasePrep": "—",
+        "phasePeak": "光學觀測判定 22 分（陰沉沉寂）",
+        "phasePost": "—",
+        "forecast": "59 分（低雲 10%）",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171"
+      },
+      {
+        "name": "新北九份即時影像",
+        "icon": "🏮",
+        "tag": "新北觀光 4K 直播・山海交界落日",
+        "phasePrep": "—",
+        "phasePeak": "影格不在暮光窗口內，未評分",
+        "phasePost": "—",
+        "forecast": "36 分（低雲 34%）",
+        "verdict": "⏳ 實測待驗證",
+        "verdictColor": "#94A3B8"
+      },
+      {
+        "name": "台北貓空指南宮",
+        "icon": "⛩️",
+        "tag": "臺北旅遊網 4K 直播・高處俯瞰盆地火燒雲",
+        "phasePrep": "—",
+        "phasePeak": "光學觀測判定 16 分（陰沉沉寂）",
+        "phasePost": "—",
+        "forecast": "63 分（低雲 13%）",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171"
+      },
+      {
+        "name": "新北八里左岸",
+        "icon": "🌊",
+        "tag": "新北觀光 4K 直播・淡江大橋與台灣海峽晚霞",
+        "phasePrep": "—",
+        "phasePeak": "光學觀測判定 30 分（平淡暮光 (雨天反光判定)）",
+        "phasePost": "—",
+        "forecast": "21 分（低雲 14%）",
+        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "verdictColor": "#FBBF24"
+      },
+      {
+        "name": "新北淡水漁人碼頭",
+        "icon": "🌉",
+        "tag": "新北觀光 4K 直播・情人橋烈焰落日",
+        "phasePrep": "—",
+        "phasePeak": "光學觀測判定 30 分（平淡暮光 (雨天反光判定)）",
+        "phasePost": "—",
+        "forecast": "22 分（低雲 14%）",
+        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
+        "verdictColor": "#4ADE80"
+      },
+      {
+        "name": "台北象山看 101",
+        "icon": "🏙️",
+        "tag": "臺北旅遊網 4K 直播・101 與西方天際線",
+        "phasePrep": "—",
+        "phasePeak": "光學觀測判定 13 分（陰沉沉寂）",
+        "phasePost": "—",
+        "forecast": "63 分（低雲 13%）",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171"
+      },
+      {
         "name": "大稻埕碼頭（4K 官方即時影像）",
-        "icon": "📸",
+        "icon": "📹",
         "tag": "官方 4K 直播・DVR 回溯精確影格",
         "phasePrep": "—",
-        "phasePeak": "出景窗口外或擷取失敗，本場無實測影格",
+        "phasePeak": "擷取失敗，本場無實測影格",
         "phasePost": "—",
         "forecast": "32 分（低雲 16%）",
         "verdict": "⏳ 實測待驗證",
         "verdictColor": "#94A3B8"
       }
     ],
+    "stationSummary": {
+      "verified": 5,
+      "pending": 2,
+      "bestStation": "bali",
+      "bestScore": 30,
+      "worstError": 50,
+      "meanError": 30.2
+    },
     "summaryAnalysis": {
-      "atmosphericReason": "預報雲量：高空 0% ／ 中空 98% ／ 低空 16%。",
-      "modelPerformance": "本場實測影格擷取失敗或光學評分尚未完成，暫無模型誤差判定。"
+      "atmosphericReason": "預報雲量：高空 0% ／ 中空 26% ／ 低空 10%。",
+      "modelPerformance": "模型預報 59 分，實況光學觀測 22 分，絕對誤差 37 分（MISMATCH）。"
     }
   },
   {
