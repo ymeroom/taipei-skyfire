@@ -1,6 +1,16 @@
 /**
- * spots-data.js - 7 大核心日出/日落攝影機位
+ * spots-data.js - 地圖 UI 用的攝影機位資料 (焦段、交通、拍攝建議)。
+ * 座標 (lat/lng/elevation) 的單一事實來源是 js/stations.js —— 這裡不再重複，
+ * 以 id 從註冊表取值，避免兩處經緯度漂移。
  */
+
+const _STATION_REG = (typeof module !== 'undefined' && module.exports)
+  ? require('./stations.js').STATIONS
+  : (typeof window !== 'undefined' && window.STATIONS) || [];
+const _coords = (id) => {
+  const s = _STATION_REG.find(x => x.id === id);
+  return s ? { lat: s.lat, lng: s.lng, elevation: s.elevation } : {};
+};
 
 const TAIPEI_SPOTS = [
   // ============ 日落機位 (Sunset) ============
@@ -8,9 +18,7 @@ const TAIPEI_SPOTS = [
     id: 'dadaocheng',
     name: '大稻埕',
     category: 'sunset',
-    lat: 25.057045046459375,
-    lng: 121.50771810454582,
-    elevation: 5,
+    ..._coords('dadaocheng'),
     difficulty: '極易',
     recommendedFocal: '16-35mm / 70-200mm',
     bestAzimuth: '280° - 305°',
@@ -23,9 +31,7 @@ const TAIPEI_SPOTS = [
     id: 'maokong',
     name: '貓空',
     category: 'sunset',
-    lat: 24.98421427814147,
-    lng: 121.58655991120213,
-    elevation: 280,
+    ..._coords('maokong'),
     difficulty: '容易',
     recommendedFocal: '24-70mm',
     bestAzimuth: '280° - 315°',
@@ -38,9 +44,7 @@ const TAIPEI_SPOTS = [
     id: 'tamsui',
     name: '淡水漁人碼頭',
     category: 'sunset',
-    lat: 25.18325188330396,
-    lng: 121.41209767613158,
-    elevation: 5,
+    ..._coords('tamsui'),
     difficulty: '極易',
     recommendedFocal: '24-105mm',
     bestAzimuth: '250° - 290°',
@@ -53,9 +57,7 @@ const TAIPEI_SPOTS = [
     id: 'jiufen',
     name: '九份',
     category: 'sunset',
-    lat: 25.110048954642046,
-    lng: 121.83829071730524,
-    elevation: 350,
+    ..._coords('jiufen'),
     difficulty: '普通',
     recommendedFocal: '24-70mm / 70-200mm',
     bestAzimuth: '270° - 300°',
@@ -65,12 +67,10 @@ const TAIPEI_SPOTS = [
     traffic: '搭乘客運至九份老街。'
   },
   {
-    id: 'taipei-101',
-    name: '101大樓',
+    id: 'xiangshan',
+    name: '象山看 101',
     category: 'sunset',
-    lat: 25.029049882166394,
-    lng: 121.57276615548665,
-    elevation: 150,
+    ..._coords('xiangshan'),
     difficulty: '普通',
     recommendedFocal: '16-35mm / 24-70mm',
     bestAzimuth: '260° - 290°',
@@ -85,9 +85,7 @@ const TAIPEI_SPOTS = [
     id: 'waimushan',
     name: '外木山',
     category: 'sunrise',
-    lat: 25.17594381403899,
-    lng: 121.70593771941236,
-    elevation: 10,
+    ..._coords('waimushan'),
     difficulty: '容易',
     recommendedFocal: '16-35mm',
     bestAzimuth: '60° - 90°',
@@ -100,9 +98,7 @@ const TAIPEI_SPOTS = [
     id: 'hongludi',
     name: '烘爐地',
     category: 'sunrise',
-    lat: 24.972013872318254,
-    lng: 121.4976771944775,
-    elevation: 300,
+    ..._coords('hongludi'),
     difficulty: '普通',
     recommendedFocal: '70-200mm',
     bestAzimuth: '60° - 90°',
