@@ -1,5 +1,227 @@
 [
   {
+    "id": "rec-2026-09-11-sunset-jiufen",
+    "date": "2026-09-11",
+    "session": "sunset",
+    "station": "jiufen",
+    "targetTime": "2026-09-11T10:04:17.124Z",
+    "source": "新北九份即時影像（4K 官方即時影像）",
+    "prediction": {
+      "score": 5,
+      "rating": "陰沉沉寂",
+      "color": "#5A6275",
+      "highCloud": 34,
+      "midCloud": 30,
+      "lowCloud": 99,
+      "totalCloud": 100,
+      "humidity": 96,
+      "precipProb": 99,
+      "horizonClearance": 0,
+      "visibilityKm": 6.8,
+      "isSimulated": false
+    },
+    "snapshotUrl": null,
+    "capture": {
+      "kind": null,
+      "fidelity": "none",
+      "validated": false,
+      "capturedAt": "2026-09-10T16:46:36.499Z",
+      "offsetMinutes": -1038,
+      "error": "outside sunset capture window: offset -1038 minutes exceeds ±600"
+    },
+    "verification": {
+      "status": "capture_unavailable",
+      "groundTruthScore": null,
+      "errorAbsolute": null,
+      "isSimulated": false
+    }
+  },
+  {
+    "id": "rec-2026-09-11-sunset-maokong",
+    "date": "2026-09-11",
+    "session": "sunset",
+    "station": "maokong",
+    "targetTime": "2026-09-11T10:04:17.124Z",
+    "source": "台北貓空指南宮（4K 官方即時影像）",
+    "prediction": {
+      "score": 9,
+      "rating": "陰沉沉寂",
+      "color": "#5A6275",
+      "highCloud": 62,
+      "midCloud": 27,
+      "lowCloud": 70,
+      "totalCloud": 91,
+      "humidity": 94,
+      "precipProb": 51,
+      "horizonClearance": 6,
+      "visibilityKm": 10.4,
+      "isSimulated": false
+    },
+    "snapshotUrl": null,
+    "capture": {
+      "kind": null,
+      "fidelity": "none",
+      "validated": false,
+      "capturedAt": "2026-09-10T16:46:36.499Z",
+      "offsetMinutes": -1038,
+      "error": "outside sunset capture window: offset -1038 minutes exceeds ±600"
+    },
+    "verification": {
+      "status": "capture_unavailable",
+      "groundTruthScore": null,
+      "errorAbsolute": null,
+      "isSimulated": false
+    }
+  },
+  {
+    "id": "rec-2026-09-11-sunset-bali",
+    "date": "2026-09-11",
+    "session": "sunset",
+    "station": "bali",
+    "targetTime": "2026-09-11T10:04:17.124Z",
+    "source": "新北八里左岸（4K 官方即時影像）",
+    "prediction": {
+      "score": 26,
+      "rating": "陰沉沉寂",
+      "color": "#5A6275",
+      "highCloud": 91,
+      "midCloud": 37,
+      "lowCloud": 39,
+      "totalCloud": 96,
+      "humidity": 86,
+      "precipProb": 99,
+      "horizonClearance": 34,
+      "visibilityKm": 10.6,
+      "isSimulated": false
+    },
+    "snapshotUrl": null,
+    "capture": {
+      "kind": null,
+      "fidelity": "none",
+      "validated": false,
+      "capturedAt": "2026-09-10T16:46:36.499Z",
+      "offsetMinutes": -1038,
+      "error": "outside sunset capture window: offset -1038 minutes exceeds ±600"
+    },
+    "verification": {
+      "status": "capture_unavailable",
+      "groundTruthScore": null,
+      "errorAbsolute": null,
+      "isSimulated": false
+    }
+  },
+  {
+    "id": "rec-2026-09-11-sunset-tamsui",
+    "date": "2026-09-11",
+    "session": "sunset",
+    "station": "tamsui",
+    "targetTime": "2026-09-11T10:04:17.124Z",
+    "source": "新北淡水漁人碼頭（4K 官方即時影像）",
+    "prediction": {
+      "score": 26,
+      "rating": "陰沉沉寂",
+      "color": "#5A6275",
+      "highCloud": 91,
+      "midCloud": 37,
+      "lowCloud": 39,
+      "totalCloud": 96,
+      "humidity": 86,
+      "precipProb": 99,
+      "horizonClearance": 34,
+      "visibilityKm": 10.6,
+      "isSimulated": false
+    },
+    "snapshotUrl": null,
+    "capture": {
+      "kind": null,
+      "fidelity": "none",
+      "validated": false,
+      "capturedAt": "2026-09-10T16:46:36.499Z",
+      "offsetMinutes": -1038,
+      "error": "outside sunset capture window: offset -1038 minutes exceeds ±600"
+    },
+    "verification": {
+      "status": "capture_unavailable",
+      "groundTruthScore": null,
+      "errorAbsolute": null,
+      "isSimulated": false
+    }
+  },
+  {
+    "id": "rec-2026-09-11-sunset-xiangshan",
+    "date": "2026-09-11",
+    "session": "sunset",
+    "station": "xiangshan",
+    "targetTime": "2026-09-11T10:04:17.124Z",
+    "source": "台北象山看 101（4K 官方即時影像）",
+    "prediction": {
+      "score": 9,
+      "rating": "陰沉沉寂",
+      "color": "#5A6275",
+      "highCloud": 62,
+      "midCloud": 27,
+      "lowCloud": 70,
+      "totalCloud": 91,
+      "humidity": 94,
+      "precipProb": 51,
+      "horizonClearance": 6,
+      "visibilityKm": 10.4,
+      "isSimulated": false
+    },
+    "snapshotUrl": null,
+    "capture": {
+      "kind": null,
+      "fidelity": "none",
+      "validated": false,
+      "capturedAt": "2026-09-10T16:46:36.499Z",
+      "offsetMinutes": -1038,
+      "error": "outside sunset capture window: offset -1038 minutes exceeds ±600"
+    },
+    "verification": {
+      "status": "capture_unavailable",
+      "groundTruthScore": null,
+      "errorAbsolute": null,
+      "isSimulated": false
+    }
+  },
+  {
+    "id": "rec-2026-09-11-sunset-dadaocheng",
+    "date": "2026-09-11",
+    "session": "sunset",
+    "station": "dadaocheng",
+    "targetTime": "2026-09-11T10:04:17.124Z",
+    "source": "台北大稻埕碼頭（4K 官方即時影像）",
+    "prediction": {
+      "score": 56,
+      "rating": "局部霞光",
+      "color": "#E5A50A",
+      "highCloud": 65,
+      "midCloud": 27,
+      "lowCloud": 35,
+      "totalCloud": 83,
+      "humidity": 90,
+      "precipProb": 51,
+      "horizonClearance": 42,
+      "visibilityKm": 10.3,
+      "isSimulated": false
+    },
+    "snapshotUrl": null,
+    "capture": {
+      "kind": null,
+      "fidelity": "none",
+      "validated": false,
+      "capturedAt": "2026-09-10T16:46:36.499Z",
+      "offsetMinutes": -1038,
+      "error": "outside sunset capture window: offset -1038 minutes exceeds ±600"
+    },
+    "verification": {
+      "status": "capture_unavailable",
+      "groundTruthScore": null,
+      "errorAbsolute": null,
+      "isSimulated": false
+    }
+  },
+  {
     "id": "rec-2026-09-10-sunset-jiufen",
     "date": "2026-09-10",
     "session": "sunset",
