@@ -17,12 +17,12 @@
       "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
     },
     "groundTruth": {
-      "score": 18,
+      "score": 19,
       "rating": "陰沉沉寂",
       "verdict": "MISMATCH",
       "verdictBadge": "⚠️ 出現偏差需校準",
       "color": "#F87171",
-      "chromaticPurity": 39.5
+      "chromaticPurity": 39.7
     },
     "stations": [
       {
@@ -30,7 +30,7 @@
         "icon": "📸",
         "tag": "官方 4K 直播・DVR 回溯精確影格",
         "phasePrep": "—",
-        "phasePeak": "光學觀測判定 18 分（陰沉沉寂）",
+        "phasePeak": "光學觀測判定 19 分（陰沉沉寂）",
         "phasePost": "—",
         "forecast": "38 分（低雲 20%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -39,7 +39,7 @@
     ],
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 6% ／ 低空 20%。",
-      "modelPerformance": "模型預報 38 分，實況光學觀測 18 分，絕對誤差 20 分（MISMATCH）。"
+      "modelPerformance": "模型預報 38 分，實況光學觀測 19 分，絕對誤差 19 分（MISMATCH）。"
     }
   },
   {
