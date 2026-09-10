@@ -1,13 +1,13 @@
 {
   "session": "sunset",
   "date": "2026-09-10",
-  "generatedAt": "2026-09-10T05:18:58.898Z",
+  "generatedAt": "2026-09-10T12:17:33.127Z",
   "stations": [
     {
       "id": "xiangshan",
       "name": "台北象山看 101",
       "icon": "🏙️",
-      "score": 56,
+      "score": 63,
       "rating": "局部霞光",
       "color": "#E5A50A",
       "viewAzimuth": 280,
@@ -18,7 +18,7 @@
       "id": "maokong",
       "name": "台北貓空指南宮",
       "icon": "⛩️",
-      "score": 55,
+      "score": 63,
       "rating": "局部霞光",
       "color": "#E5A50A",
       "viewAzimuth": 290,
@@ -29,7 +29,7 @@
       "id": "dadaocheng",
       "name": "台北大稻埕碼頭",
       "icon": "⛵",
-      "score": 52,
+      "score": 59,
       "rating": "局部霞光",
       "color": "#E5A50A",
       "viewAzimuth": 292,
@@ -37,21 +37,21 @@
       "youtubeUrl": "https://www.youtube.com/watch?v=Ndo_8RuefH4"
     },
     {
-      "id": "bali",
-      "name": "新北八里左岸",
-      "icon": "🌊",
-      "score": 26,
-      "rating": "陰沉沉寂",
-      "color": "#5A6275",
-      "viewAzimuth": 250,
-      "tag": "新北觀光 4K 直播・淡江大橋與台灣海峽晚霞",
-      "youtubeUrl": "https://www.youtube.com/watch?v=di-4DCblWq4"
+      "id": "jiufen",
+      "name": "新北九份即時影像",
+      "icon": "🏮",
+      "score": 36,
+      "rating": "平淡暮光",
+      "color": "#7B88A8",
+      "viewAzimuth": 45,
+      "tag": "新北觀光 4K 直播・山海交界落日",
+      "youtubeUrl": "https://www.youtube.com/watch?v=XSD5ptYisw8"
     },
     {
       "id": "tamsui",
       "name": "新北淡水漁人碼頭",
       "icon": "🌉",
-      "score": 25,
+      "score": 22,
       "rating": "陰沉沉寂",
       "color": "#5A6275",
       "viewAzimuth": 270,
@@ -59,15 +59,15 @@
       "youtubeUrl": "https://www.youtube.com/watch?v=xwAWSh35uuw"
     },
     {
-      "id": "jiufen",
-      "name": "新北九份即時影像",
-      "icon": "🏮",
-      "score": 5,
+      "id": "bali",
+      "name": "新北八里左岸",
+      "icon": "🌊",
+      "score": 21,
       "rating": "陰沉沉寂",
       "color": "#5A6275",
-      "viewAzimuth": 45,
-      "tag": "新北觀光 4K 直播・山海交界落日",
-      "youtubeUrl": "https://www.youtube.com/watch?v=XSD5ptYisw8"
+      "viewAzimuth": 250,
+      "tag": "新北觀光 4K 直播・淡江大橋與台灣海峽晚霞",
+      "youtubeUrl": "https://www.youtube.com/watch?v=di-4DCblWq4"
     }
   ]
 }
