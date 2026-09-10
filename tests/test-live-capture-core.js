@@ -277,4 +277,16 @@ assert.strictEqual(manual.scheduledAt, null, '手動觸發沒有排定時刻');
 
 console.log('✅ 鎖定目標由排定時刻決定，不受排程延遲影響');
 
+// ----------------------------------------------------------------
+// sessionStreams：擷取清單由測站註冊表衍生
+// ----------------------------------------------------------------
+const { sessionStreams } = require('../scripts/live-capture-core.js');
+assert.strictEqual(sessionStreams('sunset').length, 6, '日落 6 站');
+assert.strictEqual(sessionStreams('sunrise').length, 2, '日出 2 站');
+assert.ok(sessionStreams('sunset').every(s => /^[\w-]{11}$/.test(s.videoId)), '每站有合法 videoId');
+assert.ok(sessionStreams('sunset').every(s => Number.isFinite(s.lat) && Number.isFinite(s.lng)), '每站帶座標 (供 live fallback)');
+assert.strictEqual(OFFICIAL_STREAMS.sunset.id, 'dadaocheng', '日落主測站仍為大稻埕');
+assert.strictEqual(OFFICIAL_STREAMS.sunrise.id, 'hongludi', '日出主測站改為烘爐地');
+console.log('✅ sessionStreams 由測站註冊表衍生、主測站正確');
+
 console.log('🎉 真實直播影格驗證政策測試全數 PASS!\n');

@@ -3,21 +3,30 @@
  * External tools and filesystem writes stay in capture-validation.js.
  */
 
+const { stationsForSession, primaryStation } = require('../js/stations.js');
+
+// 一個測站 → 擷取來源。name 帶「4K 官方即時影像」後綴以維持既有紀錄用語。
+function toStream(s) {
+  return {
+    id: s.id,
+    name: `${s.name}（4K 官方即時影像）`,
+    url: s.url,
+    videoId: s.videoId,
+    uploaderId: s.uploaderId,
+    lat: s.lat,
+    lng: s.lng
+  };
+}
+
+// 該時段所有官方直播 (顯示順序)。多測站擷取用。
+function sessionStreams(session) {
+  return stationsForSession(session).map(toStream);
+}
+
+// 主測站 —— 招牌數字、頂層鎖定欄位、既有單站呼叫路徑用。
 const OFFICIAL_STREAMS = Object.freeze({
-  sunrise: Object.freeze({
-    id: 'xiangshan_101',
-    name: '象山看台北 101（4K 官方即時影像）',
-    url: 'https://www.youtube.com/watch?v=z_fY1pj1VBw',
-    videoId: 'z_fY1pj1VBw',
-    uploaderId: '@taipeitravelofficial'
-  }),
-  sunset: Object.freeze({
-    id: 'dadaocheng',
-    name: '大稻埕碼頭（4K 官方即時影像）',
-    url: 'https://www.youtube.com/watch?v=Ndo_8RuefH4',
-    videoId: 'Ndo_8RuefH4',
-    uploaderId: '@taipeitravelofficial'
-  })
+  get sunrise() { return toStream(primaryStation('sunrise')); },
+  get sunset() { return toStream(primaryStation('sunset')); }
 });
 
 const SCHEDULE_TO_SESSION = Object.freeze({
@@ -324,6 +333,7 @@ function isVerifiedLiveFrameRecord(record) {
 
 module.exports = {
   OFFICIAL_STREAMS,
+  sessionStreams,
   SCHEDULE_TO_SESSION,
   SCHEDULE_TO_LOCK_TARGET,
   addDaysToDateString,
