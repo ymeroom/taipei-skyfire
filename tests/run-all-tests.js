@@ -17,6 +17,7 @@ const SUITES = [
   './test-live-frame-capture.js',
   './test-capture-validation.js',
   './test-score-ground-truth.js',
+  './test-lock-forecast.js',
   './test-ray-path-model.js'
 ];
 
