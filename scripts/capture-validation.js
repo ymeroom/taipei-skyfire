@@ -51,6 +51,34 @@ function buildPredictionFromLock(lockedData) {
   };
 }
 
+/**
+ * 從每站鎖定區塊 (lockedData.stations[stationId]) 取出該站的預測欄位。
+ * 站不存在時回傳 null，讓呼叫端退回即時預測。
+ */
+function buildPredictionFromStationLock(lockedData, stationId) {
+  const s = lockedData && lockedData.stations && lockedData.stations[stationId];
+  if (!s) return null;
+  const w = s.weather || {};
+  const m = s.metrics || {};
+  const num = v => (typeof v === 'number' && Number.isFinite(v) ? v : null);
+  const visKm = num(w.visibilityKm);
+  return {
+    score: s.score,
+    rating: s.rating,
+    color: s.color,
+    highCloud: num(w.cloudHigh),
+    midCloud: num(w.cloudMid),
+    lowCloud: num(w.cloudLow),
+    totalCloud: num(w.cloudTotal),
+    humidity: num(w.humidity),
+    precipProb: num(w.precipProb),
+    horizonClearance: num(m.horizonClearance),
+    visibilityKm: visKm !== null ? visKm : num(m.visKm),
+    isSimulated: false,
+    lockedAt: lockedData.lockedAt
+  };
+}
+
 function loadRecords(recordsFile) {
   if (!fs.existsSync(recordsFile)) return [];
   try {
@@ -317,6 +345,7 @@ if (require.main === module) {
 module.exports = {
   MAX_CAPTURE_OFFSET_MINUTES,
   buildPredictionFromLock,
+  buildPredictionFromStationLock,
   loadRecords,
   writeRecord,
   runCapturePipeline

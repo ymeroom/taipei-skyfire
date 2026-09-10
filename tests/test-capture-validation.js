@@ -6,7 +6,7 @@
  */
 
 const assert = require('assert');
-const { buildPredictionFromLock } = require('../scripts/capture-validation.js');
+const { buildPredictionFromLock, buildPredictionFromStationLock } = require('../scripts/capture-validation.js');
 
 console.log('--- 🧪 測試 9: 鎖定預測欄位擷取 (buildPredictionFromLock) ---');
 
@@ -72,6 +72,31 @@ assert.strictEqual(legacyPred.visibilityKm, 18.6, '缺 weather.visibilityKm 時�
 assert.strictEqual(legacyPred.horizonClearance, 91);
 
 console.log('✅ 測試 9 通過：雲量三頻正確取自結構化 weather 區塊\n');
+
+// --- buildPredictionFromStationLock：每站鎖定區塊 → 預測欄位 ---
+const stationLocked = {
+  lockedAt: '2026-09-10T07:30:00.000Z',
+  stations: {
+    tamsui: {
+      score: 51, rating: '局部霞光', color: '#E5A50A',
+      weather: { cloudHigh: 2, cloudMid: 40, cloudLow: 8, cloudTotal: 45, humidity: 78, precipProb: 10, visibilityKm: 22 },
+      metrics: { horizonClearance: 71, visKm: 22 }
+    }
+  }
+};
+const sp = buildPredictionFromStationLock(stationLocked, 'tamsui');
+assert.strictEqual(sp.score, 51);
+assert.strictEqual(sp.rating, '局部霞光');
+assert.strictEqual(sp.lowCloud, 8);
+assert.strictEqual(sp.midCloud, 40);
+assert.strictEqual(sp.humidity, 78);
+assert.strictEqual(sp.horizonClearance, 71);
+assert.strictEqual(sp.visibilityKm, 22);
+assert.strictEqual(sp.isSimulated, false);
+assert.strictEqual(sp.lockedAt, '2026-09-10T07:30:00.000Z');
+assert.strictEqual(buildPredictionFromStationLock(stationLocked, 'nope'), null, '站不存在 → null');
+assert.strictEqual(buildPredictionFromStationLock({}, 'tamsui'), null, '無 stations map → null');
+console.log('✅ buildPredictionFromStationLock 正確讀取每站鎖定區塊\n');
 
 // ----------------------------------------------------------------
 // live-edge 誠實標記
