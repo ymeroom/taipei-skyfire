@@ -280,6 +280,10 @@ const EXACT_CAPTURE_KIND = 'youtube-live-frame';
 const DEGRADED_CAPTURE_KIND = 'youtube-live-poster';
 const SCORABLE_CAPTURE_KINDS = Object.freeze([EXACT_CAPTURE_KIND, DEGRADED_CAPTURE_KIND]);
 
+// DVR seek 未落地、落回直播邊緣影格：畫面所屬時刻 ≈ 擷取當下，不是 targetTime。
+// 是真實影像 (可標示、可留存)，但絕不能冒充出景當刻的 ground truth。
+const LIVE_EDGE_FIDELITY = 'live-edge';
+
 /**
  * 該紀錄是否具備可供光學評分的真實影像證據。
  * 海報影格屬真實影像（與捏造的模擬值不同），因此允許評分，
@@ -303,7 +307,8 @@ function isExactLiveFrameRecord(record) {
   return Boolean(
     isValidatedLiveCaptureRecord(record) &&
     record.capture.kind === EXACT_CAPTURE_KIND &&
-    record.capture.fidelity !== 'degraded'
+    record.capture.fidelity !== 'degraded' &&
+    record.capture.fidelity !== LIVE_EDGE_FIDELITY
   );
 }
 
@@ -335,5 +340,6 @@ module.exports = {
   isVerifiedLiveFrameRecord,
   EXACT_CAPTURE_KIND,
   DEGRADED_CAPTURE_KIND,
+  LIVE_EDGE_FIDELITY,
   SCORABLE_CAPTURE_KINDS
 };

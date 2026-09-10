@@ -12,7 +12,8 @@ const {
   OFFICIAL_STREAMS,
   getTaipeiDateString,
   resolveSessionType,
-  assertCaptureWindow
+  assertCaptureWindow,
+  LIVE_EDGE_FIDELITY
 } = require('./live-capture-core.js');
 const { captureLiveFrame, capturePosterFrame } = require('./live-frame-capture.js');
 
@@ -232,6 +233,20 @@ async function runCapturePipeline(inputSession = '', options = {}) {
     prediction: predictionData
   };
 
+  // Tier A 影格但 DVR seek 沒落地 (dvrSeekApplied !== true) 且回溯量 > 15 分：
+  // 這是直播邊緣影像，畫面所屬時刻 ≈ capturedAt，不是 eventTime。標成 live-edge，
+  // frameEffectiveTimeUtc 用 capturedAt，dvrRewindMinutes 歸零 —— 不冒充精確影格。
+  const offsetAbs = Math.abs(captureWindow.offsetMinutes);
+  const isLiveEdgeFrame = Boolean(
+    capture &&
+    capture.fidelity === 'exact' &&
+    capture.dvrSeekApplied !== true &&
+    offsetAbs > 15
+  );
+  const effectiveFidelity = isLiveEdgeFrame
+    ? LIVE_EDGE_FIDELITY
+    : (capture && capture.fidelity) || 'exact';
+
   const record = capture
     ? {
         ...baseRecord,
@@ -242,17 +257,20 @@ async function runCapturePipeline(inputSession = '', options = {}) {
           fileName: snapshotFileName,
           sha256: capture.sha256,
           // capturedAt = 腳本執行當下；frameEffectiveTimeUtc = 影格畫面實際所屬的
-          // 天文時刻 (== targetTime，DVR 已回溯至此)；offsetMinutes = 兩者之間、
-          // 亦即本次 DVR 回溯的分鐘數。三者不同義，勿混用。fidelity: 'exact' 時
-          // 影格即代表 frameEffectiveTimeUtc 當刻，不受 offsetMinutes 大小影響。
+          // 天文時刻。fidelity 'exact' 時 == targetTime (DVR 已回溯至此)；
+          // 'live-edge' 時 == capturedAt (seek 沒落地，抓的是直播當下)。
+          // offsetMinutes = 兩者之間；dvrRewindMinutes = 實際回溯量 (live-edge 為 0)。
           capturedAt: capturedAt.toISOString(),
-          frameEffectiveTimeUtc: eventTime.toISOString(),
+          frameEffectiveTimeUtc: isLiveEdgeFrame ? capturedAt.toISOString() : eventTime.toISOString(),
           offsetMinutes: captureWindow.offsetMinutes,
-          dvrRewindMinutes: captureWindow.offsetMinutes,
+          dvrRewindMinutes: isLiveEdgeFrame ? 0 : captureWindow.offsetMinutes,
+          dvrSeekApplied: capture.dvrSeekApplied === true,
           kind: capture.kind || 'youtube-live-frame',
-          fidelity: capture.fidelity || 'exact',
+          fidelity: effectiveFidelity,
           posterQuality: capture.posterQuality || null,
-          fallbackReason: capture.fidelity === 'degraded' ? fallbackReason : null,
+          fallbackReason: isLiveEdgeFrame
+            ? (fallbackReason || 'DVR seek did not land; captured the live edge instead')
+            : (capture.fidelity === 'degraded' ? fallbackReason : null),
           validated: true
         },
         verification: {

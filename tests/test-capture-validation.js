@@ -72,3 +72,97 @@ assert.strictEqual(legacyPred.visibilityKm, 18.6, '缺 weather.visibilityKm 時�
 assert.strictEqual(legacyPred.horizonClearance, 91);
 
 console.log('✅ 測試 9 通過：雲量三頻正確取自結構化 weather 區塊\n');
+
+// ----------------------------------------------------------------
+// live-edge 誠實標記
+//
+// DVR seek 沒落地 (dvrSeekApplied:false) 且回溯量 > 15 分時，該影格是直播
+// 邊緣影像、不是出景當刻，必須記成 fidelity:'live-edge' 並把
+// frameEffectiveTimeUtc 標成擷取當下 (capturedAt)，不得冒充 targetTime 的
+// exact 影格 —— 否則 score-ground-truth 會拿白天畫面當 ground truth，
+// 又是一次「假資料汙染校準」。
+// ----------------------------------------------------------------
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
+const SolarCalc = require('../js/solar-calc.js');
+const { runCapturePipeline } = require('../scripts/capture-validation.js');
+const { isExactLiveFrameRecord } = require('../scripts/live-capture-core.js');
+
+function makeLockedDir(session, score) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'skyfire-live-edge-'));
+  fs.mkdirSync(path.join(dir, 'snapshots'), { recursive: true });
+  const now = new Date();
+  const dateStr = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Taipei', year: 'numeric', month: '2-digit', day: '2-digit'
+  }).format(now);
+  fs.writeFileSync(path.join(dir, `locked-${session}-forecast.json`), JSON.stringify({
+    date: dateStr, session, lockedAt: now.toISOString(),
+    skyfire: { score, rating: { badge: '局部霞光', color: '#E5A50A' },
+      metrics: { horizonClearance: 60, visKm: 22 }, diagnostics: [] }
+  }), 'utf8');
+  return dir;
+}
+
+const goodJpeg = () => Buffer.concat([
+  Buffer.from([0xff, 0xd8, 0xff]), Buffer.alloc(12000, 0x42), Buffer.from([0xff, 0xd9])
+]);
+const ffprobeJson = JSON.stringify({ streams: [{ codec_name: 'mjpeg', width: 1920, height: 1080 }] });
+
+// Tier-A 成功但 metadata 無 formats → seek 直接跳過 → dvrSeekApplied 維持 false
+function tierANoSeek(command, args) {
+  if (command === 'yt-dlp') return JSON.stringify({
+    id: 'Ndo_8RuefH4', is_live: true, live_status: 'is_live', uploader_id: '@taipeitravelofficial',
+    protocol: 'm3u8_native', url: 'https://live.example/stream.m3u8', width: 1920, height: 1080, format_id: '95'
+  });
+  if (command === 'ffmpeg') { fs.writeFileSync(args[args.length - 1], goodJpeg()); return ''; }
+  if (command === 'ffprobe') return ffprobeJson;
+  throw new Error(`unexpected tool: ${command}`);
+}
+
+// Tier-A 且 seek 成功轉出影格 → dvrSeekApplied:true
+function tierASeekOk(command, args) {
+  if (command === 'yt-dlp') return JSON.stringify({
+    id: 'Ndo_8RuefH4', is_live: true, live_status: 'is_live', uploader_id: '@taipeitravelofficial',
+    protocol: 'm3u8_native', url: 'https://live.example/stream.m3u8', width: 1920, height: 1080, format_id: '95',
+    formats: [{ format_id: '95', url: 'https://hls.example/95.m3u8' }]
+  });
+  if (command === 'curl' && !args.includes('-o')) return 'https://seg.example/sq/100000/dur/5.0/segment.ts\n';
+  if (command === 'curl' && args.includes('-o')) { fs.writeFileSync(args[args.indexOf('-o') + 1], Buffer.alloc(50000, 0x11)); return ''; }
+  if (command === 'ffmpeg') { fs.writeFileSync(args[args.length - 1], goodJpeg()); return ''; }
+  if (command === 'ffprobe') return ffprobeJson;
+  throw new Error(`unexpected tool: ${command}`);
+}
+
+const sunsetEvent = SolarCalc.getTimes(new Date()).sunset;
+const dirLiveEdge = makeLockedDir('sunset', 55);
+const dirSeekOk = makeLockedDir('sunset', 55);
+
+module.exports = runCapturePipeline('sunset', {
+  now: new Date(sunsetEvent.getTime() + 40 * 60000),   // 日落後 40 分：窗口內、回溯量 40 分 > 15
+  dataDir: dirLiveEdge,
+  runTool: tierANoSeek
+}).then(record => {
+  assert.strictEqual(record.capture.fidelity, 'live-edge', 'seek 沒落地 + 回溯 > 15 分 → live-edge');
+  assert.strictEqual(record.capture.dvrRewindMinutes, 0, 'live-edge 不宣稱回溯');
+  assert.strictEqual(record.capture.frameEffectiveTimeUtc, record.capture.capturedAt, 'live-edge 畫面時刻 = 擷取當下');
+  assert.notStrictEqual(record.capture.frameEffectiveTimeUtc, record.targetTime, 'live-edge 不得冒充 targetTime');
+  assert.strictEqual(isExactLiveFrameRecord(record), false, 'live-edge 不算 exact 影格');
+  console.log('✅ live-edge 影格誠實標記正確');
+  fs.rmSync(dirLiveEdge, { recursive: true, force: true });
+
+  return runCapturePipeline('sunset', {
+    now: new Date(sunsetEvent.getTime() + 40 * 60000),
+    dataDir: dirSeekOk,
+    runTool: tierASeekOk
+  });
+}).then(record => {
+  assert.strictEqual(record.capture.fidelity, 'exact', 'seek 確實落地 → 維持 exact');
+  assert.strictEqual(record.capture.frameEffectiveTimeUtc, record.targetTime, 'exact 影格畫面時刻 = targetTime');
+  assert.strictEqual(isExactLiveFrameRecord(record), true);
+  console.log('✅ 確認 DVR seek 落地時維持 exact');
+  fs.rmSync(dirSeekOk, { recursive: true, force: true });
+}).catch(err => {
+  console.error('❌ live-edge 標記測試未通過:', err.message);
+  process.exit(1);
+});
