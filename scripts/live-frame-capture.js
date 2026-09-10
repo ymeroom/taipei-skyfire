@@ -210,6 +210,9 @@ function captureLiveFrame({
 
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
   const temporaryPath = `${outputPath}.${process.pid}.tmp.jpg`;
+  // 只有「seek 出來的片段確實轉出了這張 JPEG」才算 true。落回直播邊緣
+  // (seek 沒跑 / 拋錯 / .ts 太小) 時保持 false，讓上層據此標成 live-edge。
+  let dvrSeekApplied = false;
 
   try {
     // YouTube 對資料中心 IP 施行 bot check；提供 cookies 可解除。
@@ -269,6 +272,9 @@ function captureLiveFrame({
                   '-q:v', '2',
                   temporaryPath
                 ]);
+                if (fs.existsSync(temporaryPath) && fs.statSync(temporaryPath).size > 10000) {
+                  dvrSeekApplied = true;
+                }
               }
               if (fs.existsSync(tempTs)) fs.rmSync(tempTs, { force: true });
             }
@@ -306,7 +312,8 @@ function captureLiveFrame({
       windowEvidence,
       probe: JSON.parse(probeText),
       sha256,
-      capturedAt
+      capturedAt,
+      dvrSeekApplied
     });
 
     fs.renameSync(temporaryPath, outputPath);

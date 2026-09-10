@@ -9,10 +9,11 @@ const path = require('path');
 const SolarCalc = require('../js/solar-calc.js');
 const WeatherService = require('../js/weather-service.js');
 const {
-  OFFICIAL_STREAMS,
+  sessionStreams,
   getTaipeiDateString,
   resolveSessionType,
-  assertCaptureWindow
+  assertCaptureWindow,
+  LIVE_EDGE_FIDELITY
 } = require('./live-capture-core.js');
 const { captureLiveFrame, capturePosterFrame } = require('./live-frame-capture.js');
 
@@ -50,6 +51,34 @@ function buildPredictionFromLock(lockedData) {
   };
 }
 
+/**
+ * 從每站鎖定區塊 (lockedData.stations[stationId]) 取出該站的預測欄位。
+ * 站不存在時回傳 null，讓呼叫端退回即時預測。
+ */
+function buildPredictionFromStationLock(lockedData, stationId) {
+  const s = lockedData && lockedData.stations && lockedData.stations[stationId];
+  if (!s) return null;
+  const w = s.weather || {};
+  const m = s.metrics || {};
+  const num = v => (typeof v === 'number' && Number.isFinite(v) ? v : null);
+  const visKm = num(w.visibilityKm);
+  return {
+    score: s.score,
+    rating: s.rating,
+    color: s.color,
+    highCloud: num(w.cloudHigh),
+    midCloud: num(w.cloudMid),
+    lowCloud: num(w.cloudLow),
+    totalCloud: num(w.cloudTotal),
+    humidity: num(w.humidity),
+    precipProb: num(w.precipProb),
+    horizonClearance: num(m.horizonClearance),
+    visibilityKm: visKm !== null ? visKm : num(m.visKm),
+    isSimulated: false,
+    lockedAt: lockedData.lockedAt
+  };
+}
+
 function loadRecords(recordsFile) {
   if (!fs.existsSync(recordsFile)) return [];
   try {
@@ -68,7 +97,166 @@ function writeRecord(recordsFile, record) {
   } else {
     records.unshift(record);
   }
-  fs.writeFileSync(recordsFile, JSON.stringify(records.slice(0, 90), null, 2), 'utf8');
+  // 每場 8 站 → 90 筆只夠 ~11 天。720 筆 ≈ 90 天季節跨度。
+  fs.writeFileSync(recordsFile, JSON.stringify(records.slice(0, 720), null, 2), 'utf8');
+  return record;
+}
+
+function stationSnapshotUrl(dateStr, sessionType, stationId) {
+  return `data/snapshots/${dateStr}/${sessionType}/${stationId}.jpg`;
+}
+
+// 預測解析順序：每站鎖定區塊 → 頂層共用鎖定 (舊格式/相容) → 該站座標的即時預測。
+async function resolveStationPrediction(lockedData, station, sessionType, dateStr) {
+  if (lockedData) {
+    const perStation = buildPredictionFromStationLock(lockedData, station.id);
+    if (perStation) return perStation;
+    if (lockedData.skyfire) return buildPredictionFromLock(lockedData);
+  }
+  const forecastData = await WeatherService.fetchForecast(true, { lat: station.lat, lng: station.lng });
+  const day = forecastData.daysForecast.find(d =>
+    getTaipeiDateString(new Date(d.date)) === dateStr
+  ) || forecastData.daysForecast[0];
+  const sf = day[sessionType];
+  const w = sf.weather || {};
+  return {
+    score: sf.skyfire.score,
+    rating: sf.skyfire.rating.badge,
+    color: sf.skyfire.rating.color,
+    highCloud: w.cloudHigh ?? null,
+    midCloud: w.cloudMid ?? null,
+    lowCloud: w.cloudLow ?? null,
+    totalCloud: w.cloudTotal ?? null,
+    humidity: w.humidity ?? null,
+    precipProb: w.precipProb ?? null,
+    horizonClearance: sf.skyfire.metrics.horizonClearance,
+    visibilityKm: sf.skyfire.metrics.visKm,
+    isSimulated: forecastData.isSimulated === true
+  };
+}
+
+function unavailableStationRecord(station, ctx, errorMessage, prediction = {}) {
+  return {
+    id: `rec-${ctx.dateStr}-${ctx.sessionType}-${station.id}`,
+    date: ctx.dateStr,
+    session: ctx.sessionType,
+    station: station.id,
+    targetTime: ctx.eventTime.toISOString(),
+    source: station.name,
+    prediction,
+    snapshotUrl: null,
+    capture: {
+      kind: null,
+      fidelity: 'none',
+      validated: false,
+      capturedAt: ctx.capturedAt.toISOString(),
+      offsetMinutes: ctx.captureWindow.offsetMinutes,
+      error: errorMessage
+    },
+    verification: {
+      status: 'capture_unavailable',
+      groundTruthScore: null,
+      errorAbsolute: null,
+      isSimulated: false
+    }
+  };
+}
+
+// 單站擷取：分層 Tier A → Tier B，套用 live-edge 誠實標記，寫入該站紀錄。
+async function captureOneStation(station, ctx) {
+  const { dateStr, sessionType, eventTime, captureWindow, windowError, capturedAt, dataDir, lockedData, options, recordsFile } = ctx;
+
+  const snapshotUrl = stationSnapshotUrl(dateStr, sessionType, station.id);
+  const snapshotPath = path.join(dataDir, 'snapshots', dateStr, sessionType, `${station.id}.jpg`);
+  fs.mkdirSync(path.dirname(snapshotPath), { recursive: true });
+
+  let prediction = {};
+  try {
+    prediction = await resolveStationPrediction(lockedData, station, sessionType, dateStr);
+  } catch (err) {
+    console.warn(`[capture] ${station.id}: 預測解析失敗，仍嘗試擷取影格 (${err.message})`);
+  }
+
+  const runTool = (options.runToolFor && options.runToolFor(station.id)) || options.runTool;
+
+  let capture = null;
+  let fallbackReason = windowError;
+  try {
+    if (windowError) throw new Error(windowError);
+    const exact = captureLiveFrame({
+      source: station,
+      outputPath: snapshotPath,
+      windowEvidence: captureWindow,
+      capturedAt,
+      runTool
+    });
+    capture = { ...exact, fidelity: 'exact' };
+  } catch (error) {
+    fallbackReason = error.message;
+    if (!windowError) {
+      try {
+        capture = capturePosterFrame({
+          source: station,
+          outputPath: snapshotPath,
+          windowEvidence: captureWindow,
+          capturedAt,
+          fetchImage: options.fetchImage
+        });
+      } catch (posterError) {
+        fallbackReason = `${fallbackReason} | poster: ${posterError.message}`;
+      }
+    }
+  }
+
+  if (!capture) {
+    const rec = unavailableStationRecord(station, ctx, fallbackReason, prediction);
+    console.log(`[capture] ${station.id}: capture_unavailable (${fallbackReason})`);
+    return writeRecord(recordsFile, rec);
+  }
+
+  const fileName = `${station.id}.jpg`;
+  const offsetAbs = Math.abs(captureWindow.offsetMinutes);
+  const isLiveEdgeFrame = Boolean(
+    capture.fidelity === 'exact' && capture.dvrSeekApplied !== true && offsetAbs > 15
+  );
+  const effectiveFidelity = isLiveEdgeFrame ? LIVE_EDGE_FIDELITY : capture.fidelity || 'exact';
+
+  const rec = {
+    id: `rec-${dateStr}-${sessionType}-${station.id}`,
+    date: dateStr,
+    session: sessionType,
+    station: station.id,
+    targetTime: eventTime.toISOString(),
+    source: station.name,
+    prediction,
+    snapshotUrl,
+    capture: {
+      width: capture.width,
+      height: capture.height,
+      fileName,
+      sha256: capture.sha256,
+      capturedAt: capturedAt.toISOString(),
+      frameEffectiveTimeUtc: isLiveEdgeFrame ? capturedAt.toISOString() : eventTime.toISOString(),
+      offsetMinutes: captureWindow.offsetMinutes,
+      dvrRewindMinutes: isLiveEdgeFrame ? 0 : captureWindow.offsetMinutes,
+      dvrSeekApplied: capture.dvrSeekApplied === true,
+      kind: capture.kind || 'youtube-live-frame',
+      fidelity: effectiveFidelity,
+      posterQuality: capture.posterQuality || null,
+      fallbackReason: isLiveEdgeFrame
+        ? (fallbackReason || 'DVR seek did not land; captured the live edge instead')
+        : (capture.fidelity === 'degraded' ? fallbackReason : null),
+      validated: true
+    },
+    verification: {
+      status: 'captured_ready_for_scoring',
+      groundTruthScore: null,
+      errorAbsolute: null,
+      isSimulated: false
+    }
+  };
+  console.log(`[capture] ${station.id}: ${effectiveFidelity} ${capture.width}x${capture.height}`);
+  return writeRecord(recordsFile, rec);
 }
 
 async function runCapturePipeline(inputSession = '', options = {}) {
@@ -77,216 +265,61 @@ async function runCapturePipeline(inputSession = '', options = {}) {
     inputSession,
     options.schedule || process.env.GITHUB_EVENT_SCHEDULE || ''
   );
-  const source = OFFICIAL_STREAMS[sessionType];
   const dateStr = getTaipeiDateString(now);
   const targetDate = new Date(`${dateStr}T12:00:00+08:00`);
   const solarTimes = SolarCalc.getTimes(targetDate);
   const eventTime = sessionType === 'sunrise' ? solarTimes.sunrise : solarTimes.sunset;
-  // 自架 runner 的機器可能關機，job 會排隊到開機才執行；GitHub 排程本身
-  // 也有數小時延遲。超出擷取窗口是可預期的營運狀況，不該讓整個 job 變紅，
-  // 但也絕不能拿窗口外的影格充當出景當刻的 ground truth。
-  // 因此：不擷取、誠實記錄，並以 exit 0 讓後續日報照常產出。
   const offsetMinutes = Math.round((now.getTime() - eventTime.getTime()) / 60000);
+
   let windowError = null;
   try {
-    assertCaptureWindow({
-      now,
-      eventTime,
-      sessionType,
-      maxOffsetMinutes: MAX_CAPTURE_OFFSET_MINUTES
-    });
+    assertCaptureWindow({ now, eventTime, sessionType, maxOffsetMinutes: MAX_CAPTURE_OFFSET_MINUTES });
   } catch (error) {
     windowError = error.message;
   }
 
-  console.log('====================================================');
-  console.log(`📸 啟動實況影格擷取管線 [${sessionType}]`);
-  console.log(`📅 台北觀測日期: ${dateStr}`);
-  console.log(`⏰ 天文時刻: ${SolarCalc.formatTime(eventTime)} / 啟動偏移: ${offsetMinutes} 分鐘`);
-  if (windowError) {
-    console.warn(`⚠️ ${windowError}`);
-    console.warn('   跳過擷取：窗口外的影格不能充當出景當刻的實況證據');
-  }
-  console.log(`📍 官方直播: ${source.name}`);
+  const capturedAt = now;
+  const captureWindow = windowError
+    ? { eventTime: eventTime.toISOString(), offsetMinutes, maxOffsetMinutes: MAX_CAPTURE_OFFSET_MINUTES }
+    : assertCaptureWindow({ now: capturedAt, eventTime, sessionType, maxOffsetMinutes: MAX_CAPTURE_OFFSET_MINUTES });
 
   const dataDir = options.dataDir || path.join(__dirname, '../data');
-  const outputDir = path.join(dataDir, 'snapshots');
-  const snapshotFileName = `${dateStr}-${sessionType}.jpg`;
-  const snapshotPath = path.join(outputDir, snapshotFileName);
   const recordsFile = path.join(dataDir, 'verification-records.json');
 
-  let predictionScore = null;
-  let predictionData = {};
-  
-  // 嘗試讀取提前鎖定的預測
+  let lockedData = null;
   const lockFile = path.join(dataDir, `locked-${sessionType}-forecast.json`);
   if (fs.existsSync(lockFile)) {
     try {
-      const lockedData = JSON.parse(fs.readFileSync(lockFile, 'utf8'));
-      if (lockedData.date === dateStr && lockedData.skyfire) {
-        console.log(`[Lock Forecast] 成功讀取提前鎖定的預測分數: ${lockedData.skyfire.score}`);
-        predictionData = buildPredictionFromLock(lockedData);
-        predictionScore = predictionData.score;
-      }
+      const parsed = JSON.parse(fs.readFileSync(lockFile, 'utf8'));
+      if (parsed.date === dateStr) lockedData = parsed;
     } catch (e) {
-      console.warn('讀取鎖定預測失敗，降級為即時預測', e.message);
+      console.warn('讀取鎖定預測失敗，改用即時預測', e.message);
     }
   }
 
-  // 如果沒有鎖定資料，則抓取即時資料
-  if (!predictionScore) {
-    const forecastData = await WeatherService.fetchForecast(true);
-    const matchingDay = forecastData.daysForecast.find(day =>
-      getTaipeiDateString(new Date(day.date)) === dateStr
-    ) || forecastData.daysForecast[0];
-    const sessionForecast = matchingDay[sessionType];
-    console.log(`即時預測分數: ${sessionForecast.skyfire.score} 分 (${sessionForecast.skyfire.rating.badge})`);
-    
-    const w = sessionForecast.weather || {};
-    predictionData = {
-      score: sessionForecast.skyfire.score,
-      rating: sessionForecast.skyfire.rating.badge,
-      color: sessionForecast.skyfire.rating.color,
-      highCloud: w.cloudHigh ?? null,
-      midCloud: w.cloudMid ?? null,
-      lowCloud: w.cloudLow ?? null,
-      totalCloud: w.cloudTotal ?? null,
-      humidity: w.humidity ?? null,
-      precipProb: w.precipProb ?? null,
-      horizonClearance: sessionForecast.skyfire.metrics.horizonClearance,
-      visibilityKm: sessionForecast.skyfire.metrics.visKm,
-      isSimulated: forecastData.isSimulated === true
-    };
+  const stations = sessionStreams(sessionType);
+  console.log('====================================================');
+  console.log(`📸 啟動實況影格擷取管線 [${sessionType}] ${stations.length} 站`);
+  console.log(`📅 台北觀測日期: ${dateStr} / ⏰ ${SolarCalc.formatTime(eventTime)} / 偏移: ${offsetMinutes} 分`);
+  if (windowError) {
+    console.warn(`⚠️ ${windowError} —— 跳過擷取、誠實記錄`);
   }
 
-  console.log('準備利用 yt-dlp 擷取影片，再以 ffmpeg 輸出為截圖...');
-
-  const capturedAt = options.now instanceof Date ? options.now : new Date();
-  const captureWindow = windowError
-    ? { eventTime: eventTime.toISOString(), offsetMinutes, maxOffsetMinutes: MAX_CAPTURE_OFFSET_MINUTES }
-    : assertCaptureWindow({
-        now: capturedAt,
-        eventTime,
-        sessionType,
-        maxOffsetMinutes: MAX_CAPTURE_OFFSET_MINUTES
-      });
-
-  // ------------------------------------------------------------------
-  // 分層擷取策略
-  //
-  // Tier A: yt-dlp + ffmpeg 取回精確直播影格 (fidelity: exact)
-  //   YouTube 對資料中心 IP 施行 bot check，GitHub 託管 runner 必然失敗。
-  //   設定 YT_COOKIES secret 或改用自架 runner (residential IP) 即可啟用。
-  // Tier B: i.ytimg.com 靜態 CDN 的直播海報影格 (fidelity: degraded)
-  //   不經 bot check，是真實但可能落後數分鐘的畫面。
-  // 兩層皆失敗時誠實記錄 capture_unavailable，絕不捏造 ground truth，
-  // 也絕不拋出 —— 否則後續的光學評分與每日日報會被整串跳過。
-  // ------------------------------------------------------------------
-  let capture = null;
-  let fallbackReason = windowError;
-
-  try {
-    if (windowError) {
-      throw new Error(windowError);
-    }
-    const exact = captureLiveFrame({
-      source,
-      outputPath: snapshotPath,
-      windowEvidence: captureWindow,
-      capturedAt,
-      runTool: options.runTool
-    });
-    capture = { ...exact, fidelity: 'exact' };
-    console.log(`Tier A 精確影格已驗證: ${capture.width}x${capture.height}`);
-  } catch (error) {
-    fallbackReason = error.message;
-    if (windowError) {
-      // 窗口外不做任何擷取：海報影格同樣無法代表出景當刻，
-      // 保持 capture = null，後續會產出 capture_unavailable 紀錄。
-      console.warn('已超出擷取窗口，不進行降級擷取');
-    } else {
-    console.warn(`Tier A (yt-dlp 精確影格) 失敗: ${error.message}`);
-    console.warn('降級嘗試 Tier B: i.ytimg.com 直播海報影格...');
+  const ctx = { dateStr, sessionType, eventTime, captureWindow, windowError, capturedAt, dataDir, lockedData, options, recordsFile };
+  const results = [];
+  for (const st of stations) {
     try {
-      capture = capturePosterFrame({
-        source,
-        outputPath: snapshotPath,
-        windowEvidence: captureWindow,
-        capturedAt,
-        fetchImage: options.fetchImage
-      });
-      console.log(`Tier B 海報影格已取得: ${capture.width}x${capture.height} (${capture.posterQuality})`);
-    } catch (posterError) {
-      console.error(`Tier B 亦失敗: ${posterError.message}`);
-      fallbackReason = `${fallbackReason} | poster: ${posterError.message}`;
-    }
+      results.push(await captureOneStation(st, ctx));
+    } catch (err) {
+      console.error(`[capture] ${st.id} 未預期錯誤，記為 capture_unavailable: ${err.message}`);
+      results.push(writeRecord(recordsFile, unavailableStationRecord(st, ctx, err.message)));
     }
   }
 
-  const baseRecord = {
-    id: `rec-${dateStr}-${sessionType}`,
-    date: dateStr,
-    session: sessionType,
-    targetTime: eventTime.toISOString(),
-    source: source.name,
-    prediction: predictionData
-  };
-
-  const record = capture
-    ? {
-        ...baseRecord,
-        snapshotUrl: `data/snapshots/${snapshotFileName}`,
-        capture: {
-          width: capture.width,
-          height: capture.height,
-          fileName: snapshotFileName,
-          sha256: capture.sha256,
-          // capturedAt = 腳本執行當下；frameEffectiveTimeUtc = 影格畫面實際所屬的
-          // 天文時刻 (== targetTime，DVR 已回溯至此)；offsetMinutes = 兩者之間、
-          // 亦即本次 DVR 回溯的分鐘數。三者不同義，勿混用。fidelity: 'exact' 時
-          // 影格即代表 frameEffectiveTimeUtc 當刻，不受 offsetMinutes 大小影響。
-          capturedAt: capturedAt.toISOString(),
-          frameEffectiveTimeUtc: eventTime.toISOString(),
-          offsetMinutes: captureWindow.offsetMinutes,
-          dvrRewindMinutes: captureWindow.offsetMinutes,
-          kind: capture.kind || 'youtube-live-frame',
-          fidelity: capture.fidelity || 'exact',
-          posterQuality: capture.posterQuality || null,
-          fallbackReason: capture.fidelity === 'degraded' ? fallbackReason : null,
-          validated: true
-        },
-        verification: {
-          status: 'captured_ready_for_scoring',
-          groundTruthScore: null,
-          errorAbsolute: null,
-          isSimulated: false
-        }
-      }
-    : {
-        ...baseRecord,
-        snapshotUrl: null,
-        capture: {
-          kind: null,
-          fidelity: 'none',
-          validated: false,
-          capturedAt: capturedAt.toISOString(),
-          offsetMinutes: captureWindow.offsetMinutes,
-          error: fallbackReason
-        },
-        verification: {
-          status: 'capture_unavailable',
-          groundTruthScore: null,
-          errorAbsolute: null,
-          isSimulated: false
-        }
-      };
-
-  writeRecord(recordsFile, record);
-  console.log(capture
-    ? `驗證紀錄已更新 (${record.capture.fidelity}): SHA-256 ${capture.sha256}`
-    : '已誠實記錄 capture_unavailable，未捏造任何 ground truth');
+  const ok = results.filter(r => r.snapshotUrl).length;
+  console.log(`✅ ${ok}/${stations.length} 站擷取到影格`);
   console.log('====================================================\n');
-  return record;
+  return results;
 }
 
 if (require.main === module) {
@@ -299,6 +332,7 @@ if (require.main === module) {
 module.exports = {
   MAX_CAPTURE_OFFSET_MINUTES,
   buildPredictionFromLock,
+  buildPredictionFromStationLock,
   loadRecords,
   writeRecord,
   runCapturePipeline

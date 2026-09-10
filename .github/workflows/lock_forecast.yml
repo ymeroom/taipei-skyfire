@@ -23,6 +23,7 @@ permissions:
 jobs:
   lock-forecast:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     env:
       TZ: Asia/Taipei
 
@@ -40,6 +41,9 @@ jobs:
           MANUAL_SESSION: ${{ inputs.session }}
           EVENT_SCHEDULE: ${{ github.event.schedule }}
         run: node scripts/lock-forecast.js
+
+      - name: 🗂️ 產生今晚各機位排名
+        run: node scripts/build-tonight-stations.js
 
       - name: Commit & Push Locked Forecast
         run: |

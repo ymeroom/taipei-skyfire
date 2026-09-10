@@ -12,9 +12,12 @@ const {
   finalizeCaptureEvidence,
   validateOpticalResult,
   isValidatedLiveCaptureRecord,
+  isExactLiveFrameRecord,
   isVerifiedLiveFrameRecord,
   resolveScheduledInstant,
   resolveLockTarget,
+  EXACT_CAPTURE_KIND,
+  LIVE_EDGE_FIDELITY,
 } = require('../scripts/live-capture-core.js');
 
 console.log('--- 🧪 測試 6: 真實日出／日落直播影格驗證政策 ---');
@@ -209,6 +212,27 @@ assert.throws(
 console.log('✅ 排程時刻回推正確');
 
 // ----------------------------------------------------------------
+// live-edge fidelity 不得計入「精確影格」—— 招牌準確率統計與 ground truth 皆排除
+// ----------------------------------------------------------------
+assert.strictEqual(
+  isExactLiveFrameRecord({
+    snapshotUrl: 'data/snapshots/x.jpg',
+    capture: { kind: EXACT_CAPTURE_KIND, validated: true, fidelity: LIVE_EDGE_FIDELITY }
+  }),
+  false,
+  'live-edge fidelity 不算 exact 影格'
+);
+assert.strictEqual(
+  isExactLiveFrameRecord({
+    snapshotUrl: 'data/snapshots/x.jpg',
+    capture: { kind: EXACT_CAPTURE_KIND, validated: true, fidelity: 'exact' }
+  }),
+  true,
+  'exact fidelity 仍算 exact 影格'
+);
+console.log('✅ live-edge fidelity 排除於精確影格之外');
+
+// ----------------------------------------------------------------
 // 鎖定目標解析：由排定時刻 (而非執行時刻) 決定時段與目標日期
 // ----------------------------------------------------------------
 const delayedSunset = resolveLockTarget({
@@ -252,5 +276,17 @@ assert.strictEqual(manual.dateStr, '2026-09-01', '手動觸發於清晨時應鎖
 assert.strictEqual(manual.scheduledAt, null, '手動觸發沒有排定時刻');
 
 console.log('✅ 鎖定目標由排定時刻決定，不受排程延遲影響');
+
+// ----------------------------------------------------------------
+// sessionStreams：擷取清單由測站註冊表衍生
+// ----------------------------------------------------------------
+const { sessionStreams } = require('../scripts/live-capture-core.js');
+assert.strictEqual(sessionStreams('sunset').length, 6, '日落 6 站');
+assert.strictEqual(sessionStreams('sunrise').length, 2, '日出 2 站');
+assert.ok(sessionStreams('sunset').every(s => /^[\w-]{11}$/.test(s.videoId)), '每站有合法 videoId');
+assert.ok(sessionStreams('sunset').every(s => Number.isFinite(s.lat) && Number.isFinite(s.lng)), '每站帶座標 (供 live fallback)');
+assert.strictEqual(OFFICIAL_STREAMS.sunset.id, 'dadaocheng', '日落主測站仍為大稻埕');
+assert.strictEqual(OFFICIAL_STREAMS.sunrise.id, 'hongludi', '日出主測站改為烘爐地');
+console.log('✅ sessionStreams 由測站註冊表衍生、主測站正確');
 
 console.log('🎉 真實直播影格驗證政策測試全數 PASS!\n');

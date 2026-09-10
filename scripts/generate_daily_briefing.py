@@ -46,25 +46,58 @@ def _load_json(path, default):
         return default
 
 
-def resolve_target_record(records, session, today_str):
-    """優先取今日該時段紀錄；沒有的話只接受「昨天」的同時段紀錄 (排程跨午夜延遲)。
+def _load_stations():
+    """data/stations.json → {id: {...}}。缺檔時回空 dict (下游會退回 record 的 source)。"""
+    data = _load_json(os.path.join(DATA_DIR, "stations.json"), {})
+    rows = data.get("stations") if isinstance(data, dict) else data
+    return {s["id"]: s for s in (rows or []) if isinstance(s, dict) and s.get("id")}
 
-    刻意不退回更舊的紀錄：擷取整個失敗時 (window miss / capture step error)，
-    今日就是「尚無實測」，不該拿前天的報告重新掛上今天的時間戳假裝有做。
-    verification-records.json 依慣例新→舊排列 (capture-validation.js 用 unshift)。
+
+STATIONS_META = _load_stations()
+
+
+def _primary_station_id(session):
+    for s in STATIONS_META.values():
+        if s.get("session") == session and s.get("isPrimary"):
+            return s["id"]
+    return None
+
+
+def _sort_primary_first(recs, session):
+    pid = _primary_station_id(session)
+    return sorted(recs, key=lambda r: (r.get("station") != pid,))
+
+
+def _matches(rec, session, date_str):
+    if rec.get("session") != session or rec.get("date") != date_str:
+        return False
+    rid = rec.get("id", "")
+    return rid == f"rec-{date_str}-{session}" or rid.startswith(f"rec-{date_str}-{session}-")
+
+
+def resolve_target_records(records, session, today_str):
+    """該時段當日全部測站紀錄；當日沒有才退回「昨天」(排程跨午夜延遲)，更舊不退回。
+
+    擷取整場失敗時，今日就是「尚無實測」，不該拿前天的報告掛今天時間戳假裝有做。
+    回傳依主測站優先排序的 list。
     """
-    exact = next((r for r in records if r.get("id") == f"rec-{today_str}-{session}"), None)
-    if exact:
-        return exact
     try:
         yesterday = (datetime.date.fromisoformat(today_str) - datetime.timedelta(days=1)).isoformat()
     except ValueError:
         yesterday = None
-    return next(
-        (r for r in records
-         if r.get("session") == session and r.get("date") in (today_str, yesterday)),
-        None,
-    )
+    for d in (today_str, yesterday):
+        if d is None:
+            continue
+        recs = [r for r in records if _matches(r, session, d)]
+        if recs:
+            return _sort_primary_first(recs, session)
+    return []
+
+
+def resolve_target_record(records, session, today_str):
+    """resolve_target_records 的單筆版：回傳主測站紀錄 (或 None)。"""
+    recs = resolve_target_records(records, session, today_str)
+    return recs[0] if recs else None
 
 
 def clean_cloud_bands(high, mid, low, has_structured_inputs):
@@ -133,40 +166,77 @@ def is_verified(ground_truth):
     return ground_truth.get("verdict") not in (None, "PENDING")
 
 
-def build_station_rows(record, prediction, ground_truth):
-    """單列：直接對應本場唯一一個官方直播機位的真實擷取結果。
+def build_station_rows(station_records):
+    """每站一列，全部欄位取自該站的真實 verification 紀錄。
 
-    舊版此處是 2~6 個手寫測站段落，與當天實況無關，且逐日一字不差 ——
-    正是那份靜態文字讓「日報造假」長期沒被發現。
+    phasePrep / phasePost 永遠 "—"：手寫測站敘述正是當初「日報造假」的載體，
+    絕不重新引入。
     """
-    if not record:
-        return []
+    rows = []
+    for r in station_records:
+        sid = r.get("station")
+        meta = STATIONS_META.get(sid, {})
+        v = r.get("verification") or {}
+        status = v.get("status")
 
-    if is_verified(ground_truth):
-        peak = f"光學觀測判定 {ground_truth['score']} 分（{ground_truth.get('rating') or '—'}）"
-    elif (record.get("verification") or {}).get("status") == "capture_unavailable":
-        peak = "出景窗口外或擷取失敗，本場無實測影格"
-    else:
-        peak = "影格已擷取，光學評分尚未完成"
+        if status == "verified_completed" and v.get("groundTruthScore") is not None:
+            verdict_val = v.get("verdict") or "MISMATCH"
+            peak = f"光學觀測判定 {v['groundTruthScore']} 分（{v.get('groundTruthBadge') or '—'}）"
+            verdict = v.get("verdictBadge") or verdict_val
+            color = VERDICT_COLORS.get(verdict_val, "#94A3B8")
+        elif status == "capture_unavailable":
+            peak, verdict, color = "擷取失敗，本場無實測影格", "⏳ 實測待驗證", "#94A3B8"
+        elif status == "skipped_out_of_window":
+            peak, verdict, color = "影格不在暮光窗口內，未評分", "⏳ 實測待驗證", "#94A3B8"
+        else:
+            peak, verdict, color = "影格已擷取，光學評分尚未完成", "⏳ 實測待驗證", "#94A3B8"
 
-    forecast = "—"
-    if prediction.get("score") is not None:
-        low = prediction.get("lowCloud")
-        forecast = f"{prediction['score']} 分"
-        if low is not None:
-            forecast += f"（低雲 {low}%）"
+        pred = r.get("prediction") or {}
+        forecast = "—"
+        if pred.get("score") is not None:
+            forecast = f"{pred['score']} 分"
+            if pred.get("lowCloud") is not None:
+                forecast += f"（低雲 {pred['lowCloud']}%）"
 
-    return [{
-        "name": record.get("source") or "官方直播影格",
-        "icon": "📸",
-        "tag": "官方 4K 直播・DVR 回溯精確影格",
-        "phasePrep": "—",
-        "phasePeak": peak,
-        "phasePost": "—",
-        "forecast": forecast,
-        "verdict": ground_truth.get("verdictBadge") or "⏳ 待驗證",
-        "verdictColor": ground_truth.get("color") or "#94A3B8",
-    }]
+        rows.append({
+            "name": meta.get("name") or r.get("source") or sid or "官方直播影格",
+            "icon": meta.get("icon") or "📹",
+            "tag": meta.get("tag") or "官方 4K 直播・DVR 回溯精確影格",
+            "phasePrep": "—",
+            "phasePeak": peak,
+            "phasePost": "—",
+            "forecast": forecast,
+            "verdict": verdict,
+            "verdictColor": color,
+        })
+    return rows
+
+
+def build_station_summary(station_records):
+    verified = [
+        r for r in station_records
+        if (r.get("verification") or {}).get("groundTruthScore") is not None
+    ]
+    out = {
+        "verified": len(verified),
+        "pending": len(station_records) - len(verified),
+        "bestStation": None,
+        "bestScore": None,
+        "worstError": None,
+        "meanError": None,
+    }
+    if verified:
+        best = max(verified, key=lambda r: r["verification"]["groundTruthScore"])
+        out["bestStation"] = best.get("station")
+        out["bestScore"] = best["verification"]["groundTruthScore"]
+        errs = [
+            r["verification"]["errorAbsolute"] for r in verified
+            if r["verification"].get("errorAbsolute") is not None
+        ]
+        if errs:
+            out["worstError"] = max(errs)
+            out["meanError"] = round(sum(errs) / len(errs), 1)
+    return out
 
 
 def build_summary_analysis(prediction, ground_truth):
@@ -188,12 +258,42 @@ def build_summary_analysis(prediction, ground_truth):
     return {"atmosphericReason": atmospheric, "modelPerformance": performance}
 
 
+def generate_briefing_obj(records, locked, session, date_str, published_at=None):
+    """純函式：由紀錄 + 鎖定檔組出一筆日報 dict (不碰檔案/時鐘)。"""
+    session_label = "清晨日出" if session == "sunrise" else "傍晚日落"
+    publish_time_label = "09:00 定時發布" if session == "sunrise" else "21:00 定時發布"
+
+    recs = _sort_primary_first(
+        [r for r in records if _matches(r, session, date_str)], session
+    )
+    primary = recs[0] if recs else None
+
+    if isinstance(locked, dict) and locked.get("date") and locked.get("date") != date_str:
+        locked = {}
+
+    prediction = build_prediction(primary, locked)
+    ground_truth = build_ground_truth(primary)
+
+    return {
+        "id": f"report-{date_str}-{session}",
+        "date": date_str,
+        "session": session,
+        "sessionLabel": session_label,
+        "publishedAt": published_at or datetime.datetime.now().isoformat(),
+        "publishTimeLabel": publish_time_label,
+        "title": f"{date_str} {session_label}實況觀測 vs. 模型預報總結",
+        "prediction": prediction,
+        "groundTruth": ground_truth,
+        "stations": build_station_rows(recs),
+        "stationSummary": build_station_summary(recs),
+        "summaryAnalysis": build_summary_analysis(prediction, ground_truth),
+    }
+
+
 def generate_briefing(session_override=None):
     now = datetime.datetime.now()  # workflow 已設 TZ=Asia/Taipei
     today_str = now.strftime("%Y-%m-%d")
     session = session_override or ("sunrise" if now.hour < 15 else "sunset")
-    session_label = "清晨日出" if session == "sunrise" else "傍晚日落"
-    publish_time_label = "09:00 定時發布" if session == "sunrise" else "21:00 定時發布"
 
     records = _load_json(os.path.join(DATA_DIR, "verification-records.json"), [])
     if not isinstance(records, list):
@@ -202,39 +302,20 @@ def generate_briefing(session_override=None):
     if not isinstance(locked, dict):
         locked = {}
 
-    record = resolve_target_record(records, session, today_str)
-    date_str = (record or {}).get("date") or today_str
+    resolved = resolve_target_records(records, session, today_str)
+    date_str = resolved[0]["date"] if resolved else today_str
 
-    # 鎖定檔對不上目標日期就別拿它的 summary / 回退預測
-    if locked.get("date") and locked.get("date") != date_str:
-        locked = {}
+    report_obj = generate_briefing_obj(records, locked, session, date_str, published_at=now.isoformat())
+    report_id = report_obj["id"]
+    session_label = report_obj["sessionLabel"]
 
-    report_id = f"report-{date_str}-{session}"
-    prediction = build_prediction(record, locked)
-    ground_truth = build_ground_truth(record)
-
-    print(f"=== 📰 產生每日實況日報: {date_str} {session_label} ({publish_time_label}) ===")
-    if record is None:
+    summary = report_obj["stationSummary"]
+    print(f"=== 📰 產生每日實況日報: {date_str} {session_label} ===")
+    if not resolved:
         print("⚠️ 找不到對應的 verification 紀錄 —— 產出「待實測驗證」佔位日報")
-    elif is_verified(ground_truth):
-        print(f"✅ 實測命中判定: {ground_truth['verdictBadge']} "
-              f"(預報 {prediction['score']} / 實測 {ground_truth['score']})")
     else:
-        print(f"⏳ 尚無實測結果 (capture status: {ground_truth.get('captureStatus')}) —— 標記為待驗證")
-
-    report_obj = {
-        "id": report_id,
-        "date": date_str,
-        "session": session,
-        "sessionLabel": session_label,
-        "publishedAt": now.isoformat(),
-        "publishTimeLabel": publish_time_label,
-        "title": f"{date_str} {session_label}實況觀測 vs. 模型預報總結",
-        "prediction": prediction,
-        "groundTruth": ground_truth,
-        "stations": build_station_rows(record, prediction, ground_truth),
-        "summaryAnalysis": build_summary_analysis(prediction, ground_truth),
-    }
+        print(f"📊 測站: {summary['verified']} 驗證 / {summary['pending']} 待驗；"
+              f"預報 {report_obj['prediction'].get('score')} / 實測 {report_obj['groundTruth'].get('score')}")
 
     reports_path = os.path.join(DATA_DIR, "daily-reports.json")
     reports = _load_json(reports_path, [])

@@ -92,8 +92,8 @@ def prune_old_bundles(base_dir, keep_days=BUNDLE_RETENTION_DAYS):
         print(f"    🧹 已清除 {removed} 個超過 {keep_days} 天的舊縮時資料夾")
 
 # 站點沿用 capture_standard_stations.py 已驗證可直播的頻道 ID，
-# 僅保留使用者指定的 7 站 (排除該檔案裡多出的「八里左岸」)。
-# lat/lng 取自 js/spots-data.js 同名機位，供雨天閘門查詢當地降雨用。
+# ⚠️ 機位清單須與 js/stations.js 同步（tests/test-stations.js 會比對 videoId）。
+# lat/lng 取自 js/stations.js 同名機位，供雨天閘門查詢當地降雨用。
 SUNRISE_STATIONS = [
     {"id": "waimushan", "name": "外木山", "url": "https://www.youtube.com/watch?v=A9pluEagLD4",
      "lat": 25.17594381403899, "lng": 121.70593771941236},
@@ -108,6 +108,8 @@ SUNSET_STATIONS = [
      "lat": 25.057045046459375, "lng": 121.50771810454582},
     {"id": "tamsui", "name": "淡水漁人碼頭", "url": "https://www.youtube.com/watch?v=xwAWSh35uuw",
      "lat": 25.18325188330396, "lng": 121.41209767613158},
+    {"id": "bali", "name": "八里左岸", "url": "https://www.youtube.com/watch?v=di-4DCblWq4",
+     "lat": 25.15470, "lng": 121.41030},
     {"id": "jiufen", "name": "九份", "url": "https://www.youtube.com/watch?v=XSD5ptYisw8",
      "lat": 25.110048954642046, "lng": 121.83829071730524},
     {"id": "maokong", "name": "貓空", "url": "https://www.youtube.com/watch?v=215ahZ_0rTg",

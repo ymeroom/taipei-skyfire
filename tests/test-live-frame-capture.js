@@ -143,6 +143,70 @@ try {
 }
 
 // ----------------------------------------------------------------
+// DVR seek 誠實標記 (dvrSeekApplied)
+// seek 後的 .ts 太小 / seek 拋錯 / 根本沒跑 seek 時，captureLiveFrame 會
+// 靜默改抓直播邊緣影格。此時必須回報 dvrSeekApplied:false，讓上層
+// (capture-validation.js) 把該影格標成 live-edge 而非冒充 exact。
+// ----------------------------------------------------------------
+{
+  const dvrSource = OFFICIAL_STREAMS.sunset;
+  const largeWindow = {
+    eventTime: '2026-09-10T10:07:00.000Z',
+    offsetMinutes: 300,
+    maxOffsetMinutes: 600
+  };
+  const ytJson = JSON.stringify({
+    id: dvrSource.videoId, is_live: true, live_status: 'is_live',
+    uploader_id: dvrSource.uploaderId, protocol: 'm3u8_native',
+    url: 'https://live.example/stream.m3u8', width: 1920, height: 1080, format_id: '95',
+    formats: [{ format_id: '95', url: 'https://hls.example/95.m3u8' }]
+  });
+  const goodJpeg = () => Buffer.concat([
+    Buffer.from([0xff, 0xd8, 0xff]), Buffer.alloc(12000, 0x42), Buffer.from([0xff, 0xd9])
+  ]);
+  const ffprobeJson = JSON.stringify({ streams: [{ codec_name: 'mjpeg', width: 1920, height: 1080 }] });
+
+  function dvrTool(tsBytes) {
+    return (command, args) => {
+      if (command === 'yt-dlp') return ytJson;
+      if (command === 'curl' && !args.includes('-o')) return 'https://seg.example/sq/1000/dur/5.0/segment.ts\n';
+      if (command === 'curl' && args.includes('-o')) { fs.writeFileSync(args[args.indexOf('-o') + 1], Buffer.alloc(tsBytes, 0x11)); return ''; }
+      if (command === 'ffmpeg') { fs.writeFileSync(args[args.length - 1], goodJpeg()); return ''; }
+      if (command === 'ffprobe') return ffprobeJson;
+      throw new Error(`unexpected tool: ${command}`);
+    };
+  }
+
+  // Case A: seek 下載的 .ts 太小 → 落回直播邊緣 → dvrSeekApplied:false
+  const dirA = fs.mkdtempSync(path.join(os.tmpdir(), 'skyfire-dvr-a-'));
+  try {
+    const evA = captureLiveFrame({
+      source: dvrSource, outputPath: path.join(dirA, 'a.jpg'),
+      runTool: dvrTool(4), capturedAt: new Date('2026-09-10T15:07:00.000Z'),
+      windowEvidence: largeWindow
+    });
+    assert.strictEqual(evA.dvrSeekApplied, false, 'seek 的 .ts 太小 → dvrSeekApplied 必須為 false');
+  } finally {
+    fs.rmSync(dirA, { recursive: true, force: true });
+  }
+
+  // Case B: seek 下載的 .ts 夠大、ffmpeg 成功轉出影格 → dvrSeekApplied:true
+  const dirB = fs.mkdtempSync(path.join(os.tmpdir(), 'skyfire-dvr-b-'));
+  try {
+    const evB = captureLiveFrame({
+      source: dvrSource, outputPath: path.join(dirB, 'b.jpg'),
+      runTool: dvrTool(50000), capturedAt: new Date('2026-09-10T15:07:00.000Z'),
+      windowEvidence: largeWindow
+    });
+    assert.strictEqual(evB.dvrSeekApplied, true, 'seek 成功轉出影格 → dvrSeekApplied 必須為 true');
+  } finally {
+    fs.rmSync(dirB, { recursive: true, force: true });
+  }
+
+  console.log('✅ DVR seek 誠實標記 (dvrSeekApplied) 正確');
+}
+
+// ----------------------------------------------------------------
 // 管線降級：yt-dlp 被 bot check 擋下時，必須降級到海報影格，
 // 並且絕不可讓整條管線失敗 —— 否則後續的光學評分與每日日報全被連坐跳過。
 // 這正是 2026-08-18 起排程連續 33 次全紅的原因。
@@ -185,7 +249,9 @@ module.exports = runCapturePipeline('sunset', {
   dataDir: degradedDir,
   runTool: botCheckError,
   fetchImage: () => buildJpeg(1280, 720)
-}).then(record => {
+}).then(records => {
+  assert.strictEqual(records.length, 6, '日落 6 站各一筆');
+  const record = records[0];
   assert.strictEqual(record.capture.kind, 'youtube-live-poster', 'yt-dlp 失敗後應降級為海報影格');
   assert.strictEqual(record.capture.fidelity, 'degraded', '降級證據必須明確標示');
   assert.match(record.capture.fallbackReason, /bot/i, '必須記錄降級原因');
@@ -200,7 +266,8 @@ module.exports = runCapturePipeline('sunset', {
     runTool: botCheckError,
     fetchImage: () => { throw new Error('cdn unreachable'); }
   });
-}).then(record => {
+}).then(records => {
+  const record = records[0];
   assert.strictEqual(record.verification.status, 'capture_unavailable', '應誠實記錄擷取不可用');
   assert.strictEqual(record.snapshotUrl, null, '無影像時不得指向任何快照檔');
   assert.strictEqual(record.verification.groundTruthScore, null, '不得捏造 ground truth');
@@ -218,7 +285,8 @@ module.exports = runCapturePipeline('sunset', {
     dataDir: staleDir,
     runTool: botCheckError,
     fetchImage: () => buildJpeg(1280, 720)
-  }).then(staleRecord => {
+  }).then(staleRecords => {
+    const staleRecord = staleRecords[0];
     assert.strictEqual(
       staleRecord.verification.status,
       'capture_unavailable',

@@ -34,7 +34,7 @@ jobs:
     # 取得 Tier A 精確影格 (住宅 IP 不受 YouTube bot check 影響)。
     # 未設定時使用 GitHub 託管 runner，Tier A 必失敗並降級為 Tier B 海報影格。
     runs-on: ${{ vars.CAPTURE_RUNNER || 'ubuntu-latest' }}
-    timeout-minutes: 20
+    timeout-minutes: 30
     defaults:
       run:
         # 自架 Windows runner 預設為 pwsh，明確指定 bash 讓兩種平台共用同一份語法
@@ -150,6 +150,10 @@ jobs:
         if: always()
         run: |
           "$PYTHON_BIN" scripts/generate_daily_briefing.py "${{ steps.session.outputs.value }}"
+
+      - name: 🗂️ 更新今晚各機位排名
+        if: always()
+        run: node scripts/build-tonight-stations.js "${{ steps.session.outputs.value }}"
 
       - name: 🚀 提交驗證數據至倉庫 (Commit & Push)
         if: always()

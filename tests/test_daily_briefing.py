@@ -44,6 +44,38 @@ assert briefing.resolve_target_record(records, "sunset", "2026-09-08") is None
 assert briefing.resolve_target_record([], "sunrise", "2026-09-07") is None
 print("✅ resolve_target_record：優先當日、其次僅接受昨日、更舊不退回")
 
+# --- generate_briefing_obj: 每站列 + stationSummary + 頂層主測站 ---
+station_records = [
+    {"id": "rec-2026-09-10-sunset-dadaocheng", "station": "dadaocheng", "date": "2026-09-10", "session": "sunset",
+     "prediction": {"score": 44, "lowCloud": 5, "highCloud": 0, "midCloud": 2, "humidity": 80},
+     "capture": {"kind": "youtube-live-frame", "validated": True, "fidelity": "exact"},
+     "verification": {"status": "verified_completed", "groundTruthScore": 15, "groundTruthBadge": "陰沉沉寂",
+                      "verdict": "MISMATCH", "verdictBadge": "⚠️ 出現偏差需校準", "errorAbsolute": 29}},
+    {"id": "rec-2026-09-10-sunset-tamsui", "station": "tamsui", "date": "2026-09-10", "session": "sunset",
+     "prediction": {"score": 51, "lowCloud": 8},
+     "verification": {"status": "skipped_out_of_window", "groundTruthScore": None}},
+]
+report = briefing.generate_briefing_obj(station_records, {}, "sunset", "2026-09-10", published_at="2026-09-10T21:00:00")
+assert len(report["stations"]) == 2, "兩站兩列"
+assert report["stations"][0]["name"].endswith("大稻埕碼頭"), "主測站列在最前、名稱取自 stations.json"
+assert report["stations"][0]["phasePrep"] == "—" and report["stations"][0]["phasePost"] == "—", "不含手寫敘述"
+assert "光學觀測判定 15" in report["stations"][0]["phasePeak"]
+assert report["stations"][0]["forecast"] == "44 分（低雲 5%）"
+assert report["stations"][1]["verdict"].startswith("⏳"), "skipped → 待驗證，不是命中"
+assert report["stationSummary"]["verified"] == 1
+assert report["stationSummary"]["pending"] == 1
+assert report["stationSummary"]["bestStation"] == "dadaocheng"
+assert report["prediction"]["score"] == 44, "頂層 prediction = 主測站"
+assert report["groundTruth"]["score"] == 15
+print("✅ generate_briefing_obj：每站真實列、stationSummary、頂層鏡射主測站、無手寫敘述")
+
+# 全 pending 佔位：無紀錄時仍產出合法報告
+empty_report = briefing.generate_briefing_obj([], {}, "sunset", "2026-09-10", published_at="x")
+assert empty_report["stations"] == []
+assert empty_report["stationSummary"]["verified"] == 0
+assert empty_report["groundTruth"]["verdict"] == "PENDING"
+print("✅ generate_briefing_obj：無紀錄時產出待驗證佔位")
+
 # --- build_ground_truth: verified ---
 gt = briefing.build_ground_truth({
     "verification": {
