@@ -63,28 +63,15 @@ function assertSnapshotIntegrity(snapshotPath, expectedSha256) {
   }
 }
 
-function runGroundTruthScoring(targetDateStr = '', inputSession = '', options = {}) {
-  const dataDir = options.dataDir || path.join(__dirname, '../data');
-  const recordsFile = path.join(dataDir, 'verification-records.json');
-  const dateStr = targetDateStr || getTaipeiDateString(options.now || new Date());
-  const sessionType = resolveSessionType(
-    inputSession,
-    options.schedule || process.env.GITHUB_EVENT_SCHEDULE || ''
-  );
-  const targetId = `rec-${dateStr}-${sessionType}`;
+function verdictForError(errorAbsolute) {
+  if (errorAbsolute <= 8) return { verdict: 'EXACT_MATCH', verdictBadge: '🎯 極致精準 (誤差 ≤ 8分)' };
+  if (errorAbsolute <= 18) return { verdict: 'SLIGHT_DEVIATION', verdictBadge: '⚡ 輕微偏差 (誤差 ≤ 18分)' };
+  return { verdict: 'MISMATCH', verdictBadge: '⚠️ 出現偏差需校準' };
+}
 
-  if (!fs.existsSync(recordsFile)) {
-    throw new Error('verification-records.json does not exist');
-  }
-
-  const records = JSON.parse(fs.readFileSync(recordsFile, 'utf8'));
-  const record = records.find(item => item.id === targetId);
-  if (!record) {
-    throw new Error(`exact capture record not found: ${targetId}`);
-  }
-  if (!isValidatedLiveCaptureRecord(record)) {
-    throw new Error(`record is not a validated livestream frame: ${targetId}`);
-  }
+// 對單筆已擷取影格：暮光窗口守門 → 光學評分 → 誤差判定，回寫該筆 verification。
+function scoreOneRecord(record, ctx) {
+  const { dataDir, analyzer } = ctx;
 
   // 暮光窗口守門：live-edge 影格、或畫面時刻落在 targetTime 曙暮光窗口外者，
   // 不是出景當刻的實況證據 —— 標記跳過、不評分、不捏造 ground truth，也不讓 job 失敗。
@@ -100,9 +87,8 @@ function runGroundTruthScoring(targetDateStr = '', inputSession = '', options = 
       verifiedAt: new Date().toISOString(),
       isSimulated: false
     };
-    fs.writeFileSync(recordsFile, JSON.stringify(records, null, 2), 'utf8');
     console.log(`⏭️  ${record.id}: ${reason} —— 跳過光學評分`);
-    return record;
+    return;
   }
 
   const snapshotPath = path.resolve(dataDir, '..', record.snapshotUrl);
@@ -112,33 +98,15 @@ function runGroundTruthScoring(targetDateStr = '', inputSession = '', options = 
   }
   assertSnapshotIntegrity(snapshotPath, record.capture.sha256);
 
-  console.log('====================================================');
-  console.log('🔬 Phase 2: 實況天空光學色彩分析');
-  console.log(`📸 影像: ${record.snapshotUrl}`);
-  console.log(`🔗 來源: ${record.youtubeLiveUrl}`);
-
-  // targetTime (非 capture.capturedAt) 才是影格畫面實際所屬的天文時刻 ——
-  // capturedAt 記的是腳本執行的當下，DVR 回溯量大時兩者可能差到數小時。
-  // 用 targetTime 餵暗夜閘門，暮光窗口外的暖色像素 (路燈/船燈/燈籠) 一律強制低分。
-  const analyzer = options.runAnalyzer || runPythonAnalyzer;
   const opticalResult = validateOpticalResult(analyzer(
     path.join(__dirname, 'analyze_sky_ground_truth.py'),
     snapshotPath,
     record.targetTime
   ));
 
-  const predictedScore = record.prediction.score;
   const groundTruthScore = opticalResult.score;
-  const errorAbsolute = Math.abs(predictedScore - groundTruthScore);
-  let verdict = 'MISMATCH';
-  let verdictBadge = '⚠️ 出現偏差需校準';
-  if (errorAbsolute <= 8) {
-    verdict = 'EXACT_MATCH';
-    verdictBadge = '🎯 極致精準 (誤差 ≤ 8分)';
-  } else if (errorAbsolute <= 18) {
-    verdict = 'SLIGHT_DEVIATION';
-    verdictBadge = '⚡ 輕微偏差 (誤差 ≤ 18分)';
-  }
+  const errorAbsolute = Math.abs(record.prediction.score - groundTruthScore);
+  const { verdict, verdictBadge } = verdictForError(errorAbsolute);
 
   record.verification = {
     captureFidelity: record.capture.fidelity || 'exact',
@@ -158,11 +126,44 @@ function runGroundTruthScoring(targetDateStr = '', inputSession = '', options = 
     engine: 'Optical Chromatic Histogram Analysis (CIELAB/HSV)',
     isSimulated: false
   };
+  console.log(`  ${record.id}: 實測 ${groundTruthScore} / 誤差 ${errorAbsolute} (${verdict})`);
+}
+
+function runGroundTruthScoring(targetDateStr = '', inputSession = '', options = {}) {
+  const dataDir = options.dataDir || path.join(__dirname, '../data');
+  const recordsFile = path.join(dataDir, 'verification-records.json');
+  const dateStr = targetDateStr || getTaipeiDateString(options.now || new Date());
+  const sessionType = resolveSessionType(
+    inputSession,
+    options.schedule || process.env.GITHUB_EVENT_SCHEDULE || ''
+  );
+  const prefix = `rec-${dateStr}-${sessionType}`;
+
+  if (!fs.existsSync(recordsFile)) {
+    throw new Error('verification-records.json does not exist');
+  }
+
+  const records = JSON.parse(fs.readFileSync(recordsFile, 'utf8'));
+  // 該日該時段全部測站 (帶或不帶 station 後綴)；只評分具備真實影像證據者。
+  const targets = records.filter(r =>
+    (r.id === prefix || r.id.startsWith(`${prefix}-`)) && isValidatedLiveCaptureRecord(r)
+  );
+  if (targets.length === 0) {
+    console.warn(`無可評分的已擷取影格: ${prefix}*`);
+    return [];
+  }
+
+  console.log('====================================================');
+  console.log(`🔬 Phase 2: 實況天空光學色彩分析 (${targets.length} 筆)`);
+
+  const ctx = { dataDir, analyzer: options.runAnalyzer || runPythonAnalyzer };
+  for (const record of targets) {
+    scoreOneRecord(record, ctx);
+  }
 
   fs.writeFileSync(recordsFile, JSON.stringify(records, null, 2), 'utf8');
-  console.log(`✅ 實況觀測 ${groundTruthScore} 分；與預測絕對誤差 ${errorAbsolute} 分`);
   console.log('====================================================\n');
-  return record;
+  return targets;
 }
 
 if (require.main === module) {

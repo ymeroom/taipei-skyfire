@@ -52,3 +52,55 @@ assert.ok(after.verification.reason, '應留下跳過原因');
 
 fs.rmSync(dir, { recursive: true, force: true });
 console.log('✅ 暮光窗口外的影格被跳過、未捏造 ground truth');
+
+// ----------------------------------------------------------------
+// 每站評分迴圈：in-window exact 評分、live-edge 跳過、capture_unavailable 不動
+// ----------------------------------------------------------------
+const dir2 = fs.mkdtempSync(path.join(os.tmpdir(), 'skyfire-sgt2-'));
+const dataDir2 = path.join(dir2, 'data');
+const snapDir2 = path.join(dataDir2, 'snapshots', '2026-09-10', 'sunset');
+fs.mkdirSync(snapDir2, { recursive: true });
+
+const jpeg = Buffer.concat([Buffer.from([0xff, 0xd8, 0xff]), Buffer.alloc(12000, 0x42), Buffer.from([0xff, 0xd9])]);
+const crypto = require('crypto');
+function mkRec(station, fidelity, effIso) {
+  const rel = `data/snapshots/2026-09-10/sunset/${station}.jpg`;
+  fs.writeFileSync(path.join(dir2, rel), jpeg);
+  return {
+    id: `rec-2026-09-10-sunset-${station}`, date: '2026-09-10', session: 'sunset', station,
+    targetTime: '2026-09-10T10:07:00.000Z', source: station,
+    prediction: { score: 40 },
+    snapshotUrl: rel,
+    capture: {
+      kind: 'youtube-live-frame', validated: true, fidelity,
+      frameEffectiveTimeUtc: effIso,
+      sha256: crypto.createHash('sha256').update(jpeg).digest('hex')
+    },
+    verification: { status: 'captured_ready_for_scoring', groundTruthScore: null }
+  };
+}
+const recs2 = [
+  mkRec('dadaocheng', 'exact', '2026-09-10T10:07:00.000Z'),      // in window → 評分
+  mkRec('tamsui', 'live-edge', '2026-09-10T02:24:00.000Z'),       // live-edge → 跳過
+  { id: 'rec-2026-09-10-sunset-jiufen', date: '2026-09-10', session: 'sunset', station: 'jiufen',
+    targetTime: '2026-09-10T10:07:00.000Z', snapshotUrl: null, capture: { fidelity: 'none' },
+    verification: { status: 'capture_unavailable', groundTruthScore: null } },
+];
+fs.writeFileSync(path.join(dataDir2, 'verification-records.json'), JSON.stringify(recs2, null, 2), 'utf8');
+
+let analyzerCalls = 0;
+runGroundTruthScoring('2026-09-10', 'sunset', {
+  dataDir: dataDir2,
+  runAnalyzer: () => { analyzerCalls += 1; return { score: 15, badge: '陰沉沉寂', level: 'OVERCAST', chromatic_purity: 30, sky_coverage_pct: 0 }; }
+});
+
+const out2 = JSON.parse(fs.readFileSync(path.join(dataDir2, 'verification-records.json'), 'utf8'));
+const by = id => out2.find(r => r.id === id);
+assert.strictEqual(analyzerCalls, 1, '只有 in-window 影格呼叫分析器一次');
+assert.strictEqual(by('rec-2026-09-10-sunset-dadaocheng').verification.status, 'verified_completed');
+assert.strictEqual(by('rec-2026-09-10-sunset-dadaocheng').verification.errorAbsolute, 25, '|40 - 15|');
+assert.strictEqual(by('rec-2026-09-10-sunset-tamsui').verification.status, 'skipped_out_of_window');
+assert.strictEqual(by('rec-2026-09-10-sunset-jiufen').verification.status, 'capture_unavailable', 'capture_unavailable 不動');
+
+fs.rmSync(dir2, { recursive: true, force: true });
+console.log('✅ 每站評分迴圈：in-window 評分 / live-edge 跳過 / capture_unavailable 不動');
