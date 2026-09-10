@@ -38,10 +38,11 @@ assert.strictEqual(stationsForSession('sunrise').length, 2, '日出 2 站');
 assert.strictEqual(primaryStation('sunset').id, 'dadaocheng');
 assert.strictEqual(primaryStation('sunrise').id, 'hongludi');
 
-// data/stations.json 與 js/stations.js 同步
+// data/stations.json 與 js/stations.js 同步 (比對前正規化換行，容忍 Windows CRLF checkout)
 const buildStationsJson = require('../scripts/build-stations-json.js');
+const norm = s => s.replace(/\r\n/g, '\n');
 const onDisk = fs.readFileSync(path.join(__dirname, '../data/stations.json'), 'utf8');
-assert.strictEqual(onDisk, buildStationsJson.render(), 'data/stations.json 已過期 —— 執行 node scripts/build-stations-json.js');
+assert.strictEqual(norm(onDisk), norm(buildStationsJson.render()), 'data/stations.json 已過期 —— 執行 node scripts/build-stations-json.js');
 
 console.log('✅ 測站註冊表不變式 + data/stations.json 同步');
 
