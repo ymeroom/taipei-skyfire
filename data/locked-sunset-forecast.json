@@ -1,119 +1,119 @@
 {
   "date": "2026-09-11",
   "session": "sunset",
-  "lockedAt": "2026-09-11T06:19:50.639Z",
+  "lockedAt": "2026-09-11T07:30:14.498Z",
   "skyfire": {
-    "score": 5,
+    "score": 92,
     "rating": {
-      "level": "OVERCAST",
-      "badge": "陰沉沉寂",
-      "icon": "☁️",
-      "color": "#5A6275",
-      "secondaryColor": "#394150",
-      "summary": "厚重低雲覆蓋天際或有陣雨，天色灰暗難見彩霞。",
-      "bgGradient": "linear-gradient(135deg, rgba(90,98,117,0.2) 0%, rgba(57,65,80,0.1) 100%)"
+      "level": "EPIC",
+      "badge": "史詩級爆發",
+      "icon": "🌟",
+      "color": "#FF3366",
+      "secondaryColor": "#FF9900",
+      "summary": "漫天紅霞・全城燃燒！極高機率出現遮天蔽日的史詩級火燒雲。",
+      "bgGradient": "linear-gradient(135deg, rgba(255,51,102,0.3) 0%, rgba(255,153,0,0.2) 100%)"
     },
     "metrics": {
-      "cloudQualityScore": 36,
-      "lowCloudPenalty": 48,
-      "horizonScore": 0,
-      "visibilityScore": 4,
-      "horizonClearance": 0,
-      "visKm": 6.1
+      "cloudQualityScore": 45,
+      "lowCloudPenalty": 0,
+      "horizonScore": 22,
+      "visibilityScore": 15,
+      "horizonClearance": 74,
+      "visKm": 24
     },
     "diagnostics": [
       {
-        "label": "高空卷層雲 (6,000m+)",
-        "status": "fair",
-        "desc": "高雲量偏高 (81%)，漫射面積大但光線穿透度可能稍微受限。"
+        "label": "高空卷雲天幕 (6,000m+)",
+        "status": "optimal",
+        "desc": "高雲量達 58%，呈現完美的天然反射天幕，極利於接收低仰角紅光。"
       },
       {
         "label": "中空立體高積雲 (2,000-6,000m)",
         "status": "optimal",
-        "desc": "中雲量達 27%，極易形成如魚鱗、波狀之立體金色燃燒雲紋。"
+        "desc": "中雲量達 42%，極易形成如魚鱗、波狀之立體金色燃燒雲紋。"
       },
       {
         "label": "遠方西方（台灣海峽/海平面）透光窗",
-        "status": "bad",
-        "desc": "低雲遮蔽高達 91%，厚雲層恐阻斷地平線入射光，投下暗灰色陰影。"
+        "status": "optimal",
+        "desc": "低雲遮蔽極低 (15%)，透光窗達 74%，夕陽/晨光無阻直射雲底！"
       },
       {
         "label": "大氣能見度與通透度",
-        "status": "bad",
-        "desc": "能見度受限（6.14 公里），霧霾或水氣可能使天色偏灰白。"
+        "status": "optimal",
+        "desc": "能見度優異（24 公里），大氣清澈通透，晚霞色彩飽和純淨。"
       }
     ],
     "photoTips": {
-      "bestTime": "日落後 20-35 分鐘之「藍調時刻 (Blue Hour)」",
-      "whiteBalance": "色溫設為 3800K - 4500K 拍出城市冷冽深藍氛圍",
-      "filter": "長曝減光鏡 (ND64/ND1000) 霧化雲流或車軌",
-      "exposure": "建議使用腳架進行 10-30 秒慢速長曝",
-      "lens": "廣角至中望遠，適合捕捉台北夜景、橋樑車軌與建築點燈",
-      "mobileTip": "切換至手機「夜景模式 (Night Mode)」，藉由多幀降噪紀錄城市藍調夜景。"
+      "bestTime": "日落前 15 分 至 日落後 25 分 (反火燒巔峰)",
+      "whiteBalance": "色溫手動設為 5600K - 6500K 或「陰影/陰天模式」(強調濃郁暖金色調)",
+      "filter": "建議搭配 0.9 (3-Stop) 軟式漸變減光鏡 (Soft GND) 平衡天空與地景光比",
+      "exposure": "建議曝光補償 -0.7 EV 至 -1.0 EV，避免天空高光橘紅區域溢出過曝",
+      "lens": "超廣角 (16-24mm) 捕捉全天漫天火燒，中焦段 (50-85mm) 特寫局部高積雲波紋",
+      "mobileTip": "手機拍攝請長按對焦在亮部雲彩並「向下拉低曝光小太陽」以獲得最濃郁飽和色彩。"
     }
   },
   "weather": {
-    "cloudHigh": 81,
-    "cloudMid": 27,
-    "cloudLow": 91,
-    "cloudTotal": 98,
-    "humidity": 89,
-    "precipProb": 72,
-    "visibilityKm": 6.1
+    "cloudHigh": 58,
+    "cloudMid": 42,
+    "cloudLow": 15,
+    "cloudTotal": null,
+    "humidity": 62,
+    "precipProb": 5,
+    "visibilityKm": 24
   },
   "stations": {
     "dadaocheng": {
-      "score": 5,
-      "rating": "陰沉沉寂",
-      "color": "#5A6275",
+      "score": 92,
+      "rating": "史詩級爆發",
+      "color": "#FF3366",
       "weather": {
-        "cloudHigh": 81,
-        "cloudMid": 27,
-        "cloudLow": 91,
-        "cloudTotal": 98,
-        "humidity": 89,
-        "precipProb": 72,
-        "visibilityKm": 6.1
+        "cloudHigh": 58,
+        "cloudMid": 42,
+        "cloudLow": 15,
+        "cloudTotal": null,
+        "humidity": 62,
+        "precipProb": 5,
+        "visibilityKm": 24
       },
       "metrics": {
-        "horizonClearance": 0,
-        "visKm": 6.1
+        "horizonClearance": 74,
+        "visKm": 24
       }
     },
     "xiangshan": {
-      "score": 5,
-      "rating": "陰沉沉寂",
-      "color": "#5A6275",
+      "score": 92,
+      "rating": "史詩級爆發",
+      "color": "#FF3366",
       "weather": {
-        "cloudHigh": 77,
-        "cloudMid": 25,
-        "cloudLow": 73,
-        "cloudTotal": 95,
-        "humidity": 92,
-        "precipProb": 72,
-        "visibilityKm": 7.6
+        "cloudHigh": 58,
+        "cloudMid": 42,
+        "cloudLow": 15,
+        "cloudTotal": null,
+        "humidity": 62,
+        "precipProb": 5,
+        "visibilityKm": 24
       },
       "metrics": {
-        "horizonClearance": 1,
-        "visKm": 7.6
+        "horizonClearance": 74,
+        "visKm": 24
       }
     },
     "tamsui": {
-      "score": 5,
-      "rating": "陰沉沉寂",
-      "color": "#5A6275",
+      "score": 92,
+      "rating": "史詩級爆發",
+      "color": "#FF3366",
       "weather": {
-        "cloudHigh": 91,
-        "cloudMid": 60,
-        "cloudLow": 76,
-        "cloudTotal": 99,
-        "humidity": 89,
-        "precipProb": 99,
-        "visibilityKm": 8
+        "cloudHigh": 58,
+        "cloudMid": 42,
+        "cloudLow": 15,
+        "cloudTotal": null,
+        "humidity": 62,
+        "precipProb": 5,
+        "visibilityKm": 24
       },
       "metrics": {
-        "horizonClearance": 0,
-        "visKm": 8
+        "horizonClearance": 74,
+        "visKm": 24
       }
     },
     "bali": {
@@ -121,17 +121,17 @@
       "rating": "陰沉沉寂",
       "color": "#5A6275",
       "weather": {
-        "cloudHigh": 91,
-        "cloudMid": 60,
-        "cloudLow": 76,
-        "cloudTotal": 99,
-        "humidity": 88,
+        "cloudHigh": 0,
+        "cloudMid": 31,
+        "cloudLow": 71,
+        "cloudTotal": 79,
+        "humidity": 86,
         "precipProb": 99,
-        "visibilityKm": 8
+        "visibilityKm": 9
       },
       "metrics": {
-        "horizonClearance": 0,
-        "visKm": 8
+        "horizonClearance": 9,
+        "visKm": 9
       }
     },
     "maokong": {
@@ -139,17 +139,17 @@
       "rating": "陰沉沉寂",
       "color": "#5A6275",
       "weather": {
-        "cloudHigh": 77,
-        "cloudMid": 25,
-        "cloudLow": 73,
-        "cloudTotal": 95,
+        "cloudHigh": 0,
+        "cloudMid": 20,
+        "cloudLow": 100,
+        "cloudTotal": 100,
         "humidity": 93,
         "precipProb": 72,
-        "visibilityKm": 7.6
+        "visibilityKm": 6.8
       },
       "metrics": {
-        "horizonClearance": 1,
-        "visKm": 7.6
+        "horizonClearance": 0,
+        "visKm": 6.8
       }
     },
     "jiufen": {
@@ -157,17 +157,17 @@
       "rating": "陰沉沉寂",
       "color": "#5A6275",
       "weather": {
-        "cloudHigh": 59,
-        "cloudMid": 41,
+        "cloudHigh": 0,
+        "cloudMid": 77,
         "cloudLow": 100,
         "cloudTotal": 100,
-        "humidity": 99,
+        "humidity": 100,
         "precipProb": 100,
-        "visibilityKm": 3.8
+        "visibilityKm": 2.9
       },
       "metrics": {
         "horizonClearance": 0,
-        "visKm": 3.8
+        "visKm": 2.9
       }
     }
   }
