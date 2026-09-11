@@ -8,9 +8,13 @@
  * so its model score reflects a horizon blocked by mountains to its west —
  * the honest prediction for a classic sunset shot from there.
  *
- * DVR rewind (verified 2026-09-10 via captureLiveFrame probe):
- *   dadaocheng / tamsui / bali / hongludi ≥ 9h · jiufen ~5–9h ·
- *   waimushan: NO DVR (always live-edge) — kept as a non-primary station.
+ * DVR rewind: dadaocheng / tamsui / bali / hongludi ≥ 9h · jiufen ~10h ·
+ *   waimushan ~12h (both confirmed 2026-09-11 by manually scrubbing the
+ *   live player back to a timestamped frame — see docs/operations.md).
+ *   Corrects a 2026-09-10 captureLiveFrame probe that had wrongly read
+ *   waimushan as having no DVR at all; that was never true, so its
+ *   isPrimary:false here is a plain secondary-station choice, not a
+ *   DVR-capability workaround.
  *
  * Keep data/stations.json in sync: node scripts/build-stations-json.js
  */
