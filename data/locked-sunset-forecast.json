@@ -1,7 +1,7 @@
 {
   "date": "2026-09-11",
   "session": "sunset",
-  "lockedAt": "2026-09-11T01:26:29.664Z",
+  "lockedAt": "2026-09-11T06:19:50.639Z",
   "skyfire": {
     "score": 5,
     "rating": {
@@ -58,7 +58,7 @@
     "cloudLow": 91,
     "cloudTotal": 98,
     "humidity": 89,
-    "precipProb": 47,
+    "precipProb": 72,
     "visibilityKm": 6.1
   },
   "stations": {
@@ -72,7 +72,7 @@
         "cloudLow": 91,
         "cloudTotal": 98,
         "humidity": 89,
-        "precipProb": 47,
+        "precipProb": 72,
         "visibilityKm": 6.1
       },
       "metrics": {
@@ -90,7 +90,7 @@
         "cloudLow": 73,
         "cloudTotal": 95,
         "humidity": 92,
-        "precipProb": 47,
+        "precipProb": 72,
         "visibilityKm": 7.6
       },
       "metrics": {
@@ -108,7 +108,7 @@
         "cloudLow": 76,
         "cloudTotal": 99,
         "humidity": 89,
-        "precipProb": 100,
+        "precipProb": 99,
         "visibilityKm": 8
       },
       "metrics": {
@@ -126,7 +126,7 @@
         "cloudLow": 76,
         "cloudTotal": 99,
         "humidity": 88,
-        "precipProb": 100,
+        "precipProb": 99,
         "visibilityKm": 8
       },
       "metrics": {
@@ -144,7 +144,7 @@
         "cloudLow": 73,
         "cloudTotal": 95,
         "humidity": 93,
-        "precipProb": 47,
+        "precipProb": 72,
         "visibilityKm": 7.6
       },
       "metrics": {
@@ -162,7 +162,7 @@
         "cloudLow": 100,
         "cloudTotal": 100,
         "humidity": 99,
-        "precipProb": 96,
+        "precipProb": 100,
         "visibilityKm": 3.8
       },
       "metrics": {
