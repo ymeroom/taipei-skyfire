@@ -23,12 +23,18 @@
   .github/workflows/ 底下的檔名，例如 lock_forecast.yml
 
 .PARAMETER Session
-  sunrise 或 sunset
+  sunrise 或 sunset。省略則觸發時不帶 session 參數 —— 給沒有這個輸入欄位
+  的 workflow 用 (例如 weekly_auto_calibration.yml)，帶了反而會被 gh 擋掉
+  (「unexpected input」)。
 #>
 param(
     [Parameter(Mandatory = $true)][string]$WorkflowFile,
-    [Parameter(Mandatory = $true)][ValidateSet('sunrise', 'sunset')][string]$Session
+    [Parameter(Mandatory = $false)][string]$Session = ''
 )
+
+if ($Session -and $Session -ne 'sunrise' -and $Session -ne 'sunset') {
+    throw "Session 必須是 sunrise、sunset 或留空，收到: $Session"
+}
 
 # 探針：不管後面任何一步是否失敗，先留下「這個行程真的被啟動了」的
 # 證據。C:\ProgramData 不需要載入使用者設定檔就能寫入，所以就算 S4U
@@ -55,7 +61,7 @@ function Write-Log {
 # 連「開始執行」都沒寫到，完全看不出是哪裡壞的。)
 try {
     $ErrorActionPreference = 'Stop'
-    Write-Log "觸發 $WorkflowFile (session=$Session) ..."
+    Write-Log "觸發 $WorkflowFile $(if ($Session) { "(session=$Session)" } else { '(無 session 參數)' }) ..."
 
     # gh CLI 預設把登入 token 存在 Windows 認證保存庫 (keyring)，那是用
     # DPAPI 加密、綁定「使用者互動登入工作階段」的 —— S4U 這種無人值守
@@ -77,7 +83,9 @@ try {
 
     Push-Location $repoRoot
     try {
-        $output = & gh workflow run $WorkflowFile -f "session=$Session" 2>&1 | Out-String
+        $ghArgs = @('workflow', 'run', $WorkflowFile)
+        if ($Session) { $ghArgs += @('-f', "session=$Session") }
+        $output = & gh @ghArgs 2>&1 | Out-String
         $exitCode = $LASTEXITCODE
         if ($exitCode -eq 0) {
             Write-Log "成功: $($output.Trim())"

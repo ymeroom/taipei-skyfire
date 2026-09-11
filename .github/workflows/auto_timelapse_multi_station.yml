@@ -5,11 +5,12 @@ name: Auto Multi-Station Timelapse Capture
 # 你的機器上執行任意程式碼。僅有 schedule 與 workflow_dispatch，後者需要
 # repo 寫入權限，外部人士無法觸發。
 on:
-  schedule:
-    # 日出 T-40 ~ T+40 全部窗口關閉後補跑 (台灣時間約 06:30，涵蓋外木山/烘爐地)
-    - cron: '30 22 * * *'
-    # 日落 T-40 ~ T+40 全部窗口關閉後補跑 (台灣時間約 19:00，涵蓋 101大樓/大稻埕/淡水漁人碼頭/九份/貓空)
-    - cron: '0 11 * * *'
+  # 原本用 schedule cron 觸發，但 GitHub Actions 排程實測延遲可達數小時
+  # (見 lock_forecast.yml / auto_validate_capture.yml 內同樣的說明)，導致
+  # 前後 40 分鐘的縮時窗口早就關閉才觸發，整批抓到的其實是事後回溯畫面。
+  # 已改為本機 Windows 工作排程器在準時的本機時鐘上呼叫
+  # `gh workflow run` 觸發下面的 workflow_dispatch，見
+  # scripts/install-local-scheduler.ps1。
   workflow_dispatch:
     inputs:
       session:

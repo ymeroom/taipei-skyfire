@@ -1,7 +1,7 @@
 ﻿<#
 .SYNOPSIS
-  在本機（Windows 工作排程器）註冊 6 個排程工作，取代不準時的 GitHub
-  Actions schedule 觸發。
+  在本機（Windows 工作排程器）註冊排程工作，取代不準時的 GitHub Actions
+  schedule 觸發。涵蓋全部 4 個原本用 schedule 觸發的 workflow。
 
 .DESCRIPTION
   可重複執行 —— 每次都會先移除舊的同名工作再重建，方便以後調整時間。
@@ -47,14 +47,22 @@ if (-not $isElevated) {
 # 動作，LastTaskResult 仍顯示 0)。S4U 才是本機無人值守自動化的正確選擇。
 $principal = New-ScheduledTaskPrincipal -UserId $env:UserName -LogonType S4U -RunLevel Limited
 
-# Name / 每天觸發時間 (台北=本機時間) / workflow 檔 / session / 錯過是否補跑
+# Name / 觸發時間 (台北=本機時間) / workflow 檔 / session (空字串 = 不帶
+# session 參數，給沒有那個輸入欄位的 workflow 用) / 錯過是否補跑 /
+# Weekly+DayOfWeek (省略 = 每天)
 $tasks = @(
-    @{ Name = 'Lock-Sunset';      Time = '15:30'; File = 'lock_forecast.yml';         Session = 'sunset';  CatchUp = $false }
-    @{ Name = 'Lock-Sunrise';     Time = '23:45'; File = 'lock_forecast.yml';         Session = 'sunrise'; CatchUp = $false }
-    @{ Name = 'Capture-Sunrise';  Time = '05:30'; File = 'auto_validate_capture.yml'; Session = 'sunrise'; CatchUp = $true }
-    @{ Name = 'Briefing-Sunrise'; Time = '09:00'; File = 'auto_validate_capture.yml'; Session = 'sunrise'; CatchUp = $true }
-    @{ Name = 'Capture-Sunset';   Time = '18:45'; File = 'auto_validate_capture.yml'; Session = 'sunset';  CatchUp = $true }
-    @{ Name = 'Briefing-Sunset';  Time = '21:00'; File = 'auto_validate_capture.yml'; Session = 'sunset';  CatchUp = $true }
+    @{ Name = 'Lock-Sunset';        Time = '15:30'; File = 'lock_forecast.yml';                Session = 'sunset';  CatchUp = $false }
+    @{ Name = 'Lock-Sunrise';       Time = '23:45'; File = 'lock_forecast.yml';                Session = 'sunrise'; CatchUp = $false }
+    @{ Name = 'Capture-Sunrise';    Time = '05:30'; File = 'auto_validate_capture.yml';         Session = 'sunrise'; CatchUp = $true }
+    @{ Name = 'Briefing-Sunrise';   Time = '09:00'; File = 'auto_validate_capture.yml';         Session = 'sunrise'; CatchUp = $true }
+    @{ Name = 'Capture-Sunset';     Time = '18:45'; File = 'auto_validate_capture.yml';         Session = 'sunset';  CatchUp = $true }
+    @{ Name = 'Briefing-Sunset';    Time = '21:00'; File = 'auto_validate_capture.yml';         Session = 'sunset';  CatchUp = $true }
+    # 縮時視窗前後 40 分鐘，過了就沒意義了，但錯過一次不算誠實性問題
+    # (跟主要驗證管線無關，純留存素材)，還是設成補跑，總比完全沒有好。
+    @{ Name = 'Timelapse-Sunrise';  Time = '06:30'; File = 'auto_timelapse_multi_station.yml'; Session = 'sunrise'; CatchUp = $true }
+    @{ Name = 'Timelapse-Sunset';   Time = '19:00'; File = 'auto_timelapse_multi_station.yml'; Session = 'sunset';  CatchUp = $true }
+    # 這個 workflow 沒有 session 輸入欄位，Session 留空；每週一次，非每天。
+    @{ Name = 'Weekly-Calibration'; Time = '00:00'; File = 'weekly_auto_calibration.yml';      Session = '';        CatchUp = $true; Weekly = $true; DayOfWeek = 'Monday' }
 )
 
 foreach ($t in $tasks) {
@@ -65,11 +73,16 @@ foreach ($t in $tasks) {
         Unregister-ScheduledTask -TaskName $taskName -TaskPath $taskFolder -Confirm:$false
     }
 
+    $sessionArg = if ($t.Session) { " -Session $($t.Session)" } else { '' }
     $action = New-ScheduledTaskAction -Execute 'powershell.exe' `
-        -Argument "-NoProfile -ExecutionPolicy Bypass -File `"$triggerScript`" -WorkflowFile $($t.File) -Session $($t.Session)" `
+        -Argument "-NoProfile -ExecutionPolicy Bypass -File `"$triggerScript`" -WorkflowFile $($t.File)$sessionArg" `
         -WorkingDirectory $repoRoot
 
-    $trigger = New-ScheduledTaskTrigger -Daily -At $t.Time
+    if ($t.Weekly) {
+        $trigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek $t.DayOfWeek -At $t.Time
+    } else {
+        $trigger = New-ScheduledTaskTrigger -Daily -At $t.Time
+    }
 
     $settings = New-ScheduledTaskSettingsSet `
         -WakeToRun `
@@ -83,16 +96,18 @@ foreach ($t in $tasks) {
     $settings.DisallowStartIfOnBatteries = $false
     $settings.StopIfGoingOnBatteries = $false
 
+    $sessionDesc = if ($t.Session) { "session=$($t.Session)" } else { '無 session 參數' }
     Register-ScheduledTask -TaskName $taskName -TaskPath $taskFolder `
         -Action $action -Trigger $trigger -Settings $settings -Principal $principal `
-        -Description "SkyFire: 準時觸發 $($t.File) (session=$($t.Session))，取代不準時的 GitHub Actions schedule" `
+        -Description "SkyFire: 準時觸發 $($t.File) ($sessionDesc)，取代不準時的 GitHub Actions schedule" `
         | Out-Null
 
-    Write-Host "已註冊 $taskFolder$taskName -> 每天 $($t.Time)，錯過補跑=$($t.CatchUp)"
+    $freqDesc = if ($t.Weekly) { "每週$($t.DayOfWeek)" } else { '每天' }
+    Write-Host "已註冊 $taskFolder$taskName -> $freqDesc $($t.Time)，錯過補跑=$($t.CatchUp)"
 }
 
 Write-Host ''
-Write-Host '全部 6 個排程工作已註冊在工作排程器的 \SkyFire\ 資料夾底下。'
+Write-Host "全部 $($tasks.Count) 個排程工作已註冊在工作排程器的 \SkyFire\ 資料夾底下。"
 Write-Host '記錄檔位置: C:\ProgramData\SkyFireScheduler\trigger.log (探針: probe.log)'
 Write-Host ''
 Write-Host '已實測驗證: S4U 登入下 gh CLI 直接讀 Windows 憑證保存庫即可成功'

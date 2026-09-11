@@ -1,9 +1,11 @@
 name: Weekly Autonomous Model Calibration Loop
 
 on:
-  schedule:
-    # 每週日午夜 (台灣時間週一 00:00 = UTC 週日 16:00)
-    - cron: '0 16 * * 0'
+  # 原本用 schedule cron 觸發，但 GitHub Actions 排程實測不準時 (見
+  # lock_forecast.yml / auto_validate_capture.yml 內同樣的說明)。校準
+  # 本身對「準時」沒那麼敏感 (晚幾小時跑不影響正確性)，但為了跟其他
+  # workflow 一致、且不再依賴 GitHub 排程本身，一併改為本機 Windows
+  # 工作排程器每週觸發，見 scripts/install-local-scheduler.ps1。
   workflow_dispatch:
 
 permissions:
