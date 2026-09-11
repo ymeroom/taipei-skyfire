@@ -114,7 +114,7 @@
         "icon": "⛩️",
         "tag": "臺北旅遊網 4K 直播・高處俯瞰盆地火燒雲",
         "phasePrep": "—",
-        "phasePeak": "光學觀測判定 17 分（陰沉沉寂）",
+        "phasePeak": "光學觀測判定 16 分（陰沉沉寂）",
         "phasePost": "—",
         "forecast": "5 分（低雲 100%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
@@ -160,7 +160,7 @@
       "bestStation": "dadaocheng",
       "bestScore": 27,
       "worstError": 75,
-      "meanError": 46.6
+      "meanError": 46.4
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 58% ／ 中空 42% ／ 低空 15%。",
