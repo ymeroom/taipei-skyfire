@@ -17,12 +17,12 @@
       "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
     },
     "groundTruth": {
-      "score": 28,
+      "score": 25,
       "rating": "陰沉沉寂",
       "verdict": "EXACT_MATCH",
       "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "color": "#4ADE80",
-      "chromaticPurity": 60.2
+      "chromaticPurity": 53.4
     },
     "stations": [
       {
@@ -30,7 +30,7 @@
         "icon": "⛰️",
         "tag": "新北觀光・雙北盆地俯瞰晨光",
         "phasePrep": "—",
-        "phasePeak": "光學觀測判定 28 分（陰沉沉寂）",
+        "phasePeak": "光學觀測判定 25 分（陰沉沉寂）",
         "phasePost": "—",
         "forecast": "33 分（低雲 22%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -41,24 +41,24 @@
         "icon": "🌊",
         "tag": "國海院・太平洋日出第一線",
         "phasePrep": "—",
-        "phasePeak": "光學觀測判定 15 分（陰沉沉寂）",
+        "phasePeak": "影格不在暮光窗口內，未評分",
         "phasePost": "—",
         "forecast": "5 分（低雲 51%）",
-        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24"
+        "verdict": "⏳ 實測待驗證",
+        "verdictColor": "#94A3B8"
       }
     ],
     "stationSummary": {
-      "verified": 2,
-      "pending": 0,
+      "verified": 1,
+      "pending": 1,
       "bestStation": "hongludi",
-      "bestScore": 28,
-      "worstError": 10,
-      "meanError": 7.5
+      "bestScore": 25,
+      "worstError": 8,
+      "meanError": 8.0
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 2% ／ 低空 22%。",
-      "modelPerformance": "模型預報 33 分，實況光學觀測 28 分，絕對誤差 5 分（EXACT_MATCH）。"
+      "modelPerformance": "模型預報 33 分，實況光學觀測 25 分，絕對誤差 8 分（EXACT_MATCH）。"
     }
   },
   {
