@@ -1,11 +1,12 @@
 name: Lock Forecast Prediction
 
 on:
-  schedule:
-    # 台灣時間 15:30 (UTC 07:30) 鎖定當日日落預測
-    - cron: '30 7 * * *'
-    # 台灣時間 23:45 (UTC 15:45) 鎖定隔日日出預測
-    - cron: '45 15 * * *'
+  # 原本用 schedule cron 觸發，但 GitHub Actions 排程實測會延遲數小時
+  # (見 auto_validate_capture.yml 內註解)，對「鎖定」這種要求準時的
+  # 動作是致命傷 —— 遲到的鎖定等於事後才做的假預測。
+  # 已改為本機 Windows 工作排程器在準時的本機時鐘上呼叫
+  # `gh workflow run` 觸發下面的 workflow_dispatch，見
+  # scripts/install-local-scheduler.ps1。
   workflow_dispatch:
     inputs:
       session:
