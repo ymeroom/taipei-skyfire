@@ -61,10 +61,13 @@ GitHub Actions `schedule:`，見下方「觸發機制」一節）。
 
 另外還有兩條非每日的背景工作：
 
-- **多機位縮時擷取**（`auto_timelapse_multi_station.yml`）：日出/日落窗口
-  （事件前後 40 分鐘、每 10 分鐘一張）另外補跑一次縮時序列，純粹是留存
-  影像素材，跟上面的預測驗證管線互不影響、互不依賴。只能在自架 runner
-  上跑（需要住宅 IP 才能穩定用 DVR 回溯）。
+- **多機位縮時擷取**（`auto_timelapse_multi_station.yml`，日出 06:30 /
+  日落 19:00）：日出/日落窗口（事件前後 40 分鐘、每 10 分鐘一張，6 站
+  ×9 張＝54 張）另外補跑一次縮時序列，純粹是留存影像素材，跟上面的
+  預測驗證管線互不影響、互不依賴。只能在自架 runner 上跑（需要住宅 IP
+  才能穩定用 DVR 回溯）。產出放在 `C:\skyfire-timelapse\<日期>-<時段>\`
+  （checkout 目錄之外，不進 git），同時也上傳成 workflow artifact
+  （保留 14 天）。
 - **每週校準**（`weekly_auto_calibration.yml`，每週一 00:00）：把過去一週
   所有測站的「預測 vs 實測」誤差丟給 `auto-calibrate-model.py`，微調
   `data/model-calibration-params.json` 裡的物理模型權重。
@@ -124,21 +127,27 @@ GitHub Actions `schedule:`，見下方「觸發機制」一節）。
 
 **舊做法：** GitHub Actions 的 `schedule:` cron。
 
-**問題：** 實測延遲 4-7 小時是常態。對「鎖定」這種動作是致命的——遲到的
-鎖定等於「看到結果之後才假裝做出的預測」；對「擷取」也很致命——常常整個
-錯過暮光窗口。
+**問題：** 實測延遲 4-7 小時是常態（多機位縮時擷取那條甚至觀察過延遲到
+快 4 小時，早就錯過前後 40 分鐘的窗口）。對「鎖定」這種動作是致命的——
+遲到的鎖定等於「看到結果之後才假裝做出的預測」；對「擷取」也很致命——
+常常整個錯過暮光窗口。
 
-**新做法：** 兩個 workflow（`lock_forecast.yml`、`auto_validate_capture.yml`）
-的 `schedule:` 已整段移除，只留 `workflow_dispatch`（手動/程式觸發用）。
-準時的鬧鐘改由**你電腦上的 Windows 工作排程器**負責：
+**新做法：** 全部 4 個 workflow（`lock_forecast.yml`、
+`auto_validate_capture.yml`、`auto_timelapse_multi_station.yml`、
+`weekly_auto_calibration.yml`）的 `schedule:` 已整段移除，只留
+`workflow_dispatch`（手動/程式觸發用）。準時的鬧鐘改由**你電腦上的
+Windows 工作排程器**負責：
 
-- 6 個排程工作，註冊在工作排程器的 `\SkyFire\` 資料夾底下
-  （`Lock-Sunset` / `Lock-Sunrise` / `Capture-Sunrise` / `Briefing-Sunrise` /
-  `Capture-Sunset` / `Briefing-Sunset`）
+- 9 個排程工作，註冊在工作排程器的 `\SkyFire\` 資料夾底下：
+  `Lock-Sunset` / `Lock-Sunrise` / `Capture-Sunrise` / `Briefing-Sunrise` /
+  `Capture-Sunset` / `Briefing-Sunset`（每天）、`Timelapse-Sunrise` /
+  `Timelapse-Sunset`（每天）、`Weekly-Calibration`（每週一）
 - 時間一到，執行 `scripts/trigger-workflow.ps1`，它做的事只有一件：呼叫
-  `gh workflow run <檔名> -f session=<sunrise|sunset>`，等同你自己手動按下
-  GitHub 網頁上的「執行」按鈕。實際的擷取/評分/鎖定邏輯完全還是跑在
-  GitHub Actions 裡（或自架 runner 上），沒有搬到本機執行。
+  `gh workflow run <檔名>`（需要 session 參數的工作再加
+  `-f session=<sunrise|sunset>`；`weekly_auto_calibration.yml` 沒有這個
+  輸入欄位，不帶），等同你自己手動按下 GitHub 網頁上的「執行」按鈕。
+  實際的擷取/評分/鎖定邏輯完全還是跑在 GitHub Actions 裡（或自架 runner
+  上），沒有搬到本機執行。
 - 登入模式用 **S4U**（不管你有沒有登入桌面都能跑，不像一般的「使用者
   登入時執行」——這台機器常態透過遠端連線使用，實測過「使用者登入時執行」
   會在沒有真正互動桌面工作階段時悄悄跳過、卻還回報成功，S4U 才是可靠的）。
@@ -157,9 +166,12 @@ GitHub Actions `schedule:`，見下方「觸發機制」一節）。
 身分執行一次，之後排程本身平常執行不需要）。可重複執行、會先移除舊的
 同名工作再重建，改時間就直接改腳本裡的表格重跑。
 
-**尚待自然驗證：** 目前只驗證過「手動點執行」這條路徑真的能跑通到
-GitHub。還沒有被「時間真正到了、系統自己觸發」驗證過——第一次會是
-2026-09-11 當天 18:45（日落擷取）。
+**已自然驗證：** `lock_forecast.yml` / `auto_validate_capture.yml` 這 6 個
+排程已經被「時間真正到了、系統自己觸發」驗證過（2026-09-11 18:45、21:00
+兩次都準時自動觸發成功，`trigger.log` 有記錄、GitHub 上也真的出現新的
+執行）。`Timelapse-Sunrise` / `Timelapse-Sunset` / `Weekly-Calibration`
+這 3 個是後來（同一天稍晚）才加的，只驗證過手動點執行，還沒被自然觸發
+驗證過——縮時的第一次會是隔天 06:30，校準的第一次會是下週一 00:00。
 
 ---
 
