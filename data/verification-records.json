@@ -1,5 +1,336 @@
 [
   {
+    "id": "rec-2026-09-12-sunset-maokong",
+    "date": "2026-09-12",
+    "session": "sunset",
+    "station": "maokong",
+    "targetTime": "2026-09-12T10:03:12.319000+00:00",
+    "source": "貓空（縮時多影格）",
+    "prediction": {
+      "score": 45,
+      "rating": "平淡暮光",
+      "color": "#7B88A8",
+      "weather": {
+        "cloudHigh": 47,
+        "cloudMid": 5,
+        "cloudLow": 22,
+        "cloudTotal": 61,
+        "humidity": 85,
+        "precipProb": 12,
+        "visibilityKm": 15.5
+      },
+      "metrics": {
+        "horizonClearance": 6,
+        "visKm": 15.5
+      }
+    },
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 9,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 26.4,
+      "peakScore": 30,
+      "peakOffsetMin": 10,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-09-12T10:46:30.226683+00:00",
+      "status": "verified_completed",
+      "errorAvgAbsolute": 18.6,
+      "verdictAvg": "MISMATCH",
+      "verdictAvgBadge": "⚠️ 出現偏差需校準",
+      "errorPeakAbsolute": 15,
+      "verdictPeak": "SLIGHT_DEVIATION",
+      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+    }
+  },
+  {
+    "id": "rec-2026-09-12-sunset-jiufen",
+    "date": "2026-09-12",
+    "session": "sunset",
+    "station": "jiufen",
+    "targetTime": "2026-09-12T10:03:12.319000+00:00",
+    "source": "九份（縮時多影格）",
+    "prediction": {
+      "score": 5,
+      "rating": "陰沉沉寂",
+      "color": "#5A6275",
+      "weather": {
+        "cloudHigh": 27,
+        "cloudMid": 10,
+        "cloudLow": 41,
+        "cloudTotal": 61,
+        "humidity": 95,
+        "precipProb": 84,
+        "visibilityKm": 6.2
+      },
+      "metrics": {
+        "horizonClearance": 4,
+        "visKm": 6.2
+      }
+    },
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 0,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": null,
+      "peakScore": null,
+      "peakOffsetMin": null,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-09-12T10:46:30.226233+00:00",
+      "status": "capture_unavailable",
+      "reason": "9 張影格全數擷取失敗，本場次無實測資料"
+    }
+  },
+  {
+    "id": "rec-2026-09-12-sunset-bali",
+    "date": "2026-09-12",
+    "session": "sunset",
+    "station": "bali",
+    "targetTime": "2026-09-12T10:03:12.319000+00:00",
+    "source": "八里左岸（縮時多影格）",
+    "prediction": {
+      "score": 27,
+      "rating": "陰沉沉寂",
+      "color": "#5A6275",
+      "weather": {
+        "cloudHigh": 85,
+        "cloudMid": 2,
+        "cloudLow": 5,
+        "cloudTotal": 87,
+        "humidity": 85,
+        "precipProb": 63,
+        "visibilityKm": 16.8
+      },
+      "metrics": {
+        "horizonClearance": 2,
+        "visKm": 16.8
+      }
+    },
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 9,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 17.3,
+      "peakScore": 31,
+      "peakOffsetMin": 20,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-09-12T10:46:30.225753+00:00",
+      "status": "verified_completed",
+      "errorAvgAbsolute": 9.7,
+      "verdictAvg": "SLIGHT_DEVIATION",
+      "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "errorPeakAbsolute": 4,
+      "verdictPeak": "EXACT_MATCH",
+      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+    }
+  },
+  {
+    "id": "rec-2026-09-12-sunset-tamsui",
+    "date": "2026-09-12",
+    "session": "sunset",
+    "station": "tamsui",
+    "targetTime": "2026-09-12T10:03:12.319000+00:00",
+    "source": "淡水漁人碼頭（縮時多影格）",
+    "prediction": {
+      "score": 28,
+      "rating": "陰沉沉寂",
+      "color": "#5A6275",
+      "weather": {
+        "cloudHigh": 85,
+        "cloudMid": 2,
+        "cloudLow": 5,
+        "cloudTotal": 87,
+        "humidity": 85,
+        "precipProb": 63,
+        "visibilityKm": 16.8
+      },
+      "metrics": {
+        "horizonClearance": 7,
+        "visKm": 16.8
+      }
+    },
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 9,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 33.4,
+      "peakScore": 88,
+      "peakOffsetMin": 20,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-09-12T10:46:30.225270+00:00",
+      "status": "verified_completed",
+      "errorAvgAbsolute": 5.399999999999999,
+      "verdictAvg": "EXACT_MATCH",
+      "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "errorPeakAbsolute": 60,
+      "verdictPeak": "MISMATCH",
+      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+    }
+  },
+  {
+    "id": "rec-2026-09-12-sunset-dadaocheng",
+    "date": "2026-09-12",
+    "session": "sunset",
+    "station": "dadaocheng",
+    "targetTime": "2026-09-12T10:03:12.319000+00:00",
+    "source": "大稻埕（縮時多影格）",
+    "prediction": {
+      "score": 44,
+      "rating": "平淡暮光",
+      "color": "#7B88A8",
+      "weather": {
+        "cloudHigh": 77,
+        "cloudMid": 3,
+        "cloudLow": 7,
+        "cloudTotal": 78,
+        "humidity": 85,
+        "precipProb": 12,
+        "visibilityKm": 17
+      },
+      "metrics": {
+        "horizonClearance": 1,
+        "visKm": 17
+      }
+    },
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 9,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 18.1,
+      "peakScore": 31,
+      "peakOffsetMin": 0,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-09-12T10:46:30.224832+00:00",
+      "status": "verified_completed",
+      "errorAvgAbsolute": 25.9,
+      "verdictAvg": "MISMATCH",
+      "verdictAvgBadge": "⚠️ 出現偏差需校準",
+      "errorPeakAbsolute": 13,
+      "verdictPeak": "SLIGHT_DEVIATION",
+      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+    }
+  },
+  {
+    "id": "rec-2026-09-12-sunset-xiangshan",
+    "date": "2026-09-12",
+    "session": "sunset",
+    "station": "xiangshan",
+    "targetTime": "2026-09-12T10:03:12.319000+00:00",
+    "source": "101大樓（縮時多影格）",
+    "prediction": {
+      "score": 44,
+      "rating": "平淡暮光",
+      "color": "#7B88A8",
+      "weather": {
+        "cloudHigh": 47,
+        "cloudMid": 5,
+        "cloudLow": 22,
+        "cloudTotal": 61,
+        "humidity": 85,
+        "precipProb": 12,
+        "visibilityKm": 15.5
+      },
+      "metrics": {
+        "horizonClearance": 0,
+        "visKm": 15.5
+      }
+    },
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 9,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 14.9,
+      "peakScore": 18,
+      "peakOffsetMin": 20,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-09-12T10:46:30.224242+00:00",
+      "status": "verified_completed",
+      "errorAvgAbsolute": 29.1,
+      "verdictAvg": "MISMATCH",
+      "verdictAvgBadge": "⚠️ 出現偏差需校準",
+      "errorPeakAbsolute": 26,
+      "verdictPeak": "MISMATCH",
+      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+    }
+  },
+  {
     "id": "rec-2026-09-12-sunrise-waimushan",
     "date": "2026-09-12",
     "session": "sunrise",

@@ -1,5 +1,114 @@
 [
   {
+    "id": "report-2026-09-12-sunset",
+    "date": "2026-09-12",
+    "session": "sunset",
+    "sessionLabel": "傍晚日落",
+    "publishedAt": "2026-09-12T18:46:37.065298",
+    "publishTimeLabel": "21:00 定時發布",
+    "title": "2026-09-12 傍晚日落實況觀測 vs. 模型預報總結",
+    "prediction": {
+      "score": 44,
+      "rating": "平淡暮光",
+      "color": "#7B88A8",
+      "highCloud": null,
+      "midCloud": null,
+      "lowCloud": null,
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
+    },
+    "groundTruth": {
+      "score": 31,
+      "avgScore": 18.1,
+      "peakScore": 31,
+      "peakOffsetMin": 0,
+      "verdict": "SLIGHT_DEVIATION",
+      "verdictAvg": "MISMATCH",
+      "verdictPeak": "SLIGHT_DEVIATION",
+      "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)（峰值 31 分／平均 18.1 分）",
+      "color": "#FBBF24"
+    },
+    "stations": [
+      {
+        "name": "台北大稻埕碼頭",
+        "icon": "⛵",
+        "tag": "臺北旅遊網 4K 直播・淡水河倒影晚霞",
+        "phasePrep": "—",
+        "phasePeak": "平均 18.1 分・峰值 31 分（T+0）",
+        "phasePost": "—",
+        "forecast": "44 分",
+        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "verdictColor": "#FBBF24"
+      },
+      {
+        "name": "台北貓空指南宮",
+        "icon": "⛩️",
+        "tag": "臺北旅遊網 4K 直播・高處俯瞰盆地火燒雲",
+        "phasePrep": "—",
+        "phasePeak": "平均 26.4 分・峰值 30 分（T+10）",
+        "phasePost": "—",
+        "forecast": "45 分",
+        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "verdictColor": "#FBBF24"
+      },
+      {
+        "name": "新北九份即時影像",
+        "icon": "🏮",
+        "tag": "新北觀光 4K 直播・山海交界落日",
+        "phasePrep": "—",
+        "phasePeak": "9 張縮時影格全數擷取失敗，本場無實測資料",
+        "phasePost": "—",
+        "forecast": "5 分",
+        "verdict": "⏳ 實測待驗證",
+        "verdictColor": "#94A3B8"
+      },
+      {
+        "name": "新北八里左岸",
+        "icon": "🌊",
+        "tag": "新北觀光 4K 直播・淡江大橋與台灣海峽晚霞",
+        "phasePrep": "—",
+        "phasePeak": "平均 17.3 分・峰值 31 分（T+20）",
+        "phasePost": "—",
+        "forecast": "27 分",
+        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
+        "verdictColor": "#4ADE80"
+      },
+      {
+        "name": "新北淡水漁人碼頭",
+        "icon": "🌉",
+        "tag": "新北觀光 4K 直播・情人橋烈焰落日",
+        "phasePrep": "—",
+        "phasePeak": "平均 33.4 分・峰值 88 分（T+20）",
+        "phasePost": "—",
+        "forecast": "28 分",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171"
+      },
+      {
+        "name": "台北象山看 101",
+        "icon": "🏙️",
+        "tag": "臺北旅遊網 4K 直播・101 與西方天際線",
+        "phasePrep": "—",
+        "phasePeak": "平均 14.9 分・峰值 18 分（T+20）",
+        "phasePost": "—",
+        "forecast": "44 分",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171"
+      }
+    ],
+    "stationSummary": {
+      "verified": 5,
+      "pending": 1,
+      "bestStation": "tamsui",
+      "bestScore": 88,
+      "worstError": 60,
+      "meanError": 23.6
+    },
+    "summaryAnalysis": {
+      "atmosphericReason": "本場預報雲量細項未隨鎖定檔存下。",
+      "modelPerformance": "模型預報 44 分，實況縮時光學觀測：平均 18.1 分（誤差 25.9 分）、峰值 31 分（T+0，誤差 13 分）（SLIGHT_DEVIATION）。"
+    }
+  },
+  {
     "id": "report-2026-09-12-sunrise",
     "date": "2026-09-12",
     "session": "sunrise",
