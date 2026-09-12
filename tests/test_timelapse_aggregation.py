@@ -49,6 +49,39 @@ assert tl.verdict_for_error(18)[0] == "SLIGHT_DEVIATION"
 assert tl.verdict_for_error(19)[0] == "MISMATCH"
 print("✅ verdict_for_error：門檻與 live-capture-core.js 一致 (≤8 / ≤18 / 其餘)")
 
+# --- bundle_folder_name：同一天同時段兩次執行不互相覆蓋 ---
+run1 = tl.datetime.datetime.fromisoformat("2026-09-12T11:00:00+00:00")  # 台北 19:00
+run2 = tl.datetime.datetime.fromisoformat("2026-09-12T13:00:00+00:00")  # 台北 21:00
+name1 = tl.bundle_folder_name("2026-09-12", "sunset", run1)
+name2 = tl.bundle_folder_name("2026-09-12", "sunset", run2)
+assert name1 == "2026-09-12-sunset-1900"
+assert name2 == "2026-09-12-sunset-2100"
+assert name1 != name2, "同一天兩次擷取要落在不同資料夾，第二次不能蓋掉第一次"
+print("✅ bundle_folder_name：資料夾名稱帶執行時刻，同日兩次擷取各自獨立")
+
+# --- prune_old_bundles：新舊兩種資料夾命名格式都要被辨識 (不能因為改格式而
+# 從此再也修剪不到，導致自架 runner 磁碟被歷史報告無限堆積) ---
+prune_dir = tempfile.mkdtemp(prefix="skyfire-prune-")
+try:
+    old_format = os.path.join(prune_dir, "2026-08-01-sunset")       # 併入時間標記前的舊格式
+    new_format = os.path.join(prune_dir, "2026-08-01-sunset-1900")  # 現在的新格式
+    unrelated = os.path.join(prune_dir, "not-a-bundle-folder")
+    for d in (old_format, new_format, unrelated):
+        os.makedirs(d)
+    old_time = tl.time.time() - (tl.BUNDLE_RETENTION_DAYS + 1) * 86400
+    for d in (old_format, new_format, unrelated):
+        os.utime(d, (old_time, old_time))
+
+    tl.prune_old_bundles(prune_dir)
+
+    remaining = set(os.listdir(prune_dir))
+    assert old_format.split(os.sep)[-1] not in remaining, "舊格式資料夾也要能被修剪"
+    assert new_format.split(os.sep)[-1] not in remaining, "新格式 (帶時刻) 資料夾要能被修剪"
+    assert "not-a-bundle-folder" in remaining, "不符合命名規則的目錄不該被誤刪"
+    print("✅ prune_old_bundles：新舊資料夾命名格式都能被正確修剪，不誤刪無關目錄")
+finally:
+    shutil.rmtree(prune_dir, ignore_errors=True)
+
 
 def mk_frame(offset_min, score, ok=True):
     return {"offsetMin": offset_min, "ok": ok, "score": score, "level": "x"}

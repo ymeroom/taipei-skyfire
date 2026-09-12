@@ -14,14 +14,17 @@ capture_timelapse_multi_station.py
 在直播 DVR 緩衝範圍內）執行一次，靠 yt-dlp 抓到的 m3u8 用 /sq/<n>/ 序號往回抓
 9 個不同時間點的切片，一次 yt-dlp -J 呼叫打完 9 張，不必真的等 80 分鐘。
 
-輸出 (單一資料夾，可整包搬移 / 上傳成 CI artifact):
-  <base>/<date>-<session>/<station>-t±NN.jpg            (原始影格)
-  <base>/<date>-<session>/<date>-<session>.json         (結構化評分資料)
-  <base>/<date>-<session>/<date>-<session>-report.html  (單檔 HTML 報告，圖片皆內嵌 base64)
+輸出 (單一資料夾，可整包搬移 / 上傳成 CI artifact)。資料夾名稱帶執行時刻
+(HHMM)，同一天同時段跑第二次 (例如 09:00/21:00 補跑再驗證一次) 不會蓋掉
+第一次的報告，見 bundle_folder_name()：
+  <base>/<date>-<session>-<HHMM>/<station>-t±NN.jpg            (原始影格)
+  <base>/<date>-<session>-<HHMM>/<date>-<session>.json         (結構化評分資料)
+  <base>/<date>-<session>-<HHMM>/<date>-<session>-report.html  (單檔 HTML 報告，圖片皆內嵌 base64)
 
   <base> 預設 = data/timelapse/ (本機檢視用、不進 git)。CI 以環境變數
-  SKYFIRE_TIMELAPSE_DIR 覆寫成 checkout 目錄「之外」的位置，否則下一個在同一台
-  自架 runner 上跑的 workflow 其 actions/checkout `git clean -ffdx` 會把產出清掉。
+  SKYFIRE_TIMELAPSE_DIR 覆寫成 D:\working space\skyfire-timelapse\
+  (checkout 目錄「之外」)，否則下一個在同一台自架 runner 上跑的 workflow
+  其 actions/checkout `git clean -ffdx` 會把產出清掉。
 
 用法:
   python scripts/capture_timelapse_multi_station.py sunrise [YYYY-MM-DD]
@@ -66,8 +69,17 @@ def output_base_dir():
     return os.path.abspath(env_dir) if env_dir else os.path.join(REPO_ROOT, "data", "timelapse")
 
 
+def bundle_folder_name(date_str, session, now_utc):
+    """一天同一時段可能跑兩次 (例如 06:30 擷取 + 09:00 補跑再驗證一次)，
+    資料夾名稱帶上執行時刻 (台北時間 HHMM) 避免第二次直接覆蓋第一次的
+    報告 —— 兩次的縮時畫面本來就不是同一批影格，各自都值得留存比對。
+    """
+    local = now_utc.astimezone(datetime.timezone(datetime.timedelta(hours=8)))
+    return f"{date_str}-{session}-{local.strftime('%H%M')}"
+
+
 def prune_old_bundles(base_dir, keep_days=BUNDLE_RETENTION_DAYS):
-    """刪除 base_dir 下超過 keep_days 天沒更新的 <date>-<session> 資料夾。
+    """刪除 base_dir 下超過 keep_days 天沒更新的 <date>-<session>[-HHMM] 資料夾。
 
     產出搬到 checkout 之外後就沒有 actions/checkout 的 `git clean` 幫忙回收，
     改由本函式自行修剪，避免自架 runner 磁碟被歷史報告（base64 內嵌，單檔可達
@@ -83,7 +95,7 @@ def prune_old_bundles(base_dir, keep_days=BUNDLE_RETENTION_DAYS):
         path = os.path.join(base_dir, name)
         if not os.path.isdir(path):
             continue
-        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}-(sunrise|sunset)", name):
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}-(sunrise|sunset)(-\d{4})?", name):
             continue
         if os.path.getmtime(path) < cutoff:
             shutil.rmtree(path, ignore_errors=True)
@@ -455,7 +467,8 @@ def run(session, date_str=None):
     print(f"    暗夜閘門窗口 = {window_start_local.strftime('%H:%M:%S')} ~ {window_end_local.strftime('%H:%M:%S')} (台北時間)，窗外強制低分")
 
     base_dir = output_base_dir()
-    out_dir = os.path.join(base_dir, f"{date_str}-{session}")
+    run_folder = bundle_folder_name(date_str, session, now_utc)
+    out_dir = os.path.join(base_dir, run_folder)
     os.makedirs(out_dir, exist_ok=True)
     print(f"    產出目錄 = {out_dir}")
 

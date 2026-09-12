@@ -98,13 +98,16 @@ GitHub Actions `schedule:`，見下方「觸發機制」一節）。
 
 19:00  capture_timelapse_multi_station.py
        ├─ 對每一站：連上對應 YouTube 直播 → 用 DVR sq 序號一次回溯抓 9 張
-       │   （T-40, T-30, ..., T+40）→ 存進 C:\skyfire-timelapse\<日期>-
-       │   <時段>\（checkout 目錄之外，不進 git，避免被下一個 workflow
-       │   的 git clean 清掉）
+       │   （T-40, T-30, ..., T+40）→ 存進 D:\working space\skyfire-
+       │   timelapse\<日期>-<時段>-<執行時刻HHMM>\（跟 taipei-skyfire
+       │   checkout 平行放、不在裡面，避免被下一個 workflow 的 git clean
+       │   清掉；資料夾名稱帶執行時刻，21:00 補跑一次也不會蓋掉 19:00 那份）
        ├─ 每一張都馬上跑 Python 光學分析器 (CIELAB/HSV) 算出 0-100 分
        ├─ aggregate_station_scores()：聚合出「平均分」+「峰值分」
        └─ 直接寫入 data/verification-records.json
-          （每站一筆記錄，含預測分數 + 兩個實測分數 + 各自誤差/判定）
+          （每站一筆記錄，含預測分數 + 兩個實測分數 + 各自誤差/判定 ——
+          這筆是「正式紀錄」，永遠是最新一次執行覆蓋前一次，跟本機留存
+          的多份縮時報告是兩回事）
 
        generate_daily_briefing.py（緊接著跑）
        └─ 把當天 6 站的完整結果（平均分+峰值分都列出）整理成一份日報，

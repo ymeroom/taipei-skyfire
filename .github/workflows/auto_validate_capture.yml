@@ -47,8 +47,10 @@ jobs:
       # 縮時原始影格 (9 張/站) 寫到 checkout 目錄「之外」—— 放在 workspace
       # 內的話，下一個在同一台自架 runner 上跑的 workflow 其 actions/checkout
       # `git clean -ffdx` 會清掉。只有聚合出的平均分/峰值分 (data/verification-
-      # records.json) 進 git，原始影格本身從不進 git。
-      SKYFIRE_TIMELAPSE_DIR: C:/skyfire-timelapse
+      # records.json) 進 git，原始影格本身從不進 git。與 taipei-skyfire
+      # checkout 平行放在 D:\working space\ 底下方便直接找到（不是放進
+      # checkout 裡面 —— 那樣一樣會被下一次 git clean 清掉）。
+      SKYFIRE_TIMELAPSE_DIR: "D:/working space/skyfire-timelapse"
 
     steps:
       - name: 📥 檢出程式碼庫 (Checkout)
