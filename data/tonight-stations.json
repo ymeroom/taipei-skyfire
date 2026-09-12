@@ -1,29 +1,73 @@
 {
-  "session": "sunrise",
+  "session": "sunset",
   "date": "2026-09-12",
-  "generatedAt": "2026-09-12T01:00:51.403Z",
+  "generatedAt": "2026-09-12T07:30:20.004Z",
   "stations": [
     {
-      "id": "hongludi",
-      "name": "新北中和烘爐地",
-      "icon": "⛰️",
-      "score": 36,
+      "id": "maokong",
+      "name": "台北貓空指南宮",
+      "icon": "⛩️",
+      "score": 45,
       "rating": "平淡暮光",
       "color": "#7B88A8",
-      "viewAzimuth": 75,
-      "tag": "新北觀光・雙北盆地俯瞰晨光",
-      "youtubeUrl": "https://www.youtube.com/watch?v=xxMRjVwCQ3o"
+      "viewAzimuth": 290,
+      "tag": "臺北旅遊網 4K 直播・高處俯瞰盆地火燒雲",
+      "youtubeUrl": "https://www.youtube.com/watch?v=215ahZ_0rTg"
     },
     {
-      "id": "waimushan",
-      "name": "基隆外木山濱海",
+      "id": "dadaocheng",
+      "name": "台北大稻埕碼頭",
+      "icon": "⛵",
+      "score": 44,
+      "rating": "平淡暮光",
+      "color": "#7B88A8",
+      "viewAzimuth": 292,
+      "tag": "臺北旅遊網 4K 直播・淡水河倒影晚霞",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Ndo_8RuefH4"
+    },
+    {
+      "id": "xiangshan",
+      "name": "台北象山看 101",
+      "icon": "🏙️",
+      "score": 44,
+      "rating": "平淡暮光",
+      "color": "#7B88A8",
+      "viewAzimuth": 280,
+      "tag": "臺北旅遊網 4K 直播・101 與西方天際線",
+      "youtubeUrl": "https://www.youtube.com/watch?v=z_fY1pj1VBw"
+    },
+    {
+      "id": "tamsui",
+      "name": "新北淡水漁人碼頭",
+      "icon": "🌉",
+      "score": 28,
+      "rating": "陰沉沉寂",
+      "color": "#5A6275",
+      "viewAzimuth": 270,
+      "tag": "新北觀光 4K 直播・情人橋烈焰落日",
+      "youtubeUrl": "https://www.youtube.com/watch?v=xwAWSh35uuw"
+    },
+    {
+      "id": "bali",
+      "name": "新北八里左岸",
       "icon": "🌊",
+      "score": 27,
+      "rating": "陰沉沉寂",
+      "color": "#5A6275",
+      "viewAzimuth": 250,
+      "tag": "新北觀光 4K 直播・淡江大橋與台灣海峽晚霞",
+      "youtubeUrl": "https://www.youtube.com/watch?v=di-4DCblWq4"
+    },
+    {
+      "id": "jiufen",
+      "name": "新北九份即時影像",
+      "icon": "🏮",
       "score": 5,
       "rating": "陰沉沉寂",
       "color": "#5A6275",
-      "viewAzimuth": 95,
-      "tag": "國海院・太平洋日出第一線",
-      "youtubeUrl": "https://www.youtube.com/watch?v=A9pluEagLD4"
+      "viewAzimuth": 45,
+      "tag": "新北觀光 4K 直播・山海交界落日",
+      "youtubeUrl": "https://www.youtube.com/watch?v=XSD5ptYisw8"
     }
   ]
 }
