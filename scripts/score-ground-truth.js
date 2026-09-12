@@ -11,7 +11,8 @@ const {
   resolveSessionType,
   isValidatedLiveCaptureRecord,
   validateOpticalResult,
-  LIVE_EDGE_FIDELITY
+  LIVE_EDGE_FIDELITY,
+  verdictForError
 } = require('./live-capture-core.js');
 const SolarCalc = require('../js/solar-calc.js');
 
@@ -61,12 +62,6 @@ function assertSnapshotIntegrity(snapshotPath, expectedSha256) {
   if (actualSha256 !== expectedSha256) {
     throw new Error('snapshot SHA-256 does not match capture provenance');
   }
-}
-
-function verdictForError(errorAbsolute) {
-  if (errorAbsolute <= 8) return { verdict: 'EXACT_MATCH', verdictBadge: '🎯 極致精準 (誤差 ≤ 8分)' };
-  if (errorAbsolute <= 18) return { verdict: 'SLIGHT_DEVIATION', verdictBadge: '⚡ 輕微偏差 (誤差 ≤ 18分)' };
-  return { verdict: 'MISMATCH', verdictBadge: '⚠️ 出現偏差需校準' };
 }
 
 // 對單筆已擷取影格：暮光窗口守門 → 光學評分 → 誤差判定，回寫該筆 verification。

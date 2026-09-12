@@ -24,8 +24,10 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: 🧪 執行校準守門與日報產生器測試
-        run: python3 tests/test_daily_briefing.py
+      - name: 🧪 執行校準守門、日報產生器、縮時聚合測試
+        run: |
+          python3 tests/test_daily_briefing.py
+          python3 tests/test_timelapse_aggregation.py
 
       - name: 🤖 執行物理模型損失函數最佳化與參數微調 (Phase 4)
         run: |

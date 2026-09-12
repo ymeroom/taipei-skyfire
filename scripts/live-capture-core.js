@@ -293,6 +293,15 @@ const SCORABLE_CAPTURE_KINDS = Object.freeze([EXACT_CAPTURE_KIND, DEGRADED_CAPTU
 // 是真實影像 (可標示、可留存)，但絕不能冒充出景當刻的 ground truth。
 const LIVE_EDGE_FIDELITY = 'live-edge';
 
+// 預測 vs 實測誤差的判定門檻。單一事實來源 —— score-ground-truth.js (單張精準
+// 擷取路徑) 與 aggregate-timelapse-groundtruth.js (縮時平均/峰值路徑) 共用，
+// 避免兩條路徑各自硬編、日後改門檻時漏改一邊。
+function verdictForError(errorAbsolute) {
+  if (errorAbsolute <= 8) return { verdict: 'EXACT_MATCH', verdictBadge: '🎯 極致精準 (誤差 ≤ 8分)' };
+  if (errorAbsolute <= 18) return { verdict: 'SLIGHT_DEVIATION', verdictBadge: '⚡ 輕微偏差 (誤差 ≤ 18分)' };
+  return { verdict: 'MISMATCH', verdictBadge: '⚠️ 出現偏差需校準' };
+}
+
 /**
  * 該紀錄是否具備可供光學評分的真實影像證據。
  * 海報影格屬真實影像（與捏造的模擬值不同），因此允許評分，
@@ -351,5 +360,6 @@ module.exports = {
   EXACT_CAPTURE_KIND,
   DEGRADED_CAPTURE_KIND,
   LIVE_EDGE_FIDELITY,
-  SCORABLE_CAPTURE_KINDS
+  SCORABLE_CAPTURE_KINDS,
+  verdictForError
 };

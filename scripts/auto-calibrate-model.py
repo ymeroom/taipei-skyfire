@@ -106,6 +106,31 @@ def has_usable_cloud_inputs(prediction):
     return True
 
 
+def expand_to_calibration_samples(records):
+    """把每筆紀錄展開成 0~2 個等權重的校準樣本。
+
+    新版紀錄一場實測有「平均分」+「峰值分」兩個獨立數字 (見
+    capture_timelapse_multi_station.py 的 aggregate_station_scores) ——
+    「全部平等餵進校準」延伸到這裡的自然意思是：兩個數字各自都是一筆獨立、
+    equally-weighted 的樣本，不能合併成一個代表值去訓練，否則等於用一半的
+    真實觀測換取另一半被丟棄。舊版單一 groundTruthScore 紀錄視為 1 個樣本
+    (相容 —— verification-records.json 最多留 720 筆歷史，切換過渡期間
+    新舊兩種形狀會同時存在)。
+    """
+    samples = []
+    for r in records:
+        v = r.get('verification') or {}
+        pred = r.get('prediction') or {}
+        if v.get('groundTruthScore') is not None:
+            samples.append({'prediction': pred, 'verification': {'groundTruthScore': v['groundTruthScore']}})
+            continue
+        if v.get('avgScore') is not None:
+            samples.append({'prediction': pred, 'verification': {'groundTruthScore': v['avgScore']}})
+        if v.get('peakScore') is not None:
+            samples.append({'prediction': pred, 'verification': {'groundTruthScore': v['peakScore']}})
+    return samples
+
+
 def evaluate_mae(dataset, weights):
     """計算指定權重在觀測數據集上的平均絕對誤差 (MAE)。
 
@@ -136,8 +161,8 @@ def run_calibration(records_path, params_path):
     with open(records_path, 'r', encoding='utf-8') as f:
         records = json.load(f)
 
-    # 篩選已完成驗證之紀錄
-    ground_truthed = [r for r in records if r.get('verification', {}).get('groundTruthScore') is not None]
+    # 每筆紀錄展開成平均分/峰值分各自獨立的校準樣本 (見 expand_to_calibration_samples)。
+    ground_truthed = expand_to_calibration_samples(records)
 
     # 再排除雲量輸入不可用者 —— calculate_score 全靠雲量三頻驅動，
     # 輸入是壞的就無法重算候選權重的 sim_pred (見 has_usable_cloud_inputs)。
@@ -145,8 +170,8 @@ def run_calibration(records_path, params_path):
     n_samples = len(verified_records)
     n_excluded = len(ground_truthed) - n_samples
 
-    print(f"📊 已驗證出景場次: {len(ground_truthed)} 場；雲量輸入可用: {n_samples} 場", end="")
-    print(f"（排除 {n_excluded} 場雲量輸入缺失／全 0）" if n_excluded else "")
+    print(f"📊 已驗證觀測樣本 (平均分/峰值分各自計): {len(ground_truthed)} 筆；雲量輸入可用: {n_samples} 筆", end="")
+    print(f"（排除 {n_excluded} 筆雲量輸入缺失／全 0）" if n_excluded else "")
 
     if n_samples < 2:
         print("ℹ️ 可用樣本不足 2 場，維持當前基礎權重。")

@@ -148,16 +148,32 @@ def build_prediction(record, locked):
 
 
 def build_ground_truth(record):
+    """實測現在是「平均分」+「峰值分」兩個數字 (見 capture_timelapse_multi_station.py
+    的 aggregate_station_scores)，不是單一 groundTruthScore。峰值判定當作代表判定 ——
+    拍照最在意的是有沒有拍到最佳時刻；平均判定反映整場 80 分鐘的穩定度，兩者都完整
+    帶出、互不取代，不硬併成一個數字。
+    """
     v = (record or {}).get("verification") or {}
-    if v.get("status") == "verified_completed" and v.get("groundTruthScore") is not None:
-        verdict = v.get("verdict") or "MISMATCH"
+    has_score = v.get("avgScore") is not None or v.get("peakScore") is not None
+    if v.get("status") == "verified_completed" and has_score:
+        verdict = v.get("verdictPeak") or v.get("verdictAvg") or "MISMATCH"
+        badge_core = v.get("verdictPeakBadge") or v.get("verdictAvgBadge") or verdict
+        parts = []
+        if v.get("peakScore") is not None:
+            parts.append(f"峰值 {v['peakScore']} 分")
+        if v.get("avgScore") is not None:
+            parts.append(f"平均 {v['avgScore']} 分")
+        detail = "（" + "／".join(parts) + "）" if parts else ""
         return {
-            "score": v.get("groundTruthScore"),
-            "rating": v.get("groundTruthBadge"),
+            "score": v.get("peakScore") if v.get("peakScore") is not None else v.get("avgScore"),
+            "avgScore": v.get("avgScore"),
+            "peakScore": v.get("peakScore"),
+            "peakOffsetMin": v.get("peakOffsetMin"),
             "verdict": verdict,
-            "verdictBadge": v.get("verdictBadge") or verdict,
+            "verdictAvg": v.get("verdictAvg"),
+            "verdictPeak": v.get("verdictPeak"),
+            "verdictBadge": f"{badge_core}{detail}",
             "color": VERDICT_COLORS.get(verdict, "#F87171"),
-            "chromaticPurity": v.get("chromaticPurity"),
         }
     return {**PENDING_GROUND_TRUTH, "captureStatus": v.get("status") or "no_record"}
 
@@ -178,14 +194,24 @@ def build_station_rows(station_records):
         meta = STATIONS_META.get(sid, {})
         v = r.get("verification") or {}
         status = v.get("status")
+        has_score = v.get("avgScore") is not None or v.get("peakScore") is not None
 
-        if status == "verified_completed" and v.get("groundTruthScore") is not None:
-            verdict_val = v.get("verdict") or "MISMATCH"
-            peak = f"光學觀測判定 {v['groundTruthScore']} 分（{v.get('groundTruthBadge') or '—'}）"
-            verdict = v.get("verdictBadge") or verdict_val
+        if status == "verified_completed" and has_score:
+            offset = v.get("peakOffsetMin")
+            offset_label = f"T{offset:+d}" if offset is not None else "T"
+            avg_txt = f"平均 {v['avgScore']} 分" if v.get("avgScore") is not None else "平均 —"
+            peak_txt = f"峰值 {v['peakScore']} 分（{offset_label}）" if v.get("peakScore") is not None else "峰值 —"
+            peak = f"{avg_txt}・{peak_txt}"
+            verdict_val = v.get("verdictPeak") or v.get("verdictAvg") or "MISMATCH"
+            verdict = v.get("verdictPeakBadge") or v.get("verdictAvgBadge") or verdict_val
             color = VERDICT_COLORS.get(verdict_val, "#94A3B8")
         elif status == "capture_unavailable":
-            peak, verdict, color = "擷取失敗，本場無實測影格", "⏳ 實測待驗證", "#94A3B8"
+            peak, verdict, color = "9 張縮時影格全數擷取失敗，本場無實測資料", "⏳ 實測待驗證", "#94A3B8"
+        elif status == "no_locked_prediction":
+            avg_txt = f"平均 {v['avgScore']} 分" if v.get("avgScore") is not None else "平均 —"
+            peak_txt = f"峰值 {v['peakScore']} 分" if v.get("peakScore") is not None else "峰值 —"
+            peak = f"{avg_txt}・{peak_txt}（找不到鎖定預測，無法算誤差）"
+            verdict, color = "⏳ 實測待驗證", "#94A3B8"
         elif status == "skipped_out_of_window":
             peak, verdict, color = "影格不在暮光窗口內，未評分", "⏳ 實測待驗證", "#94A3B8"
         else:
@@ -212,11 +238,15 @@ def build_station_rows(station_records):
     return rows
 
 
+def _rank_score(record):
+    """排名/篩選用的代表分數 —— 優先用峰值 (拍照最在意有沒有拍到最佳時刻)，
+    峰值那一側沒抓到才退回平均分。"""
+    v = record["verification"]
+    return v.get("peakScore") if v.get("peakScore") is not None else v.get("avgScore")
+
+
 def build_station_summary(station_records):
-    verified = [
-        r for r in station_records
-        if (r.get("verification") or {}).get("groundTruthScore") is not None
-    ]
+    verified = [r for r in station_records if _rank_score(r) is not None]
     out = {
         "verified": len(verified),
         "pending": len(station_records) - len(verified),
@@ -226,13 +256,15 @@ def build_station_summary(station_records):
         "meanError": None,
     }
     if verified:
-        best = max(verified, key=lambda r: r["verification"]["groundTruthScore"])
+        best = max(verified, key=_rank_score)
         out["bestStation"] = best.get("station")
-        out["bestScore"] = best["verification"]["groundTruthScore"]
-        errs = [
-            r["verification"]["errorAbsolute"] for r in verified
-            if r["verification"].get("errorAbsolute") is not None
-        ]
+        out["bestScore"] = _rank_score(best)
+        errs = []
+        for r in verified:
+            v = r["verification"]
+            err = v.get("errorPeakAbsolute") if v.get("errorPeakAbsolute") is not None else v.get("errorAvgAbsolute")
+            if err is not None:
+                errs.append(err)
         if errs:
             out["worstError"] = max(errs)
             out["meanError"] = round(sum(errs) / len(errs), 1)
@@ -247,13 +279,21 @@ def build_summary_analysis(prediction, ground_truth):
         atmospheric = "本場預報雲量細項未隨鎖定檔存下。"
 
     if is_verified(ground_truth):
-        err = abs((prediction.get("score") or 0) - (ground_truth.get("score") or 0))
+        pred_score = prediction.get("score") or 0
+        bits = []
+        if ground_truth.get("avgScore") is not None:
+            bits.append(f"平均 {ground_truth['avgScore']} 分（誤差 {abs(pred_score - ground_truth['avgScore'])} 分）")
+        if ground_truth.get("peakScore") is not None:
+            offset = ground_truth.get("peakOffsetMin")
+            offset_label = f"T{offset:+d}" if offset is not None else "T"
+            bits.append(f"峰值 {ground_truth['peakScore']} 分（{offset_label}，誤差 {abs(pred_score - ground_truth['peakScore'])} 分）")
+        detail = "、".join(bits) if bits else "—"
         performance = (
-            f"模型預報 {prediction.get('score')} 分，實況光學觀測 {ground_truth.get('score')} 分，"
-            f"絕對誤差 {err} 分（{ground_truth.get('verdict')}）。"
+            f"模型預報 {prediction.get('score')} 分，實況縮時光學觀測：{detail}"
+            f"（{ground_truth.get('verdict')}）。"
         )
     else:
-        performance = "本場實測影格擷取失敗或光學評分尚未完成，暫無模型誤差判定。"
+        performance = "本場實測影格擷取失敗或找不到對應鎖定預測，暫無模型誤差判定。"
 
     return {"atmosphericReason": atmospheric, "modelPerformance": performance}
 

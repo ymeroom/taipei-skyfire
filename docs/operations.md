@@ -1,6 +1,6 @@
 # Taipei SkyFire 現況運作說明
 
-最後更新：2026-09-11（本機排程器上線當天）
+最後更新：2026-09-12（縮時多影格聚合出「平均分＋峰值分」上線當天）
 
 這份文件說明網站背後「每天實際在做什麼」——從凌晨到深夜，資料怎麼被算出來、
 怎麼被驗證、怎麼被呈現到首頁。給未來的自己（或協作者）快速抓回全貌用。
@@ -10,9 +10,10 @@
 ## 一句話說明
 
 **Taipei SkyFire** 是一個「日出/日落火燒雲預測」網站：每天在 8 個攝影機位
-（6 個日落 + 2 個日出）鎖定一次預測分數，出景當下去對應的 YouTube 即時影像
-擷取一張畫面做光學分析、算出「實際」分數，兩者互相比對來檢驗模型準不準，
-再定期用這些比對結果回頭微調模型參數。
+（6 個日落 + 2 個日出）鎖定一次預測分數，出景前後 80 分鐘去對應的 YouTube
+即時影像拍一段 9 張的縮時序列做光學分析，聚合出「平均分」+「峰值分」兩個
+獨立的「實際」分數，跟預測分數比對來檢驗模型準不準，再定期用這些比對結果
+回頭微調模型參數。
 
 - 線上網址：https://ymeroom.github.io/taipei-skyfire/
 - 前端：純 HTML/CSS/原生 JS（無框架），靜態部署在 GitHub Pages
@@ -52,27 +53,39 @@ GitHub Actions `schedule:`，見下方「觸發機制」一節）。
 
 | 時間 | 工作 | 做什麼 |
 |---|---|---|
-| 05:30 | 擷取日出 | 到 2 個日出站抓即時影像畫面 + 光學評分 + 產生日報 |
+| 06:30 | 擷取日出 | 到 2 個日出站各拍 T-40~T+40 縮時序列（9 張）+ 光學評分 + 產生日報 |
 | 09:00 | 日出日報 | 同一條管線再跑一次（補跑/確保日報有發布） |
 | 15:30 | **鎖定日落預測** | 對 6 個日落站各自算一次模型分數，寫死存檔，事後不能改 |
-| 18:45 | 擷取日落 | 到 6 個日落站抓即時影像畫面 + 光學評分 + 產生日報 |
+| 19:00 | 擷取日落 | 到 6 個日落站各拍 T-40~T+40 縮時序列（9 張）+ 光學評分 + 產生日報 |
 | 21:00 | 日落日報 | 同一條管線再跑一次（補跑/確保日報有發布） |
 | 23:45 | **鎖定日出預測** | 對 2 個日出站各自算一次模型分數，鎖定的是**明天**日出 |
 
-另外還有兩條非每日的背景工作：
+06:30/19:00 不是實際日出/日落時刻——擷取靠 DVR 回溯，只要排在事件後
+40 分鐘以上執行都能一次抓完整段 80 分鐘，不需要卡在出景當刻即時執行。
 
-- **多機位縮時擷取**（`auto_timelapse_multi_station.yml`，日出 06:30 /
-  日落 19:00）：日出/日落窗口（事件前後 40 分鐘、每 10 分鐘一張，6 站
-  ×9 張＝54 張）另外補跑一次縮時序列，純粹是留存影像素材，跟上面的
-  預測驗證管線互不影響、互不依賴。只能在自架 runner 上跑（需要住宅 IP
-  才能穩定用 DVR 回溯）。產出放在 `C:\skyfire-timelapse\<日期>-<時段>\`
-  （checkout 目錄之外，不進 git），同時也上傳成 workflow artifact
-  （保留 14 天）。
+另外還有一條非每日的背景工作：
+
 - **每週校準**（`weekly_auto_calibration.yml`，每週一 00:00）：把過去一週
-  所有測站的「預測 vs 實測」誤差丟給 `auto-calibrate-model.py`，微調
-  `data/model-calibration-params.json` 裡的物理模型權重。
+  所有測站的「平均分／峰值分 vs 預測」誤差丟給 `auto-calibrate-model.py`，
+  微調 `data/model-calibration-params.json` 裡的物理模型權重。
 
 ---
+
+## 實測分數：「平均分」+「峰值分」
+
+2026-09-12 起，實測不再是出景當刻抓一張畫面算一個分數，而是抓一段
+**T-40~T+40、每 10 分鐘一張（9 張）** 的縮時序列，聚合成兩個獨立數字：
+
+- **平均分**：全部 9 張（整段 80 分鐘）的光學分數平均，代表整場的
+  「整體出景水準」。
+- **峰值分**：只在攝影經驗上最容易出現最佳火燒雲色彩的那一側搜尋
+  最高分——**日出前**（offsetMin ≤ 0，晨曦）或 **日落後**
+  （offsetMin ≥ 0，餘暉），另一側（日出後的普通白晝／日落前的普通
+  白晝）不列入候選，避免峰值被無關的那一半稀釋或誤導。
+
+兩者都跟同一個鎖定預測分數比對，各自算誤差、各自判定（≤8 命中 / ≤18
+輕微偏差 / >18 需校準），**不合併成一個代表值**——日報跟校準都同時採納
+兩個數字，全部平等對待。
 
 ## 資料怎麼流動（單一場次，例如某天的日落）
 
@@ -83,43 +96,51 @@ GitHub Actions `schedule:`，見下方「觸發機制」一節）。
        └─ 寫入 data/locked-sunset-forecast.json
           { stations: { dadaocheng: {...}, xiangshan: {...}, ... } }
 
-18:45  capture-validation.js
-       ├─ 讀剛才鎖定的 6 站預測
-       ├─ 對每一站：連上對應 YouTube 直播 → DVR 往回轉到日落當下時刻
-       │   → 存一張快照 data/snapshots/<日期>/sunset/<站名>.jpg
-       └─ 寫入 data/verification-records.json
-          （每站一筆記錄，含預測分數 + 影格證據 + 尚未評分）
-
-       score-ground-truth.js（緊接著跑）
-       ├─ 對每一筆記錄：檢查影格是否真的落在暮光時間窗口內
-       │   （DVR 沒轉到位的「live-edge」影格一律跳過，絕不冒充實測）
-       ├─ 在窗口內的 → Python 光學分析器讀 CIELAB/HSV 色彩直方圖 → 算出
-       │   0-100 分的「實測」分數
-       └─ 更新 verification-records.json：預測 vs 實測 + 誤差 + 判定
-          （誤差 ≤8 命中 / ≤18 輕微偏差 / >18 需校準）
+19:00  capture_timelapse_multi_station.py
+       ├─ 對每一站：連上對應 YouTube 直播 → 用 DVR sq 序號一次回溯抓 9 張
+       │   （T-40, T-30, ..., T+40）→ 存進 C:\skyfire-timelapse\<日期>-
+       │   <時段>\（checkout 目錄之外，不進 git，避免被下一個 workflow
+       │   的 git clean 清掉）
+       ├─ 每一張都馬上跑 Python 光學分析器 (CIELAB/HSV) 算出 0-100 分
+       ├─ aggregate_station_scores()：聚合出「平均分」+「峰值分」
+       └─ 直接寫入 data/verification-records.json
+          （每站一筆記錄，含預測分數 + 兩個實測分數 + 各自誤差/判定）
 
        generate_daily_briefing.py（緊接著跑）
-       └─ 把當天 6 站的完整結果整理成一份日報，存進 data/daily-reports/
+       └─ 把當天 6 站的完整結果（平均分+峰值分都列出）整理成一份日報，
+          存進 data/daily-reports.json
 
        build-tonight-stations.js（緊接著跑）
        └─ 把「今晚」場次的 6 站預測分數排序，寫入 data/tonight-stations.json
           （首頁讀這份檔案顯示排名，不需要等實測出來）
 
 每週一 00:00  auto-calibrate-model.py
-       └─ 讀一週份 verification-records.json 的誤差，回頭微調
-          data/model-calibration-params.json
+       └─ 讀一週份 verification-records.json，平均分/峰值分各自展開成
+          獨立、等權重的校準樣本（expand_to_calibration_samples），
+          回頭微調 data/model-calibration-params.json
 ```
 
-**誠實性防呆（前後修過 4 次同類 bug，逐一列出目前在檔的機制）：**
+**誠實性防呆（前後修過幾次同類 bug，逐一列出目前在檔的機制）：**
 
-1. `frameIsInWindow` — DVR 沒轉到暮光窗口內的影格標成
-   `skipped_out_of_window`，`groundTruthScore` 留 `null`，絕不硬塞假分數。
-2. `dvrSeekApplied` — 只有 DVR seek 真的落地成功的影格才算 `exact`，沒落地
-   的標成 `live-edge`，評分階段直接排除。
-3. `clean_cloud_bands` — 區分「雲量欄位真的是 0（晴空）」跟「欄位擷取失敗
+1. `compute_target_sq` — DVR 回溯超出直播緩衝範圍時直接拒絕擷取，不悄悄
+   夾到 sq=0（那可能是完全不同、更早的時刻）冒充目標時刻的畫面。
+2. `aggregate_station_scores` — 9 張裡任何一張擷取失敗就不計入平均/峰值；
+   峰值那一側全軍覆沒時峰值誠實留 `null`，不拿另一側的分數頂替。
+3. `build_station_verification_record` — 找不到對應的鎖定預測時標記
+   `no_locked_prediction`，保留已有的實測分數但不硬湊誤差；全數擷取
+   失敗時標記 `capture_unavailable`，兩個分數都留 `null`。
+4. `clean_cloud_bands` — 區分「雲量欄位真的是 0（晴空）」跟「欄位擷取失敗
    的假 0」，不讓假 0 混進日報或校準樣本。
-4. `has_usable_cloud_inputs` — 校準守門，壞紀錄（沒有可用雲量輸入）不會
+5. `has_usable_cloud_inputs` — 校準守門，壞紀錄（沒有可用雲量輸入）不會
    被拿去訓練模型權重。
+
+**2026-09-12 之前的單張精準擷取機制**（`scripts/capture-validation.js` /
+`scripts/score-ground-truth.js`，含 `frameIsInWindow`／`dvrSeekApplied`
+等防呆）已不再被排程呼叫，改由上面的縮時聚合取代——單張擷取沒有縮時序列
+容易受單一時刻的偶發雜訊影響，且原本分開的「單張精準擷取」與「多機位
+縮時擷取」兩條管線本來就在抓幾乎同一時段的畫面，重複打兩次 YouTube/
+ffmpeg 沒有必要。這兩個檔案連同其測試都還留在 repo 裡（未刪除，仍可
+獨立執行/測試），只是不再是正式線上管線的一部分。
 
 ---
 
@@ -132,16 +153,17 @@ GitHub Actions `schedule:`，見下方「觸發機制」一節）。
 遲到的鎖定等於「看到結果之後才假裝做出的預測」；對「擷取」也很致命——
 常常整個錯過暮光窗口。
 
-**新做法：** 全部 4 個 workflow（`lock_forecast.yml`、
-`auto_validate_capture.yml`、`auto_timelapse_multi_station.yml`、
-`weekly_auto_calibration.yml`）的 `schedule:` 已整段移除，只留
-`workflow_dispatch`（手動/程式觸發用）。準時的鬧鐘改由**你電腦上的
-Windows 工作排程器**負責：
+**新做法：** 全部 3 個仍會定時執行的 workflow（`lock_forecast.yml`、
+`auto_validate_capture.yml`、`weekly_auto_calibration.yml`）的 `schedule:`
+已整段移除，只留 `workflow_dispatch`（手動/程式觸發用）。
+（`auto_timelapse_multi_station.yml` 已於 2026-09-12 併入
+`auto_validate_capture.yml`，見上一節，不再是獨立 workflow。）
+準時的鬧鐘改由**你電腦上的 Windows 工作排程器**負責：
 
-- 9 個排程工作，註冊在工作排程器的 `\SkyFire\` 資料夾底下：
+- 7 個排程工作，註冊在工作排程器的 `\SkyFire\` 資料夾底下：
   `Lock-Sunset` / `Lock-Sunrise` / `Capture-Sunrise` / `Briefing-Sunrise` /
-  `Capture-Sunset` / `Briefing-Sunset`（每天）、`Timelapse-Sunrise` /
-  `Timelapse-Sunset`（每天）、`Weekly-Calibration`（每週一）
+  `Capture-Sunset` / `Briefing-Sunset`（每天）、`Weekly-Calibration`
+  （每週一）
 - 時間一到，執行 `scripts/trigger-workflow.ps1`，它做的事只有一件：呼叫
   `gh workflow run <檔名>`（需要 session 參數的工作再加
   `-f session=<sunrise|sunset>`；`weekly_auto_calibration.yml` 沒有這個
@@ -167,11 +189,14 @@ Windows 工作排程器**負責：
 同名工作再重建，改時間就直接改腳本裡的表格重跑。
 
 **已自然驗證：** `lock_forecast.yml` / `auto_validate_capture.yml` 這 6 個
-排程已經被「時間真正到了、系統自己觸發」驗證過（2026-09-11 18:45、21:00
-兩次都準時自動觸發成功，`trigger.log` 有記錄、GitHub 上也真的出現新的
-執行）。`Timelapse-Sunrise` / `Timelapse-Sunset` / `Weekly-Calibration`
-這 3 個是後來（同一天稍晚）才加的，只驗證過手動點執行，還沒被自然觸發
-驗證過——縮時的第一次會是隔天 06:30，校準的第一次會是下週一 00:00。
+排程都已經被「時間真正到了、系統自己觸發」驗證過（2026-09-11 起連續多次
+準時自動觸發成功，`trigger.log` 有記錄、GitHub 上也真的出現新的執行）。
+`Weekly-Calibration` 只驗證過手動點執行，第一次自然觸發會是下週一 00:00。
+2026-09-12 把 `Capture-Sunrise`/`Capture-Sunset` 的時間從 05:30/18:45
+改到 06:30/19:00（配合縮時擷取需要的 T+40 緩衝）並移除已併入的
+`Timelapse-*` 兩個工作，這個新排法本身還沒被自然觸發驗證過，需要重新
+執行一次 `install-local-scheduler.ps1`（系統管理員權限）讓工作排程器
+套用新時間。
 
 ---
 

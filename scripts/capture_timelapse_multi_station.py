@@ -179,8 +179,27 @@ def fetch_stream_manifest(watch_url):
     return latest_sq, dur, latest_url
 
 
+def compute_target_sq(latest_sq, dur, seconds_ago):
+    """算出往回 seconds_ago 秒對應的 sq 序號。
+
+    誠實性防呆：若目標時刻早於這條直播 DVR 緩衝的可回溯範圍，結果會是
+    負數 —— 過去在其他擷取路徑 (live-frame-capture.js) 犯過的錯誤是這種
+    情況被 `max(0, ...)` 悄悄夾在 sq=0 (該直播最早可用的切片，可能是完全
+    不同、更早的時刻)，卻仍標記成「已擷取到目標時刻」。這裡改成直接拋出
+    例外，讓呼叫端記錄失敗原因，絕不能讓 sq=0 冒充 t±NN 的畫面進平均/
+    峰值計算。
+    """
+    target_sq = latest_sq - int(seconds_ago / dur)
+    if target_sq < 0:
+        raise RuntimeError(
+            f"目標時刻早於此直播的 DVR 可回溯範圍 (需要往回 {seconds_ago/60:.1f} 分鐘，"
+            f"但只能回溯到 sq=0)，拒絕擷取以避免用錯誤時刻的畫面冒充"
+        )
+    return target_sq
+
+
 def capture_frame_at(latest_url, latest_sq, dur, seconds_ago, output_jpg):
-    target_sq = max(0, latest_sq - int(seconds_ago / dur))
+    target_sq = compute_target_sq(latest_sq, dur, seconds_ago)
     target_url = re.sub(r'/sq/\d+/', f'/sq/{target_sq}/', latest_url)
     temp_ts = output_jpg.replace('.jpg', '.ts')
     os.makedirs(os.path.dirname(output_jpg), exist_ok=True)
@@ -467,6 +486,15 @@ def run(session, date_str=None):
     ok = sum(1 for s in report["stations"] for fr in s["frames"] if fr.get("ok"))
     print(f"=== ✅ 完成 {ok}/{total} 張。報告: {html_path} ===")
 
+    records = write_verification_records(report)
+    this_run_ids = {f"rec-{date_str}-{session}-{st['id']}" for st in stations}
+    for r in records:
+        if r["id"] in this_run_ids:
+            v = r["verification"]
+            print(f"    📝 {r['station']}: 平均 {v.get('avgScore')} 分・峰值 {v.get('peakScore')} 分 "
+                  f"(T{'+' if (v.get('peakOffsetMin') or 0) >= 0 else ''}{v.get('peakOffsetMin')}) "
+                  f"[{v.get('status')}]")
+
     # 供 CI 接手上傳 (auto_timelapse_multi_station.yml 的 upload-artifact 步驟)。
     # 用 GITHUB_OUTPUT 而非在 YAML 重算日期 —— 排程可能延遲數小時而跨越台北午夜。
     bundle_fwd = out_dir.replace("\\", "/")
@@ -477,6 +505,170 @@ def run(session, date_str=None):
             f.write(f"bundle_dir={bundle_fwd}\n")
 
     return report
+
+
+def aggregate_station_scores(frames, session):
+    """從 9 張影格算出兩個實測分數：整段平均、以及對應時段那一側的峰值。
+
+    平均涵蓋 T-40~T+40 全段 (代表整場出景的整體水準)；峰值只在攝影經驗上
+    最容易出現最佳火燒雲色彩的那一側搜尋 —— 日出前的晨曦 (offsetMin <= 0)
+    或日落後的餘暉 (offsetMin >= 0)，另一側 (日出後的普通白晝 / 日落前的
+    普通白晝) 不計入峰值候選，避免「峰值」被無關的那一半稀釋或誤導。
+
+    ok_frames 用的是各影格已套用暗夜/雨天閘門後的 score —— 閘門封頂的分數
+    (例如窗口外強制 ≤12) 誠實地反映該時刻本來就不該算出景，計入平均是對的；
+    真正該排除在外的只有「根本沒抓到／抓到錯誤時刻」的影格 (ok=False)。
+    """
+    ok_frames = [f for f in frames if f.get("ok") and f.get("score") is not None]
+    peak_side = "pre-sunrise" if session == "sunrise" else "post-sunset"
+
+    if not ok_frames:
+        return {
+            "avgScore": None, "peakScore": None, "peakOffsetMin": None,
+            "peakSide": peak_side, "okFrameCount": 0, "frameCount": len(frames)
+        }
+
+    avg_score = round(sum(f["score"] for f in ok_frames) / len(ok_frames), 1)
+
+    if session == "sunrise":
+        peak_candidates = [f for f in ok_frames if f["offsetMin"] <= 0]
+    else:
+        peak_candidates = [f for f in ok_frames if f["offsetMin"] >= 0]
+
+    if peak_candidates:
+        best = max(peak_candidates, key=lambda f: f["score"])
+        peak_score, peak_offset = best["score"], best["offsetMin"]
+    else:
+        peak_score, peak_offset = None, None
+
+    return {
+        "avgScore": avg_score,
+        "peakScore": peak_score,
+        "peakOffsetMin": peak_offset,
+        "peakSide": peak_side,
+        "okFrameCount": len(ok_frames),
+        "frameCount": len(frames)
+    }
+
+
+def verdict_for_error(error_absolute):
+    """與 scripts/live-capture-core.js 的 verdictForError 同門檻，故意在此重複一份
+    小常數 (而非跨語言呼叫 node) —— 純數字門檻，維護成本遠低於 Node/Python
+    橋接的複雜度。改門檻時記得兩邊一起改。"""
+    if error_absolute <= 8:
+        return "EXACT_MATCH", "🎯 極致精準 (誤差 ≤ 8分)"
+    if error_absolute <= 18:
+        return "SLIGHT_DEVIATION", "⚡ 輕微偏差 (誤差 ≤ 18分)"
+    return "MISMATCH", "⚠️ 出現偏差需校準"
+
+
+def load_locked_prediction(data_dir, session, date_str, station_id):
+    """讀該站的鎖定預測。找不到鎖定檔或該站不在其中都回傳 None (不臨時
+    現算一份頂替 —— 鎖定應該早在擷取之前就已完成，缺鎖定本身就是異常，
+    誠實記錄成 no_locked_prediction 比假裝有預測更正確)。"""
+    locked_path = os.path.join(data_dir, f"locked-{session}-forecast.json")
+    if not os.path.exists(locked_path):
+        return None
+    try:
+        with open(locked_path, "r", encoding="utf-8") as f:
+            locked = json.load(f)
+    except (json.JSONDecodeError, OSError):
+        return None
+    if locked.get("date") != date_str:
+        return None
+    return (locked.get("stations") or {}).get(station_id)
+
+
+def build_station_verification_record(station, frames, session, date_str, anchor_utc, data_dir):
+    """組出單一測站這場次的完整驗證紀錄 (供寫進 verification-records.json)。"""
+    aggregate = aggregate_station_scores(frames, session)
+    prediction = load_locked_prediction(data_dir, session, date_str, station["id"])
+
+    record = {
+        "id": f"rec-{date_str}-{session}-{station['id']}",
+        "date": date_str,
+        "session": session,
+        "station": station["id"],
+        "targetTime": anchor_utc.isoformat(),
+        "source": f"{station['name']}（縮時多影格）",
+        "prediction": prediction,
+        "capture": {
+            "kind": "timelapse-multi-frame",
+            "frameCount": aggregate["frameCount"],
+            "okFrameCount": aggregate["okFrameCount"],
+            "offsetsMin": OFFSETS_MIN
+        },
+        "verification": {
+            "avgScore": aggregate["avgScore"],
+            "peakScore": aggregate["peakScore"],
+            "peakOffsetMin": aggregate["peakOffsetMin"],
+            "peakSide": aggregate["peakSide"],
+            "verifiedAt": datetime.datetime.now(datetime.timezone.utc).isoformat()
+        }
+    }
+
+    v = record["verification"]
+    if aggregate["okFrameCount"] == 0:
+        v["status"] = "capture_unavailable"
+        v["reason"] = "9 張影格全數擷取失敗，本場次無實測資料"
+    elif prediction is None:
+        v["status"] = "no_locked_prediction"
+        v["reason"] = "找不到對應的鎖定預測，已有實測分數但無法計算誤差"
+    else:
+        v["status"] = "verified_completed"
+        pred_score = prediction.get("score")
+        if aggregate["avgScore"] is not None and pred_score is not None:
+            err = abs(pred_score - aggregate["avgScore"])
+            verdict, badge = verdict_for_error(err)
+            v["errorAvgAbsolute"] = err
+            v["verdictAvg"] = verdict
+            v["verdictAvgBadge"] = badge
+        if aggregate["peakScore"] is not None and pred_score is not None:
+            err = abs(pred_score - aggregate["peakScore"])
+            verdict, badge = verdict_for_error(err)
+            v["errorPeakAbsolute"] = err
+            v["verdictPeak"] = verdict
+            v["verdictPeakBadge"] = badge
+
+    return record
+
+
+def write_verification_records(report, data_dir=None):
+    """把這場次每站的聚合結果 upsert 進 data/verification-records.json。
+
+    Upsert 規則與 capture-validation.js 的 writeRecord 一致：同 id 就地
+    取代 (保留原本位置)，否則塞到陣列最前面；上限 720 筆 (8 站 × ~90 天)。
+    """
+    if data_dir is None:
+        data_dir = os.path.join(REPO_ROOT, "data")
+    records_path = os.path.join(data_dir, "verification-records.json")
+
+    if os.path.exists(records_path):
+        with open(records_path, "r", encoding="utf-8") as f:
+            records = json.load(f)
+    else:
+        records = []
+
+    anchor_utc = datetime.datetime.fromisoformat(report["anchorUtc"])
+    by_id = {r.get("id"): i for i, r in enumerate(records)}
+
+    for st in report["stations"]:
+        record = build_station_verification_record(
+            st, st["frames"], report["session"], report["date"], anchor_utc, data_dir
+        )
+        idx = by_id.get(record["id"])
+        if idx is not None:
+            records[idx] = record
+        else:
+            records.insert(0, record)
+            by_id = {r.get("id"): i for i, r in enumerate(records)}
+
+    records = records[:720]
+    os.makedirs(data_dir, exist_ok=True)
+    with open(records_path, "w", encoding="utf-8") as f:
+        json.dump(records, f, ensure_ascii=False, indent=2)
+
+    return records
 
 
 if __name__ == "__main__":

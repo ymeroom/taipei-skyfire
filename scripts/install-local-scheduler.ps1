@@ -1,7 +1,9 @@
 ﻿<#
 .SYNOPSIS
   在本機（Windows 工作排程器）註冊排程工作，取代不準時的 GitHub Actions
-  schedule 觸發。涵蓋全部 4 個原本用 schedule 觸發的 workflow。
+  schedule 觸發。涵蓋全部 3 個仍用排程觸發的 workflow
+  （auto_timelapse_multi_station.yml 已於 2026-09-12 併入
+  auto_validate_capture.yml，不再是獨立 workflow）。
 
 .DESCRIPTION
   可重複執行 —— 每次都會先移除舊的同名工作再重建，方便以後調整時間。
@@ -51,19 +53,29 @@ $principal = New-ScheduledTaskPrincipal -UserId $env:UserName -LogonType S4U -Ru
 # session 參數，給沒有那個輸入欄位的 workflow 用) / 錯過是否補跑 /
 # Weekly+DayOfWeek (省略 = 每天)
 $tasks = @(
-    @{ Name = 'Lock-Sunset';        Time = '15:30'; File = 'lock_forecast.yml';                Session = 'sunset';  CatchUp = $false }
-    @{ Name = 'Lock-Sunrise';       Time = '23:45'; File = 'lock_forecast.yml';                Session = 'sunrise'; CatchUp = $false }
-    @{ Name = 'Capture-Sunrise';    Time = '05:30'; File = 'auto_validate_capture.yml';         Session = 'sunrise'; CatchUp = $true }
-    @{ Name = 'Briefing-Sunrise';   Time = '09:00'; File = 'auto_validate_capture.yml';         Session = 'sunrise'; CatchUp = $true }
-    @{ Name = 'Capture-Sunset';     Time = '18:45'; File = 'auto_validate_capture.yml';         Session = 'sunset';  CatchUp = $true }
-    @{ Name = 'Briefing-Sunset';    Time = '21:00'; File = 'auto_validate_capture.yml';         Session = 'sunset';  CatchUp = $true }
-    # 縮時視窗前後 40 分鐘，過了就沒意義了，但錯過一次不算誠實性問題
-    # (跟主要驗證管線無關，純留存素材)，還是設成補跑，總比完全沒有好。
-    @{ Name = 'Timelapse-Sunrise';  Time = '06:30'; File = 'auto_timelapse_multi_station.yml'; Session = 'sunrise'; CatchUp = $true }
-    @{ Name = 'Timelapse-Sunset';   Time = '19:00'; File = 'auto_timelapse_multi_station.yml'; Session = 'sunset';  CatchUp = $true }
+    @{ Name = 'Lock-Sunset';        Time = '15:30'; File = 'lock_forecast.yml';           Session = 'sunset';  CatchUp = $false }
+    @{ Name = 'Lock-Sunrise';       Time = '23:45'; File = 'lock_forecast.yml';           Session = 'sunrise'; CatchUp = $false }
+    # 06:30/19:00 (不是實際日出/日落時刻) —— 擷取現在是 T-40~T+40 的 9 張
+    # 縮時序列 (見 capture_timelapse_multi_station.py)，靠 DVR 回溯，只要
+    # 排在 T+40 之後執行都能一次抓完整段，不需要卡在出景當刻即時執行。
+    @{ Name = 'Capture-Sunrise';    Time = '06:30'; File = 'auto_validate_capture.yml';   Session = 'sunrise'; CatchUp = $true }
+    @{ Name = 'Briefing-Sunrise';   Time = '09:00'; File = 'auto_validate_capture.yml';   Session = 'sunrise'; CatchUp = $true }
+    @{ Name = 'Capture-Sunset';     Time = '19:00'; File = 'auto_validate_capture.yml';   Session = 'sunset';  CatchUp = $true }
+    @{ Name = 'Briefing-Sunset';    Time = '21:00'; File = 'auto_validate_capture.yml';   Session = 'sunset';  CatchUp = $true }
     # 這個 workflow 沒有 session 輸入欄位，Session 留空；每週一次，非每天。
-    @{ Name = 'Weekly-Calibration'; Time = '00:00'; File = 'weekly_auto_calibration.yml';      Session = '';        CatchUp = $true; Weekly = $true; DayOfWeek = 'Monday' }
+    @{ Name = 'Weekly-Calibration'; Time = '00:00'; File = 'weekly_auto_calibration.yml'; Session = '';        CatchUp = $true; Weekly = $true; DayOfWeek = 'Monday' }
 )
+
+# 清掉舊版留下、現在已經不對應任何 $tasks 項目的排程 (例如
+# auto_timelapse_multi_station.yml 併入前註冊過的 Timelapse-*)，
+# 避免殭屍工作繼續觸發一個已經刪除的 workflow 檔而每次都失敗。
+$desiredNames = $tasks | ForEach-Object { $_.Name }
+Get-ScheduledTask -TaskPath $taskFolder -ErrorAction SilentlyContinue |
+    Where-Object { $desiredNames -notcontains $_.TaskName } |
+    ForEach-Object {
+        Unregister-ScheduledTask -TaskName $_.TaskName -TaskPath $taskFolder -Confirm:$false
+        Write-Host "已移除過期排程: $taskFolder$($_.TaskName)"
+    }
 
 foreach ($t in $tasks) {
     $taskName = $t.Name

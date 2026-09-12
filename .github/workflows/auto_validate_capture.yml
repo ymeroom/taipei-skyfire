@@ -1,9 +1,14 @@
 name: Auto Ground-Truth YouTube Capture & Validation
 
-# ⚠️ 安全性：本 repo 為 PUBLIC，且本 workflow 可能在自架 runner (你的個人電腦)
+# ⚠️ 安全性：本 repo 為 PUBLIC，且本 workflow 在自架 runner (你的個人電腦)
 # 上執行。絕對不要為本 workflow 加上 pull_request 觸發 —— 任何人 fork 後開 PR
 # 就能在你的機器上執行任意程式碼。目前僅有 schedule 與 workflow_dispatch，
 # 後者需要 repo 寫入權限，外部人士無法觸發。
+#
+# 2026-09-12：擷取管線已從「出景當刻單張精準擷取」改成「T-40~T+40 縮時
+# 多影格 (9 張)，聚合出平均分+峰值分」(見 scripts/capture_timelapse_multi_
+# station.py)，取代原本分開的 auto_timelapse_multi_station.yml —— 兩者
+# 本來就在抓幾乎同一時段的畫面，合併後不必重複打兩次 YouTube/ffmpeg。
 on:
   # 原本用 schedule cron 觸發 (05:30/09:00/18:45/21:00 台灣時間)，但
   # GitHub Actions 排程實測延遲 4-7 小時，擷取常常完全錯過出景窗口。
@@ -26,10 +31,11 @@ permissions:
 
 jobs:
   capture-and-record:
-    # 設定 repo variable CAPTURE_RUNNER=self-hosted 即可切換到自架 runner，
-    # 取得 Tier A 精確影格 (住宅 IP 不受 YouTube bot check 影響)。
-    # 未設定時使用 GitHub 託管 runner，Tier A 必失敗並降級為 Tier B 海報影格。
-    runs-on: ${{ vars.CAPTURE_RUNNER || 'ubuntu-latest' }}
+    # 縮時多影格擷取需要住宅 IP 才能穩定通過 YouTube bot check、用 DVR sq
+    # 回溯 9 個不同時間點 —— 沒有 Tier B 海報降級可退（那是舊版單張擷取
+    # 才有的機制），GitHub 託管 runner 上這個 job 基本上就是全數擷取失敗。
+    # 設定 repo variable CAPTURE_RUNNER 可覆寫回 'ubuntu-latest' 供臨時除錯用。
+    runs-on: ${{ vars.CAPTURE_RUNNER || 'self-hosted' }}
     timeout-minutes: 30
     defaults:
       run:
@@ -38,6 +44,11 @@ jobs:
         shell: bash
     env:
       TZ: Asia/Taipei
+      # 縮時原始影格 (9 張/站) 寫到 checkout 目錄「之外」—— 放在 workspace
+      # 內的話，下一個在同一台自架 runner 上跑的 workflow 其 actions/checkout
+      # `git clean -ffdx` 會清掉。只有聚合出的平均分/峰值分 (data/verification-
+      # records.json) 進 git，原始影格本身從不進 git。
+      SKYFIRE_TIMELAPSE_DIR: C:/skyfire-timelapse
 
     steps:
       - name: 📥 檢出程式碼庫 (Checkout)
@@ -62,13 +73,14 @@ jobs:
         run: node tests/run-all-tests.js
 
       # 與本檔其他步驟一致：測試掛掉不連坐整條日報管線 (見下方 2026-08-18 註解)。
-      - name: 🐍 執行日報產生器與校準守門測試
+      - name: 🐍 執行日報產生器、校準守門、縮時聚合測試
         continue-on-error: true
         run: |
           if command -v python3 >/dev/null 2>&1; then PY=python3
           elif command -v python >/dev/null 2>&1; then PY=python
-          else echo "::warning::找不到 python，跳過日報產生器測試"; exit 0; fi
+          else echo "::warning::找不到 python，跳過 Python 測試"; exit 0; fi
           "$PY" tests/test_daily_briefing.py || echo "::warning::日報產生器／校準守門測試未通過"
+          "$PY" tests/test_timelapse_aggregation.py || echo "::warning::縮時聚合 (平均分/峰值分) 測試未通過"
 
       - name: 🌅 解析本次天文驗證時段
         id: session
@@ -102,7 +114,7 @@ jobs:
             fi
           done
           if [ -n "$MISSING" ]; then
-            echo "::warning::自架 runner 缺少工具:$MISSING —— Tier A 精確影格將無法使用，會自動降級"
+            echo "::warning::自架 runner 缺少工具:$MISSING —— 縮時擷取無法使用，該場次會全數記為 capture_unavailable"
           fi
 
       - name: 🐍 解析 Python 執行檔與影像分析套件
@@ -126,21 +138,35 @@ jobs:
             echo "未設定 YT_COOKIES secret (自架 runner 使用住宅 IP 時通常不需要)"
           fi
 
-      - name: 📸 執行出景窗口即時影格擷取與預測記錄 (Phase 1)
-        run: node scripts/capture-validation.js "${{ steps.session.outputs.value }}"
-
-      # 註：50 分鐘 11 連續縮時擷取 (scripts/capture_timelapse_series.py)
-      # 已自排程移除。它需在出景前後 25 分鐘內每 5 分鐘擷取一次，但 GitHub
-      # 排程實測延遲 4-7 小時，無法命中該時間窗。腳本保留，待改以 DVR 回溯
-      # (MAX_CAPTURE_OFFSET_MINUTES = 600) 於 09:00/21:00 事後補抓再接回。
-      #
-      # 以下步驟一律執行：擷取若失敗，仍須產出每日日報。
-      # 2026-08-18 起排程連續 33 次全紅，就是因為擷取步驟一失敗，
-      # 後面的光學評分與日報全被連坐跳過。
-      - name: 🔬 執行天空色彩光學直方圖分析與模型誤差檢驗 (Phase 2)
-        if: always()
+      # T-40 ~ T+40、每 10 分鐘一張 (9 張)，DVR 回溯一次抓完，不必即時等待。
+      # 每站聚合出「平均分」(全段 80 分鐘) + 「峰值分」(日出前/日落後那一側
+      # 的最高分) 兩個獨立實測數字，直接寫進 data/verification-records.json
+      # (script 內部完成，不需再跑一支獨立的評分腳本)。
+      # 以下步驟一律執行：擷取若失敗，仍須產出每日日報 (2026-08-18 起排程
+      # 連續 33 次全紅，就是因為擷取步驟一失敗，後面全被連坐跳過)。
+      - name: 🎞️ 執行多機位縮時擷取與光學評分 (T-40~T+40，平均分+峰值分)
+        id: timelapse
         continue-on-error: true
-        run: node scripts/score-ground-truth.js "${{ steps.session.outputs.value }}"
+        run: "$PYTHON_BIN scripts/capture_timelapse_multi_station.py \"${{ steps.session.outputs.value }}\""
+
+      - name: 📦 複製縮時產出到 workspace 供上傳
+        id: stage
+        if: always() && steps.timelapse.outputs.bundle_dir != ''
+        run: |
+          STAGE="$GITHUB_WORKSPACE/_timelapse_artifact"
+          rm -rf "$STAGE"
+          mkdir -p "$STAGE"
+          cp -r "${{ steps.timelapse.outputs.bundle_dir }}/." "$STAGE/"
+          echo "dir=$STAGE" >> "$GITHUB_OUTPUT"
+
+      - name: ☁️ 上傳縮時產出為 workflow artifact
+        if: always() && steps.stage.outputs.dir != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: timelapse-${{ steps.session.outputs.value }}-${{ github.run_id }}
+          path: ${{ steps.stage.outputs.dir }}
+          if-no-files-found: warn
+          retention-days: 14
 
       - name: 📰 產生每日實況驗證日報與歷史歸檔 (Daily Ground Truth Briefing)
         if: always()
