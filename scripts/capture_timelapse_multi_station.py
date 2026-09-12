@@ -562,10 +562,45 @@ def verdict_for_error(error_absolute):
     return "MISMATCH", "⚠️ 出現偏差需校準"
 
 
+def _num(v):
+    return v if isinstance(v, (int, float)) and not isinstance(v, bool) else None
+
+
+def flatten_station_lock(station_lock, locked_at):
+    """把 lock-forecast.js 寫的巢狀形狀 ({score, weather:{cloudHigh,...},
+    metrics:{...}}) 攤平成 generate_daily_briefing.py / clean_cloud_bands
+    期待的扁平形狀 (highCloud/midCloud/lowCloud 等直接是頂層欄位)。
+
+    與 scripts/capture-validation.js 的 buildPredictionFromStationLock 對應
+    同一份鎖定檔、產出同一種扁平形狀 —— 兩條路徑都要能餵進同一個日報產生器。
+    不攤平的話 clean_cloud_bands 會把巢狀底下的雲量誤判成「缺失」，日報就會
+    顯示「本場預報雲量細項未隨鎖定檔存下」，明明鎖定檔裡其實完整存著。
+    """
+    w = station_lock.get("weather") or {}
+    m = station_lock.get("metrics") or {}
+    vis_km = _num(w.get("visibilityKm"))
+    return {
+        "score": station_lock.get("score"),
+        "rating": station_lock.get("rating"),
+        "color": station_lock.get("color"),
+        "highCloud": _num(w.get("cloudHigh")),
+        "midCloud": _num(w.get("cloudMid")),
+        "lowCloud": _num(w.get("cloudLow")),
+        "totalCloud": _num(w.get("cloudTotal")),
+        "humidity": _num(w.get("humidity")),
+        "precipProb": _num(w.get("precipProb")),
+        "horizonClearance": _num(m.get("horizonClearance")),
+        "visibilityKm": vis_km if vis_km is not None else _num(m.get("visKm")),
+        "isSimulated": False,
+        "lockedAt": locked_at
+    }
+
+
 def load_locked_prediction(data_dir, session, date_str, station_id):
-    """讀該站的鎖定預測。找不到鎖定檔或該站不在其中都回傳 None (不臨時
-    現算一份頂替 —— 鎖定應該早在擷取之前就已完成，缺鎖定本身就是異常，
-    誠實記錄成 no_locked_prediction 比假裝有預測更正確)。"""
+    """讀該站的鎖定預測，攤平成日報產生器期待的扁平形狀。找不到鎖定檔或該站
+    不在其中都回傳 None (不臨時現算一份頂替 —— 鎖定應該早在擷取之前就已
+    完成，缺鎖定本身就是異常，誠實記錄成 no_locked_prediction 比假裝有
+    預測更正確)。"""
     locked_path = os.path.join(data_dir, f"locked-{session}-forecast.json")
     if not os.path.exists(locked_path):
         return None
@@ -576,7 +611,10 @@ def load_locked_prediction(data_dir, session, date_str, station_id):
         return None
     if locked.get("date") != date_str:
         return None
-    return (locked.get("stations") or {}).get(station_id)
+    station_lock = (locked.get("stations") or {}).get(station_id)
+    if station_lock is None:
+        return None
+    return flatten_station_lock(station_lock, locked.get("lockedAt"))
 
 
 def build_station_verification_record(station, frames, session, date_str, anchor_utc, data_dir):

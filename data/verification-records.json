@@ -10,19 +10,16 @@
       "score": 45,
       "rating": "平淡暮光",
       "color": "#7B88A8",
-      "weather": {
-        "cloudHigh": 47,
-        "cloudMid": 5,
-        "cloudLow": 22,
-        "cloudTotal": 61,
-        "humidity": 85,
-        "precipProb": 12,
-        "visibilityKm": 15.5
-      },
-      "metrics": {
-        "horizonClearance": 6,
-        "visKm": 15.5
-      }
+      "highCloud": 47,
+      "midCloud": 5,
+      "lowCloud": 22,
+      "totalCloud": 61,
+      "humidity": 85,
+      "precipProb": 12,
+      "horizonClearance": 6,
+      "visibilityKm": 15.5,
+      "isSimulated": false,
+      "lockedAt": "2026-09-12T07:30:18.342Z"
     },
     "capture": {
       "kind": "timelapse-multi-frame",
@@ -45,7 +42,7 @@
       "peakScore": 30,
       "peakOffsetMin": 10,
       "peakSide": "post-sunset",
-      "verifiedAt": "2026-09-12T10:46:30.226683+00:00",
+      "verifiedAt": "2026-09-12T12:19:01.176685+00:00",
       "status": "verified_completed",
       "errorAvgAbsolute": 18.6,
       "verdictAvg": "MISMATCH",
@@ -66,19 +63,16 @@
       "score": 5,
       "rating": "陰沉沉寂",
       "color": "#5A6275",
-      "weather": {
-        "cloudHigh": 27,
-        "cloudMid": 10,
-        "cloudLow": 41,
-        "cloudTotal": 61,
-        "humidity": 95,
-        "precipProb": 84,
-        "visibilityKm": 6.2
-      },
-      "metrics": {
-        "horizonClearance": 4,
-        "visKm": 6.2
-      }
+      "highCloud": 27,
+      "midCloud": 10,
+      "lowCloud": 41,
+      "totalCloud": 61,
+      "humidity": 95,
+      "precipProb": 84,
+      "horizonClearance": 4,
+      "visibilityKm": 6.2,
+      "isSimulated": false,
+      "lockedAt": "2026-09-12T07:30:18.342Z"
     },
     "capture": {
       "kind": "timelapse-multi-frame",
@@ -101,7 +95,7 @@
       "peakScore": null,
       "peakOffsetMin": null,
       "peakSide": "post-sunset",
-      "verifiedAt": "2026-09-12T10:46:30.226233+00:00",
+      "verifiedAt": "2026-09-12T12:19:01.176384+00:00",
       "status": "capture_unavailable",
       "reason": "9 張影格全數擷取失敗，本場次無實測資料"
     }
@@ -117,19 +111,16 @@
       "score": 27,
       "rating": "陰沉沉寂",
       "color": "#5A6275",
-      "weather": {
-        "cloudHigh": 85,
-        "cloudMid": 2,
-        "cloudLow": 5,
-        "cloudTotal": 87,
-        "humidity": 85,
-        "precipProb": 63,
-        "visibilityKm": 16.8
-      },
-      "metrics": {
-        "horizonClearance": 2,
-        "visKm": 16.8
-      }
+      "highCloud": 85,
+      "midCloud": 2,
+      "lowCloud": 5,
+      "totalCloud": 87,
+      "humidity": 85,
+      "precipProb": 63,
+      "horizonClearance": 2,
+      "visibilityKm": 16.8,
+      "isSimulated": false,
+      "lockedAt": "2026-09-12T07:30:18.342Z"
     },
     "capture": {
       "kind": "timelapse-multi-frame",
@@ -152,7 +143,7 @@
       "peakScore": 31,
       "peakOffsetMin": 20,
       "peakSide": "post-sunset",
-      "verifiedAt": "2026-09-12T10:46:30.225753+00:00",
+      "verifiedAt": "2026-09-12T12:19:01.176087+00:00",
       "status": "verified_completed",
       "errorAvgAbsolute": 9.7,
       "verdictAvg": "SLIGHT_DEVIATION",
@@ -173,19 +164,16 @@
       "score": 28,
       "rating": "陰沉沉寂",
       "color": "#5A6275",
-      "weather": {
-        "cloudHigh": 85,
-        "cloudMid": 2,
-        "cloudLow": 5,
-        "cloudTotal": 87,
-        "humidity": 85,
-        "precipProb": 63,
-        "visibilityKm": 16.8
-      },
-      "metrics": {
-        "horizonClearance": 7,
-        "visKm": 16.8
-      }
+      "highCloud": 85,
+      "midCloud": 2,
+      "lowCloud": 5,
+      "totalCloud": 87,
+      "humidity": 85,
+      "precipProb": 63,
+      "horizonClearance": 7,
+      "visibilityKm": 16.8,
+      "isSimulated": false,
+      "lockedAt": "2026-09-12T07:30:18.342Z"
     },
     "capture": {
       "kind": "timelapse-multi-frame",
@@ -208,7 +196,7 @@
       "peakScore": 88,
       "peakOffsetMin": 20,
       "peakSide": "post-sunset",
-      "verifiedAt": "2026-09-12T10:46:30.225270+00:00",
+      "verifiedAt": "2026-09-12T12:19:01.175786+00:00",
       "status": "verified_completed",
       "errorAvgAbsolute": 5.399999999999999,
       "verdictAvg": "EXACT_MATCH",
@@ -229,19 +217,16 @@
       "score": 44,
       "rating": "平淡暮光",
       "color": "#7B88A8",
-      "weather": {
-        "cloudHigh": 77,
-        "cloudMid": 3,
-        "cloudLow": 7,
-        "cloudTotal": 78,
-        "humidity": 85,
-        "precipProb": 12,
-        "visibilityKm": 17
-      },
-      "metrics": {
-        "horizonClearance": 1,
-        "visKm": 17
-      }
+      "highCloud": 77,
+      "midCloud": 3,
+      "lowCloud": 7,
+      "totalCloud": 78,
+      "humidity": 85,
+      "precipProb": 12,
+      "horizonClearance": 1,
+      "visibilityKm": 17,
+      "isSimulated": false,
+      "lockedAt": "2026-09-12T07:30:18.342Z"
     },
     "capture": {
       "kind": "timelapse-multi-frame",
@@ -264,7 +249,7 @@
       "peakScore": 31,
       "peakOffsetMin": 0,
       "peakSide": "post-sunset",
-      "verifiedAt": "2026-09-12T10:46:30.224832+00:00",
+      "verifiedAt": "2026-09-12T12:19:01.175482+00:00",
       "status": "verified_completed",
       "errorAvgAbsolute": 25.9,
       "verdictAvg": "MISMATCH",
@@ -285,19 +270,16 @@
       "score": 44,
       "rating": "平淡暮光",
       "color": "#7B88A8",
-      "weather": {
-        "cloudHigh": 47,
-        "cloudMid": 5,
-        "cloudLow": 22,
-        "cloudTotal": 61,
-        "humidity": 85,
-        "precipProb": 12,
-        "visibilityKm": 15.5
-      },
-      "metrics": {
-        "horizonClearance": 0,
-        "visKm": 15.5
-      }
+      "highCloud": 47,
+      "midCloud": 5,
+      "lowCloud": 22,
+      "totalCloud": 61,
+      "humidity": 85,
+      "precipProb": 12,
+      "horizonClearance": 0,
+      "visibilityKm": 15.5,
+      "isSimulated": false,
+      "lockedAt": "2026-09-12T07:30:18.342Z"
     },
     "capture": {
       "kind": "timelapse-multi-frame",
@@ -320,7 +302,7 @@
       "peakScore": 18,
       "peakOffsetMin": 20,
       "peakSide": "post-sunset",
-      "verifiedAt": "2026-09-12T10:46:30.224242+00:00",
+      "verifiedAt": "2026-09-12T12:19:01.175199+00:00",
       "status": "verified_completed",
       "errorAvgAbsolute": 29.1,
       "verdictAvg": "MISMATCH",

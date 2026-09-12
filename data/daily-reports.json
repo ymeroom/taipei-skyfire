@@ -11,9 +11,9 @@
       "score": 44,
       "rating": "平淡暮光",
       "color": "#7B88A8",
-      "highCloud": null,
-      "midCloud": null,
-      "lowCloud": null,
+      "highCloud": 77,
+      "midCloud": 3,
+      "lowCloud": 7,
       "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
     },
     "groundTruth": {
@@ -35,7 +35,7 @@
         "phasePrep": "—",
         "phasePeak": "平均 18.1 分・峰值 31 分（T+0）",
         "phasePost": "—",
-        "forecast": "44 分",
+        "forecast": "44 分（低雲 7%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
         "verdictColor": "#FBBF24"
       },
@@ -46,7 +46,7 @@
         "phasePrep": "—",
         "phasePeak": "平均 26.4 分・峰值 30 分（T+10）",
         "phasePost": "—",
-        "forecast": "45 分",
+        "forecast": "45 分（低雲 22%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
         "verdictColor": "#FBBF24"
       },
@@ -57,7 +57,7 @@
         "phasePrep": "—",
         "phasePeak": "9 張縮時影格全數擷取失敗，本場無實測資料",
         "phasePost": "—",
-        "forecast": "5 分",
+        "forecast": "5 分（低雲 41%）",
         "verdict": "⏳ 實測待驗證",
         "verdictColor": "#94A3B8"
       },
@@ -68,7 +68,7 @@
         "phasePrep": "—",
         "phasePeak": "平均 17.3 分・峰值 31 分（T+20）",
         "phasePost": "—",
-        "forecast": "27 分",
+        "forecast": "27 分（低雲 5%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
         "verdictColor": "#4ADE80"
       },
@@ -79,7 +79,7 @@
         "phasePrep": "—",
         "phasePeak": "平均 33.4 分・峰值 88 分（T+20）",
         "phasePost": "—",
-        "forecast": "28 分",
+        "forecast": "28 分（低雲 5%）",
         "verdict": "⚠️ 出現偏差需校準",
         "verdictColor": "#F87171"
       },
@@ -90,7 +90,7 @@
         "phasePrep": "—",
         "phasePeak": "平均 14.9 分・峰值 18 分（T+20）",
         "phasePost": "—",
-        "forecast": "44 分",
+        "forecast": "44 分（低雲 22%）",
         "verdict": "⚠️ 出現偏差需校準",
         "verdictColor": "#F87171"
       }
@@ -104,7 +104,7 @@
       "meanError": 23.6
     },
     "summaryAnalysis": {
-      "atmosphericReason": "本場預報雲量細項未隨鎖定檔存下。",
+      "atmosphericReason": "預報雲量：高空 77% ／ 中空 3% ／ 低空 7%。",
       "modelPerformance": "模型預報 44 分，實況縮時光學觀測：平均 18.1 分（誤差 25.9 分）、峰值 31 分（T+0，誤差 13 分）（SLIGHT_DEVIATION）。"
     }
   },

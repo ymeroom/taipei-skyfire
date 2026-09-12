@@ -100,10 +100,19 @@ try:
     data_dir = os.path.join(dir_, "data")
     os.makedirs(data_dir, exist_ok=True)
 
+    # 形狀跟 lock-forecast.js 實際寫出的一致：雲量/濕度巢狀在 weather 底下，
+    # 不是頂層欄位 —— 這是 2026-09-12 抓到的真實 bug 的迴歸測試案例
+    # (load_locked_prediction 曾直接回傳這個巢狀物件，未攤平成扁平形狀，
+    # 導致 clean_cloud_bands 誤判雲量缺失，日報顯示「未隨鎖定檔存下」)。
     locked = {
         "date": "2026-09-12", "session": "sunset", "lockedAt": "2026-09-12T07:30:00.000Z",
         "stations": {
-            "dadaocheng": {"score": 50, "rating": "x", "highCloud": 10, "midCloud": 20, "lowCloud": 5, "humidity": 70}
+            "dadaocheng": {
+                "score": 50, "rating": "x", "color": "#7B88A8",
+                "weather": {"cloudHigh": 10, "cloudMid": 20, "cloudLow": 5, "cloudTotal": 30,
+                            "humidity": 70, "precipProb": 12, "visibilityKm": 17},
+                "metrics": {"horizonClearance": 40, "visKm": 17}
+            }
         }
     }
     with open(os.path.join(data_dir, "locked-sunset-forecast.json"), "w", encoding="utf-8") as f:
@@ -124,6 +133,16 @@ try:
     assert rec["verification"]["errorPeakAbsolute"] == abs(50 - 60)
     assert rec["verification"]["verdictPeak"] == "SLIGHT_DEVIATION"
     print("✅ build_station_verification_record：正常情境同時算出 errorAvg/errorPeak 與各自判定")
+
+    # --- load_locked_prediction / flatten_station_lock：雲量攤平不遺失 ---
+    pred = rec["prediction"]
+    assert pred["highCloud"] == 10 and pred["midCloud"] == 20 and pred["lowCloud"] == 5, (
+        "巢狀 weather.cloudHigh/cloudMid/cloudLow 必須被攤平成頂層 highCloud/midCloud/lowCloud，"
+        "否則 generate_daily_briefing.py 的 clean_cloud_bands 會誤判雲量缺失"
+    )
+    assert pred["humidity"] == 70 and pred["visibilityKm"] == 17
+    assert pred["horizonClearance"] == 40
+    print("✅ load_locked_prediction：巢狀鎖定資料正確攤平，雲量細項不遺失")
 
     # 情境 2：找不到鎖定預測 —— 有實測但無法算誤差，不硬湊
     rec_nopred = tl.build_station_verification_record(
