@@ -17,12 +17,12 @@
       "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
     },
     "groundTruth": {
-      "score": 30,
-      "rating": "平淡暮光 (雨天反光判定)",
-      "verdict": "EXACT_MATCH",
-      "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
-      "color": "#4ADE80",
-      "chromaticPurity": 39.7
+      "score": 19,
+      "rating": "陰沉沉寂",
+      "verdict": "SLIGHT_DEVIATION",
+      "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "color": "#FBBF24",
+      "chromaticPurity": 23.2
     },
     "stations": [
       {
@@ -30,11 +30,11 @@
         "icon": "⛰️",
         "tag": "新北觀光・雙北盆地俯瞰晨光",
         "phasePrep": "—",
-        "phasePeak": "光學觀測判定 30 分（平淡暮光 (雨天反光判定)）",
+        "phasePeak": "光學觀測判定 19 分（陰沉沉寂）",
         "phasePost": "—",
         "forecast": "36 分（低雲 22%）",
-        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80"
+        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "verdictColor": "#FBBF24"
       },
       {
         "name": "基隆外木山濱海",
@@ -52,13 +52,13 @@
       "verified": 2,
       "pending": 0,
       "bestStation": "hongludi",
-      "bestScore": 30,
-      "worstError": 6,
-      "meanError": 3.0
+      "bestScore": 19,
+      "worstError": 17,
+      "meanError": 8.5
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 94% ／ 中空 1% ／ 低空 22%。",
-      "modelPerformance": "模型預報 36 分，實況光學觀測 30 分，絕對誤差 6 分（EXACT_MATCH）。"
+      "modelPerformance": "模型預報 36 分，實況光學觀測 19 分，絕對誤差 17 分（SLIGHT_DEVIATION）。"
     }
   },
   {
