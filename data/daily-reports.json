@@ -18,13 +18,13 @@
     },
     "groundTruth": {
       "score": 18,
-      "avgScore": 14.8,
+      "avgScore": 15.9,
       "peakScore": 18,
       "peakOffsetMin": -20,
       "verdict": "MISMATCH",
       "verdictAvg": "MISMATCH",
       "verdictPeak": "MISMATCH",
-      "verdictBadge": "⚠️ 出現偏差需校準（峰值 18 分／平均 14.8 分）",
+      "verdictBadge": "⚠️ 出現偏差需校準（峰值 18 分／平均 15.9 分）",
       "color": "#F87171"
     },
     "stations": [
@@ -33,7 +33,7 @@
         "icon": "⛰️",
         "tag": "新北觀光・雙北盆地俯瞰晨光",
         "phasePrep": "—",
-        "phasePeak": "平均 14.8 分・峰值 18 分（T-20）",
+        "phasePeak": "平均 15.9 分・峰值 18 分（T-20）",
         "phasePost": "—",
         "forecast": "54 分（低雲 5%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -44,7 +44,7 @@
         "icon": "🌊",
         "tag": "國海院・太平洋日出第一線",
         "phasePrep": "—",
-        "phasePeak": "平均 8.8 分・峰值 20 分（T-10）",
+        "phasePeak": "平均 20.4 分・峰值 22 分（T+0）",
         "phasePost": "—",
         "forecast": "53 分（低雲 2%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -55,13 +55,13 @@
       "verified": 2,
       "pending": 0,
       "bestStation": "waimushan",
-      "bestScore": 20,
+      "bestScore": 22,
       "worstError": 36,
-      "meanError": 34.5
+      "meanError": 33.5
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 59% ／ 中空 0% ／ 低空 5%。",
-      "modelPerformance": "模型預報 54 分，實況縮時光學觀測：平均 14.8 分（誤差 39.2 分）、峰值 18 分（T-20，誤差 36 分）（MISMATCH）。"
+      "modelPerformance": "模型預報 54 分，實況縮時光學觀測：平均 15.9 分（誤差 38.1 分）、峰值 18 分（T-20，誤差 36 分）（MISMATCH）。"
     }
   },
   {
