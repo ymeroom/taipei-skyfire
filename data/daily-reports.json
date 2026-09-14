@@ -17,14 +17,14 @@
       "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
     },
     "groundTruth": {
-      "score": 16,
-      "avgScore": 13.3,
-      "peakScore": 16,
+      "score": 18,
+      "avgScore": 17.1,
+      "peakScore": 18,
       "peakOffsetMin": -20,
       "verdict": "SLIGHT_DEVIATION",
       "verdictAvg": "SLIGHT_DEVIATION",
       "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)（峰值 16 分／平均 13.3 分）",
+      "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)（峰值 18 分／平均 17.1 分）",
       "color": "#FBBF24"
     },
     "stations": [
@@ -33,7 +33,7 @@
         "icon": "⛰️",
         "tag": "新北觀光・雙北盆地俯瞰晨光",
         "phasePrep": "—",
-        "phasePeak": "平均 13.3 分・峰值 16 分（T-20）",
+        "phasePeak": "平均 17.1 分・峰值 18 分（T-20）",
         "phasePost": "—",
         "forecast": "30 分（低雲 16%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
@@ -44,24 +44,24 @@
         "icon": "🌊",
         "tag": "國海院・太平洋日出第一線",
         "phasePrep": "—",
-        "phasePeak": "平均 5.0 分・峰值 5 分（T-40）",
+        "phasePeak": "平均 10.9 分・峰值 11 分（T+0）",
         "phasePost": "—",
         "forecast": "24 分（低雲 28%）",
-        "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "verdictColor": "#FBBF24"
       }
     ],
     "stationSummary": {
       "verified": 2,
       "pending": 0,
       "bestStation": "hongludi",
-      "bestScore": 16,
-      "worstError": 19,
-      "meanError": 16.5
+      "bestScore": 18,
+      "worstError": 13,
+      "meanError": 12.5
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 5% ／ 低空 16%。",
-      "modelPerformance": "模型預報 30 分，實況縮時光學觀測：平均 13.3 分（誤差 16.7 分）、峰值 16 分（T-20，誤差 14 分）（SLIGHT_DEVIATION）。"
+      "modelPerformance": "模型預報 30 分，實況縮時光學觀測：平均 17.1 分（誤差 12.899999999999999 分）、峰值 18 分（T-20，誤差 12 分）（SLIGHT_DEVIATION）。"
     }
   },
   {
