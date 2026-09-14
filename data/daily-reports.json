@@ -17,14 +17,14 @@
       "summary": "厚重低雲覆蓋天際或有陣雨，天色灰暗難見彩霞。"
     },
     "groundTruth": {
-      "score": 27,
-      "avgScore": 21.0,
-      "peakScore": 27,
+      "score": 28,
+      "avgScore": 21.1,
+      "peakScore": 28,
       "peakOffsetMin": 10,
       "verdict": "MISMATCH",
       "verdictAvg": "SLIGHT_DEVIATION",
       "verdictPeak": "MISMATCH",
-      "verdictBadge": "⚠️ 出現偏差需校準（峰值 27 分／平均 21.0 分）",
+      "verdictBadge": "⚠️ 出現偏差需校準（峰值 28 分／平均 21.1 分）",
       "color": "#F87171"
     },
     "stations": [
@@ -33,7 +33,7 @@
         "icon": "⛵",
         "tag": "臺北旅遊網 4K 直播・淡水河倒影晚霞",
         "phasePrep": "—",
-        "phasePeak": "平均 21.0 分・峰值 27 分（T+10）",
+        "phasePeak": "平均 21.1 分・峰值 28 分（T+10）",
         "phasePost": "—",
         "forecast": "5 分（低雲 59%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -44,7 +44,7 @@
         "icon": "⛩️",
         "tag": "臺北旅遊網 4K 直播・高處俯瞰盆地火燒雲",
         "phasePrep": "—",
-        "phasePeak": "平均 19.8 分・峰值 29 分（T+20）",
+        "phasePeak": "平均 19.4 分・峰值 26 分（T+20）",
         "phasePost": "—",
         "forecast": "5 分（低雲 75%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -55,7 +55,7 @@
         "icon": "🏮",
         "tag": "新北觀光 4K 直播・山海交界落日",
         "phasePrep": "—",
-        "phasePeak": "平均 5.0 分・峰值 5 分（T+30）",
+        "phasePeak": "平均 8.5 分・峰值 12 分（T+30）",
         "phasePost": "—",
         "forecast": "5 分（低雲 90%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -66,7 +66,7 @@
         "icon": "🌊",
         "tag": "新北觀光 4K 直播・淡江大橋與台灣海峽晚霞",
         "phasePrep": "—",
-        "phasePeak": "平均 17.3 分・峰值 30 分（T+10）",
+        "phasePeak": "平均 18.7 分・峰值 42 分（T+20）",
         "phasePost": "—",
         "forecast": "5 分（低雲 45%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -77,7 +77,7 @@
         "icon": "🌉",
         "tag": "新北觀光 4K 直播・情人橋烈焰落日",
         "phasePrep": "—",
-        "phasePeak": "平均 19.8 分・峰值 30 分（T+20）",
+        "phasePeak": "平均 22.3 分・峰值 48 分（T+20）",
         "phasePost": "—",
         "forecast": "5 分（低雲 45%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -88,7 +88,7 @@
         "icon": "🏙️",
         "tag": "臺北旅遊網 4K 直播・101 與西方天際線",
         "phasePrep": "—",
-        "phasePeak": "平均 15.1 分・峰值 21 分（T+10）",
+        "phasePeak": "平均 15.2 分・峰值 21 分（T+10）",
         "phasePost": "—",
         "forecast": "5 分（低雲 75%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
@@ -98,14 +98,14 @@
     "stationSummary": {
       "verified": 6,
       "pending": 0,
-      "bestStation": "bali",
-      "bestScore": 30,
-      "worstError": 25,
-      "meanError": 18.7
+      "bestStation": "tamsui",
+      "bestScore": 48,
+      "worstError": 43,
+      "meanError": 24.5
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 11% ／ 低空 59%。",
-      "modelPerformance": "模型預報 5 分，實況縮時光學觀測：平均 21.0 分（誤差 16.0 分）、峰值 27 分（T+10，誤差 22 分）（MISMATCH）。"
+      "modelPerformance": "模型預報 5 分，實況縮時光學觀測：平均 21.1 分（誤差 16.1 分）、峰值 28 分（T+10，誤差 23 分）（MISMATCH）。"
     }
   },
   {
