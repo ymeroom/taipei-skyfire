@@ -17,15 +17,15 @@
       "summary": "厚重低雲覆蓋天際或有陣雨，天色灰暗難見彩霞。"
     },
     "groundTruth": {
-      "score": 14,
-      "avgScore": 12.7,
-      "peakScore": 14,
-      "peakOffsetMin": -20,
-      "verdict": "SLIGHT_DEVIATION",
-      "verdictAvg": "EXACT_MATCH",
-      "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)（峰值 14 分／平均 12.7 分）",
-      "color": "#FBBF24"
+      "score": 24,
+      "avgScore": 15.2,
+      "peakScore": 24,
+      "peakOffsetMin": -10,
+      "verdict": "MISMATCH",
+      "verdictAvg": "SLIGHT_DEVIATION",
+      "verdictPeak": "MISMATCH",
+      "verdictBadge": "⚠️ 出現偏差需校準（峰值 24 分／平均 15.2 分）",
+      "color": "#F87171"
     },
     "stations": [
       {
@@ -33,18 +33,18 @@
         "icon": "⛰️",
         "tag": "新北觀光・雙北盆地俯瞰晨光",
         "phasePrep": "—",
-        "phasePeak": "平均 12.7 分・峰值 14 分（T-20）",
+        "phasePeak": "平均 15.2 分・峰值 24 分（T-10）",
         "phasePost": "—",
         "forecast": "5 分（低雲 59%）",
-        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24"
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171"
       },
       {
         "name": "基隆外木山濱海",
         "icon": "🌊",
         "tag": "國海院・太平洋日出第一線",
         "phasePrep": "—",
-        "phasePeak": "平均 5.0 分・峰值 5 分（T-40）",
+        "phasePeak": "平均 11.9 分・峰值 10 分（T+0）",
         "phasePost": "—",
         "forecast": "92 分（低雲 20%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -55,13 +55,13 @@
       "verified": 2,
       "pending": 0,
       "bestStation": "hongludi",
-      "bestScore": 14,
-      "worstError": 87,
-      "meanError": 48.0
+      "bestScore": 24,
+      "worstError": 82,
+      "meanError": 50.5
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 1% ／ 中空 11% ／ 低空 59%。",
-      "modelPerformance": "模型預報 5 分，實況縮時光學觀測：平均 12.7 分（誤差 7.699999999999999 分）、峰值 14 分（T-20，誤差 9 分）（SLIGHT_DEVIATION）。"
+      "modelPerformance": "模型預報 5 分，實況縮時光學觀測：平均 15.2 分（誤差 10.2 分）、峰值 24 分（T-10，誤差 19 分）（MISMATCH）。"
     }
   },
   {

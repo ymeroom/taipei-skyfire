@@ -24,7 +24,7 @@
     "capture": {
       "kind": "timelapse-multi-frame",
       "frameCount": 9,
-      "okFrameCount": 3,
+      "okFrameCount": 9,
       "offsetsMin": [
         -40,
         -30,
@@ -38,18 +38,18 @@
       ]
     },
     "verification": {
-      "avgScore": 12.7,
-      "peakScore": 14,
-      "peakOffsetMin": -20,
+      "avgScore": 15.2,
+      "peakScore": 24,
+      "peakOffsetMin": -10,
       "peakSide": "pre-sunrise",
-      "verifiedAt": "2026-09-14T21:30:56.139486+00:00",
+      "verifiedAt": "2026-09-15T01:01:33.338943+00:00",
       "status": "verified_completed",
-      "errorAvgAbsolute": 7.699999999999999,
-      "verdictAvg": "EXACT_MATCH",
-      "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
-      "errorPeakAbsolute": 9,
-      "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+      "errorAvgAbsolute": 10.2,
+      "verdictAvg": "SLIGHT_DEVIATION",
+      "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "errorPeakAbsolute": 19,
+      "verdictPeak": "MISMATCH",
+      "verdictPeakBadge": "⚠️ 出現偏差需校準"
     }
   },
   {
@@ -77,7 +77,7 @@
     "capture": {
       "kind": "timelapse-multi-frame",
       "frameCount": 9,
-      "okFrameCount": 3,
+      "okFrameCount": 9,
       "offsetsMin": [
         -40,
         -30,
@@ -91,16 +91,16 @@
       ]
     },
     "verification": {
-      "avgScore": 5.0,
-      "peakScore": 5,
-      "peakOffsetMin": -40,
+      "avgScore": 11.9,
+      "peakScore": 10,
+      "peakOffsetMin": 0,
       "peakSide": "pre-sunrise",
-      "verifiedAt": "2026-09-14T21:30:56.139041+00:00",
+      "verifiedAt": "2026-09-15T01:01:33.337731+00:00",
       "status": "verified_completed",
-      "errorAvgAbsolute": 87.0,
+      "errorAvgAbsolute": 80.1,
       "verdictAvg": "MISMATCH",
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
-      "errorPeakAbsolute": 87,
+      "errorPeakAbsolute": 82,
       "verdictPeak": "MISMATCH",
       "verdictPeakBadge": "⚠️ 出現偏差需校準"
     }
