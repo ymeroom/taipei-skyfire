@@ -1,5 +1,111 @@
 [
   {
+    "id": "report-2026-09-15-sunset",
+    "date": "2026-09-15",
+    "session": "sunset",
+    "sessionLabel": "傍晚日落",
+    "publishedAt": "2026-09-15T21:01:37.000811",
+    "publishTimeLabel": "21:00 定時發布",
+    "title": "2026-09-15 傍晚日落實況觀測 vs. 模型預報總結",
+    "prediction": {
+      "score": null,
+      "rating": null,
+      "color": "#E5A50A",
+      "highCloud": null,
+      "midCloud": null,
+      "lowCloud": null,
+      "summary": ""
+    },
+    "groundTruth": {
+      "score": null,
+      "rating": null,
+      "verdict": "PENDING",
+      "verdictBadge": "⏳ 實測待驗證",
+      "color": "#94A3B8",
+      "captureStatus": "no_locked_prediction"
+    },
+    "stations": [
+      {
+        "name": "台北大稻埕碼頭",
+        "icon": "⛵",
+        "tag": "臺北旅遊網 4K 直播・淡水河倒影晚霞",
+        "phasePrep": "—",
+        "phasePeak": "平均 26.0 分・峰值 51 分（找不到鎖定預測，無法算誤差）",
+        "phasePost": "—",
+        "forecast": "—",
+        "verdict": "⏳ 實測待驗證",
+        "verdictColor": "#94A3B8"
+      },
+      {
+        "name": "台北貓空指南宮",
+        "icon": "⛩️",
+        "tag": "臺北旅遊網 4K 直播・高處俯瞰盆地火燒雲",
+        "phasePrep": "—",
+        "phasePeak": "平均 35.7 分・峰值 31 分（找不到鎖定預測，無法算誤差）",
+        "phasePost": "—",
+        "forecast": "—",
+        "verdict": "⏳ 實測待驗證",
+        "verdictColor": "#94A3B8"
+      },
+      {
+        "name": "新北九份即時影像",
+        "icon": "🏮",
+        "tag": "新北觀光 4K 直播・山海交界落日",
+        "phasePrep": "—",
+        "phasePeak": "平均 8.5 分・峰值 12 分（找不到鎖定預測，無法算誤差）",
+        "phasePost": "—",
+        "forecast": "—",
+        "verdict": "⏳ 實測待驗證",
+        "verdictColor": "#94A3B8"
+      },
+      {
+        "name": "新北八里左岸",
+        "icon": "🌊",
+        "tag": "新北觀光 4K 直播・淡江大橋與台灣海峽晚霞",
+        "phasePrep": "—",
+        "phasePeak": "平均 39.8 分・峰值 46 分（找不到鎖定預測，無法算誤差）",
+        "phasePost": "—",
+        "forecast": "—",
+        "verdict": "⏳ 實測待驗證",
+        "verdictColor": "#94A3B8"
+      },
+      {
+        "name": "新北淡水漁人碼頭",
+        "icon": "🌉",
+        "tag": "新北觀光 4K 直播・情人橋烈焰落日",
+        "phasePrep": "—",
+        "phasePeak": "平均 44.9 分・峰值 57 分（找不到鎖定預測，無法算誤差）",
+        "phasePost": "—",
+        "forecast": "—",
+        "verdict": "⏳ 實測待驗證",
+        "verdictColor": "#94A3B8"
+      },
+      {
+        "name": "台北象山看 101",
+        "icon": "🏙️",
+        "tag": "臺北旅遊網 4K 直播・101 與西方天際線",
+        "phasePrep": "—",
+        "phasePeak": "平均 20.8 分・峰值 40 分（找不到鎖定預測，無法算誤差）",
+        "phasePost": "—",
+        "forecast": "—",
+        "verdict": "⏳ 實測待驗證",
+        "verdictColor": "#94A3B8"
+      }
+    ],
+    "stationSummary": {
+      "verified": 6,
+      "pending": 0,
+      "bestStation": "tamsui",
+      "bestScore": 57,
+      "worstError": null,
+      "meanError": null
+    },
+    "summaryAnalysis": {
+      "atmosphericReason": "本場預報雲量細項未隨鎖定檔存下。",
+      "modelPerformance": "本場實測影格擷取失敗或找不到對應鎖定預測，暫無模型誤差判定。"
+    }
+  },
+  {
     "id": "report-2026-09-15-sunrise",
     "date": "2026-09-15",
     "session": "sunrise",
