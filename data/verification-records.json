@@ -1,5 +1,209 @@
 [
   {
+    "id": "rec-2026-09-16-sunset-maokong",
+    "date": "2026-09-16",
+    "session": "sunset",
+    "station": "maokong",
+    "targetTime": "2026-09-16T09:58:51.231000+00:00",
+    "source": "貓空（縮時多影格）",
+    "prediction": null,
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 9,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 58.1,
+      "peakScore": 96,
+      "peakOffsetMin": 20,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-09-16T13:01:34.395280+00:00",
+      "status": "no_locked_prediction",
+      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差"
+    }
+  },
+  {
+    "id": "rec-2026-09-16-sunset-jiufen",
+    "date": "2026-09-16",
+    "session": "sunset",
+    "station": "jiufen",
+    "targetTime": "2026-09-16T09:58:51.231000+00:00",
+    "source": "九份（縮時多影格）",
+    "prediction": null,
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 9,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 44.6,
+      "peakScore": 85,
+      "peakOffsetMin": 20,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-09-16T13:01:34.394834+00:00",
+      "status": "no_locked_prediction",
+      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差"
+    }
+  },
+  {
+    "id": "rec-2026-09-16-sunset-bali",
+    "date": "2026-09-16",
+    "session": "sunset",
+    "station": "bali",
+    "targetTime": "2026-09-16T09:58:51.231000+00:00",
+    "source": "八里左岸（縮時多影格）",
+    "prediction": null,
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 9,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 45.4,
+      "peakScore": 78,
+      "peakOffsetMin": 20,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-09-16T13:01:34.394388+00:00",
+      "status": "no_locked_prediction",
+      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差"
+    }
+  },
+  {
+    "id": "rec-2026-09-16-sunset-tamsui",
+    "date": "2026-09-16",
+    "session": "sunset",
+    "station": "tamsui",
+    "targetTime": "2026-09-16T09:58:51.231000+00:00",
+    "source": "淡水漁人碼頭（縮時多影格）",
+    "prediction": null,
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 9,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 61.1,
+      "peakScore": 95,
+      "peakOffsetMin": 20,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-09-16T13:01:34.393956+00:00",
+      "status": "no_locked_prediction",
+      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差"
+    }
+  },
+  {
+    "id": "rec-2026-09-16-sunset-dadaocheng",
+    "date": "2026-09-16",
+    "session": "sunset",
+    "station": "dadaocheng",
+    "targetTime": "2026-09-16T09:58:51.231000+00:00",
+    "source": "大稻埕（縮時多影格）",
+    "prediction": null,
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 9,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 31.2,
+      "peakScore": 41,
+      "peakOffsetMin": 10,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-09-16T13:01:34.393423+00:00",
+      "status": "no_locked_prediction",
+      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差"
+    }
+  },
+  {
+    "id": "rec-2026-09-16-sunset-xiangshan",
+    "date": "2026-09-16",
+    "session": "sunset",
+    "station": "xiangshan",
+    "targetTime": "2026-09-16T09:58:51.231000+00:00",
+    "source": "101大樓（縮時多影格）",
+    "prediction": null,
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 9,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 29.1,
+      "peakScore": 48,
+      "peakOffsetMin": 20,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-09-16T13:01:34.392835+00:00",
+      "status": "no_locked_prediction",
+      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差"
+    }
+  },
+  {
     "id": "rec-2026-09-16-sunrise-hongludi",
     "date": "2026-09-16",
     "session": "sunrise",
