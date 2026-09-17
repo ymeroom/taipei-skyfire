@@ -1,25 +1,25 @@
 {
-  "date": "2026-09-17",
+  "date": "2026-09-18",
   "session": "sunrise",
-  "lockedAt": "2026-09-16T15:45:18.783Z",
+  "lockedAt": "2026-09-17T15:45:17.776Z",
   "skyfire": {
-    "score": 35,
+    "score": 5,
     "rating": {
-      "level": "FAINT",
-      "badge": "平淡暮光",
-      "icon": "🌤️",
-      "color": "#7B88A8",
-      "secondaryColor": "#A0AEC0",
-      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
-      "bgGradient": "linear-gradient(135deg, rgba(123,136,168,0.2) 0%, rgba(160,174,192,0.1) 100%)"
+      "level": "OVERCAST",
+      "badge": "陰沉沉寂",
+      "icon": "☁️",
+      "color": "#5A6275",
+      "secondaryColor": "#394150",
+      "summary": "厚重低雲覆蓋天際或有陣雨，天色灰暗難見彩霞。",
+      "bgGradient": "linear-gradient(135deg, rgba(90,98,117,0.2) 0%, rgba(57,65,80,0.1) 100%)"
     },
     "metrics": {
       "cloudQualityScore": 0,
-      "lowCloudPenalty": 0,
-      "horizonScore": 22,
-      "visibilityScore": 13,
-      "horizonClearance": 74,
-      "visKm": 21.3
+      "lowCloudPenalty": 21,
+      "horizonScore": 9,
+      "visibilityScore": 12,
+      "horizonClearance": 30,
+      "visKm": 16.5
     },
     "diagnostics": [
       {
@@ -34,13 +34,13 @@
       },
       {
         "label": "遠方東方（太平洋/宜蘭外海）透光窗",
-        "status": "optimal",
-        "desc": "低雲遮蔽極低 (1%)，透光窗達 74%，夕陽/晨光無阻直射雲底！"
+        "status": "fair",
+        "desc": "低雲量約 54%，地平線具有部分透光縫隙，呈現局部霞光。"
       },
       {
         "label": "大氣能見度與通透度",
-        "status": "optimal",
-        "desc": "能見度優異（21.34 公里），大氣清澈通透，晚霞色彩飽和純淨。"
+        "status": "fair",
+        "desc": "能見度正常（16.54 公里），色彩呈現良好。"
       }
     ],
     "photoTips": {
@@ -55,47 +55,47 @@
   "weather": {
     "cloudHigh": 0,
     "cloudMid": 0,
-    "cloudLow": 1,
-    "cloudTotal": 1,
-    "humidity": 87,
+    "cloudLow": 54,
+    "cloudTotal": 54,
+    "humidity": 85,
     "precipProb": 0,
-    "visibilityKm": 21.3
+    "visibilityKm": 16.5
   },
   "stations": {
     "hongludi": {
-      "score": 35,
-      "rating": "平淡暮光",
-      "color": "#7B88A8",
+      "score": 5,
+      "rating": "陰沉沉寂",
+      "color": "#5A6275",
       "weather": {
         "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 1,
-        "cloudTotal": 1,
-        "humidity": 87,
+        "cloudLow": 54,
+        "cloudTotal": 54,
+        "humidity": 85,
         "precipProb": 0,
-        "visibilityKm": 21.3
+        "visibilityKm": 16.5
       },
       "metrics": {
-        "horizonClearance": 74,
-        "visKm": 21.3
+        "horizonClearance": 30,
+        "visKm": 16.5
       }
     },
     "waimushan": {
-      "score": 31,
-      "rating": "平淡暮光",
-      "color": "#7B88A8",
+      "score": 5,
+      "rating": "陰沉沉寂",
+      "color": "#5A6275",
       "weather": {
         "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 13,
-        "cloudTotal": 13,
-        "humidity": 84,
+        "cloudLow": 70,
+        "cloudTotal": 70,
+        "humidity": 91,
         "precipProb": 0,
-        "visibilityKm": 22
+        "visibilityKm": 16.9
       },
       "metrics": {
-        "horizonClearance": 38,
-        "visKm": 22
+        "horizonClearance": 17,
+        "visKm": 16.9
       }
     }
   }
