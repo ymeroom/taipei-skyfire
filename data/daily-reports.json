@@ -17,15 +17,12 @@
       "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
     },
     "groundTruth": {
-      "score": 48,
-      "avgScore": 41.7,
-      "peakScore": 48,
-      "peakOffsetMin": 10,
-      "verdict": "SLIGHT_DEVIATION",
-      "verdictAvg": "EXACT_MATCH",
-      "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)（峰值 48 分／平均 41.7 分）",
-      "color": "#FBBF24"
+      "score": null,
+      "rating": null,
+      "verdict": "PENDING",
+      "verdictBadge": "⏳ 實測待驗證",
+      "color": "#94A3B8",
+      "captureStatus": "capture_unavailable"
     },
     "stations": [
       {
@@ -33,29 +30,29 @@
         "icon": "⛵",
         "tag": "臺北旅遊網 4K 直播・淡水河倒影晚霞",
         "phasePrep": "—",
-        "phasePeak": "平均 41.7 分・峰值 48 分（T+10）",
+        "phasePeak": "9 張縮時影格全數擷取失敗，本場無實測資料",
         "phasePost": "—",
         "forecast": "35 分（低雲 28%）",
-        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24"
+        "verdict": "⏳ 實測待驗證",
+        "verdictColor": "#94A3B8"
       },
       {
         "name": "台北貓空指南宮",
         "icon": "⛩️",
         "tag": "臺北旅遊網 4K 直播・高處俯瞰盆地火燒雲",
         "phasePrep": "—",
-        "phasePeak": "平均 61.6 分・峰值 98 分（T+20）",
+        "phasePeak": "9 張縮時影格全數擷取失敗，本場無實測資料",
         "phasePost": "—",
         "forecast": "35 分（低雲 16%）",
-        "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdict": "⏳ 實測待驗證",
+        "verdictColor": "#94A3B8"
       },
       {
         "name": "新北九份即時影像",
         "icon": "🏮",
         "tag": "新北觀光 4K 直播・山海交界落日",
         "phasePrep": "—",
-        "phasePeak": "平均 12.5 分・峰值 17 分（T+10）",
+        "phasePeak": "平均 12.8 分・峰值 17 分（T+10）",
         "phasePost": "—",
         "forecast": "5 分（低雲 91%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
@@ -66,7 +63,7 @@
         "icon": "🌊",
         "tag": "新北觀光 4K 直播・淡江大橋與台灣海峽晚霞",
         "phasePrep": "—",
-        "phasePeak": "平均 47.9 分・峰值 86 分（T+20）",
+        "phasePeak": "平均 47.6 分・峰值 86 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 12%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -77,7 +74,7 @@
         "icon": "🌉",
         "tag": "新北觀光 4K 直播・情人橋烈焰落日",
         "phasePrep": "—",
-        "phasePeak": "平均 54.4 分・峰值 82 分（T+10）",
+        "phasePeak": "平均 54.7 分・峰值 84 分（T+10）",
         "phasePost": "—",
         "forecast": "35 分（低雲 12%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -88,24 +85,24 @@
         "icon": "🏙️",
         "tag": "臺北旅遊網 4K 直播・101 與西方天際線",
         "phasePrep": "—",
-        "phasePeak": "平均 26.9 分・峰值 32 分（T+10）",
+        "phasePeak": "9 張縮時影格全數擷取失敗，本場無實測資料",
         "phasePost": "—",
         "forecast": "35 分（低雲 16%）",
-        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80"
+        "verdict": "⏳ 實測待驗證",
+        "verdictColor": "#94A3B8"
       }
     ],
     "stationSummary": {
-      "verified": 6,
-      "pending": 0,
-      "bestStation": "maokong",
-      "bestScore": 98,
-      "worstError": 63,
-      "meanError": 31.5
+      "verified": 3,
+      "pending": 3,
+      "bestStation": "bali",
+      "bestScore": 86,
+      "worstError": 51,
+      "meanError": 37.3
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 28%。",
-      "modelPerformance": "模型預報 35 分，實況縮時光學觀測：平均 41.7 分（誤差 6.700000000000003 分）、峰值 48 分（T+10，誤差 13 分）（SLIGHT_DEVIATION）。"
+      "modelPerformance": "本場實測影格擷取失敗或找不到對應鎖定預測，暫無模型誤差判定。"
     }
   },
   {
