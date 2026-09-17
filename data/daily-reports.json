@@ -18,13 +18,13 @@
     },
     "groundTruth": {
       "score": 72,
-      "avgScore": 32.0,
+      "avgScore": 30.9,
       "peakScore": 72,
       "peakOffsetMin": -20,
       "verdict": "MISMATCH",
       "verdictAvg": "EXACT_MATCH",
       "verdictPeak": "MISMATCH",
-      "verdictBadge": "⚠️ 出現偏差需校準（峰值 72 分／平均 32.0 分）",
+      "verdictBadge": "⚠️ 出現偏差需校準（峰值 72 分／平均 30.9 分）",
       "color": "#F87171"
     },
     "stations": [
@@ -33,7 +33,7 @@
         "icon": "⛰️",
         "tag": "新北觀光・雙北盆地俯瞰晨光",
         "phasePrep": "—",
-        "phasePeak": "平均 32.0 分・峰值 72 分（T-20）",
+        "phasePeak": "平均 30.9 分・峰值 72 分（T-20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 1%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -44,11 +44,11 @@
         "icon": "🌊",
         "tag": "國海院・太平洋日出第一線",
         "phasePrep": "—",
-        "phasePeak": "平均 7.3 分・峰值 12 分（T-20）",
+        "phasePeak": "平均 16.2 分・峰值 19 分（T+0）",
         "phasePost": "—",
         "forecast": "31 分（低雲 13%）",
-        "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "verdictColor": "#FBBF24"
       }
     ],
     "stationSummary": {
@@ -57,11 +57,11 @@
       "bestStation": "hongludi",
       "bestScore": 72,
       "worstError": 37,
-      "meanError": 28.0
+      "meanError": 24.5
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 1%。",
-      "modelPerformance": "模型預報 35 分，實況縮時光學觀測：平均 32.0 分（誤差 3.0 分）、峰值 72 分（T-20，誤差 37 分）（MISMATCH）。"
+      "modelPerformance": "模型預報 35 分，實況縮時光學觀測：平均 30.9 分（誤差 4.100000000000001 分）、峰值 72 分（T-20，誤差 37 分）（MISMATCH）。"
     }
   },
   {
