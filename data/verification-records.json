@@ -38,16 +38,16 @@
       ]
     },
     "verification": {
-      "avgScore": 53.8,
-      "peakScore": 65,
+      "avgScore": 53.6,
+      "peakScore": 64,
       "peakOffsetMin": 20,
       "peakSide": "post-sunset",
-      "verifiedAt": "2026-09-18T10:46:47.071047+00:00",
+      "verifiedAt": "2026-09-18T13:01:27.555506+00:00",
       "status": "verified_completed",
-      "errorAvgAbsolute": 18.799999999999997,
+      "errorAvgAbsolute": 18.6,
       "verdictAvg": "MISMATCH",
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
-      "errorPeakAbsolute": 30,
+      "errorPeakAbsolute": 29,
       "verdictPeak": "MISMATCH",
       "verdictPeakBadge": "⚠️ 出現偏差需校準"
     }
@@ -77,7 +77,7 @@
     "capture": {
       "kind": "timelapse-multi-frame",
       "frameCount": 9,
-      "okFrameCount": 9,
+      "okFrameCount": 0,
       "offsetsMin": [
         -40,
         -30,
@@ -91,18 +91,13 @@
       ]
     },
     "verification": {
-      "avgScore": 30.2,
-      "peakScore": 38,
-      "peakOffsetMin": 10,
+      "avgScore": null,
+      "peakScore": null,
+      "peakOffsetMin": null,
       "peakSide": "post-sunset",
-      "verifiedAt": "2026-09-18T10:46:47.070612+00:00",
-      "status": "verified_completed",
-      "errorAvgAbsolute": 3.8000000000000007,
-      "verdictAvg": "EXACT_MATCH",
-      "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
-      "errorPeakAbsolute": 4,
-      "verdictPeak": "EXACT_MATCH",
-      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      "verifiedAt": "2026-09-18T13:01:27.555103+00:00",
+      "status": "capture_unavailable",
+      "reason": "9 張影格全數擷取失敗，本場次無實測資料"
     }
   },
   {
@@ -144,16 +139,16 @@
       ]
     },
     "verification": {
-      "avgScore": 50.1,
-      "peakScore": 83,
+      "avgScore": 50.2,
+      "peakScore": 84,
       "peakOffsetMin": 20,
       "peakSide": "post-sunset",
-      "verifiedAt": "2026-09-18T10:46:47.070210+00:00",
+      "verifiedAt": "2026-09-18T13:01:27.554692+00:00",
       "status": "verified_completed",
-      "errorAvgAbsolute": 15.100000000000001,
+      "errorAvgAbsolute": 15.200000000000003,
       "verdictAvg": "SLIGHT_DEVIATION",
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-      "errorPeakAbsolute": 48,
+      "errorPeakAbsolute": 49,
       "verdictPeak": "MISMATCH",
       "verdictPeakBadge": "⚠️ 出現偏差需校準"
     }
@@ -197,16 +192,16 @@
       ]
     },
     "verification": {
-      "avgScore": 63.4,
-      "peakScore": 89,
-      "peakOffsetMin": 10,
+      "avgScore": 63.7,
+      "peakScore": 91,
+      "peakOffsetMin": 20,
       "peakSide": "post-sunset",
-      "verifiedAt": "2026-09-18T10:46:47.069774+00:00",
+      "verifiedAt": "2026-09-18T13:01:27.554253+00:00",
       "status": "verified_completed",
-      "errorAvgAbsolute": 28.4,
+      "errorAvgAbsolute": 28.700000000000003,
       "verdictAvg": "MISMATCH",
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
-      "errorPeakAbsolute": 54,
+      "errorPeakAbsolute": 56,
       "verdictPeak": "MISMATCH",
       "verdictPeakBadge": "⚠️ 出現偏差需校準"
     }
@@ -250,16 +245,16 @@
       ]
     },
     "verification": {
-      "avgScore": 38.4,
-      "peakScore": 42,
+      "avgScore": 38.7,
+      "peakScore": 41,
       "peakOffsetMin": 20,
       "peakSide": "post-sunset",
-      "verifiedAt": "2026-09-18T10:46:47.069434+00:00",
+      "verifiedAt": "2026-09-18T13:01:27.553805+00:00",
       "status": "verified_completed",
-      "errorAvgAbsolute": 3.3999999999999986,
+      "errorAvgAbsolute": 3.700000000000003,
       "verdictAvg": "EXACT_MATCH",
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
-      "errorPeakAbsolute": 7,
+      "errorPeakAbsolute": 6,
       "verdictPeak": "EXACT_MATCH",
       "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
     }
@@ -307,7 +302,7 @@
       "peakScore": 35,
       "peakOffsetMin": 20,
       "peakSide": "post-sunset",
-      "verifiedAt": "2026-09-18T10:46:47.068950+00:00",
+      "verifiedAt": "2026-09-18T13:01:27.553361+00:00",
       "status": "verified_completed",
       "errorAvgAbsolute": 8.8,
       "verdictAvg": "SLIGHT_DEVIATION",

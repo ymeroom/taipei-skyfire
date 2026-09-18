@@ -17,14 +17,14 @@
       "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
     },
     "groundTruth": {
-      "score": 42,
-      "avgScore": 38.4,
-      "peakScore": 42,
+      "score": 41,
+      "avgScore": 38.7,
+      "peakScore": 41,
       "peakOffsetMin": 20,
       "verdict": "EXACT_MATCH",
       "verdictAvg": "EXACT_MATCH",
       "verdictPeak": "EXACT_MATCH",
-      "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)（峰值 42 分／平均 38.4 分）",
+      "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)（峰值 41 分／平均 38.7 分）",
       "color": "#4ADE80"
     },
     "stations": [
@@ -33,7 +33,7 @@
         "icon": "⛵",
         "tag": "臺北旅遊網 4K 直播・淡水河倒影晚霞",
         "phasePrep": "—",
-        "phasePeak": "平均 38.4 分・峰值 42 分（T+20）",
+        "phasePeak": "平均 38.7 分・峰值 41 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 5%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -44,7 +44,7 @@
         "icon": "⛩️",
         "tag": "臺北旅遊網 4K 直播・高處俯瞰盆地火燒雲",
         "phasePrep": "—",
-        "phasePeak": "平均 53.8 分・峰值 65 分（T+20）",
+        "phasePeak": "平均 53.6 分・峰值 64 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 5%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -55,18 +55,18 @@
         "icon": "🏮",
         "tag": "新北觀光 4K 直播・山海交界落日",
         "phasePrep": "—",
-        "phasePeak": "平均 30.2 分・峰值 38 分（T+10）",
+        "phasePeak": "9 張縮時影格全數擷取失敗，本場無實測資料",
         "phasePost": "—",
         "forecast": "34 分（低雲 31%）",
-        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80"
+        "verdict": "⏳ 實測待驗證",
+        "verdictColor": "#94A3B8"
       },
       {
         "name": "新北八里左岸",
         "icon": "🌊",
         "tag": "新北觀光 4K 直播・淡江大橋與台灣海峽晚霞",
         "phasePrep": "—",
-        "phasePeak": "平均 50.1 分・峰值 83 分（T+20）",
+        "phasePeak": "平均 50.2 分・峰值 84 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 1%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -77,7 +77,7 @@
         "icon": "🌉",
         "tag": "新北觀光 4K 直播・情人橋烈焰落日",
         "phasePrep": "—",
-        "phasePeak": "平均 63.4 分・峰值 89 分（T+10）",
+        "phasePeak": "平均 63.7 分・峰值 91 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 1%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -96,16 +96,16 @@
       }
     ],
     "stationSummary": {
-      "verified": 6,
-      "pending": 0,
+      "verified": 5,
+      "pending": 1,
       "bestStation": "tamsui",
-      "bestScore": 89,
-      "worstError": 54,
-      "meanError": 23.8
+      "bestScore": 91,
+      "worstError": 56,
+      "meanError": 28.0
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 5%。",
-      "modelPerformance": "模型預報 35 分，實況縮時光學觀測：平均 38.4 分（誤差 3.3999999999999986 分）、峰值 42 分（T+20，誤差 7 分）（EXACT_MATCH）。"
+      "modelPerformance": "模型預報 35 分，實況縮時光學觀測：平均 38.7 分（誤差 3.700000000000003 分）、峰值 41 分（T+20，誤差 6 分）（EXACT_MATCH）。"
     }
   },
   {
