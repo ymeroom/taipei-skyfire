@@ -24,7 +24,7 @@
     "capture": {
       "kind": "timelapse-multi-frame",
       "frameCount": 9,
-      "okFrameCount": 3,
+      "okFrameCount": 9,
       "offsetsMin": [
         -40,
         -30,
@@ -38,16 +38,16 @@
       ]
     },
     "verification": {
-      "avgScore": 15.0,
-      "peakScore": 21,
+      "avgScore": 11.3,
+      "peakScore": 20,
       "peakOffsetMin": -20,
       "peakSide": "pre-sunrise",
-      "verifiedAt": "2026-09-17T21:31:00.312071+00:00",
+      "verifiedAt": "2026-09-18T01:00:59.718110+00:00",
       "status": "verified_completed",
-      "errorAvgAbsolute": 10.0,
-      "verdictAvg": "SLIGHT_DEVIATION",
-      "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-      "errorPeakAbsolute": 16,
+      "errorAvgAbsolute": 6.300000000000001,
+      "verdictAvg": "EXACT_MATCH",
+      "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "errorPeakAbsolute": 15,
       "verdictPeak": "SLIGHT_DEVIATION",
       "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
     }
@@ -77,7 +77,7 @@
     "capture": {
       "kind": "timelapse-multi-frame",
       "frameCount": 9,
-      "okFrameCount": 3,
+      "okFrameCount": 9,
       "offsetsMin": [
         -40,
         -30,
@@ -91,18 +91,18 @@
       ]
     },
     "verification": {
-      "avgScore": 5.0,
-      "peakScore": 5,
-      "peakOffsetMin": -40,
+      "avgScore": 17.7,
+      "peakScore": 29,
+      "peakOffsetMin": 0,
       "peakSide": "pre-sunrise",
-      "verifiedAt": "2026-09-17T21:31:00.311662+00:00",
+      "verifiedAt": "2026-09-18T01:00:59.717082+00:00",
       "status": "verified_completed",
-      "errorAvgAbsolute": 0.0,
-      "verdictAvg": "EXACT_MATCH",
-      "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
-      "errorPeakAbsolute": 0,
-      "verdictPeak": "EXACT_MATCH",
-      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      "errorAvgAbsolute": 12.7,
+      "verdictAvg": "SLIGHT_DEVIATION",
+      "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "errorPeakAbsolute": 24,
+      "verdictPeak": "MISMATCH",
+      "verdictPeakBadge": "⚠️ 出現偏差需校準"
     }
   },
   {
