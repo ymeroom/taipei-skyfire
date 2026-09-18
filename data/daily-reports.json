@@ -1,5 +1,70 @@
 [
   {
+    "id": "report-2026-09-19-sunrise",
+    "date": "2026-09-19",
+    "session": "sunrise",
+    "sessionLabel": "清晨日出",
+    "publishedAt": "2026-09-19T05:30:53.177699",
+    "publishTimeLabel": "09:00 定時發布",
+    "title": "2026-09-19 清晨日出實況觀測 vs. 模型預報總結",
+    "prediction": {
+      "score": 35,
+      "rating": "平淡暮光",
+      "color": "#7B88A8",
+      "highCloud": 0,
+      "midCloud": 0,
+      "lowCloud": 16,
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
+    },
+    "groundTruth": {
+      "score": 37,
+      "avgScore": 20.3,
+      "peakScore": 37,
+      "peakOffsetMin": -20,
+      "verdict": "EXACT_MATCH",
+      "verdictAvg": "SLIGHT_DEVIATION",
+      "verdictPeak": "EXACT_MATCH",
+      "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)（峰值 37 分／平均 20.3 分）",
+      "color": "#4ADE80"
+    },
+    "stations": [
+      {
+        "name": "新北中和烘爐地",
+        "icon": "⛰️",
+        "tag": "新北觀光・雙北盆地俯瞰晨光",
+        "phasePrep": "—",
+        "phasePeak": "平均 20.3 分・峰值 37 分（T-20）",
+        "phasePost": "—",
+        "forecast": "35 分（低雲 16%）",
+        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
+        "verdictColor": "#4ADE80"
+      },
+      {
+        "name": "基隆外木山濱海",
+        "icon": "🌊",
+        "tag": "國海院・太平洋日出第一線",
+        "phasePrep": "—",
+        "phasePeak": "平均 9.0 分・峰值 17 分（T-20）",
+        "phasePost": "—",
+        "forecast": "19 分（低雲 23%）",
+        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
+        "verdictColor": "#4ADE80"
+      }
+    ],
+    "stationSummary": {
+      "verified": 2,
+      "pending": 0,
+      "bestStation": "hongludi",
+      "bestScore": 37,
+      "worstError": 2,
+      "meanError": 2.0
+    },
+    "summaryAnalysis": {
+      "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 16%。",
+      "modelPerformance": "模型預報 35 分，實況縮時光學觀測：平均 20.3 分（誤差 14.7 分）、峰值 37 分（T-20，誤差 2 分）（EXACT_MATCH）。"
+    }
+  },
+  {
     "id": "report-2026-09-18-sunset",
     "date": "2026-09-18",
     "session": "sunset",

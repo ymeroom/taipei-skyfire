@@ -1,5 +1,111 @@
 [
   {
+    "id": "rec-2026-09-19-sunrise-hongludi",
+    "date": "2026-09-19",
+    "session": "sunrise",
+    "station": "hongludi",
+    "targetTime": "2026-09-18T21:42:26.380000+00:00",
+    "source": "烘爐地（縮時多影格）",
+    "prediction": {
+      "score": 35,
+      "rating": "平淡暮光",
+      "color": "#7B88A8",
+      "highCloud": 0,
+      "midCloud": 0,
+      "lowCloud": 16,
+      "totalCloud": 16,
+      "humidity": 93,
+      "precipProb": 0,
+      "horizonClearance": 67,
+      "visibilityKm": 860,
+      "isSimulated": false,
+      "lockedAt": "2026-09-18T15:45:20.110Z"
+    },
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 3,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 20.3,
+      "peakScore": 37,
+      "peakOffsetMin": -20,
+      "peakSide": "pre-sunrise",
+      "verifiedAt": "2026-09-18T21:30:48.177738+00:00",
+      "status": "verified_completed",
+      "errorAvgAbsolute": 14.7,
+      "verdictAvg": "SLIGHT_DEVIATION",
+      "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "errorPeakAbsolute": 2,
+      "verdictPeak": "EXACT_MATCH",
+      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+    }
+  },
+  {
+    "id": "rec-2026-09-19-sunrise-waimushan",
+    "date": "2026-09-19",
+    "session": "sunrise",
+    "station": "waimushan",
+    "targetTime": "2026-09-18T21:42:26.380000+00:00",
+    "source": "外木山（縮時多影格）",
+    "prediction": {
+      "score": 19,
+      "rating": "陰沉沉寂",
+      "color": "#5A6275",
+      "highCloud": 0,
+      "midCloud": 0,
+      "lowCloud": 23,
+      "totalCloud": 23,
+      "humidity": 93,
+      "precipProb": 0,
+      "horizonClearance": 44,
+      "visibilityKm": 1.4,
+      "isSimulated": false,
+      "lockedAt": "2026-09-18T15:45:20.110Z"
+    },
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 3,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 9.0,
+      "peakScore": 17,
+      "peakOffsetMin": -20,
+      "peakSide": "pre-sunrise",
+      "verifiedAt": "2026-09-18T21:30:48.176497+00:00",
+      "status": "verified_completed",
+      "errorAvgAbsolute": 10.0,
+      "verdictAvg": "SLIGHT_DEVIATION",
+      "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "errorPeakAbsolute": 2,
+      "verdictPeak": "EXACT_MATCH",
+      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+    }
+  },
+  {
     "id": "rec-2026-09-18-sunset-maokong",
     "date": "2026-09-18",
     "session": "sunset",
