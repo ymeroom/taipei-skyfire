@@ -44,7 +44,7 @@
         "icon": "⛩️",
         "tag": "臺北旅遊網 4K 直播・高處俯瞰盆地火燒雲",
         "phasePrep": "—",
-        "phasePeak": "平均 68.6 分・峰值 100 分（T+20）",
+        "phasePeak": "平均 68.7 分・峰值 100 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 0%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -55,18 +55,18 @@
         "icon": "🏮",
         "tag": "新北觀光 4K 直播・山海交界落日",
         "phasePrep": "—",
-        "phasePeak": "平均 36.2 分・峰值 54 分（T+10）",
+        "phasePeak": "平均 36.1 分・峰值 53 分（T+10）",
         "phasePost": "—",
         "forecast": "35 分（低雲 27%）",
-        "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "verdictColor": "#FBBF24"
       },
       {
         "name": "新北八里左岸",
         "icon": "🌊",
         "tag": "新北觀光 4K 直播・淡江大橋與台灣海峽晚霞",
         "phasePrep": "—",
-        "phasePeak": "平均 46.8 分・峰值 79 分（T+20）",
+        "phasePeak": "平均 46.6 分・峰值 79 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 5%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -77,7 +77,7 @@
         "icon": "🌉",
         "tag": "新北觀光 4K 直播・情人橋烈焰落日",
         "phasePrep": "—",
-        "phasePeak": "平均 62.0 分・峰值 95 分（T+20）",
+        "phasePeak": "平均 58.5 分・峰值 95 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 5%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -101,7 +101,7 @@
       "bestStation": "maokong",
       "bestScore": 100,
       "worstError": 65,
-      "meanError": 37.3
+      "meanError": 37.2
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 0%。",
