@@ -1,5 +1,293 @@
 [
   {
+    "id": "rec-2026-09-20-sunset-maokong",
+    "date": "2026-09-20",
+    "session": "sunset",
+    "station": "maokong",
+    "targetTime": "2026-09-20T09:54:28.557000+00:00",
+    "source": "貓空（縮時多影格）",
+    "prediction": {
+      "score": 35,
+      "rating": "平淡暮光",
+      "color": "#7B88A8",
+      "highCloud": 0,
+      "midCloud": 0,
+      "lowCloud": 1,
+      "totalCloud": 1,
+      "humidity": 80,
+      "precipProb": 5,
+      "horizonClearance": 95,
+      "visibilityKm": 24.7,
+      "isSimulated": false,
+      "lockedAt": "2026-09-20T07:30:16.267Z"
+    },
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 0,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": null,
+      "peakScore": null,
+      "peakOffsetMin": null,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-09-20T10:46:36.420082+00:00",
+      "status": "capture_unavailable",
+      "reason": "9 張影格全數擷取失敗，本場次無實測資料"
+    }
+  },
+  {
+    "id": "rec-2026-09-20-sunset-jiufen",
+    "date": "2026-09-20",
+    "session": "sunset",
+    "station": "jiufen",
+    "targetTime": "2026-09-20T09:54:28.557000+00:00",
+    "source": "九份（縮時多影格）",
+    "prediction": {
+      "score": 35,
+      "rating": "平淡暮光",
+      "color": "#7B88A8",
+      "highCloud": 0,
+      "midCloud": 0,
+      "lowCloud": 11,
+      "totalCloud": 11,
+      "humidity": 90,
+      "precipProb": 7,
+      "horizonClearance": 83,
+      "visibilityKm": 20.3,
+      "isSimulated": false,
+      "lockedAt": "2026-09-20T07:30:16.267Z"
+    },
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 0,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": null,
+      "peakScore": null,
+      "peakOffsetMin": null,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-09-20T10:46:36.418962+00:00",
+      "status": "capture_unavailable",
+      "reason": "9 張影格全數擷取失敗，本場次無實測資料"
+    }
+  },
+  {
+    "id": "rec-2026-09-20-sunset-bali",
+    "date": "2026-09-20",
+    "session": "sunset",
+    "station": "bali",
+    "targetTime": "2026-09-20T09:54:28.557000+00:00",
+    "source": "八里左岸（縮時多影格）",
+    "prediction": {
+      "score": 35,
+      "rating": "平淡暮光",
+      "color": "#7B88A8",
+      "highCloud": 0,
+      "midCloud": 0,
+      "lowCloud": 0,
+      "totalCloud": 0,
+      "humidity": 76,
+      "precipProb": 9,
+      "horizonClearance": 89,
+      "visibilityKm": 24.1,
+      "isSimulated": false,
+      "lockedAt": "2026-09-20T07:30:16.267Z"
+    },
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 0,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": null,
+      "peakScore": null,
+      "peakOffsetMin": null,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-09-20T10:46:36.417905+00:00",
+      "status": "capture_unavailable",
+      "reason": "9 張影格全數擷取失敗，本場次無實測資料"
+    }
+  },
+  {
+    "id": "rec-2026-09-20-sunset-tamsui",
+    "date": "2026-09-20",
+    "session": "sunset",
+    "station": "tamsui",
+    "targetTime": "2026-09-20T09:54:28.557000+00:00",
+    "source": "淡水漁人碼頭（縮時多影格）",
+    "prediction": {
+      "score": 35,
+      "rating": "平淡暮光",
+      "color": "#7B88A8",
+      "highCloud": 0,
+      "midCloud": 0,
+      "lowCloud": 0,
+      "totalCloud": 0,
+      "humidity": 76,
+      "precipProb": 9,
+      "horizonClearance": 91,
+      "visibilityKm": 24.1,
+      "isSimulated": false,
+      "lockedAt": "2026-09-20T07:30:16.267Z"
+    },
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 0,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": null,
+      "peakScore": null,
+      "peakOffsetMin": null,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-09-20T10:46:36.416850+00:00",
+      "status": "capture_unavailable",
+      "reason": "9 張影格全數擷取失敗，本場次無實測資料"
+    }
+  },
+  {
+    "id": "rec-2026-09-20-sunset-dadaocheng",
+    "date": "2026-09-20",
+    "session": "sunset",
+    "station": "dadaocheng",
+    "targetTime": "2026-09-20T09:54:28.557000+00:00",
+    "source": "大稻埕（縮時多影格）",
+    "prediction": {
+      "score": 35,
+      "rating": "平淡暮光",
+      "color": "#7B88A8",
+      "highCloud": 0,
+      "midCloud": 0,
+      "lowCloud": 0,
+      "totalCloud": 0,
+      "humidity": 78,
+      "precipProb": 5,
+      "horizonClearance": 95,
+      "visibilityKm": 24.4,
+      "isSimulated": false,
+      "lockedAt": "2026-09-20T07:30:16.267Z"
+    },
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 0,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": null,
+      "peakScore": null,
+      "peakOffsetMin": null,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-09-20T10:46:36.415863+00:00",
+      "status": "capture_unavailable",
+      "reason": "9 張影格全數擷取失敗，本場次無實測資料"
+    }
+  },
+  {
+    "id": "rec-2026-09-20-sunset-xiangshan",
+    "date": "2026-09-20",
+    "session": "sunset",
+    "station": "xiangshan",
+    "targetTime": "2026-09-20T09:54:28.557000+00:00",
+    "source": "101大樓（縮時多影格）",
+    "prediction": {
+      "score": 35,
+      "rating": "平淡暮光",
+      "color": "#7B88A8",
+      "highCloud": 0,
+      "midCloud": 0,
+      "lowCloud": 1,
+      "totalCloud": 1,
+      "humidity": 80,
+      "precipProb": 5,
+      "horizonClearance": 95,
+      "visibilityKm": 24.7,
+      "isSimulated": false,
+      "lockedAt": "2026-09-20T07:30:16.267Z"
+    },
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 0,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": null,
+      "peakScore": null,
+      "peakOffsetMin": null,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-09-20T10:46:36.414626+00:00",
+      "status": "capture_unavailable",
+      "reason": "9 張影格全數擷取失敗，本場次無實測資料"
+    }
+  },
+  {
     "id": "rec-2026-09-20-sunrise-hongludi",
     "date": "2026-09-20",
     "session": "sunrise",
