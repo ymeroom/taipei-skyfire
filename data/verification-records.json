@@ -24,7 +24,7 @@
     "capture": {
       "kind": "timelapse-multi-frame",
       "frameCount": 9,
-      "okFrameCount": 3,
+      "okFrameCount": 9,
       "offsetsMin": [
         -40,
         -30,
@@ -38,18 +38,18 @@
       ]
     },
     "verification": {
-      "avgScore": 13.7,
-      "peakScore": 17,
-      "peakOffsetMin": -20,
+      "avgScore": 13.0,
+      "peakScore": 31,
+      "peakOffsetMin": -10,
       "peakSide": "pre-sunrise",
-      "verifiedAt": "2026-09-20T21:30:48.805201+00:00",
+      "verifiedAt": "2026-09-21T01:00:56.285749+00:00",
       "status": "verified_completed",
-      "errorAvgAbsolute": 22.3,
+      "errorAvgAbsolute": 23.0,
       "verdictAvg": "MISMATCH",
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
-      "errorPeakAbsolute": 19,
-      "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "errorPeakAbsolute": 5,
+      "verdictPeak": "EXACT_MATCH",
+      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
     }
   },
   {
@@ -77,7 +77,7 @@
     "capture": {
       "kind": "timelapse-multi-frame",
       "frameCount": 9,
-      "okFrameCount": 2,
+      "okFrameCount": 7,
       "offsetsMin": [
         -40,
         -30,
@@ -91,18 +91,18 @@
       ]
     },
     "verification": {
-      "avgScore": 5.0,
-      "peakScore": 5,
-      "peakOffsetMin": -30,
+      "avgScore": 15.4,
+      "peakScore": 18,
+      "peakOffsetMin": 0,
       "peakSide": "pre-sunrise",
-      "verifiedAt": "2026-09-20T21:30:48.804563+00:00",
+      "verifiedAt": "2026-09-21T01:00:56.285238+00:00",
       "status": "verified_completed",
-      "errorAvgAbsolute": 17.0,
-      "verdictAvg": "SLIGHT_DEVIATION",
-      "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-      "errorPeakAbsolute": 17,
-      "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+      "errorAvgAbsolute": 6.6,
+      "verdictAvg": "EXACT_MATCH",
+      "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "errorPeakAbsolute": 4,
+      "verdictPeak": "EXACT_MATCH",
+      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
     }
   },
   {
