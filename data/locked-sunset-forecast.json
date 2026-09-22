@@ -1,7 +1,7 @@
 {
-  "date": "2026-09-21",
+  "date": "2026-09-22",
   "session": "sunset",
-  "lockedAt": "2026-09-21T07:30:16.035Z",
+  "lockedAt": "2026-09-22T07:30:20.869Z",
   "skyfire": {
     "score": 35,
     "rating": {
@@ -16,10 +16,10 @@
     "metrics": {
       "cloudQualityScore": 0,
       "lowCloudPenalty": 0,
-      "horizonScore": 15,
+      "horizonScore": 27,
       "visibilityScore": 15,
-      "horizonClearance": 49,
-      "visKm": 24.8
+      "horizonClearance": 91,
+      "visKm": 27.6
     },
     "diagnostics": [
       {
@@ -34,13 +34,13 @@
       },
       {
         "label": "遠方西方（台灣海峽/海平面）透光窗",
-        "status": "fair",
-        "desc": "低雲量約 2%，地平線具有部分透光縫隙，呈現局部霞光。"
+        "status": "optimal",
+        "desc": "低雲遮蔽極低 (2%)，透光窗達 91%，夕陽/晨光無阻直射雲底！"
       },
       {
         "label": "大氣能見度與通透度",
         "status": "optimal",
-        "desc": "能見度優異（24.76 公里），大氣清澈通透，晚霞色彩飽和純淨。"
+        "desc": "能見度優異（27.62 公里），大氣清澈通透，晚霞色彩飽和純淨。"
       }
     ],
     "photoTips": {
@@ -57,9 +57,9 @@
     "cloudMid": 0,
     "cloudLow": 2,
     "cloudTotal": 2,
-    "humidity": 75,
+    "humidity": 71,
     "precipProb": 0,
-    "visibilityKm": 24.8
+    "visibilityKm": 27.6
   },
   "stations": {
     "dadaocheng": {
@@ -71,13 +71,13 @@
         "cloudMid": 0,
         "cloudLow": 2,
         "cloudTotal": 2,
-        "humidity": 75,
+        "humidity": 71,
         "precipProb": 0,
-        "visibilityKm": 24.8
+        "visibilityKm": 27.6
       },
       "metrics": {
-        "horizonClearance": 49,
-        "visKm": 24.8
+        "horizonClearance": 91,
+        "visKm": 27.6
       }
     },
     "xiangshan": {
@@ -87,15 +87,15 @@
       "weather": {
         "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 2,
-        "cloudTotal": 2,
-        "humidity": 78,
+        "cloudLow": 1,
+        "cloudTotal": 1,
+        "humidity": 72,
         "precipProb": 0,
-        "visibilityKm": 25
+        "visibilityKm": 25.1
       },
       "metrics": {
-        "horizonClearance": 49,
-        "visKm": 25
+        "horizonClearance": 98,
+        "visKm": 25.1
       }
     },
     "tamsui": {
@@ -105,15 +105,15 @@
       "weather": {
         "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 0,
-        "cloudTotal": 1,
-        "humidity": 72,
+        "cloudLow": 2,
+        "cloudTotal": 2,
+        "humidity": 71,
         "precipProb": 0,
-        "visibilityKm": 24.2
+        "visibilityKm": 27
       },
       "metrics": {
-        "horizonClearance": 53,
-        "visKm": 24.2
+        "horizonClearance": 49,
+        "visKm": 27
       }
     },
     "bali": {
@@ -123,15 +123,15 @@
       "weather": {
         "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 0,
-        "cloudTotal": 1,
-        "humidity": 72,
+        "cloudLow": 2,
+        "cloudTotal": 2,
+        "humidity": 71,
         "precipProb": 0,
-        "visibilityKm": 24.2
+        "visibilityKm": 27
       },
       "metrics": {
-        "horizonClearance": 50,
-        "visKm": 24.2
+        "horizonClearance": 76,
+        "visKm": 27
       }
     },
     "maokong": {
@@ -141,15 +141,15 @@
       "weather": {
         "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 2,
-        "cloudTotal": 2,
-        "humidity": 78,
+        "cloudLow": 1,
+        "cloudTotal": 1,
+        "humidity": 72,
         "precipProb": 0,
-        "visibilityKm": 25
+        "visibilityKm": 25.1
       },
       "metrics": {
-        "horizonClearance": 91,
-        "visKm": 25
+        "horizonClearance": 97,
+        "visKm": 25.1
       }
     },
     "jiufen": {
@@ -159,15 +159,15 @@
       "weather": {
         "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 22,
-        "cloudTotal": 22,
-        "humidity": 85,
+        "cloudLow": 20,
+        "cloudTotal": 20,
+        "humidity": 82,
         "precipProb": 0,
-        "visibilityKm": 25.4
+        "visibilityKm": 26.4
       },
       "metrics": {
-        "horizonClearance": 74,
-        "visKm": 25.4
+        "horizonClearance": 77,
+        "visKm": 26.4
       }
     }
   }
