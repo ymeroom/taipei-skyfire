@@ -18,13 +18,13 @@
     },
     "groundTruth": {
       "score": 51,
-      "avgScore": 33.8,
+      "avgScore": 33.9,
       "peakScore": 51,
       "peakOffsetMin": 10,
       "verdict": "SLIGHT_DEVIATION",
       "verdictAvg": "EXACT_MATCH",
       "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)（峰值 51 分／平均 33.8 分）",
+      "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)（峰值 51 分／平均 33.9 分）",
       "color": "#FBBF24"
     },
     "stations": [
@@ -33,7 +33,7 @@
         "icon": "⛵",
         "tag": "臺北旅遊網 4K 直播・淡水河倒影晚霞",
         "phasePrep": "—",
-        "phasePeak": "平均 33.8 分・峰值 51 分（T+10）",
+        "phasePeak": "平均 33.9 分・峰值 51 分（T+10）",
         "phasePost": "—",
         "forecast": "35 分（低雲 2%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
@@ -55,7 +55,7 @@
         "icon": "🏮",
         "tag": "新北觀光 4K 直播・山海交界落日",
         "phasePrep": "—",
-        "phasePeak": "平均 30.6 分・峰值 40 分（T+0）",
+        "phasePeak": "平均 30.2 分・峰值 40 分（T+0）",
         "phasePost": "—",
         "forecast": "35 分（低雲 20%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -66,7 +66,7 @@
         "icon": "🌊",
         "tag": "新北觀光 4K 直播・淡江大橋與台灣海峽晚霞",
         "phasePrep": "—",
-        "phasePeak": "平均 46.8 分・峰值 89 分（T+20）",
+        "phasePeak": "平均 47.0 分・峰值 90 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 2%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -88,7 +88,7 @@
         "icon": "🏙️",
         "tag": "臺北旅遊網 4K 直播・101 與西方天際線",
         "phasePrep": "—",
-        "phasePeak": "平均 28.2 分・峰值 49 分（T+20）",
+        "phasePeak": "平均 28.3 分・峰值 49 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 1%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
@@ -101,11 +101,11 @@
       "bestStation": "maokong",
       "bestScore": 100,
       "worstError": 65,
-      "meanError": 34.5
+      "meanError": 34.7
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 2%。",
-      "modelPerformance": "模型預報 35 分，實況縮時光學觀測：平均 33.8 分（誤差 1.2000000000000028 分）、峰值 51 分（T+10，誤差 16 分）（SLIGHT_DEVIATION）。"
+      "modelPerformance": "模型預報 35 分，實況縮時光學觀測：平均 33.9 分（誤差 1.1000000000000014 分）、峰值 51 分（T+10，誤差 16 分）（SLIGHT_DEVIATION）。"
     }
   },
   {
