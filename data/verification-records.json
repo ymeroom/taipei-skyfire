@@ -24,7 +24,7 @@
     "capture": {
       "kind": "timelapse-multi-frame",
       "frameCount": 9,
-      "okFrameCount": 3,
+      "okFrameCount": 9,
       "offsetsMin": [
         -40,
         -30,
@@ -38,16 +38,16 @@
       ]
     },
     "verification": {
-      "avgScore": 18.3,
-      "peakScore": 31,
+      "avgScore": 30.2,
+      "peakScore": 32,
       "peakOffsetMin": -20,
       "peakSide": "pre-sunrise",
-      "verifiedAt": "2026-09-21T21:30:54.134245+00:00",
+      "verifiedAt": "2026-09-22T01:01:07.358149+00:00",
       "status": "verified_completed",
-      "errorAvgAbsolute": 13.7,
-      "verdictAvg": "SLIGHT_DEVIATION",
-      "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-      "errorPeakAbsolute": 1,
+      "errorAvgAbsolute": 1.8000000000000007,
+      "verdictAvg": "EXACT_MATCH",
+      "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "errorPeakAbsolute": 0,
       "verdictPeak": "EXACT_MATCH",
       "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
     }
@@ -77,7 +77,7 @@
     "capture": {
       "kind": "timelapse-multi-frame",
       "frameCount": 9,
-      "okFrameCount": 3,
+      "okFrameCount": 2,
       "offsetsMin": [
         -40,
         -30,
@@ -91,18 +91,15 @@
       ]
     },
     "verification": {
-      "avgScore": 10.3,
-      "peakScore": 21,
-      "peakOffsetMin": -20,
+      "avgScore": 23.0,
+      "peakScore": null,
+      "peakOffsetMin": null,
       "peakSide": "pre-sunrise",
-      "verifiedAt": "2026-09-21T21:30:54.133896+00:00",
+      "verifiedAt": "2026-09-22T01:01:07.357810+00:00",
       "status": "verified_completed",
-      "errorAvgAbsolute": 9.7,
-      "verdictAvg": "SLIGHT_DEVIATION",
-      "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-      "errorPeakAbsolute": 1,
-      "verdictPeak": "EXACT_MATCH",
-      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      "errorAvgAbsolute": 3.0,
+      "verdictAvg": "EXACT_MATCH",
+      "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)"
     }
   },
   {
