@@ -17,15 +17,15 @@
       "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
     },
     "groundTruth": {
-      "score": 37,
-      "avgScore": 20.3,
-      "peakScore": 37,
-      "peakOffsetMin": -20,
-      "verdict": "SLIGHT_DEVIATION",
-      "verdictAvg": "MISMATCH",
-      "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)（峰值 37 分／平均 20.3 分）",
-      "color": "#FBBF24"
+      "score": 5,
+      "avgScore": 38.2,
+      "peakScore": 5,
+      "peakOffsetMin": 0,
+      "verdict": "MISMATCH",
+      "verdictAvg": "EXACT_MATCH",
+      "verdictPeak": "MISMATCH",
+      "verdictBadge": "⚠️ 出現偏差需校準（峰值 5 分／平均 38.2 分）",
+      "color": "#F87171"
     },
     "stations": [
       {
@@ -33,35 +33,35 @@
         "icon": "⛰️",
         "tag": "新北觀光・雙北盆地俯瞰晨光",
         "phasePrep": "—",
-        "phasePeak": "平均 20.3 分・峰值 37 分（T-20）",
+        "phasePeak": "平均 38.2 分・峰值 5 分（T+0）",
         "phasePost": "—",
         "forecast": "46 分（低雲 4%）",
-        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24"
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171"
       },
       {
         "name": "基隆外木山濱海",
         "icon": "🌊",
         "tag": "國海院・太平洋日出第一線",
         "phasePrep": "—",
-        "phasePeak": "平均 14.0 分・峰值 16 分（T-20）",
+        "phasePeak": "9 張縮時影格全數擷取失敗，本場無實測資料",
         "phasePost": "—",
         "forecast": "68 分（低雲 0%）",
-        "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdict": "⏳ 實測待驗證",
+        "verdictColor": "#94A3B8"
       }
     ],
     "stationSummary": {
-      "verified": 2,
-      "pending": 0,
+      "verified": 1,
+      "pending": 1,
       "bestStation": "hongludi",
-      "bestScore": 37,
-      "worstError": 52,
-      "meanError": 30.5
+      "bestScore": 5,
+      "worstError": 41,
+      "meanError": 41.0
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 21% ／ 中空 0% ／ 低空 4%。",
-      "modelPerformance": "模型預報 46 分，實況縮時光學觀測：平均 20.3 分（誤差 25.7 分）、峰值 37 分（T-20，誤差 9 分）（SLIGHT_DEVIATION）。"
+      "modelPerformance": "模型預報 46 分，實況縮時光學觀測：平均 38.2 分（誤差 7.799999999999997 分）、峰值 5 分（T+0，誤差 41 分）（MISMATCH）。"
     }
   },
   {
