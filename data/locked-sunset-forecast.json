@@ -1,7 +1,7 @@
 {
-  "date": "2026-09-22",
+  "date": "2026-09-23",
   "session": "sunset",
-  "lockedAt": "2026-09-22T07:30:20.869Z",
+  "lockedAt": "2026-09-23T07:30:14.741Z",
   "skyfire": {
     "score": 35,
     "rating": {
@@ -16,10 +16,10 @@
     "metrics": {
       "cloudQualityScore": 0,
       "lowCloudPenalty": 0,
-      "horizonScore": 27,
-      "visibilityScore": 15,
-      "horizonClearance": 91,
-      "visKm": 27.6
+      "horizonScore": 28,
+      "visibilityScore": 14,
+      "horizonClearance": 92,
+      "visKm": 22.3
     },
     "diagnostics": [
       {
@@ -35,12 +35,12 @@
       {
         "label": "遠方西方（台灣海峽/海平面）透光窗",
         "status": "optimal",
-        "desc": "低雲遮蔽極低 (2%)，透光窗達 91%，夕陽/晨光無阻直射雲底！"
+        "desc": "低雲遮蔽極低 (6%)，透光窗達 92%，夕陽/晨光無阻直射雲底！"
       },
       {
         "label": "大氣能見度與通透度",
         "status": "optimal",
-        "desc": "能見度優異（27.62 公里），大氣清澈通透，晚霞色彩飽和純淨。"
+        "desc": "能見度優異（22.3 公里），大氣清澈通透，晚霞色彩飽和純淨。"
       }
     ],
     "photoTips": {
@@ -55,11 +55,11 @@
   "weather": {
     "cloudHigh": 0,
     "cloudMid": 0,
-    "cloudLow": 2,
-    "cloudTotal": 2,
-    "humidity": 71,
+    "cloudLow": 6,
+    "cloudTotal": 6,
+    "humidity": 73,
     "precipProb": 0,
-    "visibilityKm": 27.6
+    "visibilityKm": 22.3
   },
   "stations": {
     "dadaocheng": {
@@ -69,15 +69,15 @@
       "weather": {
         "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 2,
-        "cloudTotal": 2,
-        "humidity": 71,
+        "cloudLow": 6,
+        "cloudTotal": 6,
+        "humidity": 73,
         "precipProb": 0,
-        "visibilityKm": 27.6
+        "visibilityKm": 22.3
       },
       "metrics": {
-        "horizonClearance": 91,
-        "visKm": 27.6
+        "horizonClearance": 92,
+        "visKm": 22.3
       }
     },
     "xiangshan": {
@@ -87,15 +87,15 @@
       "weather": {
         "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 1,
-        "cloudTotal": 1,
-        "humidity": 72,
+        "cloudLow": 5,
+        "cloudTotal": 5,
+        "humidity": 73,
         "precipProb": 0,
-        "visibilityKm": 25.1
+        "visibilityKm": 22.4
       },
       "metrics": {
-        "horizonClearance": 98,
-        "visKm": 25.1
+        "horizonClearance": 94,
+        "visKm": 22.4
       }
     },
     "tamsui": {
@@ -105,15 +105,15 @@
       "weather": {
         "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 2,
-        "cloudTotal": 2,
-        "humidity": 71,
+        "cloudLow": 4,
+        "cloudTotal": 4,
+        "humidity": 74,
         "precipProb": 0,
-        "visibilityKm": 27
+        "visibilityKm": 22.7
       },
       "metrics": {
-        "horizonClearance": 49,
-        "visKm": 27
+        "horizonClearance": 96,
+        "visKm": 22.7
       }
     },
     "bali": {
@@ -123,15 +123,15 @@
       "weather": {
         "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 2,
-        "cloudTotal": 2,
-        "humidity": 71,
+        "cloudLow": 4,
+        "cloudTotal": 4,
+        "humidity": 74,
         "precipProb": 0,
-        "visibilityKm": 27
+        "visibilityKm": 22.7
       },
       "metrics": {
-        "horizonClearance": 76,
-        "visKm": 27
+        "horizonClearance": 95,
+        "visKm": 22.7
       }
     },
     "maokong": {
@@ -141,15 +141,15 @@
       "weather": {
         "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 1,
-        "cloudTotal": 1,
-        "humidity": 72,
+        "cloudLow": 5,
+        "cloudTotal": 5,
+        "humidity": 73,
         "precipProb": 0,
-        "visibilityKm": 25.1
+        "visibilityKm": 22.4
       },
       "metrics": {
-        "horizonClearance": 97,
-        "visKm": 25.1
+        "horizonClearance": 94,
+        "visKm": 22.4
       }
     },
     "jiufen": {
@@ -159,15 +159,15 @@
       "weather": {
         "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 20,
-        "cloudTotal": 20,
-        "humidity": 82,
-        "precipProb": 0,
-        "visibilityKm": 26.4
+        "cloudLow": 24,
+        "cloudTotal": 24,
+        "humidity": 83,
+        "precipProb": 8,
+        "visibilityKm": 19.6
       },
       "metrics": {
-        "horizonClearance": 77,
-        "visKm": 26.4
+        "horizonClearance": 73,
+        "visKm": 19.6
       }
     }
   }
