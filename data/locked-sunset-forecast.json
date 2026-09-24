@@ -1,7 +1,7 @@
 {
-  "date": "2026-09-23",
+  "date": "2026-09-24",
   "session": "sunset",
-  "lockedAt": "2026-09-23T07:30:14.741Z",
+  "lockedAt": "2026-09-24T07:30:17.607Z",
   "skyfire": {
     "score": 35,
     "rating": {
@@ -17,9 +17,9 @@
       "cloudQualityScore": 0,
       "lowCloudPenalty": 0,
       "horizonScore": 28,
-      "visibilityScore": 14,
-      "horizonClearance": 92,
-      "visKm": 22.3
+      "visibilityScore": 15,
+      "horizonClearance": 93,
+      "visKm": 24.9
     },
     "diagnostics": [
       {
@@ -35,12 +35,12 @@
       {
         "label": "遠方西方（台灣海峽/海平面）透光窗",
         "status": "optimal",
-        "desc": "低雲遮蔽極低 (6%)，透光窗達 92%，夕陽/晨光無阻直射雲底！"
+        "desc": "低雲遮蔽極低 (6%)，透光窗達 93%，夕陽/晨光無阻直射雲底！"
       },
       {
         "label": "大氣能見度與通透度",
         "status": "optimal",
-        "desc": "能見度優異（22.3 公里），大氣清澈通透，晚霞色彩飽和純淨。"
+        "desc": "能見度優異（24.88 公里），大氣清澈通透，晚霞色彩飽和純淨。"
       }
     ],
     "photoTips": {
@@ -57,9 +57,9 @@
     "cloudMid": 0,
     "cloudLow": 6,
     "cloudTotal": 6,
-    "humidity": 73,
+    "humidity": 72,
     "precipProb": 0,
-    "visibilityKm": 22.3
+    "visibilityKm": 24.9
   },
   "stations": {
     "dadaocheng": {
@@ -71,13 +71,13 @@
         "cloudMid": 0,
         "cloudLow": 6,
         "cloudTotal": 6,
-        "humidity": 73,
+        "humidity": 72,
         "precipProb": 0,
-        "visibilityKm": 22.3
+        "visibilityKm": 24.9
       },
       "metrics": {
-        "horizonClearance": 92,
-        "visKm": 22.3
+        "horizonClearance": 93,
+        "visKm": 24.9
       }
     },
     "xiangshan": {
@@ -89,13 +89,13 @@
         "cloudMid": 0,
         "cloudLow": 5,
         "cloudTotal": 5,
-        "humidity": 73,
+        "humidity": 72,
         "precipProb": 0,
-        "visibilityKm": 22.4
+        "visibilityKm": 24.4
       },
       "metrics": {
         "horizonClearance": 94,
-        "visKm": 22.4
+        "visKm": 24.4
       }
     },
     "tamsui": {
@@ -103,17 +103,17 @@
       "rating": "平淡暮光",
       "color": "#7B88A8",
       "weather": {
-        "cloudHigh": 0,
+        "cloudHigh": 5,
         "cloudMid": 0,
-        "cloudLow": 4,
-        "cloudTotal": 4,
-        "humidity": 74,
+        "cloudLow": 2,
+        "cloudTotal": 8,
+        "humidity": 73,
         "precipProb": 0,
-        "visibilityKm": 22.7
+        "visibilityKm": 24
       },
       "metrics": {
-        "horizonClearance": 96,
-        "visKm": 22.7
+        "horizonClearance": 98,
+        "visKm": 24
       }
     },
     "bali": {
@@ -121,17 +121,17 @@
       "rating": "平淡暮光",
       "color": "#7B88A8",
       "weather": {
-        "cloudHigh": 0,
+        "cloudHigh": 5,
         "cloudMid": 0,
-        "cloudLow": 4,
-        "cloudTotal": 4,
-        "humidity": 74,
+        "cloudLow": 2,
+        "cloudTotal": 8,
+        "humidity": 73,
         "precipProb": 0,
-        "visibilityKm": 22.7
+        "visibilityKm": 24
       },
       "metrics": {
-        "horizonClearance": 95,
-        "visKm": 22.7
+        "horizonClearance": 98,
+        "visKm": 24
       }
     },
     "maokong": {
@@ -143,31 +143,31 @@
         "cloudMid": 0,
         "cloudLow": 5,
         "cloudTotal": 5,
-        "humidity": 73,
+        "humidity": 72,
         "precipProb": 0,
-        "visibilityKm": 22.4
+        "visibilityKm": 24.4
       },
       "metrics": {
         "horizonClearance": 94,
-        "visKm": 22.4
+        "visKm": 24.4
       }
     },
     "jiufen": {
-      "score": 35,
+      "score": 30,
       "rating": "平淡暮光",
       "color": "#7B88A8",
       "weather": {
         "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 24,
-        "cloudTotal": 24,
-        "humidity": 83,
+        "cloudLow": 38,
+        "cloudTotal": 38,
+        "humidity": 86,
         "precipProb": 8,
-        "visibilityKm": 19.6
+        "visibilityKm": 22.3
       },
       "metrics": {
-        "horizonClearance": 73,
-        "visKm": 19.6
+        "horizonClearance": 58,
+        "visKm": 22.3
       }
     }
   }
