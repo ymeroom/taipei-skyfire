@@ -1,31 +1,31 @@
 {
-  "date": "2026-09-24",
+  "date": "2026-09-25",
   "session": "sunrise",
-  "lockedAt": "2026-09-23T15:45:21.167Z",
+  "lockedAt": "2026-09-24T15:45:17.536Z",
   "skyfire": {
-    "score": 32,
+    "score": 26,
     "rating": {
-      "level": "FAINT",
-      "badge": "平淡暮光",
-      "icon": "🌤️",
-      "color": "#7B88A8",
-      "secondaryColor": "#A0AEC0",
-      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
-      "bgGradient": "linear-gradient(135deg, rgba(123,136,168,0.2) 0%, rgba(160,174,192,0.1) 100%)"
+      "level": "OVERCAST",
+      "badge": "陰沉沉寂",
+      "icon": "☁️",
+      "color": "#5A6275",
+      "secondaryColor": "#394150",
+      "summary": "厚重低雲覆蓋天際或有陣雨，天色灰暗難見彩霞。",
+      "bgGradient": "linear-gradient(135deg, rgba(90,98,117,0.2) 0%, rgba(57,65,80,0.1) 100%)"
     },
     "metrics": {
-      "cloudQualityScore": 18,
-      "lowCloudPenalty": 0,
-      "horizonScore": 7,
-      "visibilityScore": 1,
-      "horizonClearance": 22,
-      "visKm": 1.4
+      "cloudQualityScore": 0,
+      "lowCloudPenalty": 4,
+      "horizonScore": 9,
+      "visibilityScore": 15,
+      "horizonClearance": 29,
+      "visKm": 400
     },
     "diagnostics": [
       {
         "label": "高空卷雲 (6,000m+)",
-        "status": "fair",
-        "desc": "高雲量僅 27%，上方缺少大面積紅色漫射反光板。"
+        "status": "low",
+        "desc": "高雲量僅 0%，上方缺少大面積紅色漫射反光板。"
       },
       {
         "label": "中空雲層 (2,000-6,000m)",
@@ -35,12 +35,12 @@
       {
         "label": "遠方東方（太平洋/宜蘭外海）透光窗",
         "status": "fair",
-        "desc": "低雲量約 5%，地平線具有部分透光縫隙，呈現局部霞光。"
+        "desc": "低雲量約 30%，地平線具有部分透光縫隙，呈現局部霞光。"
       },
       {
         "label": "大氣能見度與通透度",
-        "status": "bad",
-        "desc": "能見度受限（1.38 公里），霧霾或水氣可能使天色偏灰白。"
+        "status": "optimal",
+        "desc": "能見度優異（400 公里），大氣清澈通透，晚霞色彩飽和純淨。"
       }
     ],
     "photoTips": {
@@ -53,49 +53,49 @@
     }
   },
   "weather": {
-    "cloudHigh": 27,
+    "cloudHigh": 0,
     "cloudMid": 0,
-    "cloudLow": 5,
+    "cloudLow": 30,
     "cloudTotal": 30,
-    "humidity": 89,
+    "humidity": 93,
     "precipProb": 0,
-    "visibilityKm": 1.4
+    "visibilityKm": 400
   },
   "stations": {
     "hongludi": {
-      "score": 32,
-      "rating": "平淡暮光",
-      "color": "#7B88A8",
+      "score": 26,
+      "rating": "陰沉沉寂",
+      "color": "#5A6275",
       "weather": {
-        "cloudHigh": 27,
+        "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 5,
+        "cloudLow": 30,
         "cloudTotal": 30,
-        "humidity": 89,
+        "humidity": 93,
         "precipProb": 0,
-        "visibilityKm": 1.4
+        "visibilityKm": 400
       },
       "metrics": {
-        "horizonClearance": 22,
-        "visKm": 1.4
+        "horizonClearance": 29,
+        "visKm": 400
       }
     },
     "waimushan": {
-      "score": 35,
+      "score": 34,
       "rating": "平淡暮光",
       "color": "#7B88A8",
       "weather": {
-        "cloudHigh": 1,
+        "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 23,
-        "cloudTotal": 23,
-        "humidity": 89,
+        "cloudLow": 13,
+        "cloudTotal": 13,
+        "humidity": 94,
         "precipProb": 0,
-        "visibilityKm": 21
+        "visibilityKm": 16.3
       },
       "metrics": {
-        "horizonClearance": 67,
-        "visKm": 21
+        "horizonClearance": 54,
+        "visKm": 16.3
       }
     }
   }
