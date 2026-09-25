@@ -1,7 +1,7 @@
 {
-  "date": "2026-09-24",
+  "date": "2026-09-25",
   "session": "sunset",
-  "lockedAt": "2026-09-24T07:30:17.607Z",
+  "lockedAt": "2026-09-25T07:30:16.799Z",
   "skyfire": {
     "score": 35,
     "rating": {
@@ -14,12 +14,12 @@
       "bgGradient": "linear-gradient(135deg, rgba(123,136,168,0.2) 0%, rgba(160,174,192,0.1) 100%)"
     },
     "metrics": {
-      "cloudQualityScore": 0,
+      "cloudQualityScore": 1,
       "lowCloudPenalty": 0,
-      "horizonScore": 28,
+      "horizonScore": 29,
       "visibilityScore": 15,
-      "horizonClearance": 93,
-      "visKm": 24.9
+      "horizonClearance": 97,
+      "visKm": 24.5
     },
     "diagnostics": [
       {
@@ -30,17 +30,17 @@
       {
         "label": "中空雲層 (2,000-6,000m)",
         "status": "low",
-        "desc": "中雲量稀疏 (0%)，雲彩層次感較為單純。"
+        "desc": "中雲量稀疏 (1%)，雲彩層次感較為單純。"
       },
       {
         "label": "遠方西方（台灣海峽/海平面）透光窗",
         "status": "optimal",
-        "desc": "低雲遮蔽極低 (6%)，透光窗達 93%，夕陽/晨光無阻直射雲底！"
+        "desc": "低雲遮蔽極低 (2%)，透光窗達 97%，夕陽/晨光無阻直射雲底！"
       },
       {
         "label": "大氣能見度與通透度",
         "status": "optimal",
-        "desc": "能見度優異（24.88 公里），大氣清澈通透，晚霞色彩飽和純淨。"
+        "desc": "能見度優異（24.5 公里），大氣清澈通透，晚霞色彩飽和純淨。"
       }
     ],
     "photoTips": {
@@ -54,12 +54,12 @@
   },
   "weather": {
     "cloudHigh": 0,
-    "cloudMid": 0,
-    "cloudLow": 6,
-    "cloudTotal": 6,
-    "humidity": 72,
-    "precipProb": 0,
-    "visibilityKm": 24.9
+    "cloudMid": 1,
+    "cloudLow": 2,
+    "cloudTotal": 2,
+    "humidity": 75,
+    "precipProb": 6,
+    "visibilityKm": 24.5
   },
   "stations": {
     "dadaocheng": {
@@ -68,16 +68,16 @@
       "color": "#7B88A8",
       "weather": {
         "cloudHigh": 0,
-        "cloudMid": 0,
-        "cloudLow": 6,
-        "cloudTotal": 6,
-        "humidity": 72,
-        "precipProb": 0,
-        "visibilityKm": 24.9
+        "cloudMid": 1,
+        "cloudLow": 2,
+        "cloudTotal": 2,
+        "humidity": 75,
+        "precipProb": 6,
+        "visibilityKm": 24.5
       },
       "metrics": {
-        "horizonClearance": 93,
-        "visKm": 24.9
+        "horizonClearance": 97,
+        "visKm": 24.5
       }
     },
     "xiangshan": {
@@ -87,15 +87,15 @@
       "weather": {
         "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 5,
-        "cloudTotal": 5,
-        "humidity": 72,
-        "precipProb": 0,
-        "visibilityKm": 24.4
+        "cloudLow": 9,
+        "cloudTotal": 9,
+        "humidity": 78,
+        "precipProb": 6,
+        "visibilityKm": 24.1
       },
       "metrics": {
-        "horizonClearance": 94,
-        "visKm": 24.4
+        "horizonClearance": 89,
+        "visKm": 24.1
       }
     },
     "tamsui": {
@@ -105,14 +105,14 @@
       "weather": {
         "cloudHigh": 5,
         "cloudMid": 0,
-        "cloudLow": 2,
-        "cloudTotal": 8,
-        "humidity": 73,
+        "cloudLow": 5,
+        "cloudTotal": 10,
+        "humidity": 80,
         "precipProb": 0,
         "visibilityKm": 24
       },
       "metrics": {
-        "horizonClearance": 98,
+        "horizonClearance": 94,
         "visKm": 24
       }
     },
@@ -123,14 +123,14 @@
       "weather": {
         "cloudHigh": 5,
         "cloudMid": 0,
-        "cloudLow": 2,
-        "cloudTotal": 8,
-        "humidity": 73,
+        "cloudLow": 5,
+        "cloudTotal": 10,
+        "humidity": 80,
         "precipProb": 0,
         "visibilityKm": 24
       },
       "metrics": {
-        "horizonClearance": 98,
+        "horizonClearance": 94,
         "visKm": 24
       }
     },
@@ -141,33 +141,33 @@
       "weather": {
         "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 5,
-        "cloudTotal": 5,
-        "humidity": 72,
-        "precipProb": 0,
-        "visibilityKm": 24.4
+        "cloudLow": 9,
+        "cloudTotal": 9,
+        "humidity": 78,
+        "precipProb": 6,
+        "visibilityKm": 24.1
       },
       "metrics": {
-        "horizonClearance": 94,
-        "visKm": 24.4
+        "horizonClearance": 89,
+        "visKm": 24.1
       }
     },
     "jiufen": {
-      "score": 30,
+      "score": 35,
       "rating": "平淡暮光",
       "color": "#7B88A8",
       "weather": {
         "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 38,
-        "cloudTotal": 38,
-        "humidity": 86,
-        "precipProb": 8,
-        "visibilityKm": 22.3
+        "cloudLow": 13,
+        "cloudTotal": 13,
+        "humidity": 92,
+        "precipProb": 19,
+        "visibilityKm": 16.1
       },
       "metrics": {
-        "horizonClearance": 58,
-        "visKm": 22.3
+        "horizonClearance": 84,
+        "visKm": 16.1
       }
     }
   }
