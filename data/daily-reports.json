@@ -17,14 +17,14 @@
       "summary": "厚重低雲覆蓋天際或有陣雨，天色灰暗難見彩霞。"
     },
     "groundTruth": {
-      "score": 33,
-      "avgScore": 19.0,
-      "peakScore": 33,
+      "score": 34,
+      "avgScore": 33.0,
+      "peakScore": 34,
       "peakOffsetMin": -20,
       "verdict": "EXACT_MATCH",
       "verdictAvg": "EXACT_MATCH",
       "verdictPeak": "EXACT_MATCH",
-      "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)（峰值 33 分／平均 19.0 分）",
+      "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)（峰值 34 分／平均 33.0 分）",
       "color": "#4ADE80"
     },
     "stations": [
@@ -33,7 +33,7 @@
         "icon": "⛰️",
         "tag": "新北觀光・雙北盆地俯瞰晨光",
         "phasePrep": "—",
-        "phasePeak": "平均 19.0 分・峰值 33 分（T-20）",
+        "phasePeak": "平均 33.0 分・峰值 34 分（T-20）",
         "phasePost": "—",
         "forecast": "26 分（低雲 30%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -44,7 +44,7 @@
         "icon": "🌊",
         "tag": "國海院・太平洋日出第一線",
         "phasePrep": "—",
-        "phasePeak": "平均 8.7 分・峰值 16 分（T-20）",
+        "phasePeak": "平均 17.3 分・峰值 16 分（T+0）",
         "phasePost": "—",
         "forecast": "34 分（低雲 13%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
@@ -55,13 +55,13 @@
       "verified": 2,
       "pending": 0,
       "bestStation": "hongludi",
-      "bestScore": 33,
+      "bestScore": 34,
       "worstError": 18,
-      "meanError": 12.5
+      "meanError": 13.0
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 30%。",
-      "modelPerformance": "模型預報 26 分，實況縮時光學觀測：平均 19.0 分（誤差 7.0 分）、峰值 33 分（T-20，誤差 7 分）（EXACT_MATCH）。"
+      "modelPerformance": "模型預報 26 分，實況縮時光學觀測：平均 33.0 分（誤差 7.0 分）、峰值 34 分（T-20，誤差 8 分）（EXACT_MATCH）。"
     }
   },
   {
