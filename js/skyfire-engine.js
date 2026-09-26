@@ -146,19 +146,24 @@ class SkyFireEngine {
     let rawScore = cloudBaseScore - lowCloudPenalty + horizonScore + visibilityScore + aqiModifier + moistureScore;
 
     // 邊界保護
-    // 特殊情況：如果完全無雲 (高雲<5% 且 中雲<5%)，只能算晴朗黃昏，不是火燒雲
-    if (highCloud < 6 && midCloud < 6) {
-      rawScore = Math.min(rawScore, 35);
-    }
     // 特殊情況：如果低雲 > 85%，火燒雲幾率幾乎為 0
     if (lowCloud > 85) {
       rawScore = Math.min(rawScore, 15);
+    }
+    // 天空美感分 (js/beauty-model.js) 的輸入：晴空暮光本身可以很好看，不套下面的無雲上限
+    const clearSkyUncappedScore = Math.max(5, Math.min(100, Math.round(rawScore)));
+    // 特殊情況：高中空幾乎無雲 = 沒有可被染紅的雲，只有晴空暮光，不是火燒雲。
+    // 上限 10：2026-09 用攝影機量到的「染紅的雲」回測，晴空場次實測幾乎都是 5-15 分
+    // (原本 35 分上限讓晴天日出/日落每場誤差約 20 分)。晴空暮光好不好看由天空美感分負責。
+    const clearSkyCapped = highCloud < 6 && midCloud < 6 && lowCloud <= 85;
+    if (highCloud < 6 && midCloud < 6) {
+      rawScore = Math.min(rawScore, 10);
     }
 
     const finalScore = Math.max(5, Math.min(100, Math.round(rawScore)));
 
     // 7. 評級與色彩診斷
-    const rating = this.getRatingLevel(finalScore);
+    const rating = clearSkyCapped ? this.getClearSkyRating() : this.getRatingLevel(finalScore);
     const diagnostics = this.generateDiagnostics({
       highCloud,
       midCloud,
@@ -179,10 +184,23 @@ class SkyFireEngine {
         horizonScore: Math.round(horizonScore),
         visibilityScore: Math.round(visibilityScore),
         horizonClearance: Math.round(horizonClearance),
-        visKm: parseFloat(visKm.toFixed(1))
+        visKm: parseFloat(visKm.toFixed(1)),
+        clearSkyUncappedScore
       },
       diagnostics,
       photoTips
+    };
+  }
+
+  static getClearSkyRating() {
+    return {
+      level: 'CLEAR',
+      badge: '晴空無雲',
+      icon: '🌇',
+      color: '#7B88A8',
+      secondaryColor: '#A0AEC0',
+      summary: '高中空幾乎無雲，沒有雲層可被染紅，不會有火燒雲；地平線的橘色暮光請看各機位的天空美感分。',
+      bgGradient: 'linear-gradient(135deg, rgba(123,136,168,0.2) 0%, rgba(160,174,192,0.1) 100%)'
     };
   }
 

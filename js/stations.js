@@ -16,42 +16,46 @@
  *   isPrimary:false here is a plain secondary-station choice, not a
  *   DVR-capability workaround.
  *
+ * skyRoiBottom: 畫面由上往下算、天空區域的底緣比例 (0-1)，給火燒雲分評分器
+ *   (scripts/analyze_sky_ground_truth.py analyze_fire_cloud) 排除地面、海面、
+ *   城市燈光。攝影機是固定機位，重新架設或改構圖時要跟著改。
+ *
  * Keep data/stations.json in sync: node scripts/build-stations-json.js
  */
 
 const STATIONS = [
   { id: 'dadaocheng', name: '台北大稻埕碼頭', icon: '⛵', session: 'sunset', isPrimary: true,
     lat: 25.057045046459375, lng: 121.50771810454582, elevation: 5,
-    videoId: 'Ndo_8RuefH4', uploaderId: '@taipeitravelofficial', viewAzimuth: 292,
+    videoId: 'Ndo_8RuefH4', uploaderId: '@taipeitravelofficial', viewAzimuth: 292, skyRoiBottom: 0.50,
     tag: '臺北旅遊網 4K 直播・淡水河倒影晚霞' },
   { id: 'xiangshan', name: '台北象山看 101', icon: '🏙️', session: 'sunset', isPrimary: false,
     lat: 25.029049882166394, lng: 121.57276615548665, elevation: 150,
-    videoId: 'z_fY1pj1VBw', uploaderId: '@taipeitravelofficial', viewAzimuth: 280,
+    videoId: 'z_fY1pj1VBw', uploaderId: '@taipeitravelofficial', viewAzimuth: 280, skyRoiBottom: 0.56,
     tag: '臺北旅遊網 4K 直播・101 與西方天際線' },
   { id: 'tamsui', name: '新北淡水漁人碼頭', icon: '🌉', session: 'sunset', isPrimary: false,
     lat: 25.18325188330396, lng: 121.41209767613158, elevation: 5,
-    videoId: 'xwAWSh35uuw', uploaderId: '@ntctour', viewAzimuth: 270,
+    videoId: 'xwAWSh35uuw', uploaderId: '@ntctour', viewAzimuth: 270, skyRoiBottom: 0.44,
     tag: '新北觀光 4K 直播・情人橋烈焰落日' },
   { id: 'bali', name: '新北八里左岸', icon: '🌊', session: 'sunset', isPrimary: false,
     lat: 25.15470, lng: 121.41030, elevation: 5,
-    videoId: 'di-4DCblWq4', uploaderId: '@ntctour', viewAzimuth: 250,
+    videoId: 'di-4DCblWq4', uploaderId: '@ntctour', viewAzimuth: 250, skyRoiBottom: 0.58,
     tag: '新北觀光 4K 直播・淡江大橋與台灣海峽晚霞' },
   { id: 'maokong', name: '台北貓空指南宮', icon: '⛩️', session: 'sunset', isPrimary: false,
     lat: 24.98421427814147, lng: 121.58655991120213, elevation: 280,
-    videoId: '215ahZ_0rTg', uploaderId: '@taipeitravelofficial', viewAzimuth: 290,
+    videoId: '215ahZ_0rTg', uploaderId: '@taipeitravelofficial', viewAzimuth: 290, skyRoiBottom: 0.66,
     tag: '臺北旅遊網 4K 直播・高處俯瞰盆地火燒雲' },
   { id: 'jiufen', name: '新北九份即時影像', icon: '🏮', session: 'sunset', isPrimary: false,
     lat: 25.110048954642046, lng: 121.83829071730524, elevation: 350,
-    videoId: 'XSD5ptYisw8', uploaderId: '@ntctour', viewAzimuth: 45,
+    videoId: 'XSD5ptYisw8', uploaderId: '@ntctour', viewAzimuth: 45, skyRoiBottom: 0.54,
     tag: '新北觀光 4K 直播・山海交界落日' },
 
   { id: 'hongludi', name: '新北中和烘爐地', icon: '⛰️', session: 'sunrise', isPrimary: true,
     lat: 24.972013872318254, lng: 121.4976771944775, elevation: 300,
-    videoId: 'xxMRjVwCQ3o', uploaderId: '@ntctour', viewAzimuth: 75,
+    videoId: 'xxMRjVwCQ3o', uploaderId: '@ntctour', viewAzimuth: 75, skyRoiBottom: 0.22,
     tag: '新北觀光・雙北盆地俯瞰晨光' },
   { id: 'waimushan', name: '基隆外木山濱海', icon: '🌊', session: 'sunrise', isPrimary: false,
     lat: 25.17594381403899, lng: 121.70593771941236, elevation: 10,
-    videoId: 'A9pluEagLD4', uploaderId: '@goocean520', viewAzimuth: 95,
+    videoId: 'A9pluEagLD4', uploaderId: '@goocean520', viewAzimuth: 95, skyRoiBottom: 0.57,
     tag: '國海院・太平洋日出第一線' },
 ];
 

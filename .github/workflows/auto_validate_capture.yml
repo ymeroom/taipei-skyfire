@@ -83,6 +83,7 @@ jobs:
           else echo "::warning::找不到 python，跳過 Python 測試"; exit 0; fi
           "$PY" tests/test_daily_briefing.py || echo "::warning::日報產生器／校準守門測試未通過"
           "$PY" tests/test_timelapse_aggregation.py || echo "::warning::縮時聚合 (平均分/峰值分) 測試未通過"
+          "$PY" tests/test_fire_cloud.py || echo "::warning::火燒雲分評分器測試未通過"
 
       - name: 🌅 解析本次天文驗證時段
         id: session

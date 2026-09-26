@@ -10,6 +10,7 @@ const SUITES = [
   './test-stations.js',
   './test-solar-calc.js',
   './test-skyfire-engine.js',
+  './test-beauty-model.js',
   './test-weather-service.js',
   './test-spots-data.js',
   './test-dom-bindings.js',

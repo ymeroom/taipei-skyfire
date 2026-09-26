@@ -8,7 +8,7 @@ const SkyFireEngineModule = typeof window !== 'undefined' ? window.SkyFireEngine
 class WeatherService {
   // 台北核心基準點（大稻埕碼頭/市中心）
   static TAIPEI_COORDS = { lat: 25.057045, lng: 121.507718, name: '台北核心（大稻埕）' };
-  static CACHE_KEY = 'taipei_skyfire_weather_cache_v2';
+  static CACHE_KEY = 'taipei_skyfire_weather_cache_v3';
   static CACHE_DURATION_MS = 15 * 60 * 1000; // 15 分鐘快取
 
   /**

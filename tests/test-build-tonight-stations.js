@@ -35,6 +35,21 @@ assert.strictEqual(out.stations[0].icon, '🌉');
 const onDisk = JSON.parse(fs.readFileSync(path.join(dataDir, 'tonight-stations.json'), 'utf8'));
 assert.deepStrictEqual(onDisk.stations.map(s => s.id), ['tamsui', 'dadaocheng']);
 
+// 晴天：火燒雲分同分 → 由天空美感分決定名次；沒有美感分的排最後
+fs.writeFileSync(path.join(dataDir, 'locked-sunset-forecast.json'), JSON.stringify({
+  date: '2026-09-11', session: 'sunset',
+  stations: {
+    xiangshan: { score: 10, beautyScore: 35, rating: '晴空無雲', color: '#7B88A8' },
+    tamsui: { score: 10, beautyScore: 92, rating: '晴空無雲', color: '#7B88A8' },
+    jiufen: { score: 10, rating: '晴空無雲', color: '#7B88A8' },
+    maokong: { score: 12, beautyScore: 60, rating: '晴空無雲', color: '#7B88A8' }
+  }
+}));
+const clear = buildTonightStations({ dataDir, session: 'sunset', now: new Date('2026-09-11T09:00:00Z') });
+assert.deepStrictEqual(clear.stations.map(s => s.id), ['maokong', 'tamsui', 'xiangshan', 'jiufen']);
+assert.strictEqual(clear.stations[1].beautyScore, 92);
+assert.strictEqual(clear.stations[3].beautyScore, null);
+
 // 缺鎖定檔 → 空清單，不炸
 const out2 = buildTonightStations({ dataDir, session: 'sunrise', now: new Date('2026-09-10T00:00:00Z') });
 assert.deepStrictEqual(out2.stations, []);

@@ -125,6 +125,17 @@ assert agg4["peakScore"] is None, "唯一成功的影格在錯誤的那一側，
 assert agg4["avgScore"] == 77.0, "平均仍照樣涵蓋全部成功影格 (不分側)"
 print("✅ aggregate_station_scores：峰值那一側全軍覆沒時峰值誠實留 None，平均不受側別限制")
 
+# --- aggregate_fire_cloud_scores: 無法判讀 (黑白夜視) 的影格排除並計數，不當 0 分 ---
+fire_frames = [dict(f, fireCloudScore=fs) for f, fs in zip(
+    sunrise_frames, [None, None, 40, 12, 8, 70, 5, 5, 5])]
+fire_frames[8] = dict(fire_frames[8], ok=False, fireCloudScore=None)
+fagg = tl.aggregate_fire_cloud_scores(fire_frames, "sunrise")
+assert fagg["unreadableFrameCount"] == 2, "兩張黑白夜視 (ok 但 fireCloudScore=None)"
+assert fagg["okFrameCount"] == 6
+assert fagg["avgScore"] == round((40 + 12 + 8 + 70 + 5 + 5) / 6, 1), "平均不含無法判讀與擷取失敗的影格"
+assert fagg["peakScore"] == 40 and fagg["peakOffsetMin"] == -20, "日出峰值同樣只看 T<=0"
+print("✅ aggregate_fire_cloud_scores：無法判讀影格排除並計數，峰值側別規則同美感分")
+
 # ----------------------------------------------------------------
 # build_station_verification_record / write_verification_records
 # ----------------------------------------------------------------
@@ -141,10 +152,10 @@ try:
         "date": "2026-09-12", "session": "sunset", "lockedAt": "2026-09-12T07:30:00.000Z",
         "stations": {
             "dadaocheng": {
-                "score": 50, "rating": "x", "color": "#7B88A8",
+                "score": 50, "rating": "x", "color": "#7B88A8", "beautyScore": 70,
                 "weather": {"cloudHigh": 10, "cloudMid": 20, "cloudLow": 5, "cloudTotal": 30,
                             "humidity": 70, "precipProb": 12, "visibilityKm": 17},
-                "metrics": {"horizonClearance": 40, "visKm": 17}
+                "metrics": {"horizonClearance": 40, "visKm": 17, "clearSkyUncappedScore": 55}
             }
         }
     }
@@ -166,6 +177,24 @@ try:
     assert rec["verification"]["errorPeakAbsolute"] == abs(50 - 60)
     assert rec["verification"]["verdictPeak"] == "SLIGHT_DEVIATION"
     print("✅ build_station_verification_record：正常情境同時算出 errorAvg/errorPeak 與各自判定")
+
+    # 兩個分數各自對上自己的預報 (舊的 verdictAvg/verdictPeak 保留不動)
+    beauty = rec["verification"]["beauty"]
+    assert beauty == {"predicted": 70, "errorPeakAbsolute": 10, "verdictPeak": "SLIGHT_DEVIATION",
+                      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"}, beauty
+    assert rec["verification"]["fireCloud"]["peakScore"] is None, "影格沒有火燒雲分就是 None"
+    assert "verdictPeak" not in rec["verification"]["fireCloud"], "沒有實測就不給判定"
+    assert rec["prediction"]["beautyScore"] == 70 and rec["prediction"]["clearSkyUncappedScore"] == 55
+
+    sunset_fire = [dict(f, fireCloudScore=fs) for f, fs in zip(sunset_frames, [9, 5, 5, 5, 20, 45, 70, 30, 12])]
+    rec_fire = tl.build_station_verification_record(
+        station, sunset_fire, "sunset", "2026-09-12", anchor_utc, data_dir
+    )
+    fc = rec_fire["verification"]["fireCloud"]
+    assert fc["peakScore"] == 70 and fc["peakOffsetMin"] == 20
+    assert fc["predicted"] == 50 and fc["errorPeakAbsolute"] == 20 and fc["verdictPeak"] == "MISMATCH"
+    assert rec_fire["verification"]["peakScore"] == 60, "既有的暖色 (美感) 峰值不受影響"
+    print("✅ build_station_verification_record：火燒雲分對引擎分數、美感分對 beautyScore，各自判定")
 
     # --- load_locked_prediction / flatten_station_lock：雲量攤平不遺失 ---
     pred = rec["prediction"]

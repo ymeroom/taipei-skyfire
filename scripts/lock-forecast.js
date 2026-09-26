@@ -12,6 +12,17 @@ const path = require('path');
 const WeatherService = require('../js/weather-service.js');
 const { getTaipeiDateString, resolveLockTarget } = require('./live-capture-core.js');
 const { stationsForSession } = require('../js/stations.js');
+const { predictBeauty } = require('../js/beauty-model.js');
+
+const DEFAULT_PARAMS_PATH = path.join(__dirname, '../data/model-calibration-params.json');
+
+function loadBeautyModel(paramsPath = DEFAULT_PARAMS_PATH) {
+  try {
+    return JSON.parse(fs.readFileSync(paramsPath, 'utf8')).beautyModel || null;
+  } catch {
+    return null;
+  }
+}
 
 function pickSessionForecast(forecastData, dateStr, sessionType) {
   const day = forecastData.daysForecast.find(d =>
@@ -20,13 +31,15 @@ function pickSessionForecast(forecastData, dateStr, sessionType) {
   return day[sessionType];
 }
 
-function stationLockEntry(sf) {
+function stationLockEntry(sf, stationId, beautyModel) {
   const w = sf.weather || {};
   const m = sf.skyfire.metrics || {};
+  const clearSkyUncappedScore = m.clearSkyUncappedScore ?? null;
   return {
     score: sf.skyfire.score,
     rating: sf.skyfire.rating.badge,
     color: sf.skyfire.rating.color,
+    beautyScore: predictBeauty(beautyModel, stationId, clearSkyUncappedScore),
     weather: {
       cloudHigh: w.cloudHigh ?? null,
       cloudMid: w.cloudMid ?? null,
@@ -38,12 +51,13 @@ function stationLockEntry(sf) {
     },
     metrics: {
       horizonClearance: m.horizonClearance ?? null,
-      visKm: m.visKm ?? null
+      visKm: m.visKm ?? null,
+      clearSkyUncappedScore
     }
   };
 }
 
-async function lockForecast({ dataDir } = {}) {
+async function lockForecast({ dataDir, beautyModel = loadBeautyModel() } = {}) {
   // 目標日期一律由 cron 的「排定時刻」推算，而非實際執行時刻 (GitHub 排程延遲
   // 實測可達 4-7 小時，用執行時刻會在跨過台北午夜時鎖錯天)。
   const target = resolveLockTarget({
@@ -85,8 +99,8 @@ async function lockForecast({ dataDir } = {}) {
       console.warn(`[Lock Forecast] ${st.id}: 無預測資料，略過`);
       continue;
     }
-    stationLocks[st.id] = stationLockEntry(sf);
-    console.log(`[Lock Forecast]   ${st.id}: ${sf.skyfire.score} 分`);
+    stationLocks[st.id] = stationLockEntry(sf, st.id, beautyModel);
+    console.log(`[Lock Forecast]   ${st.id}: 火燒雲 ${sf.skyfire.score} 分・美感 ${stationLocks[st.id].beautyScore ?? '—'} 分`);
     if (st.isPrimary) {
       primarySkyfire = sf.skyfire;
       primaryWeather = stationLocks[st.id].weather;

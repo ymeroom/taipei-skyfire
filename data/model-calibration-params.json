@@ -9,15 +9,15 @@
     "improvementPct": 0.8
   },
   "weights": {
-    "highCloudMax": 20.0,
-    "highCloudOpt": 50.0,
-    "midCloudMax": 15.0,
-    "midCloudOpt": 42.0,
-    "synergyBonus": 5.0,
-    "lowCloudSlope": 1.0,
-    "horizonMax": 30.0,
-    "visMax": 15.0,
-    "moistureMax": 8.0
+    "highCloudMax": 20,
+    "highCloudOpt": 50,
+    "midCloudMax": 15,
+    "midCloudOpt": 42,
+    "synergyBonus": 5,
+    "lowCloudSlope": 1,
+    "horizonMax": 30,
+    "visMax": 15,
+    "moistureMax": 8
   },
   "history": [
     {
@@ -29,18 +29,18 @@
     {
       "date": "2026-08-30",
       "maeBefore": 23.86,
-      "maeAfter": 23.0,
+      "maeAfter": 23,
       "adjustment": "基於 7 場觀測紀錄微調高低雲光學權重，MAE 降低 0.86 分"
     },
     {
       "date": "2026-08-18",
-      "maeBefore": 28.0,
+      "maeBefore": 28,
       "maeAfter": 25.2,
       "adjustment": "基於 5 場觀測紀錄微調高低雲光學權重，MAE 降低 2.80 分"
     },
     {
       "date": "2026-08-17",
-      "maeBefore": 20.0,
+      "maeBefore": 20,
       "maeAfter": 17.25,
       "adjustment": "基於 4 場觀測紀錄微調高低雲光學權重，MAE 降低 2.75 分"
     },
@@ -50,5 +50,60 @@
       "maeAfter": 4.1,
       "adjustment": "優化低雲懲罰斜率與高雲飽和權重，MAE 降低 1.3 分"
     }
-  ]
+  ],
+  "beautyModel": {
+    "input": "clearSkyUncappedScore",
+    "target": "verification.peakScore",
+    "fittedAt": "2026-09-26T14:38:16.231Z",
+    "stations": {
+      "maokong": {
+        "slope": 1.53,
+        "intercept": 2.724,
+        "n": 12,
+        "mae": 17.699
+      },
+      "jiufen": {
+        "slope": 0.432,
+        "intercept": 29.048,
+        "n": 10,
+        "mae": 19.597
+      },
+      "bali": {
+        "slope": 1.117,
+        "intercept": 26.836,
+        "n": 13,
+        "mae": 9.692
+      },
+      "tamsui": {
+        "slope": 1.189,
+        "intercept": 31.549,
+        "n": 13,
+        "mae": 8.455
+      },
+      "dadaocheng": {
+        "slope": 0.4,
+        "intercept": 28.973,
+        "n": 12,
+        "mae": 8.983
+      },
+      "xiangshan": {
+        "slope": 0.255,
+        "intercept": 19.717,
+        "n": 12,
+        "mae": 8.079
+      },
+      "hongludi": {
+        "slope": 0.119,
+        "intercept": 24.491,
+        "n": 14,
+        "mae": 10.461
+      },
+      "waimushan": {
+        "slope": -0.147,
+        "intercept": 26.011,
+        "n": 11,
+        "mae": 5.345
+      }
+    }
+  }
 }

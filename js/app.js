@@ -43,7 +43,7 @@ class SkyFireApp {
       if (!data.stations || !data.stations.length) return;
       if (sub) {
         const label = data.session === 'sunrise' ? '今晨日出 2 站' : '今晚日落 6 站';
-        sub.textContent = `${data.date}・${label}・依模型鎖定預測排序`;
+        sub.textContent = `${data.date}・${label}・依火燒雲分排序，同分再比天空美感分`;
       }
       el.innerHTML = data.stations.map((s, i) => `
         <a class="tonight-station-card" href="${s.youtubeUrl}" target="_blank" rel="noopener">
@@ -52,7 +52,8 @@ class SkyFireApp {
             ${s.icon} <strong>${s.name}</strong><br>
             <span class="tonight-station-meta">${s.tag} ・ 方位 ${Math.round(s.viewAzimuth)}°</span>
           </span>
-          <span class="tonight-station-score" style="color:${s.color};">${s.score}</span>
+          <span class="tonight-station-score" style="color:${s.color};" title="火燒雲分：雲有沒有被染紅">🔥${s.score}</span>
+          <span class="tonight-station-score" style="color:#E5A50A;" title="天空美感分：攝影機畫面的暖色峰值，晴天暮光也算">🌅${s.beautyScore ?? '--'}</span>
         </a>`).join('');
     } catch (err) {
       console.warn('載入今晚機位排名失敗:', err);
@@ -877,6 +878,36 @@ class SkyFireApp {
 
     const isSunrise = report.session === 'sunrise';
     const isLatest = report.id === this.dailyReports[0].id;
+    const isDual = Boolean(report.groundTruth?.fireCloud);
+
+    const dualCell = (d) => {
+      if (!d) return '<td>--</td><td>--</td>';
+      // 整場都是最低分 5 分時「峰值出現在哪個時刻」沒有意義，不顯示
+      const offset = d.peakOffsetMin == null || d.peakScore <= 5 ? '' : `（T${d.peakOffsetMin >= 0 ? '+' : ''}${d.peakOffsetMin}）`;
+      const actual = d.peakScore == null ? '無實測' : `${d.peakScore} 分${offset}`;
+      return `
+        <td><span style="color: #ff9e00; font-weight: 700;">${d.predicted ?? '--'}</span> → <strong>${actual}</strong></td>
+        <td><span class="report-tag-pill" style="color: ${d.color}; border-color: rgba(148, 163, 184, 0.4);">${d.verdictBadge}</span></td>`;
+    };
+
+    const dualTableRows = (report.stations || []).map(st => `
+      <tr>
+        <td><strong>${st.icon || '📹'} ${st.name}</strong><br><span style="font-size: 0.72rem; color: var(--text-muted);">${st.tag || ''}</span></td>
+        ${st.fireCloud ? dualCell(st.fireCloud) : `<td colspan="2">${st.phasePeak || '--'}</td>`}
+        ${st.beauty ? dualCell(st.beauty) : '<td colspan="2">--</td>'}
+      </tr>
+    `).join('');
+
+    const dualBannerUnit = (icon, label, hint, d) => `
+      <div class="report-score-unit">
+        <div class="report-score-unit-icon">${icon}</div>
+        <div class="report-score-info-box">
+          <span>${label}</span>
+          <strong style="color: ${d.color};">預報 ${d.predicted ?? '--'} ／ 實測峰值 ${d.peakScore ?? '--'}</strong>
+          <span style="font-size: 0.75rem; color: ${d.color};">${d.verdictBadge}</span>
+          <span style="font-size: 0.7rem; color: var(--text-muted);">${hint}</span>
+        </div>
+      </div>`;
 
     // 構建機位實況表格 HTML (純數據表格，無圖片)
     const tableRows = (report.stations || []).map(st => `
@@ -905,6 +936,30 @@ class SkyFireApp {
         </div>
       </div>
 
+      ${isDual ? `
+      <!-- 雙分數：火燒雲分 (雲有沒有被染紅) / 天空美感分 (攝影機拍到的暖色峰值) -->
+      <div class="report-score-banner-row">
+        ${dualBannerUnit('🔥', '火燒雲分', '只算被染紅的雲，晴空暮光不算', report.groundTruth.fireCloud)}
+        ${dualBannerUnit('🌅', '天空美感分', '攝影機畫面的暖色峰值，晴天暮光也算', report.groundTruth.beauty)}
+      </div>
+
+      <div class="report-table-box">
+        <table class="report-data-table">
+          <thead>
+            <tr>
+              <th>觀測機位</th>
+              <th>🔥 火燒雲 預報 → 實測峰值</th>
+              <th>判定</th>
+              <th>🌅 天空美感 預報 → 實測峰值</th>
+              <th>判定</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${dualTableRows}
+          </tbody>
+        </table>
+      </div>
+      ` : `
       <!-- 預測 vs 實況 綜合對比欄 -->
       <div class="report-score-banner-row">
         <div class="report-score-unit">
@@ -946,6 +1001,7 @@ class SkyFireApp {
           </tbody>
         </table>
       </div>
+      `}
 
       <!-- 總結分析區塊 -->
       <div class="report-summary-card-block">
@@ -996,7 +1052,10 @@ class SkyFireApp {
           <div class="archive-item-badges">
             ${rep.id === 'report-2026-08-27-sunset' ? '<span class="report-tag-pill" style="background: rgba(244, 63, 94, 0.25); color: #f43f5e; border-color: rgba(244, 63, 94, 0.5); font-weight: 800;">🔥 史詩大景</span>' : ''}
             <span class="report-tag-pill">${rep.publishTimeLabel}</span>
-            <span class="report-tag-pill highlight">${rep.groundTruth?.verdictBadge || '⏳ 待實測驗證'}</span>
+            ${rep.groundTruth?.fireCloud ? `
+              <span class="report-tag-pill" style="color: ${rep.groundTruth.fireCloud.color};">🔥 ${rep.groundTruth.fireCloud.verdictBadge}</span>
+              <span class="report-tag-pill" style="color: ${rep.groundTruth.beauty.color};">🌅 ${rep.groundTruth.beauty.verdictBadge}</span>
+            ` : `<span class="report-tag-pill highlight">${rep.groundTruth?.verdictBadge || '⏳ 待實測驗證'}</span>`}
             <span style="font-size: 0.8rem; color: #ff9e00;">${isSelected ? '📖 現正展示中' : '點擊查看 ➔'}</span>
           </div>
         </div>

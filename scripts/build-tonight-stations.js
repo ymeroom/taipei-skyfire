@@ -30,13 +30,15 @@ function buildTonightStations({ dataDir = path.join(__dirname, '../data'), sessi
       name: meta[id].name,
       icon: meta[id].icon,
       score: s.score,
+      beautyScore: s.beautyScore ?? null,
       rating: s.rating,
       color: s.color,
       viewAzimuth: meta[id].viewAzimuth,
       tag: meta[id].tag,
       youtubeUrl: meta[id].url
     }))
-    .sort((a, b) => b.score - a.score);
+    // 先比火燒雲分；晴天各站火燒雲分都在底線附近，改由天空美感分決定名次
+    .sort((a, b) => (b.score - a.score) || ((b.beautyScore ?? -1) - (a.beautyScore ?? -1)));
 
   const out = {
     session: sess,

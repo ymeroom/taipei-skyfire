@@ -24,14 +24,27 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: ⚙️ 設定 Node.js 環境
+        uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+
       - name: 🧪 執行校準守門、日報產生器、縮時聚合測試
         run: |
+          pip install pillow numpy
           python3 tests/test_daily_briefing.py
           python3 tests/test_timelapse_aggregation.py
+          python3 tests/test_fire_cloud.py
+          node tests/test-beauty-model.js
 
       - name: 🤖 執行物理模型損失函數最佳化與參數微調 (Phase 4)
         run: |
           python3 scripts/auto-calibrate-model.py
+
+      # 天空美感分：每站 beauty = intercept + slope × clearSkyUncappedScore，
+      # 用累積的實測暖色峰值重新擬合 (js/beauty-model.js)。
+      - name: 🌅 重新擬合天空美感分模型
+        run: node scripts/fit-beauty-model.js
 
       - name: 🚀 提交最新校準權重至倉庫 (Commit & Push)
         run: |

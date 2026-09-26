@@ -24,7 +24,7 @@ WeatherService.fetchForecast = async (force, coords) => {
       skyfire: {
         score,
         rating: { badge: '平淡暮光', color: '#7B88A8', level: 'FAINT' },
-        metrics: { horizonClearance: 50 + calls, visKm: 18 + calls }
+        metrics: { horizonClearance: 50 + calls, visKm: 18 + calls, clearSkyUncappedScore: 40 + calls }
       },
       weather: { cloudHigh: 1, cloudMid: 10 + calls, cloudLow: 2, cloudTotal: 13 + calls, humidity: 80, precipProb: 5, visibilityKm: 18 + calls }
     },
@@ -38,7 +38,8 @@ const { lockForecast } = require('../scripts/lock-forecast.js');
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'skyfire-lock-'));
 
 module.exports = (async () => {
-  await lockForecast({ dataDir: path.join(dir, 'data') });
+  const beautyModel = { stations: { tamsui: { slope: 1, intercept: 30, n: 5 } } };
+  await lockForecast({ dataDir: path.join(dir, 'data'), beautyModel });
 
   const locked = JSON.parse(fs.readFileSync(path.join(dir, 'data', 'locked-sunset-forecast.json'), 'utf8'));
 
@@ -50,6 +51,10 @@ module.exports = (async () => {
   assert.strictEqual(typeof locked.stations.tamsui.metrics.horizonClearance, 'number');
   assert.strictEqual(locked.session, 'sunset');
   assert.ok(locked.lockedAt);
+
+  const t = locked.stations.tamsui;
+  assert.strictEqual(t.beautyScore, 30 + t.metrics.clearSkyUncappedScore, '美感分由該站參數 × clearSkyUncappedScore 算出');
+  assert.strictEqual(locked.stations.bali.beautyScore, null, '沒有擬合參數的站不預報美感分');
 
   // 每站分數應互不相同 (來自各自的 fetchForecast 呼叫)
   const scores = Object.values(locked.stations).map(s => s.score);

@@ -154,4 +154,44 @@ scores = sorted(s["verification"]["groundTruthScore"] for s in samples)
 assert scores == [12, 18, 20, 35], "平均分與峰值分都各自成為獨立樣本，全部平等餵進校準"
 print("✅ expand_to_calibration_samples：平均分/峰值分各自等權重展開，舊版單一分數相容")
 
+# --- 雙分數：火燒雲分 / 天空美感分各自的預報、實測、判定 ---
+dual_rec = {
+    "id": "rec-2026-09-22-sunset-dadaocheng", "station": "dadaocheng", "date": "2026-09-22", "session": "sunset",
+    "prediction": {"score": 35, "beautyScore": 58, "lowCloud": 2, "highCloud": 0, "midCloud": 0, "humidity": 71},
+    "verification": {
+        "status": "verified_completed", "avgScore": 33.9, "peakScore": 51, "peakOffsetMin": 10,
+        "verdictPeak": "MISMATCH", "verdictPeakBadge": "⚠️ 出現偏差需校準", "errorPeakAbsolute": 16,
+        "fireCloud": {"avgScore": 10.8, "peakScore": 12, "peakOffsetMin": 20, "okFrameCount": 9,
+                      "unreadableFrameCount": 0, "predicted": 35, "errorPeakAbsolute": 23,
+                      "verdictPeak": "MISMATCH", "verdictPeakBadge": "⚠️ 出現偏差需校準"},
+        "beauty": {"predicted": 58, "errorPeakAbsolute": 7, "verdictPeak": "EXACT_MATCH",
+                   "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"},
+    },
+}
+rep = briefing.generate_briefing_obj([dual_rec], {}, "sunset", "2026-09-22", published_at="x")
+gt = rep["groundTruth"]
+assert gt["fireCloud"]["predicted"] == 35 and gt["fireCloud"]["peakScore"] == 12
+assert gt["fireCloud"]["verdict"] == "MISMATCH"
+assert gt["beauty"]["predicted"] == 58 and gt["beauty"]["peakScore"] == 51, "美感實測 = 既有暖色峰值"
+assert gt["beauty"]["verdict"] == "EXACT_MATCH"
+assert gt["verdictBadge"].startswith("⚠️"), "舊欄位原樣保留，舊版前端照常可讀"
+assert rep["prediction"]["beautyScore"] == 58
+row = rep["stations"][0]
+assert row["fireCloud"]["peakOffsetMin"] == 20 and row["beauty"]["verdictBadge"].startswith("🎯")
+assert "🔥 火燒雲：預報 35 分，實測平均 10.8 分、峰值 12 分" in rep["summaryAnalysis"]["modelPerformance"]
+assert "🌅 天空美感：預報 58 分，實測平均 33.9 分、峰值 51 分" in rep["summaryAnalysis"]["modelPerformance"]
+
+# 回填的歷史紀錄：有火燒雲實測、但當時沒有美感預報 → 美感格誠實標「無法比對」
+hist = {**dual_rec, "prediction": {"score": 35}, "verification": {
+    k: v for k, v in dual_rec["verification"].items() if k != "beauty"}}
+hrep = briefing.generate_briefing_obj([hist], {}, "sunset", "2026-09-22", published_at="x")
+assert hrep["groundTruth"]["beauty"]["predicted"] is None
+assert hrep["groundTruth"]["beauty"]["verdict"] == "PENDING"
+assert "本場無預報可比對" in hrep["summaryAnalysis"]["modelPerformance"]
+
+# 沒有 fireCloud 的舊紀錄 → 維持舊版面，不出現雙分數欄位
+old = briefing.generate_briefing_obj(station_records, {}, "sunset", "2026-09-10", published_at="x")
+assert "fireCloud" not in old["groundTruth"] and "fireCloud" not in old["stations"][0]
+print("✅ 雙分數：火燒雲／美感各自預報、實測、判定；舊紀錄維持舊版面")
+
 print("🎉 Python 測試全數 PASS!\n")

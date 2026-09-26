@@ -129,6 +129,19 @@ SUNSET_STATIONS = [
 ]
 
 
+def load_sky_roi_bottoms():
+    """data/stations.json (由 js/stations.js 產生) → {station_id: skyRoiBottom}。"""
+    try:
+        with open(os.path.join(REPO_ROOT, "data", "stations.json"), "r", encoding="utf-8") as f:
+            rows = json.load(f).get("stations") or []
+    except (OSError, json.JSONDecodeError):
+        return {}
+    return {s["id"]: s.get("skyRoiBottom") for s in rows if s.get("id")}
+
+
+SKY_ROI_BOTTOMS = load_sky_roi_bottoms()
+
+
 def get_anchor_time_utc(session, date_str):
     """透過 js/solar-calc.js (SolarCalc, 單一事實來源) 取得台北當日日出/日落時刻。
 
@@ -268,7 +281,8 @@ def run_station(station, anchor_utc, now_utc, out_dir, twilight_window):
                 capture_time=target_dt,
                 twilight_window=twilight_window,
                 rain_series=rain_series,
-                station_coords={"lat": station["lat"], "lng": station["lng"]} if "lat" in station else None
+                station_coords={"lat": station["lat"], "lng": station["lng"]} if "lat" in station else None,
+                sky_roi_bottom=SKY_ROI_BOTTOMS.get(station["id"])
             )
             night_gated = optics.get("nightGate", {}).get("applied")
             rain_gated = optics.get("rainGate", {}).get("applied")
@@ -277,7 +291,9 @@ def run_station(station, anchor_utc, now_utc, out_dir, twilight_window):
                 tag += " 🌙 暗夜閘門已套用"
             if rain_gated:
                 tag += " 🌧️ 雨天閘門已套用"
-            print(f"    ✅ {label}: score={optics['score']} ({optics.get('level')}){tag}")
+            fire = optics.get("fireCloudScore")
+            fire_txt = fire if fire is not None else "無法判讀"
+            print(f"    ✅ {label}: 美感={optics['score']} ({optics.get('level')})・火燒雲={fire_txt}{tag}")
             frames.append({
                 "offsetMin": offset_min,
                 "ok": True,
@@ -520,6 +536,17 @@ def run(session, date_str=None):
     return report
 
 
+def aggregate_fire_cloud_scores(frames, session):
+    """火燒雲分的平均/峰值，規則同 aggregate_station_scores。無法判讀的影格
+    (黑白夜視，fireCloudScore=None) 排除在外並計數，不當成 0 分拉低平均。"""
+    ok = [f for f in frames if f.get("ok")]
+    scored = [{"offsetMin": f["offsetMin"], "ok": True, "score": f["fireCloudScore"]}
+              for f in ok if f.get("fireCloudScore") is not None]
+    agg = aggregate_station_scores(scored, session)
+    agg["unreadableFrameCount"] = len(ok) - len(scored)
+    return agg
+
+
 def aggregate_station_scores(frames, session):
     """從 9 張影格算出兩個實測分數：整段平均、以及對應時段那一側的峰值。
 
@@ -596,6 +623,8 @@ def flatten_station_lock(station_lock, locked_at):
         "score": station_lock.get("score"),
         "rating": station_lock.get("rating"),
         "color": station_lock.get("color"),
+        "beautyScore": _num(station_lock.get("beautyScore")),
+        "clearSkyUncappedScore": _num(m.get("clearSkyUncappedScore")),
         "highCloud": _num(w.get("cloudHigh")),
         "midCloud": _num(w.get("cloudMid")),
         "lowCloud": _num(w.get("cloudLow")),
@@ -681,7 +710,38 @@ def build_station_verification_record(station, frames, session, date_str, anchor
             v["verdictPeak"] = verdict
             v["verdictPeakBadge"] = badge
 
+    add_dual_score_verdicts(record, aggregate_fire_cloud_scores(frames, session))
     return record
+
+
+def peak_verdict(predicted, peak_score):
+    if predicted is None or peak_score is None:
+        return {}
+    err = abs(predicted - peak_score)
+    verdict, badge = verdict_for_error(err)
+    return {"predicted": predicted, "errorPeakAbsolute": err, "verdictPeak": verdict, "verdictPeakBadge": badge}
+
+
+def add_dual_score_verdicts(record, fire_aggregate):
+    """兩個分數各自對上自己的預報，都以峰值判定：
+      fireCloud：攝影機量到的「染紅的雲」 vs 引擎分數 prediction.score (引擎本來就是
+                 火燒雲模型，晴空封頂 35 的設計也是這個定義)。
+      beauty   ：攝影機量到的暖色峰值 (既有 verification.peakScore) vs prediction.beautyScore。
+    既有的 verdictAvg/verdictPeak (引擎分數 vs 暖色分數) 保留不動，舊紀錄的比較基準不變。
+    """
+    v = record["verification"]
+    pred = record.get("prediction") or {}
+    v["fireCloud"] = {
+        "avgScore": fire_aggregate["avgScore"],
+        "peakScore": fire_aggregate["peakScore"],
+        "peakOffsetMin": fire_aggregate["peakOffsetMin"],
+        "okFrameCount": fire_aggregate["okFrameCount"],
+        "unreadableFrameCount": fire_aggregate["unreadableFrameCount"],
+        **peak_verdict(pred.get("score"), fire_aggregate["peakScore"]),
+    }
+    beauty = peak_verdict(pred.get("beautyScore"), v.get("peakScore"))
+    if beauty:
+        v["beauty"] = beauty
 
 
 def write_verification_records(report, data_dir=None):

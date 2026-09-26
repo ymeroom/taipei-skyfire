@@ -45,7 +45,17 @@ const clear = SkyFireEngine.calculate({
   type: 'sunset'
 });
 
-assert(clear.score <= 35, `完全無雲得分應 <= 35，實際得分: ${clear.score}`);
-console.log('✅ 晴空無雲防呆測試通過:', clear.score, '分');
+assert(clear.score <= 10, `完全無雲沒有可被染紅的雲，火燒雲分應 <= 10，實際得分: ${clear.score}`);
+assert.strictEqual(clear.rating.level, 'CLEAR', '晴空不能標成「陰沉沉寂」');
+assert.strictEqual(overcast.rating.level, 'OVERCAST', '厚低雲仍是陰沉');
+console.log('✅ 晴空無雲防呆測試通過:', clear.score, '分 -', clear.rating.badge);
+
+// 4. 天空美感分的輸入：不套無雲上限，但仍套厚低雲上限
+assert(clear.metrics.clearSkyUncappedScore > 35,
+  `晴空的 clearSkyUncappedScore 不該被無雲上限壓住，實際: ${clear.metrics.clearSkyUncappedScore}`);
+assert(overcast.metrics.clearSkyUncappedScore <= 15,
+  `低雲 >85% 的 clearSkyUncappedScore 仍應 <= 15，實際: ${overcast.metrics.clearSkyUncappedScore}`);
+assert.strictEqual(epic.metrics.clearSkyUncappedScore, epic.score, '有雲時兩個分數相同');
+console.log('✅ clearSkyUncappedScore 只略過無雲上限:', clear.metrics.clearSkyUncappedScore, '分');
 
 console.log('🎉 Taipei SkyFireEngine 測試案例全數 PASS!\n');

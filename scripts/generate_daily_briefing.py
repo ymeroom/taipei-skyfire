@@ -178,6 +178,44 @@ def build_ground_truth(record):
     return {**PENDING_GROUND_TRUTH, "captureStatus": v.get("status") or "no_record"}
 
 
+def _offset_label(offset):
+    return f"T{offset:+d}" if offset is not None else "T"
+
+
+def dual_score(block, peak, avg, offset):
+    """火燒雲分或天空美感分的一格：預報、實測峰值/平均、峰值判定。
+    block 是 verification.fireCloud / verification.beauty (可能缺)。"""
+    block = block or {}
+    verdict = block.get("verdictPeak")
+    return {
+        "predicted": block.get("predicted"),
+        "peakScore": peak,
+        "avgScore": avg,
+        "peakOffsetMin": offset,
+        "verdict": verdict or "PENDING",
+        "verdictBadge": block.get("verdictPeakBadge") or "⏳ 無法比對",
+        "color": VERDICT_COLORS.get(verdict, "#94A3B8"),
+    }
+
+
+def build_dual_scores(record):
+    """回傳 {"fireCloud": {...}, "beauty": {...}}；紀錄沒有火燒雲實測 (舊紀錄) 時回傳 None，
+    日報維持舊版面。美感分實測就是既有的暖色 avgScore/peakScore。"""
+    v = (record or {}).get("verification") or {}
+    fc = v.get("fireCloud")
+    if not fc:
+        return None
+    pred = (record or {}).get("prediction") or {}
+    beauty = dict(v.get("beauty") or {})
+    beauty.setdefault("predicted", pred.get("beautyScore"))
+    fire = dict(fc)
+    fire.setdefault("predicted", pred.get("score"))
+    return {
+        "fireCloud": dual_score(fire, fc.get("peakScore"), fc.get("avgScore"), fc.get("peakOffsetMin")),
+        "beauty": dual_score(beauty, v.get("peakScore"), v.get("avgScore"), v.get("peakOffsetMin")),
+    }
+
+
 def is_verified(ground_truth):
     return ground_truth.get("verdict") not in (None, "PENDING")
 
@@ -224,7 +262,7 @@ def build_station_rows(station_records):
             if pred.get("lowCloud") is not None:
                 forecast += f"（低雲 {pred['lowCloud']}%）"
 
-        rows.append({
+        row = {
             "name": meta.get("name") or r.get("source") or sid or "官方直播影格",
             "icon": meta.get("icon") or "📹",
             "tag": meta.get("tag") or "官方 4K 直播・DVR 回溯精確影格",
@@ -234,7 +272,11 @@ def build_station_rows(station_records):
             "forecast": forecast,
             "verdict": verdict,
             "verdictColor": color,
-        })
+        }
+        dual = build_dual_scores(r)
+        if dual:
+            row.update(dual)
+        rows.append(row)
     return rows
 
 
@@ -295,6 +337,10 @@ def build_summary_analysis(prediction, ground_truth):
     else:
         performance = "本場實測影格擷取失敗或找不到對應鎖定預測，暫無模型誤差判定。"
 
+    if ground_truth.get("fireCloud"):
+        performance = (_dual_sentence("🔥 火燒雲", ground_truth["fireCloud"])
+                       + _dual_sentence("🌅 天空美感", ground_truth["beauty"]))
+
     return {"atmosphericReason": atmospheric, "modelPerformance": performance}
 
 
@@ -313,6 +359,10 @@ def generate_briefing_obj(records, locked, session, date_str, published_at=None)
 
     prediction = build_prediction(primary, locked)
     ground_truth = build_ground_truth(primary)
+    dual = build_dual_scores(primary)
+    if dual:
+        ground_truth.update(dual)
+        prediction["beautyScore"] = dual["beauty"]["predicted"]
 
     return {
         "id": f"report-{date_str}-{session}",
@@ -328,6 +378,18 @@ def generate_briefing_obj(records, locked, session, date_str, published_at=None)
         "stationSummary": build_station_summary(recs),
         "summaryAnalysis": build_summary_analysis(prediction, ground_truth),
     }
+
+
+def _dual_sentence(label, d):
+    if d.get("peakScore") is None:
+        return f"{label}：本場無實測。"
+    # 整場都是最低分 5 分時，峰值出現在哪個時刻沒有意義
+    at = f"{_offset_label(d.get('peakOffsetMin'))}，" if d["peakScore"] > 5 else ""
+    avg = f"平均 {d['avgScore']} 分、" if d.get("avgScore") is not None else ""
+    if d.get("predicted") is None:
+        return f"{label}：實測{avg}峰值 {d['peakScore']} 分{f'（{at[:-1]}）' if at else ''}，本場無預報可比對。"
+    err = abs(d["predicted"] - d["peakScore"])
+    return f"{label}：預報 {d['predicted']} 分，實測{avg}峰值 {d['peakScore']} 分（{at}峰值誤差 {err} 分）。"
 
 
 def generate_briefing(session_override=None):

@@ -256,7 +256,127 @@ def classify_score(score):
         return "OVERCAST", "陰沉沉寂"
 
 
-def analyze_image_optics(image_path, capture_time=None, twilight_window=None, rain_series=None, station_coords=None):
+# ---------------------------------------------------------------------------
+# 火燒雲分：只算「被染紅的雲」，晴空的平滑暮光漸層不算。
+#
+# 下面 analyze_image_optics 的 score 量的是天空暖色面積 (現在的定義是「天空美感
+# 分」)，晴天日落後那一圈橘色地平線就能拿到 90-100 分，分不出有沒有雲被照亮。
+# 這裡改看「紋理」：晴空漸層沿著水平方向幾乎不變，雲會在水平方向造成亮度起伏
+# 與邊緣。紋理 ∧ 暖色 ∧ 夠亮 = 被染紅的雲；暗的雲剪影不算 (沒有被照亮)。
+# 門檻用 2026-09-13~26 的 888 張縮時影格逐張目視校對過：晴天傍晚落在 0-7%，
+# 9/13 淡水、9/16 貓空這種整片雲燒起來的畫面落在 22-27%。
+# ---------------------------------------------------------------------------
+FIRE_CLOUD_WIDTH = 320
+FIRE_CLOUD_DEFAULT_ROI_BOTTOM = 0.65
+FIRE_CLOUD_DARK_V = 0.18          # 低於此亮度視為地面／建築／暗雲剪影，不算天空
+FIRE_CLOUD_EDGE_ERODE_PX = 3      # 天空邊界內縮，避開山稜線、天際線與天空交界的強邊緣
+FIRE_CLOUD_DEVIATION = 0.07       # 與同列水平平滑背景的亮度差
+FIRE_CLOUD_HGRAD = 0.30           # 水平 Sobel 強度
+FIRE_CLOUD_SCORE_PER_PCT = 3.5    # 染紅雲面積 % → 分數 (22-27% ≈ 77-95 分)
+MONOCHROME_MEDIAN_SAT = 0.06      # 整張中位數飽和度低於此 = 黑白夜視模式，無法判讀顏色
+
+
+def _hsv_arrays(px):
+    r, g, b = px[..., 0], px[..., 1], px[..., 2]
+    mx = px.max(axis=-1)
+    mn = px.min(axis=-1)
+    d = mx - mn + 1e-7
+    s = np.where(mx == 0, 0, d / (mx + 1e-7))
+    h = np.zeros_like(r)
+    rm = mx == r
+    gm = (mx == g) & ~rm
+    bm = ~rm & ~gm
+    h[rm] = (60 * ((g[rm] - b[rm]) / d[rm]) + 360) % 360
+    h[gm] = (60 * ((b[gm] - r[gm]) / d[gm]) + 120) % 360
+    h[bm] = (60 * ((r[bm] - g[bm]) / d[bm]) + 240) % 360
+    return h, s, mx
+
+
+def _grow_within(seed, mask):
+    """從 seed 出發、只在 mask 內做 4 鄰接擴張，直到不再變化 (不依賴 scipy)。"""
+    reach = seed & mask
+    while True:
+        grown = reach.copy()
+        grown[1:] |= reach[:-1]
+        grown[:-1] |= reach[1:]
+        grown[:, 1:] |= reach[:, :-1]
+        grown[:, :-1] |= reach[:, 1:]
+        grown &= mask
+        if np.array_equal(grown, reach):
+            return reach
+        reach = grown
+
+
+def _erode(mask, px):
+    out = mask.copy()
+    for _ in range(px):
+        e = out.copy()
+        e[1:] &= out[:-1]
+        e[:-1] &= out[1:]
+        e[:, 1:] &= out[:, :-1]
+        e[:, :-1] &= out[:, 1:]
+        out = e
+    return out
+
+
+def _box_blur(a, ry, rx):
+    def blur1(x, r, axis):
+        pad = [(0, 0)] * x.ndim
+        pad[axis] = (r + 1, r)
+        c = np.cumsum(np.pad(x, pad, mode="edge"), axis=axis)
+        n = c.shape[axis]
+        hi = np.take(c, range(2 * r + 1, n), axis=axis)
+        lo = np.take(c, range(0, n - 2 * r - 1), axis=axis)
+        return (hi - lo) / (2 * r + 1)
+    return blur1(blur1(a, ry, 0), rx, 1)
+
+
+def analyze_fire_cloud(img, sky_roi_bottom=None):
+    """回傳 {"score", "litCloudPct", "readable", "reason", "skyRoiBottom"}。
+
+    img: PIL RGB 影像。sky_roi_bottom: 該機位天空區域底緣比例 (js/stations.js
+    的 skyRoiBottom)，未提供則用 0.65。無法判讀 (黑白夜視) 時 score 為 None ——
+    不給 0 分冒充「沒有火燒雲」。
+    """
+    roi_bottom = sky_roi_bottom if sky_roi_bottom else FIRE_CLOUD_DEFAULT_ROI_BOTTOM
+    w, h0 = img.size
+    small = img.resize((FIRE_CLOUD_WIDTH, max(1, int(h0 * FIRE_CLOUD_WIDTH / w))), Image.BILINEAR)
+    full = np.asarray(small, dtype=np.float32) / 255.0
+    base = {"skyRoiBottom": roi_bottom}
+
+    _, full_s, _ = _hsv_arrays(full)
+    if float(np.median(full_s)) < MONOCHROME_MEDIAN_SAT:
+        return {**base, "score": None, "litCloudPct": None, "readable": False,
+                "reason": "黑白夜視畫面，無法判讀顏色"}
+
+    px = full[:max(1, int(full.shape[0] * roi_bottom))]
+    h, s, v = _hsv_arrays(px)
+
+    bright = v >= FIRE_CLOUD_DARK_V
+    seed = np.zeros_like(bright)
+    seed[0] = True
+    sky = _grow_within(seed, bright)
+    inner = _erode(sky, FIRE_CLOUD_EDGE_ERODE_PX)
+
+    weight = sky.astype(np.float32)
+    background = _box_blur(np.where(sky, v, 0.0), 2, 40) / (_box_blur(weight, 2, 40) + 1e-6)
+    p = np.pad(v, 1, mode="edge")
+    hgrad = np.abs((p[:-2, 2:] + 2 * p[1:-1, 2:] + p[2:, 2:]) - (p[:-2, :-2] + 2 * p[1:-1, :-2] + p[2:, :-2]))
+    textured = inner & ((np.abs(v - background) > FIRE_CLOUD_DEVIATION) | (hgrad > FIRE_CLOUD_HGRAD))
+
+    warm = ((h <= 50) | (h >= 300)) & (s >= 0.30) & (v >= 0.30)
+    lit_pct = 100.0 * float((textured & warm).sum()) / v.size
+    score = int(np.clip(round(lit_pct * FIRE_CLOUD_SCORE_PER_PCT), 5, 100))
+    return {**base, "score": score, "litCloudPct": round(lit_pct, 1), "readable": True, "reason": None}
+
+
+def _cap_fire_cloud(result, cap):
+    if result.get("fireCloudScore") is not None:
+        result["fireCloudScore"] = min(result["fireCloudScore"], cap)
+
+
+def analyze_image_optics(image_path, capture_time=None, twilight_window=None, rain_series=None,
+                         station_coords=None, sky_roi_bottom=None):
     """分析天空區域的火燒雲光學特徵"""
     if not os.path.exists(image_path) or Image is None:
         return {
@@ -270,6 +390,7 @@ def analyze_image_optics(image_path, capture_time=None, twilight_window=None, ra
 
     try:
         img = Image.open(image_path).convert('RGB')
+        img_full = img
         # 縮放至合適尺寸加速運算 (寬 640px)
         w, h = img.size
         target_w = 640
@@ -346,7 +467,15 @@ def analyze_image_optics(image_path, capture_time=None, twilight_window=None, ra
             "avg_brightness_pct": round(avg_warm_brightness * 100, 1),
             "is_simulated": False
         }
+        fire = analyze_fire_cloud(img_full, sky_roi_bottom)
+        result["fireCloudScore"] = fire.pop("score")
+        result["fireCloud"] = fire
+
+        # 暮光窗外同樣封頂：夜裡雲層反射的城市燈光也是暖色、也有紋理。
+        # 雨天閘門不套：它排除的是濕路面／車燈反光，火燒雲分只看天空範圍。
         result = apply_night_gate(result, capture_time, twilight_window)
+        if result["nightGate"].get("applied"):
+            _cap_fire_cloud(result, 12)
 
         if capture_time is not None:
             coords = station_coords
