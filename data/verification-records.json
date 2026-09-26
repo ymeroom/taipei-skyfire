@@ -49,7 +49,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 1,
       "verdictPeak": "EXACT_MATCH",
-      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 30,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-26-sunset-2100"
+      }
     }
   },
   {
@@ -102,7 +114,19 @@
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 61,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 6.0,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 5,
+        "errorPeakAbsolute": 0,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+        "backfilledFrom": "2026-09-26-sunset-2100"
+      }
     }
   },
   {
@@ -155,7 +179,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 61,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.3,
+        "peakScore": 8,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 27,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-26-sunset-2100"
+      }
     }
   },
   {
@@ -208,7 +244,19 @@
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 65,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 30,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-26-sunset-2100"
+      }
     }
   },
   {
@@ -261,7 +309,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 13,
       "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "fireCloud": {
+        "avgScore": 8.9,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 30,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-26-sunset-2100"
+      }
     }
   },
   {
@@ -314,7 +374,19 @@
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 13,
       "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 30,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-26-sunset-2100"
+      }
     }
   },
   {
@@ -367,7 +439,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 18,
       "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "fireCloud": {
+        "avgScore": 7.2,
+        "peakScore": 5,
+        "peakOffsetMin": -40,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 30,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-26-sunrise-0900"
+      }
     }
   },
   {
@@ -420,7 +504,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 1,
       "verdictPeak": "EXACT_MATCH",
-      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": -10,
+        "okFrameCount": 6,
+        "unreadableFrameCount": 3,
+        "predicted": 35,
+        "errorPeakAbsolute": 30,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-26-sunrise-0900"
+      }
     }
   },
   {
@@ -473,7 +569,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 30,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 14.2,
+        "peakScore": 24,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 11,
+        "verdictPeak": "SLIGHT_DEVIATION",
+        "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "backfilledFrom": "2026-09-25-sunset-2100"
+      }
     }
   },
   {
@@ -526,7 +634,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 43,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 6.7,
+        "peakScore": 14,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 21,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-25-sunset-2100"
+      }
     }
   },
   {
@@ -579,7 +699,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 59,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 30,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-25-sunset-2100"
+      }
     }
   },
   {
@@ -632,7 +764,19 @@
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 65,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 30,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-25-sunset-2100"
+      }
     }
   },
   {
@@ -685,7 +829,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 3,
       "verdictPeak": "EXACT_MATCH",
-      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "fireCloud": {
+        "avgScore": 9.9,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 30,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-25-sunset-2100"
+      }
     }
   },
   {
@@ -738,7 +894,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 15,
       "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 30,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-25-sunset-2100"
+      }
     }
   },
   {
@@ -791,7 +959,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 8,
       "verdictPeak": "EXACT_MATCH",
-      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "fireCloud": {
+        "avgScore": 9.1,
+        "peakScore": 5,
+        "peakOffsetMin": -40,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 26,
+        "errorPeakAbsolute": 21,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-25-sunrise-0900"
+      }
     }
   },
   {
@@ -844,7 +1024,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 18,
       "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 5,
+        "unreadableFrameCount": 4,
+        "predicted": 34,
+        "errorPeakAbsolute": 29,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-25-sunrise-0900"
+      }
     }
   },
   {
@@ -897,7 +1089,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 65,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 14.2,
+        "peakScore": 40,
+        "peakOffsetMin": 20,
+        "okFrameCount": 5,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 5,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+        "backfilledFrom": "2026-09-24-sunset-2100"
+      }
     }
   },
   {
@@ -945,7 +1149,15 @@
       "peakSide": "post-sunset",
       "verifiedAt": "2026-09-24T13:01:18.599799+00:00",
       "status": "capture_unavailable",
-      "reason": "9 張影格全數擷取失敗，本場次無實測資料"
+      "reason": "9 張影格全數擷取失敗，本場次無實測資料",
+      "fireCloud": {
+        "avgScore": null,
+        "peakScore": null,
+        "peakOffsetMin": null,
+        "okFrameCount": 0,
+        "unreadableFrameCount": 0,
+        "backfilledFrom": "2026-09-24-sunset-2100"
+      }
     }
   },
   {
@@ -998,7 +1210,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 52,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 10,
+        "okFrameCount": 4,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 30,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-24-sunset-2100"
+      }
     }
   },
   {
@@ -1051,7 +1275,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 60,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 5,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 30,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-24-sunset-2100"
+      }
     }
   },
   {
@@ -1104,7 +1340,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 29,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 7.8,
+        "peakScore": 13,
+        "peakOffsetMin": 20,
+        "okFrameCount": 5,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 22,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-24-sunset-2100"
+      }
     }
   },
   {
@@ -1157,7 +1405,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 14,
       "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 7,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 30,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-24-sunset-2100"
+      }
     }
   },
   {
@@ -1210,7 +1470,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 7,
       "verdictPeak": "EXACT_MATCH",
-      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "fireCloud": {
+        "avgScore": 7.1,
+        "peakScore": 10,
+        "peakOffsetMin": -20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 32,
+        "errorPeakAbsolute": 22,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-24-sunrise-0900"
+      }
     }
   },
   {
@@ -1263,7 +1535,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 12,
       "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": -10,
+        "okFrameCount": 6,
+        "unreadableFrameCount": 3,
+        "predicted": 35,
+        "errorPeakAbsolute": 30,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-24-sunrise-0900"
+      }
     }
   },
   {
@@ -1316,7 +1600,19 @@
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 63,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 8.4,
+        "peakScore": 19,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 16,
+        "verdictPeak": "SLIGHT_DEVIATION",
+        "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "backfilledFrom": "2026-09-23-sunset-2100"
+      }
     }
   },
   {
@@ -1369,7 +1665,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 1,
       "verdictPeak": "EXACT_MATCH",
-      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "fireCloud": {
+        "avgScore": 5.8,
+        "peakScore": 7,
+        "peakOffsetMin": 10,
+        "okFrameCount": 5,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 28,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-23-sunset-2100"
+      }
     }
   },
   {
@@ -1422,7 +1730,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 53,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 30,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-23-sunset-2100"
+      }
     }
   },
   {
@@ -1475,7 +1795,19 @@
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 52,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.7,
+        "peakScore": 6,
+        "peakOffsetMin": 30,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 29,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-23-sunset-2100"
+      }
     }
   },
   {
@@ -1528,7 +1860,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 19,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 11.0,
+        "peakScore": 12,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 23,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-23-sunset-2100"
+      }
     }
   },
   {
@@ -1581,7 +1925,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 3,
       "verdictPeak": "EXACT_MATCH",
-      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "fireCloud": {
+        "avgScore": 5.4,
+        "peakScore": 7,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 28,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-23-sunset-2100"
+      }
     }
   },
   {
@@ -1634,7 +1990,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 41,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 5,
+        "unreadableFrameCount": 0,
+        "predicted": 46,
+        "errorPeakAbsolute": 41,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-23-sunrise-0900"
+      }
     }
   },
   {
@@ -1682,7 +2050,15 @@
       "peakSide": "pre-sunrise",
       "verifiedAt": "2026-09-23T01:00:57.007423+00:00",
       "status": "capture_unavailable",
-      "reason": "9 張影格全數擷取失敗，本場次無實測資料"
+      "reason": "9 張影格全數擷取失敗，本場次無實測資料",
+      "fireCloud": {
+        "avgScore": null,
+        "peakScore": null,
+        "peakOffsetMin": null,
+        "okFrameCount": 0,
+        "unreadableFrameCount": 0,
+        "backfilledFrom": "2026-09-23-sunrise-0900"
+      }
     }
   },
   {
@@ -1735,7 +2111,19 @@
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 65,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 30,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-22-sunset-2100"
+      }
     }
   },
   {
@@ -1788,7 +2176,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 5,
       "verdictPeak": "EXACT_MATCH",
-      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "fireCloud": {
+        "avgScore": 18.1,
+        "peakScore": 36,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 1,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+        "backfilledFrom": "2026-09-22-sunset-2100"
+      }
     }
   },
   {
@@ -1841,7 +2241,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 55,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.9,
+        "peakScore": 9,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 26,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-22-sunset-2100"
+      }
     }
   },
   {
@@ -1894,7 +2306,19 @@
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 53,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 7.6,
+        "peakScore": 12,
+        "peakOffsetMin": 30,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 23,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-22-sunset-2100"
+      }
     }
   },
   {
@@ -1947,7 +2371,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 16,
       "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "fireCloud": {
+        "avgScore": 10.8,
+        "peakScore": 12,
+        "peakOffsetMin": 30,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 23,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-22-sunset-2100"
+      }
     }
   },
   {
@@ -2000,7 +2436,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 14,
       "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "fireCloud": {
+        "avgScore": 6.2,
+        "peakScore": 16,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 19,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-22-sunset-2100"
+      }
     }
   },
   {
@@ -2053,7 +2501,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 0,
       "verdictPeak": "EXACT_MATCH",
-      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "fireCloud": {
+        "avgScore": 6.0,
+        "peakScore": 11,
+        "peakOffsetMin": -30,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 32,
+        "errorPeakAbsolute": 21,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-22-sunrise-0900"
+      }
     }
   },
   {
@@ -2103,7 +2563,15 @@
       "status": "verified_completed",
       "errorAvgAbsolute": 3.0,
       "verdictAvg": "EXACT_MATCH",
-      "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": null,
+        "peakOffsetMin": null,
+        "okFrameCount": 2,
+        "unreadableFrameCount": 0,
+        "backfilledFrom": "2026-09-22-sunrise-0900"
+      }
     }
   },
   {
@@ -2156,7 +2624,19 @@
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 65,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 8.3,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 30,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-21-sunset-2100"
+      }
     }
   },
   {
@@ -2209,7 +2689,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 37,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 18.6,
+        "peakScore": 29,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 6,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+        "backfilledFrom": "2026-09-21-sunset-2100"
+      }
     }
   },
   {
@@ -2262,7 +2754,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 55,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 30,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-21-sunset-2100"
+      }
     }
   },
   {
@@ -2315,7 +2819,19 @@
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 60,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 30,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-21-sunset-2100"
+      }
     }
   },
   {
@@ -2368,7 +2884,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 27,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 12.9,
+        "peakScore": 12,
+        "peakOffsetMin": 30,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 23,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-21-sunset-2100"
+      }
     }
   },
   {
@@ -2421,7 +2949,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 15,
       "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "fireCloud": {
+        "avgScore": 6.9,
+        "peakScore": 17,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 18,
+        "verdictPeak": "SLIGHT_DEVIATION",
+        "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "backfilledFrom": "2026-09-21-sunset-2100"
+      }
     }
   },
   {
@@ -2474,7 +3014,19 @@
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 5,
       "verdictPeak": "EXACT_MATCH",
-      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": -40,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 36,
+        "errorPeakAbsolute": 31,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-21-sunrise-0900"
+      }
     }
   },
   {
@@ -2527,7 +3079,15 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 4,
       "verdictPeak": "EXACT_MATCH",
-      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": null,
+        "peakOffsetMin": null,
+        "okFrameCount": 4,
+        "unreadableFrameCount": 3,
+        "backfilledFrom": "2026-09-21-sunrise-0900"
+      }
     }
   },
   {
@@ -2580,7 +3140,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 62,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 12.0,
+        "peakScore": 16,
+        "peakOffsetMin": 10,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 19,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-20-sunset-2100"
+      }
     }
   },
   {
@@ -2633,7 +3205,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 4,
       "verdictPeak": "EXACT_MATCH",
-      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "fireCloud": {
+        "avgScore": 7.4,
+        "peakScore": 16,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 19,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-20-sunset-2100"
+      }
     }
   },
   {
@@ -2686,7 +3270,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 48,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.8,
+        "peakScore": 12,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 23,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-20-sunset-2100"
+      }
     }
   },
   {
@@ -2739,7 +3335,19 @@
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 59,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 7.8,
+        "peakScore": 25,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 10,
+        "verdictPeak": "SLIGHT_DEVIATION",
+        "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "backfilledFrom": "2026-09-20-sunset-2100"
+      }
     }
   },
   {
@@ -2792,7 +3400,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 20,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 12.1,
+        "peakScore": 16,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 19,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-20-sunset-2100"
+      }
     }
   },
   {
@@ -2845,7 +3465,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 0,
       "verdictPeak": "EXACT_MATCH",
-      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "fireCloud": {
+        "avgScore": 7.2,
+        "peakScore": 13,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 22,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-20-sunset-2100"
+      }
     }
   },
   {
@@ -2898,7 +3530,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 10,
       "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": -40,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 32,
+        "errorPeakAbsolute": 27,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-20-sunrise-0900"
+      }
     }
   },
   {
@@ -2951,7 +3595,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 24,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 6.0,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 5,
+        "unreadableFrameCount": 4,
+        "predicted": 5,
+        "errorPeakAbsolute": 0,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+        "backfilledFrom": "2026-09-20-sunrise-0900"
+      }
     }
   },
   {
@@ -3004,7 +3660,19 @@
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 65,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 30,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-19-sunset-2100"
+      }
     }
   },
   {
@@ -3057,7 +3725,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 18,
       "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "fireCloud": {
+        "avgScore": 5.1,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 30,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-19-sunset-2100"
+      }
     }
   },
   {
@@ -3110,7 +3790,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 44,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 30,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-19-sunset-2100"
+      }
     }
   },
   {
@@ -3163,7 +3855,19 @@
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 60,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 6.9,
+        "peakScore": 13,
+        "peakOffsetMin": 20,
+        "okFrameCount": 8,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 22,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-19-sunset-2100"
+      }
     }
   },
   {
@@ -3216,7 +3920,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 28,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 11.7,
+        "peakScore": 12,
+        "peakOffsetMin": 30,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 23,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-19-sunset-2100"
+      }
     }
   },
   {
@@ -3269,7 +3985,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 8,
       "verdictPeak": "EXACT_MATCH",
-      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "fireCloud": {
+        "avgScore": 5.8,
+        "peakScore": 9,
+        "peakOffsetMin": 30,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 26,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-19-sunset-2100"
+      }
     }
   },
   {
@@ -3322,7 +4050,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 2,
       "verdictPeak": "EXACT_MATCH",
-      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": -40,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 30,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-19-sunrise-0900"
+      }
     }
   },
   {
@@ -3375,7 +4115,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 1,
       "verdictPeak": "EXACT_MATCH",
-      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": -10,
+        "okFrameCount": 6,
+        "unreadableFrameCount": 3,
+        "predicted": 19,
+        "errorPeakAbsolute": 14,
+        "verdictPeak": "SLIGHT_DEVIATION",
+        "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "backfilledFrom": "2026-09-19-sunrise-0900"
+      }
     }
   },
   {
@@ -3428,7 +4180,19 @@
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 29,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 14.3,
+        "peakScore": 17,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 18,
+        "verdictPeak": "SLIGHT_DEVIATION",
+        "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "backfilledFrom": "2026-09-18-sunset-2100"
+      }
     }
   },
   {
@@ -3476,7 +4240,15 @@
       "peakSide": "post-sunset",
       "verifiedAt": "2026-09-18T13:01:27.555103+00:00",
       "status": "capture_unavailable",
-      "reason": "9 張影格全數擷取失敗，本場次無實測資料"
+      "reason": "9 張影格全數擷取失敗，本場次無實測資料",
+      "fireCloud": {
+        "avgScore": null,
+        "peakScore": null,
+        "peakOffsetMin": null,
+        "okFrameCount": 0,
+        "unreadableFrameCount": 0,
+        "backfilledFrom": "2026-09-18-sunset-2100"
+      }
     }
   },
   {
@@ -3529,7 +4301,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 49,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 30,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-18-sunset-2100"
+      }
     }
   },
   {
@@ -3582,7 +4366,19 @@
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 56,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.1,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 30,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-18-sunset-2100"
+      }
     }
   },
   {
@@ -3635,7 +4431,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 6,
       "verdictPeak": "EXACT_MATCH",
-      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "fireCloud": {
+        "avgScore": 16.1,
+        "peakScore": 17,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 18,
+        "verdictPeak": "SLIGHT_DEVIATION",
+        "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "backfilledFrom": "2026-09-18-sunset-2100"
+      }
     }
   },
   {
@@ -3688,7 +4496,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 0,
       "verdictPeak": "EXACT_MATCH",
-      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "fireCloud": {
+        "avgScore": 6.1,
+        "peakScore": 9,
+        "peakOffsetMin": 30,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 26,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-18-sunset-2100"
+      }
     }
   },
   {
@@ -3741,7 +4561,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 15,
       "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": -40,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 5,
+        "errorPeakAbsolute": 0,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+        "backfilledFrom": "2026-09-18-sunrise-0900"
+      }
     }
   },
   {
@@ -3794,7 +4626,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 24,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 5,
+        "unreadableFrameCount": 4,
+        "predicted": 5,
+        "errorPeakAbsolute": 0,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+        "backfilledFrom": "2026-09-18-sunrise-0900"
+      }
     }
   },
   {
@@ -3842,7 +4686,15 @@
       "peakSide": "post-sunset",
       "verifiedAt": "2026-09-17T13:01:53.973021+00:00",
       "status": "capture_unavailable",
-      "reason": "9 張影格全數擷取失敗，本場次無實測資料"
+      "reason": "9 張影格全數擷取失敗，本場次無實測資料",
+      "fireCloud": {
+        "avgScore": null,
+        "peakScore": null,
+        "peakOffsetMin": null,
+        "okFrameCount": 0,
+        "unreadableFrameCount": 0,
+        "backfilledFrom": "2026-09-17-sunset-2100"
+      }
     }
   },
   {
@@ -3895,7 +4747,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 12,
       "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 10,
+        "okFrameCount": 4,
+        "unreadableFrameCount": 0,
+        "predicted": 5,
+        "errorPeakAbsolute": 0,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+        "backfilledFrom": "2026-09-17-sunset-2100"
+      }
     }
   },
   {
@@ -3948,7 +4812,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 51,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 16.7,
+        "peakScore": 40,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 5,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+        "backfilledFrom": "2026-09-17-sunset-2100"
+      }
     }
   },
   {
@@ -4001,7 +4877,19 @@
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 49,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 20.1,
+        "peakScore": 33,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 2,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+        "backfilledFrom": "2026-09-17-sunset-2100"
+      }
     }
   },
   {
@@ -4049,7 +4937,15 @@
       "peakSide": "post-sunset",
       "verifiedAt": "2026-09-17T13:01:53.971732+00:00",
       "status": "capture_unavailable",
-      "reason": "9 張影格全數擷取失敗，本場次無實測資料"
+      "reason": "9 張影格全數擷取失敗，本場次無實測資料",
+      "fireCloud": {
+        "avgScore": null,
+        "peakScore": null,
+        "peakOffsetMin": null,
+        "okFrameCount": 0,
+        "unreadableFrameCount": 0,
+        "backfilledFrom": "2026-09-17-sunset-2100"
+      }
     }
   },
   {
@@ -4097,7 +4993,15 @@
       "peakSide": "post-sunset",
       "verifiedAt": "2026-09-17T13:01:53.971373+00:00",
       "status": "capture_unavailable",
-      "reason": "9 張影格全數擷取失敗，本場次無實測資料"
+      "reason": "9 張影格全數擷取失敗，本場次無實測資料",
+      "fireCloud": {
+        "avgScore": null,
+        "peakScore": null,
+        "peakOffsetMin": null,
+        "okFrameCount": 0,
+        "unreadableFrameCount": 0,
+        "backfilledFrom": "2026-09-17-sunset-2100"
+      }
     }
   },
   {
@@ -4150,7 +5054,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 37,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 7.2,
+        "peakScore": 12,
+        "peakOffsetMin": -30,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 35,
+        "errorPeakAbsolute": 23,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-17-sunrise-0900"
+      }
     }
   },
   {
@@ -4203,7 +5119,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 12,
       "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "fireCloud": {
+        "avgScore": 6.4,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 5,
+        "unreadableFrameCount": 4,
+        "predicted": 31,
+        "errorPeakAbsolute": 26,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-17-sunrise-0900"
+      }
     }
   },
   {
@@ -4237,7 +5165,15 @@
       "peakSide": "post-sunset",
       "verifiedAt": "2026-09-16T13:01:34.395280+00:00",
       "status": "no_locked_prediction",
-      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差"
+      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差",
+      "fireCloud": {
+        "avgScore": 30.4,
+        "peakScore": 97,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "backfilledFrom": "2026-09-16-sunset-2100"
+      }
     }
   },
   {
@@ -4271,7 +5207,15 @@
       "peakSide": "post-sunset",
       "verifiedAt": "2026-09-16T13:01:34.394834+00:00",
       "status": "no_locked_prediction",
-      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差"
+      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差",
+      "fireCloud": {
+        "avgScore": 14.2,
+        "peakScore": 33,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "backfilledFrom": "2026-09-16-sunset-2100"
+      }
     }
   },
   {
@@ -4305,7 +5249,15 @@
       "peakSide": "post-sunset",
       "verifiedAt": "2026-09-16T13:01:34.394388+00:00",
       "status": "no_locked_prediction",
-      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差"
+      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差",
+      "fireCloud": {
+        "avgScore": 5.8,
+        "peakScore": 8,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "backfilledFrom": "2026-09-16-sunset-2100"
+      }
     }
   },
   {
@@ -4339,7 +5291,15 @@
       "peakSide": "post-sunset",
       "verifiedAt": "2026-09-16T13:01:34.393956+00:00",
       "status": "no_locked_prediction",
-      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差"
+      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差",
+      "fireCloud": {
+        "avgScore": 7.0,
+        "peakScore": 12,
+        "peakOffsetMin": 30,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "backfilledFrom": "2026-09-16-sunset-2100"
+      }
     }
   },
   {
@@ -4373,7 +5333,15 @@
       "peakSide": "post-sunset",
       "verifiedAt": "2026-09-16T13:01:34.393423+00:00",
       "status": "no_locked_prediction",
-      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差"
+      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差",
+      "fireCloud": {
+        "avgScore": 13.2,
+        "peakScore": 17,
+        "peakOffsetMin": 10,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "backfilledFrom": "2026-09-16-sunset-2100"
+      }
     }
   },
   {
@@ -4407,7 +5375,15 @@
       "peakSide": "post-sunset",
       "verifiedAt": "2026-09-16T13:01:34.392835+00:00",
       "status": "no_locked_prediction",
-      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差"
+      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差",
+      "fireCloud": {
+        "avgScore": 7.2,
+        "peakScore": 15,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "backfilledFrom": "2026-09-16-sunset-2100"
+      }
     }
   },
   {
@@ -4460,7 +5436,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 19,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.1,
+        "peakScore": 5,
+        "peakOffsetMin": -40,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 5,
+        "errorPeakAbsolute": 0,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+        "backfilledFrom": "2026-09-16-sunrise-0900"
+      }
     }
   },
   {
@@ -4508,7 +5496,15 @@
       "peakSide": "pre-sunrise",
       "verifiedAt": "2026-09-16T01:01:03.256068+00:00",
       "status": "capture_unavailable",
-      "reason": "9 張影格全數擷取失敗，本場次無實測資料"
+      "reason": "9 張影格全數擷取失敗，本場次無實測資料",
+      "fireCloud": {
+        "avgScore": null,
+        "peakScore": null,
+        "peakOffsetMin": null,
+        "okFrameCount": 0,
+        "unreadableFrameCount": 0,
+        "backfilledFrom": "2026-09-16-sunrise-0900"
+      }
     }
   },
   {
@@ -4542,7 +5538,15 @@
       "peakSide": "post-sunset",
       "verifiedAt": "2026-09-15T13:01:29.595681+00:00",
       "status": "no_locked_prediction",
-      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差"
+      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差",
+      "fireCloud": {
+        "avgScore": 18.3,
+        "peakScore": 9,
+        "peakOffsetMin": 40,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "backfilledFrom": "2026-09-15-sunset-2100"
+      }
     }
   },
   {
@@ -4576,7 +5580,15 @@
       "peakSide": "post-sunset",
       "verifiedAt": "2026-09-15T13:01:29.594988+00:00",
       "status": "no_locked_prediction",
-      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差"
+      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 30,
+        "okFrameCount": 2,
+        "unreadableFrameCount": 0,
+        "backfilledFrom": "2026-09-15-sunset-2100"
+      }
     }
   },
   {
@@ -4610,7 +5622,15 @@
       "peakSide": "post-sunset",
       "verifiedAt": "2026-09-15T13:01:29.594435+00:00",
       "status": "no_locked_prediction",
-      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差"
+      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差",
+      "fireCloud": {
+        "avgScore": 6.0,
+        "peakScore": 12,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "backfilledFrom": "2026-09-15-sunset-2100"
+      }
     }
   },
   {
@@ -4644,7 +5664,15 @@
       "peakSide": "post-sunset",
       "verifiedAt": "2026-09-15T13:01:29.593856+00:00",
       "status": "no_locked_prediction",
-      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差"
+      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差",
+      "fireCloud": {
+        "avgScore": 7.9,
+        "peakScore": 12,
+        "peakOffsetMin": 30,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "backfilledFrom": "2026-09-15-sunset-2100"
+      }
     }
   },
   {
@@ -4678,7 +5706,15 @@
       "peakSide": "post-sunset",
       "verifiedAt": "2026-09-15T13:01:29.593250+00:00",
       "status": "no_locked_prediction",
-      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差"
+      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差",
+      "fireCloud": {
+        "avgScore": 17.3,
+        "peakScore": 43,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "backfilledFrom": "2026-09-15-sunset-2100"
+      }
     }
   },
   {
@@ -4712,7 +5748,15 @@
       "peakSide": "post-sunset",
       "verifiedAt": "2026-09-15T13:01:29.592582+00:00",
       "status": "no_locked_prediction",
-      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差"
+      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差",
+      "fireCloud": {
+        "avgScore": 6.7,
+        "peakScore": 19,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "backfilledFrom": "2026-09-15-sunset-2100"
+      }
     }
   },
   {
@@ -4765,7 +5809,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 19,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": -40,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 5,
+        "errorPeakAbsolute": 0,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+        "backfilledFrom": "2026-09-15-sunrise-0900"
+      }
     }
   },
   {
@@ -4818,7 +5874,19 @@
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 82,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 5,
+        "unreadableFrameCount": 4,
+        "predicted": 92,
+        "errorPeakAbsolute": 87,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-15-sunrise-0900"
+      }
     }
   },
   {
@@ -4871,7 +5939,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 21,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.9,
+        "peakScore": 8,
+        "peakOffsetMin": 40,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 5,
+        "errorPeakAbsolute": 3,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+        "backfilledFrom": "2026-09-14-sunset-2100"
+      }
     }
   },
   {
@@ -4924,7 +6004,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 7,
       "verdictPeak": "EXACT_MATCH",
-      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 30,
+        "okFrameCount": 2,
+        "unreadableFrameCount": 0,
+        "predicted": 5,
+        "errorPeakAbsolute": 0,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+        "backfilledFrom": "2026-09-14-sunset-2100"
+      }
     }
   },
   {
@@ -4977,7 +6069,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 37,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 5,
+        "errorPeakAbsolute": 0,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+        "backfilledFrom": "2026-09-14-sunset-2100"
+      }
     }
   },
   {
@@ -5030,7 +6134,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 43,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 8,
+        "unreadableFrameCount": 1,
+        "predicted": 5,
+        "errorPeakAbsolute": 0,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+        "backfilledFrom": "2026-09-14-sunset-2100"
+      }
     }
   },
   {
@@ -5083,7 +6199,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 23,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.7,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 5,
+        "errorPeakAbsolute": 0,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+        "backfilledFrom": "2026-09-14-sunset-2100"
+      }
     }
   },
   {
@@ -5136,7 +6264,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 16,
       "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "fireCloud": {
+        "avgScore": 5.6,
+        "peakScore": 10,
+        "peakOffsetMin": 40,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 5,
+        "errorPeakAbsolute": 5,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+        "backfilledFrom": "2026-09-14-sunset-2100"
+      }
     }
   },
   {
@@ -5189,7 +6329,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 12,
       "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "fireCloud": {
+        "avgScore": 5.4,
+        "peakScore": 5,
+        "peakOffsetMin": -40,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 30,
+        "errorPeakAbsolute": 25,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-14-sunrise-0900"
+      }
     }
   },
   {
@@ -5242,7 +6394,19 @@
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "errorPeakAbsolute": 13,
       "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 5,
+        "unreadableFrameCount": 4,
+        "predicted": 24,
+        "errorPeakAbsolute": 19,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-14-sunrise-0900"
+      }
     }
   },
   {
@@ -5295,7 +6459,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 36,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 17.0,
+        "peakScore": 43,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 64,
+        "errorPeakAbsolute": 21,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-13-sunset-2100"
+      }
     }
   },
   {
@@ -5348,7 +6524,19 @@
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 27,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 40,
+        "okFrameCount": 1,
+        "unreadableFrameCount": 0,
+        "predicted": 39,
+        "errorPeakAbsolute": 34,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-13-sunset-2100"
+      }
     }
   },
   {
@@ -5401,7 +6589,19 @@
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 12,
       "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "fireCloud": {
+        "avgScore": 9.3,
+        "peakScore": 21,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 47,
+        "errorPeakAbsolute": 26,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-13-sunset-2100"
+      }
     }
   },
   {
@@ -5454,7 +6654,19 @@
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 52,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 22.2,
+        "peakScore": 79,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 48,
+        "errorPeakAbsolute": 31,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-13-sunset-2100"
+      }
     }
   },
   {
@@ -5507,7 +6719,19 @@
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 14,
       "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "fireCloud": {
+        "avgScore": 9.9,
+        "peakScore": 15,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 67,
+        "errorPeakAbsolute": 52,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-13-sunset-2100"
+      }
     }
   },
   {
@@ -5560,7 +6784,19 @@
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 30,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 7.0,
+        "peakScore": 12,
+        "peakOffsetMin": 30,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 64,
+        "errorPeakAbsolute": 52,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-13-sunset-2100"
+      }
     }
   },
   {
@@ -5613,7 +6849,19 @@
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 36,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 7.7,
+        "peakScore": 18,
+        "peakOffsetMin": -20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 54,
+        "errorPeakAbsolute": 36,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-13-sunrise-0900"
+      }
     }
   },
   {
@@ -5666,7 +6914,19 @@
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 31,
       "verdictPeak": "MISMATCH",
-      "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": -10,
+        "okFrameCount": 6,
+        "unreadableFrameCount": 3,
+        "predicted": 53,
+        "errorPeakAbsolute": 48,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準",
+        "backfilledFrom": "2026-09-13-sunrise-0900"
+      }
     }
   },
   {

@@ -14,7 +14,8 @@
       "highCloud": 5,
       "midCloud": 2,
       "lowCloud": 8,
-      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": 48,
@@ -25,7 +26,25 @@
       "verdictAvg": "SLIGHT_DEVIATION",
       "verdictPeak": "SLIGHT_DEVIATION",
       "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)（峰值 48 分／平均 24.9 分）",
-      "color": "#FBBF24"
+      "color": "#FBBF24",
+      "fireCloud": {
+        "predicted": 35,
+        "peakScore": 5,
+        "avgScore": 8.9,
+        "peakOffsetMin": 0,
+        "verdict": "MISMATCH",
+        "verdictBadge": "⚠️ 出現偏差需校準",
+        "color": "#F87171"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 48,
+        "avgScore": 24.9,
+        "peakOffsetMin": 20,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -37,7 +56,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 8%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24"
+        "verdictColor": "#FBBF24",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 5,
+          "avgScore": 8.9,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 48,
+          "avgScore": 24.9,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北貓空指南宮",
@@ -48,7 +85,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 38%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80"
+        "verdictColor": "#4ADE80",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 36,
+          "avgScore": 34.7,
+          "peakOffsetMin": 10,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北九份即時影像",
@@ -59,7 +114,25 @@
         "phasePost": "—",
         "forecast": "5 分（低雲 98%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 5,
+          "peakScore": 5,
+          "avgScore": 6.0,
+          "peakOffsetMin": 0,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 66,
+          "avgScore": 25.1,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北八里左岸",
@@ -70,7 +143,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 1%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 8,
+          "avgScore": 5.3,
+          "peakOffsetMin": 20,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 96,
+          "avgScore": 50.9,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北淡水漁人碼頭",
@@ -81,7 +172,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 1%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 100,
+          "avgScore": 64.3,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北象山看 101",
@@ -92,7 +201,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 38%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24"
+        "verdictColor": "#FBBF24",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 22,
+          "avgScore": 15.6,
+          "peakOffsetMin": 10,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -105,7 +232,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 5% ／ 中空 2% ／ 低空 8%。",
-      "modelPerformance": "模型預報 35 分，實況縮時光學觀測：平均 24.9 分（誤差 10.100000000000001 分）、峰值 48 分（T+20，誤差 13 分）（SLIGHT_DEVIATION）。"
+      "modelPerformance": "🔥 火燒雲：預報 35 分，實測平均 8.9 分、峰值 5 分（峰值誤差 30 分）。🌅 天空美感：實測平均 24.9 分、峰值 48 分（T+20），本場無預報可比對。"
     }
   },
   {
@@ -123,7 +250,8 @@
       "highCloud": 0,
       "midCloud": 0,
       "lowCloud": 14,
-      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": 17,
@@ -134,7 +262,25 @@
       "verdictAvg": "SLIGHT_DEVIATION",
       "verdictPeak": "SLIGHT_DEVIATION",
       "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)（峰值 17 分／平均 24.7 分）",
-      "color": "#FBBF24"
+      "color": "#FBBF24",
+      "fireCloud": {
+        "predicted": 35,
+        "peakScore": 5,
+        "avgScore": 7.2,
+        "peakOffsetMin": -40,
+        "verdict": "MISMATCH",
+        "verdictBadge": "⚠️ 出現偏差需校準",
+        "color": "#F87171"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 17,
+        "avgScore": 24.7,
+        "peakOffsetMin": -20,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -146,7 +292,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 14%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24"
+        "verdictColor": "#FBBF24",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 5,
+          "avgScore": 7.2,
+          "peakOffsetMin": -40,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 17,
+          "avgScore": 24.7,
+          "peakOffsetMin": -20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "基隆外木山濱海",
@@ -157,7 +321,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 2%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80"
+        "verdictColor": "#4ADE80",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": -10,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 36,
+          "avgScore": 21.7,
+          "peakOffsetMin": -10,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -170,7 +352,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 14%。",
-      "modelPerformance": "模型預報 35 分，實況縮時光學觀測：平均 24.7 分（誤差 10.3 分）、峰值 17 分（T-20，誤差 18 分）（SLIGHT_DEVIATION）。"
+      "modelPerformance": "🔥 火燒雲：預報 35 分，實測平均 7.2 分、峰值 5 分（峰值誤差 30 分）。🌅 天空美感：實測平均 24.7 分、峰值 17 分（T-20），本場無預報可比對。"
     }
   },
   {
@@ -188,7 +370,8 @@
       "highCloud": 0,
       "midCloud": 1,
       "lowCloud": 2,
-      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": 32,
@@ -199,7 +382,25 @@
       "verdictAvg": "EXACT_MATCH",
       "verdictPeak": "EXACT_MATCH",
       "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)（峰值 32 分／平均 35.7 分）",
-      "color": "#4ADE80"
+      "color": "#4ADE80",
+      "fireCloud": {
+        "predicted": 35,
+        "peakScore": 5,
+        "avgScore": 9.9,
+        "peakOffsetMin": 0,
+        "verdict": "MISMATCH",
+        "verdictBadge": "⚠️ 出現偏差需校準",
+        "color": "#F87171"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 32,
+        "avgScore": 35.7,
+        "peakOffsetMin": 20,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -211,7 +412,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 2%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80"
+        "verdictColor": "#4ADE80",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 5,
+          "avgScore": 9.9,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 32,
+          "avgScore": 35.7,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北貓空指南宮",
@@ -222,7 +441,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 9%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 24,
+          "avgScore": 14.2,
+          "peakOffsetMin": 20,
+          "verdict": "SLIGHT_DEVIATION",
+          "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+          "color": "#FBBF24"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 65,
+          "avgScore": 36.8,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北九份即時影像",
@@ -233,7 +470,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 13%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 14,
+          "avgScore": 6.7,
+          "peakOffsetMin": 20,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 78,
+          "avgScore": 35.8,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北八里左岸",
@@ -244,7 +499,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 5%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 94,
+          "avgScore": 49.9,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北淡水漁人碼頭",
@@ -255,7 +528,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 5%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 100,
+          "avgScore": 62.3,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北象山看 101",
@@ -266,7 +557,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 9%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24"
+        "verdictColor": "#FBBF24",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 20,
+          "avgScore": 18.1,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -279,7 +588,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 1% ／ 低空 2%。",
-      "modelPerformance": "模型預報 35 分，實況縮時光學觀測：平均 35.7 分（誤差 0.7000000000000028 分）、峰值 32 分（T+20，誤差 3 分）（EXACT_MATCH）。"
+      "modelPerformance": "🔥 火燒雲：預報 35 分，實測平均 9.9 分、峰值 5 分（峰值誤差 30 分）。🌅 天空美感：實測平均 35.7 分、峰值 32 分（T+20），本場無預報可比對。"
     }
   },
   {
@@ -297,7 +606,8 @@
       "highCloud": 0,
       "midCloud": 0,
       "lowCloud": 30,
-      "summary": "厚重低雲覆蓋天際或有陣雨，天色灰暗難見彩霞。"
+      "summary": "厚重低雲覆蓋天際或有陣雨，天色灰暗難見彩霞。",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": 34,
@@ -308,7 +618,25 @@
       "verdictAvg": "EXACT_MATCH",
       "verdictPeak": "EXACT_MATCH",
       "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)（峰值 34 分／平均 33.0 分）",
-      "color": "#4ADE80"
+      "color": "#4ADE80",
+      "fireCloud": {
+        "predicted": 26,
+        "peakScore": 5,
+        "avgScore": 9.1,
+        "peakOffsetMin": -40,
+        "verdict": "MISMATCH",
+        "verdictBadge": "⚠️ 出現偏差需校準",
+        "color": "#F87171"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 34,
+        "avgScore": 33.0,
+        "peakOffsetMin": -20,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -320,7 +648,25 @@
         "phasePost": "—",
         "forecast": "26 分（低雲 30%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80"
+        "verdictColor": "#4ADE80",
+        "fireCloud": {
+          "predicted": 26,
+          "peakScore": 5,
+          "avgScore": 9.1,
+          "peakOffsetMin": -40,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 34,
+          "avgScore": 33.0,
+          "peakOffsetMin": -20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "基隆外木山濱海",
@@ -331,7 +677,25 @@
         "phasePost": "—",
         "forecast": "34 分（低雲 13%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24"
+        "verdictColor": "#FBBF24",
+        "fireCloud": {
+          "predicted": 34,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 16,
+          "avgScore": 17.3,
+          "peakOffsetMin": 0,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -344,7 +708,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 30%。",
-      "modelPerformance": "模型預報 26 分，實況縮時光學觀測：平均 33.0 分（誤差 7.0 分）、峰值 34 分（T-20，誤差 8 分）（EXACT_MATCH）。"
+      "modelPerformance": "🔥 火燒雲：預報 26 分，實測平均 9.1 分、峰值 5 分（峰值誤差 21 分）。🌅 天空美感：實測平均 33.0 分、峰值 34 分（T-20），本場無預報可比對。"
     }
   },
   {
@@ -362,7 +726,8 @@
       "highCloud": 0,
       "midCloud": 0,
       "lowCloud": 6,
-      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": 64,
@@ -373,7 +738,25 @@
       "verdictAvg": "EXACT_MATCH",
       "verdictPeak": "MISMATCH",
       "verdictBadge": "⚠️ 出現偏差需校準（峰值 64 分／平均 29.4 分）",
-      "color": "#F87171"
+      "color": "#F87171",
+      "fireCloud": {
+        "predicted": 35,
+        "peakScore": 13,
+        "avgScore": 7.8,
+        "peakOffsetMin": 20,
+        "verdict": "MISMATCH",
+        "verdictBadge": "⚠️ 出現偏差需校準",
+        "color": "#F87171"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 64,
+        "avgScore": 29.4,
+        "peakOffsetMin": 20,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -385,7 +768,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 6%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 13,
+          "avgScore": 7.8,
+          "peakOffsetMin": 20,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 64,
+          "avgScore": 29.4,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北貓空指南宮",
@@ -396,7 +797,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 5%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 40,
+          "avgScore": 14.2,
+          "peakOffsetMin": 20,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 100,
+          "avgScore": 44.6,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北九份即時影像",
@@ -407,7 +826,25 @@
         "phasePost": "—",
         "forecast": "30 分（低雲 38%）",
         "verdict": "⏳ 實測待驗證",
-        "verdictColor": "#94A3B8"
+        "verdictColor": "#94A3B8",
+        "fireCloud": {
+          "predicted": 30,
+          "peakScore": null,
+          "avgScore": null,
+          "peakOffsetMin": null,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": null,
+          "avgScore": null,
+          "peakOffsetMin": null,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北八里左岸",
@@ -418,7 +855,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 2%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 10,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 87,
+          "avgScore": 39.5,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北淡水漁人碼頭",
@@ -429,7 +884,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 2%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 95,
+          "avgScore": 51.8,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北象山看 101",
@@ -440,7 +913,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 5%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24"
+        "verdictColor": "#FBBF24",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 21,
+          "avgScore": 21.7,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -453,7 +944,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 6%。",
-      "modelPerformance": "模型預報 35 分，實況縮時光學觀測：平均 29.4 分（誤差 5.600000000000001 分）、峰值 64 分（T+20，誤差 29 分）（MISMATCH）。"
+      "modelPerformance": "🔥 火燒雲：預報 35 分，實測平均 7.8 分、峰值 13 分（T+20，峰值誤差 22 分）。🌅 天空美感：實測平均 29.4 分、峰值 64 分（T+20），本場無預報可比對。"
     }
   },
   {
@@ -471,7 +962,8 @@
       "highCloud": 27,
       "midCloud": 0,
       "lowCloud": 5,
-      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": 39,
@@ -482,7 +974,25 @@
       "verdictAvg": "EXACT_MATCH",
       "verdictPeak": "EXACT_MATCH",
       "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)（峰值 39 分／平均 31.2 分）",
-      "color": "#4ADE80"
+      "color": "#4ADE80",
+      "fireCloud": {
+        "predicted": 32,
+        "peakScore": 10,
+        "avgScore": 7.1,
+        "peakOffsetMin": -20,
+        "verdict": "MISMATCH",
+        "verdictBadge": "⚠️ 出現偏差需校準",
+        "color": "#F87171"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 39,
+        "avgScore": 31.2,
+        "peakOffsetMin": -20,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -494,7 +1004,25 @@
         "phasePost": "—",
         "forecast": "32 分（低雲 5%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80"
+        "verdictColor": "#4ADE80",
+        "fireCloud": {
+          "predicted": 32,
+          "peakScore": 10,
+          "avgScore": 7.1,
+          "peakOffsetMin": -20,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 39,
+          "avgScore": 31.2,
+          "peakOffsetMin": -20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "基隆外木山濱海",
@@ -505,7 +1033,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 23%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24"
+        "verdictColor": "#FBBF24",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": -10,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 23,
+          "avgScore": 20.4,
+          "peakOffsetMin": -10,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -518,7 +1064,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 27% ／ 中空 0% ／ 低空 5%。",
-      "modelPerformance": "模型預報 32 分，實況縮時光學觀測：平均 31.2 分（誤差 0.8000000000000007 分）、峰值 39 分（T-20，誤差 7 分）（EXACT_MATCH）。"
+      "modelPerformance": "🔥 火燒雲：預報 32 分，實測平均 7.1 分、峰值 10 分（T-20，峰值誤差 22 分）。🌅 天空美感：實測平均 31.2 分、峰值 39 分（T-20），本場無預報可比對。"
     }
   },
   {
@@ -536,7 +1082,8 @@
       "highCloud": 0,
       "midCloud": 0,
       "lowCloud": 6,
-      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": 54,
@@ -547,7 +1094,25 @@
       "verdictAvg": "EXACT_MATCH",
       "verdictPeak": "MISMATCH",
       "verdictBadge": "⚠️ 出現偏差需校準（峰值 54 分／平均 37.8 分）",
-      "color": "#F87171"
+      "color": "#F87171",
+      "fireCloud": {
+        "predicted": 35,
+        "peakScore": 12,
+        "avgScore": 11.0,
+        "peakOffsetMin": 20,
+        "verdict": "MISMATCH",
+        "verdictBadge": "⚠️ 出現偏差需校準",
+        "color": "#F87171"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 54,
+        "avgScore": 37.8,
+        "peakOffsetMin": 10,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -559,7 +1124,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 6%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 12,
+          "avgScore": 11.0,
+          "peakOffsetMin": 20,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 54,
+          "avgScore": 37.8,
+          "peakOffsetMin": 10,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北貓空指南宮",
@@ -570,7 +1153,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 5%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 19,
+          "avgScore": 8.4,
+          "peakOffsetMin": 20,
+          "verdict": "SLIGHT_DEVIATION",
+          "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+          "color": "#FBBF24"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 98,
+          "avgScore": 67.1,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北九份即時影像",
@@ -581,7 +1182,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 24%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80"
+        "verdictColor": "#4ADE80",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 7,
+          "avgScore": 5.8,
+          "peakOffsetMin": 10,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 34,
+          "avgScore": 22.6,
+          "peakOffsetMin": 10,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北八里左岸",
@@ -592,7 +1211,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 4%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 88,
+          "avgScore": 49.3,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北淡水漁人碼頭",
@@ -603,7 +1240,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 4%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 6,
+          "avgScore": 5.7,
+          "peakOffsetMin": 30,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 87,
+          "avgScore": 58.9,
+          "peakOffsetMin": 10,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北象山看 101",
@@ -614,7 +1269,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 5%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80"
+        "verdictColor": "#4ADE80",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 7,
+          "avgScore": 5.4,
+          "peakOffsetMin": 20,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 32,
+          "avgScore": 26.3,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -627,7 +1300,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 6%。",
-      "modelPerformance": "模型預報 35 分，實況縮時光學觀測：平均 37.8 分（誤差 2.799999999999997 分）、峰值 54 分（T+10，誤差 19 分）（MISMATCH）。"
+      "modelPerformance": "🔥 火燒雲：預報 35 分，實測平均 11.0 分、峰值 12 分（T+20，峰值誤差 23 分）。🌅 天空美感：實測平均 37.8 分、峰值 54 分（T+10），本場無預報可比對。"
     }
   },
   {
@@ -645,7 +1318,8 @@
       "highCloud": 21,
       "midCloud": 0,
       "lowCloud": 4,
-      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": 5,
@@ -656,7 +1330,25 @@
       "verdictAvg": "EXACT_MATCH",
       "verdictPeak": "MISMATCH",
       "verdictBadge": "⚠️ 出現偏差需校準（峰值 5 分／平均 38.2 分）",
-      "color": "#F87171"
+      "color": "#F87171",
+      "fireCloud": {
+        "predicted": 46,
+        "peakScore": 5,
+        "avgScore": 5.0,
+        "peakOffsetMin": 0,
+        "verdict": "MISMATCH",
+        "verdictBadge": "⚠️ 出現偏差需校準",
+        "color": "#F87171"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 5,
+        "avgScore": 38.2,
+        "peakOffsetMin": 0,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -668,7 +1360,25 @@
         "phasePost": "—",
         "forecast": "46 分（低雲 4%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 46,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 5,
+          "avgScore": 38.2,
+          "peakOffsetMin": 0,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "基隆外木山濱海",
@@ -679,7 +1389,25 @@
         "phasePost": "—",
         "forecast": "68 分（低雲 0%）",
         "verdict": "⏳ 實測待驗證",
-        "verdictColor": "#94A3B8"
+        "verdictColor": "#94A3B8",
+        "fireCloud": {
+          "predicted": 68,
+          "peakScore": null,
+          "avgScore": null,
+          "peakOffsetMin": null,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": null,
+          "avgScore": null,
+          "peakOffsetMin": null,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -692,7 +1420,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 21% ／ 中空 0% ／ 低空 4%。",
-      "modelPerformance": "模型預報 46 分，實況縮時光學觀測：平均 38.2 分（誤差 7.799999999999997 分）、峰值 5 分（T+0，誤差 41 分）（MISMATCH）。"
+      "modelPerformance": "🔥 火燒雲：預報 46 分，實測平均 5.0 分、峰值 5 分（峰值誤差 41 分）。🌅 天空美感：實測平均 38.2 分、峰值 5 分，本場無預報可比對。"
     }
   },
   {
@@ -710,7 +1438,8 @@
       "highCloud": 0,
       "midCloud": 0,
       "lowCloud": 2,
-      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": 51,
@@ -721,7 +1450,25 @@
       "verdictAvg": "EXACT_MATCH",
       "verdictPeak": "SLIGHT_DEVIATION",
       "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)（峰值 51 分／平均 33.9 分）",
-      "color": "#FBBF24"
+      "color": "#FBBF24",
+      "fireCloud": {
+        "predicted": 35,
+        "peakScore": 12,
+        "avgScore": 10.8,
+        "peakOffsetMin": 30,
+        "verdict": "MISMATCH",
+        "verdictBadge": "⚠️ 出現偏差需校準",
+        "color": "#F87171"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 51,
+        "avgScore": 33.9,
+        "peakOffsetMin": 10,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -733,7 +1480,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 2%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24"
+        "verdictColor": "#FBBF24",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 12,
+          "avgScore": 10.8,
+          "peakOffsetMin": 30,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 51,
+          "avgScore": 33.9,
+          "peakOffsetMin": 10,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北貓空指南宮",
@@ -744,7 +1509,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 1%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 100,
+          "avgScore": 68.1,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北九份即時影像",
@@ -755,7 +1538,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 20%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80"
+        "verdictColor": "#4ADE80",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 36,
+          "avgScore": 18.1,
+          "peakOffsetMin": 0,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 40,
+          "avgScore": 30.2,
+          "peakOffsetMin": 0,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北八里左岸",
@@ -766,7 +1567,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 2%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 9,
+          "avgScore": 5.9,
+          "peakOffsetMin": 20,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 90,
+          "avgScore": 47.0,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北淡水漁人碼頭",
@@ -777,7 +1596,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 2%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 12,
+          "avgScore": 7.6,
+          "peakOffsetMin": 30,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 88,
+          "avgScore": 58.3,
+          "peakOffsetMin": 10,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北象山看 101",
@@ -788,7 +1625,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 1%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24"
+        "verdictColor": "#FBBF24",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 16,
+          "avgScore": 6.2,
+          "peakOffsetMin": 20,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 49,
+          "avgScore": 28.3,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -801,7 +1656,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 2%。",
-      "modelPerformance": "模型預報 35 分，實況縮時光學觀測：平均 33.9 分（誤差 1.1000000000000014 分）、峰值 51 分（T+10，誤差 16 分）（SLIGHT_DEVIATION）。"
+      "modelPerformance": "🔥 火燒雲：預報 35 分，實測平均 10.8 分、峰值 12 分（T+30，峰值誤差 23 分）。🌅 天空美感：實測平均 33.9 分、峰值 51 分（T+10），本場無預報可比對。"
     }
   },
   {
@@ -819,7 +1674,8 @@
       "highCloud": 0,
       "midCloud": 0,
       "lowCloud": 3,
-      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": 32,
@@ -830,7 +1686,25 @@
       "verdictAvg": "EXACT_MATCH",
       "verdictPeak": "EXACT_MATCH",
       "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)（峰值 32 分／平均 30.2 分）",
-      "color": "#4ADE80"
+      "color": "#4ADE80",
+      "fireCloud": {
+        "predicted": 32,
+        "peakScore": 11,
+        "avgScore": 6.0,
+        "peakOffsetMin": -30,
+        "verdict": "MISMATCH",
+        "verdictBadge": "⚠️ 出現偏差需校準",
+        "color": "#F87171"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 32,
+        "avgScore": 30.2,
+        "peakOffsetMin": -20,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -842,7 +1716,25 @@
         "phasePost": "—",
         "forecast": "32 分（低雲 3%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80"
+        "verdictColor": "#4ADE80",
+        "fireCloud": {
+          "predicted": 32,
+          "peakScore": 11,
+          "avgScore": 6.0,
+          "peakOffsetMin": -30,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 32,
+          "avgScore": 30.2,
+          "peakOffsetMin": -20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "基隆外木山濱海",
@@ -853,7 +1745,25 @@
         "phasePost": "—",
         "forecast": "20 分（低雲 30%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80"
+        "verdictColor": "#4ADE80",
+        "fireCloud": {
+          "predicted": 20,
+          "peakScore": null,
+          "avgScore": 5.0,
+          "peakOffsetMin": null,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": null,
+          "avgScore": 23.0,
+          "peakOffsetMin": null,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -866,7 +1776,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 3%。",
-      "modelPerformance": "模型預報 32 分，實況縮時光學觀測：平均 30.2 分（誤差 1.8000000000000007 分）、峰值 32 分（T-20，誤差 0 分）（EXACT_MATCH）。"
+      "modelPerformance": "🔥 火燒雲：預報 32 分，實測平均 6.0 分、峰值 11 分（T-30，峰值誤差 21 分）。🌅 天空美感：實測平均 30.2 分、峰值 32 分（T-20），本場無預報可比對。"
     }
   },
   {
@@ -884,7 +1794,8 @@
       "highCloud": 0,
       "midCloud": 0,
       "lowCloud": 2,
-      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": 62,
@@ -895,7 +1806,25 @@
       "verdictAvg": "SLIGHT_DEVIATION",
       "verdictPeak": "MISMATCH",
       "verdictBadge": "⚠️ 出現偏差需校準（峰值 62 分／平均 45.4 分）",
-      "color": "#F87171"
+      "color": "#F87171",
+      "fireCloud": {
+        "predicted": 35,
+        "peakScore": 12,
+        "avgScore": 12.9,
+        "peakOffsetMin": 30,
+        "verdict": "MISMATCH",
+        "verdictBadge": "⚠️ 出現偏差需校準",
+        "color": "#F87171"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 62,
+        "avgScore": 45.4,
+        "peakOffsetMin": 10,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -907,7 +1836,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 2%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 12,
+          "avgScore": 12.9,
+          "peakOffsetMin": 30,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 62,
+          "avgScore": 45.4,
+          "peakOffsetMin": 10,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北貓空指南宮",
@@ -918,7 +1865,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 2%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 5,
+          "avgScore": 8.3,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 100,
+          "avgScore": 62.7,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北九份即時影像",
@@ -929,7 +1894,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 22%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 29,
+          "avgScore": 18.6,
+          "peakOffsetMin": 0,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 72,
+          "avgScore": 37.2,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北八里左岸",
@@ -940,7 +1923,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 0%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 90,
+          "avgScore": 49.1,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北淡水漁人碼頭",
@@ -951,7 +1952,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 0%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 95,
+          "avgScore": 59.1,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北象山看 101",
@@ -962,7 +1981,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 2%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24"
+        "verdictColor": "#FBBF24",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 17,
+          "avgScore": 6.9,
+          "peakOffsetMin": 20,
+          "verdict": "SLIGHT_DEVIATION",
+          "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+          "color": "#FBBF24"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 50,
+          "avgScore": 29.1,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -975,7 +2012,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 2%。",
-      "modelPerformance": "模型預報 35 分，實況縮時光學觀測：平均 45.4 分（誤差 10.399999999999999 分）、峰值 62 分（T+10，誤差 27 分）（MISMATCH）。"
+      "modelPerformance": "🔥 火燒雲：預報 35 分，實測平均 12.9 分、峰值 12 分（T+30，峰值誤差 23 分）。🌅 天空美感：實測平均 45.4 分、峰值 62 分（T+10），本場無預報可比對。"
     }
   },
   {
@@ -993,7 +2030,8 @@
       "highCloud": 0,
       "midCloud": 16,
       "lowCloud": 13,
-      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": 31,
@@ -1004,7 +2042,25 @@
       "verdictAvg": "MISMATCH",
       "verdictPeak": "EXACT_MATCH",
       "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)（峰值 31 分／平均 13.0 分）",
-      "color": "#4ADE80"
+      "color": "#4ADE80",
+      "fireCloud": {
+        "predicted": 36,
+        "peakScore": 5,
+        "avgScore": 5.0,
+        "peakOffsetMin": -40,
+        "verdict": "MISMATCH",
+        "verdictBadge": "⚠️ 出現偏差需校準",
+        "color": "#F87171"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 31,
+        "avgScore": 13.0,
+        "peakOffsetMin": -10,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -1016,7 +2072,25 @@
         "phasePost": "—",
         "forecast": "36 分（低雲 13%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80"
+        "verdictColor": "#4ADE80",
+        "fireCloud": {
+          "predicted": 36,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": -40,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 31,
+          "avgScore": 13.0,
+          "peakOffsetMin": -10,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "基隆外木山濱海",
@@ -1027,7 +2101,25 @@
         "phasePost": "—",
         "forecast": "22 分（低雲 35%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80"
+        "verdictColor": "#4ADE80",
+        "fireCloud": {
+          "predicted": 22,
+          "peakScore": null,
+          "avgScore": 5.0,
+          "peakOffsetMin": null,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 18,
+          "avgScore": 15.4,
+          "peakOffsetMin": 0,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -1040,7 +2132,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 16% ／ 低空 13%。",
-      "modelPerformance": "模型預報 36 分，實況縮時光學觀測：平均 13.0 分（誤差 23.0 分）、峰值 31 分（T-10，誤差 5 分）（EXACT_MATCH）。"
+      "modelPerformance": "🔥 火燒雲：預報 36 分，實測平均 5.0 分、峰值 5 分（峰值誤差 31 分）。🌅 天空美感：實測平均 13.0 分、峰值 31 分（T-10），本場無預報可比對。"
     }
   },
   {
@@ -1058,7 +2150,8 @@
       "highCloud": 0,
       "midCloud": 0,
       "lowCloud": 0,
-      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": 55,
@@ -1069,7 +2162,25 @@
       "verdictAvg": "EXACT_MATCH",
       "verdictPeak": "MISMATCH",
       "verdictBadge": "⚠️ 出現偏差需校準（峰值 55 分／平均 33.9 分）",
-      "color": "#F87171"
+      "color": "#F87171",
+      "fireCloud": {
+        "predicted": 35,
+        "peakScore": 16,
+        "avgScore": 12.1,
+        "peakOffsetMin": 20,
+        "verdict": "MISMATCH",
+        "verdictBadge": "⚠️ 出現偏差需校準",
+        "color": "#F87171"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 55,
+        "avgScore": 33.9,
+        "peakOffsetMin": 20,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -1081,7 +2192,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 0%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 16,
+          "avgScore": 12.1,
+          "peakOffsetMin": 20,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 55,
+          "avgScore": 33.9,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北貓空指南宮",
@@ -1092,7 +2221,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 1%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 16,
+          "avgScore": 12.0,
+          "peakOffsetMin": 10,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 97,
+          "avgScore": 45.0,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北九份即時影像",
@@ -1103,7 +2250,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 11%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80"
+        "verdictColor": "#4ADE80",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 16,
+          "avgScore": 7.4,
+          "peakOffsetMin": 20,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 39,
+          "avgScore": 20.0,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北八里左岸",
@@ -1114,7 +2279,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 0%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 12,
+          "avgScore": 5.8,
+          "peakOffsetMin": 20,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 83,
+          "avgScore": 47.6,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北淡水漁人碼頭",
@@ -1125,7 +2308,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 0%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 25,
+          "avgScore": 7.8,
+          "peakOffsetMin": 20,
+          "verdict": "SLIGHT_DEVIATION",
+          "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+          "color": "#FBBF24"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 94,
+          "avgScore": 57.3,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北象山看 101",
@@ -1136,7 +2337,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 1%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80"
+        "verdictColor": "#4ADE80",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 13,
+          "avgScore": 7.2,
+          "peakOffsetMin": 20,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 35,
+          "avgScore": 22.9,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -1149,7 +2368,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 0%。",
-      "modelPerformance": "模型預報 35 分，實況縮時光學觀測：平均 33.9 分（誤差 1.1000000000000014 分）、峰值 55 分（T+20，誤差 20 分）（MISMATCH）。"
+      "modelPerformance": "🔥 火燒雲：預報 35 分，實測平均 12.1 分、峰值 16 分（T+20，峰值誤差 19 分）。🌅 天空美感：實測平均 33.9 分、峰值 55 分（T+20），本場無預報可比對。"
     }
   },
   {
@@ -1167,7 +2386,8 @@
       "highCloud": 0,
       "midCloud": 0,
       "lowCloud": 15,
-      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": 22,
@@ -1178,7 +2398,25 @@
       "verdictAvg": "SLIGHT_DEVIATION",
       "verdictPeak": "SLIGHT_DEVIATION",
       "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)（峰值 22 分／平均 14.2 分）",
-      "color": "#FBBF24"
+      "color": "#FBBF24",
+      "fireCloud": {
+        "predicted": 32,
+        "peakScore": 5,
+        "avgScore": 5.0,
+        "peakOffsetMin": -40,
+        "verdict": "MISMATCH",
+        "verdictBadge": "⚠️ 出現偏差需校準",
+        "color": "#F87171"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 22,
+        "avgScore": 14.2,
+        "peakOffsetMin": -10,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -1190,7 +2428,25 @@
         "phasePost": "—",
         "forecast": "32 分（低雲 15%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24"
+        "verdictColor": "#FBBF24",
+        "fireCloud": {
+          "predicted": 32,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": -40,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 22,
+          "avgScore": 14.2,
+          "peakOffsetMin": -10,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "基隆外木山濱海",
@@ -1201,7 +2457,25 @@
         "phasePost": "—",
         "forecast": "5 分（低雲 81%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 5,
+          "peakScore": 5,
+          "avgScore": 6.0,
+          "peakOffsetMin": 0,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 29,
+          "avgScore": 11.8,
+          "peakOffsetMin": 0,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -1214,7 +2488,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 15%。",
-      "modelPerformance": "模型預報 32 分，實況縮時光學觀測：平均 14.2 分（誤差 17.8 分）、峰值 22 分（T-10，誤差 10 分）（SLIGHT_DEVIATION）。"
+      "modelPerformance": "🔥 火燒雲：預報 32 分，實測平均 5.0 分、峰值 5 分（峰值誤差 27 分）。🌅 天空美感：實測平均 14.2 分、峰值 22 分（T-10），本場無預報可比對。"
     }
   },
   {
@@ -1232,7 +2506,8 @@
       "highCloud": 0,
       "midCloud": 0,
       "lowCloud": 0,
-      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": 63,
@@ -1243,7 +2518,25 @@
       "verdictAvg": "EXACT_MATCH",
       "verdictPeak": "MISMATCH",
       "verdictBadge": "⚠️ 出現偏差需校準（峰值 63 分／平均 40.0 分）",
-      "color": "#F87171"
+      "color": "#F87171",
+      "fireCloud": {
+        "predicted": 35,
+        "peakScore": 12,
+        "avgScore": 11.7,
+        "peakOffsetMin": 30,
+        "verdict": "MISMATCH",
+        "verdictBadge": "⚠️ 出現偏差需校準",
+        "color": "#F87171"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 63,
+        "avgScore": 40.0,
+        "peakOffsetMin": 20,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -1255,7 +2548,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 0%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 12,
+          "avgScore": 11.7,
+          "peakOffsetMin": 30,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 63,
+          "avgScore": 40.0,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北貓空指南宮",
@@ -1266,7 +2577,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 0%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 100,
+          "avgScore": 68.7,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北九份即時影像",
@@ -1277,7 +2606,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 27%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24"
+        "verdictColor": "#FBBF24",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 5,
+          "avgScore": 5.1,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 53,
+          "avgScore": 36.1,
+          "peakOffsetMin": 10,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北八里左岸",
@@ -1288,7 +2635,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 5%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 79,
+          "avgScore": 46.6,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北淡水漁人碼頭",
@@ -1299,7 +2664,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 5%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 13,
+          "avgScore": 6.9,
+          "peakOffsetMin": 20,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 95,
+          "avgScore": 58.5,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北象山看 101",
@@ -1310,7 +2693,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 0%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80"
+        "verdictColor": "#4ADE80",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 9,
+          "avgScore": 5.8,
+          "peakOffsetMin": 30,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 43,
+          "avgScore": 27.1,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -1323,7 +2724,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 0%。",
-      "modelPerformance": "模型預報 35 分，實況縮時光學觀測：平均 40.0 分（誤差 5.0 分）、峰值 63 分（T+20，誤差 28 分）（MISMATCH）。"
+      "modelPerformance": "🔥 火燒雲：預報 35 分，實測平均 11.7 分、峰值 12 分（T+30，峰值誤差 23 分）。🌅 天空美感：實測平均 40.0 分、峰值 63 分（T+20），本場無預報可比對。"
     }
   },
   {
@@ -1341,7 +2742,8 @@
       "highCloud": 0,
       "midCloud": 0,
       "lowCloud": 16,
-      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": 37,
@@ -1352,7 +2754,25 @@
       "verdictAvg": "SLIGHT_DEVIATION",
       "verdictPeak": "EXACT_MATCH",
       "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)（峰值 37 分／平均 20.2 分）",
-      "color": "#4ADE80"
+      "color": "#4ADE80",
+      "fireCloud": {
+        "predicted": 35,
+        "peakScore": 5,
+        "avgScore": 5.0,
+        "peakOffsetMin": -40,
+        "verdict": "MISMATCH",
+        "verdictBadge": "⚠️ 出現偏差需校準",
+        "color": "#F87171"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 37,
+        "avgScore": 20.2,
+        "peakOffsetMin": -20,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -1364,7 +2784,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 16%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80"
+        "verdictColor": "#4ADE80",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": -40,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 37,
+          "avgScore": 20.2,
+          "peakOffsetMin": -20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "基隆外木山濱海",
@@ -1375,7 +2813,25 @@
         "phasePost": "—",
         "forecast": "19 分（低雲 23%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80"
+        "verdictColor": "#4ADE80",
+        "fireCloud": {
+          "predicted": 19,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": -10,
+          "verdict": "SLIGHT_DEVIATION",
+          "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+          "color": "#FBBF24"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 20,
+          "avgScore": 14.7,
+          "peakOffsetMin": -10,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -1388,7 +2844,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 16%。",
-      "modelPerformance": "模型預報 35 分，實況縮時光學觀測：平均 20.2 分（誤差 14.8 分）、峰值 37 分（T-20，誤差 2 分）（EXACT_MATCH）。"
+      "modelPerformance": "🔥 火燒雲：預報 35 分，實測平均 5.0 分、峰值 5 分（峰值誤差 30 分）。🌅 天空美感：實測平均 20.2 分、峰值 37 分（T-20），本場無預報可比對。"
     }
   },
   {
@@ -1406,7 +2862,8 @@
       "highCloud": 0,
       "midCloud": 0,
       "lowCloud": 5,
-      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": 41,
@@ -1417,7 +2874,25 @@
       "verdictAvg": "EXACT_MATCH",
       "verdictPeak": "EXACT_MATCH",
       "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)（峰值 41 分／平均 38.7 分）",
-      "color": "#4ADE80"
+      "color": "#4ADE80",
+      "fireCloud": {
+        "predicted": 35,
+        "peakScore": 17,
+        "avgScore": 16.1,
+        "peakOffsetMin": 20,
+        "verdict": "SLIGHT_DEVIATION",
+        "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "color": "#FBBF24"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 41,
+        "avgScore": 38.7,
+        "peakOffsetMin": 20,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -1429,7 +2904,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 5%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80"
+        "verdictColor": "#4ADE80",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 17,
+          "avgScore": 16.1,
+          "peakOffsetMin": 20,
+          "verdict": "SLIGHT_DEVIATION",
+          "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+          "color": "#FBBF24"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 41,
+          "avgScore": 38.7,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北貓空指南宮",
@@ -1440,7 +2933,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 5%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 17,
+          "avgScore": 14.3,
+          "peakOffsetMin": 20,
+          "verdict": "SLIGHT_DEVIATION",
+          "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+          "color": "#FBBF24"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 64,
+          "avgScore": 53.6,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北九份即時影像",
@@ -1451,7 +2962,25 @@
         "phasePost": "—",
         "forecast": "34 分（低雲 31%）",
         "verdict": "⏳ 實測待驗證",
-        "verdictColor": "#94A3B8"
+        "verdictColor": "#94A3B8",
+        "fireCloud": {
+          "predicted": 34,
+          "peakScore": null,
+          "avgScore": null,
+          "peakOffsetMin": null,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": null,
+          "avgScore": null,
+          "peakOffsetMin": null,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北八里左岸",
@@ -1462,7 +2991,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 1%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 84,
+          "avgScore": 50.2,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北淡水漁人碼頭",
@@ -1473,7 +3020,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 1%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 5,
+          "avgScore": 5.1,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 91,
+          "avgScore": 63.7,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北象山看 101",
@@ -1484,7 +3049,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 5%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80"
+        "verdictColor": "#4ADE80",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 9,
+          "avgScore": 6.1,
+          "peakOffsetMin": 30,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 35,
+          "avgScore": 26.2,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -1497,7 +3080,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 5%。",
-      "modelPerformance": "模型預報 35 分，實況縮時光學觀測：平均 38.7 分（誤差 3.700000000000003 分）、峰值 41 分（T+20，誤差 6 分）（EXACT_MATCH）。"
+      "modelPerformance": "🔥 火燒雲：預報 35 分，實測平均 16.1 分、峰值 17 分（T+20，峰值誤差 18 分）。🌅 天空美感：實測平均 38.7 分、峰值 41 分（T+20），本場無預報可比對。"
     }
   },
   {
@@ -1515,7 +3098,8 @@
       "highCloud": 0,
       "midCloud": 0,
       "lowCloud": 54,
-      "summary": "厚重低雲覆蓋天際或有陣雨，天色灰暗難見彩霞。"
+      "summary": "厚重低雲覆蓋天際或有陣雨，天色灰暗難見彩霞。",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": 20,
@@ -1526,7 +3110,25 @@
       "verdictAvg": "EXACT_MATCH",
       "verdictPeak": "SLIGHT_DEVIATION",
       "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)（峰值 20 分／平均 11.3 分）",
-      "color": "#FBBF24"
+      "color": "#FBBF24",
+      "fireCloud": {
+        "predicted": 5,
+        "peakScore": 5,
+        "avgScore": 5.0,
+        "peakOffsetMin": -40,
+        "verdict": "EXACT_MATCH",
+        "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+        "color": "#4ADE80"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 20,
+        "avgScore": 11.3,
+        "peakOffsetMin": -20,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -1538,7 +3140,25 @@
         "phasePost": "—",
         "forecast": "5 分（低雲 54%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24"
+        "verdictColor": "#FBBF24",
+        "fireCloud": {
+          "predicted": 5,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": -40,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 20,
+          "avgScore": 11.3,
+          "peakOffsetMin": -20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "基隆外木山濱海",
@@ -1549,7 +3169,25 @@
         "phasePost": "—",
         "forecast": "5 分（低雲 70%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 5,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 29,
+          "avgScore": 17.7,
+          "peakOffsetMin": 0,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -1562,7 +3200,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 54%。",
-      "modelPerformance": "模型預報 5 分，實況縮時光學觀測：平均 11.3 分（誤差 6.300000000000001 分）、峰值 20 分（T-20，誤差 15 分）（SLIGHT_DEVIATION）。"
+      "modelPerformance": "🔥 火燒雲：預報 5 分，實測平均 5.0 分、峰值 5 分（峰值誤差 0 分）。🌅 天空美感：實測平均 11.3 分、峰值 20 分（T-20），本場無預報可比對。"
     }
   },
   {
@@ -1580,7 +3218,8 @@
       "highCloud": 0,
       "midCloud": 0,
       "lowCloud": 28,
-      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": null,
@@ -1588,7 +3227,25 @@
       "verdict": "PENDING",
       "verdictBadge": "⏳ 實測待驗證",
       "color": "#94A3B8",
-      "captureStatus": "capture_unavailable"
+      "captureStatus": "capture_unavailable",
+      "fireCloud": {
+        "predicted": 35,
+        "peakScore": null,
+        "avgScore": null,
+        "peakOffsetMin": null,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": null,
+        "avgScore": null,
+        "peakOffsetMin": null,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -1600,7 +3257,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 28%）",
         "verdict": "⏳ 實測待驗證",
-        "verdictColor": "#94A3B8"
+        "verdictColor": "#94A3B8",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": null,
+          "avgScore": null,
+          "peakOffsetMin": null,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": null,
+          "avgScore": null,
+          "peakOffsetMin": null,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北貓空指南宮",
@@ -1611,7 +3286,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 16%）",
         "verdict": "⏳ 實測待驗證",
-        "verdictColor": "#94A3B8"
+        "verdictColor": "#94A3B8",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": null,
+          "avgScore": null,
+          "peakOffsetMin": null,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": null,
+          "avgScore": null,
+          "peakOffsetMin": null,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北九份即時影像",
@@ -1622,7 +3315,25 @@
         "phasePost": "—",
         "forecast": "5 分（低雲 91%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24"
+        "verdictColor": "#FBBF24",
+        "fireCloud": {
+          "predicted": 5,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 10,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 17,
+          "avgScore": 12.8,
+          "peakOffsetMin": 10,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北八里左岸",
@@ -1633,7 +3344,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 12%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 40,
+          "avgScore": 16.7,
+          "peakOffsetMin": 20,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 86,
+          "avgScore": 47.6,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北淡水漁人碼頭",
@@ -1644,7 +3373,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 12%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 33,
+          "avgScore": 20.1,
+          "peakOffsetMin": 20,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 84,
+          "avgScore": 54.7,
+          "peakOffsetMin": 10,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北象山看 101",
@@ -1655,7 +3402,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 16%）",
         "verdict": "⏳ 實測待驗證",
-        "verdictColor": "#94A3B8"
+        "verdictColor": "#94A3B8",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": null,
+          "avgScore": null,
+          "peakOffsetMin": null,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": null,
+          "avgScore": null,
+          "peakOffsetMin": null,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -1668,7 +3433,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 28%。",
-      "modelPerformance": "本場實測影格擷取失敗或找不到對應鎖定預測，暫無模型誤差判定。"
+      "modelPerformance": "🔥 火燒雲：本場無實測。🌅 天空美感：本場無實測。"
     }
   },
   {
@@ -1686,7 +3451,8 @@
       "highCloud": 0,
       "midCloud": 0,
       "lowCloud": 1,
-      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": 72,
@@ -1697,7 +3463,25 @@
       "verdictAvg": "EXACT_MATCH",
       "verdictPeak": "MISMATCH",
       "verdictBadge": "⚠️ 出現偏差需校準（峰值 72 分／平均 30.9 分）",
-      "color": "#F87171"
+      "color": "#F87171",
+      "fireCloud": {
+        "predicted": 35,
+        "peakScore": 12,
+        "avgScore": 7.2,
+        "peakOffsetMin": -30,
+        "verdict": "MISMATCH",
+        "verdictBadge": "⚠️ 出現偏差需校準",
+        "color": "#F87171"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 72,
+        "avgScore": 30.9,
+        "peakOffsetMin": -20,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -1709,7 +3493,25 @@
         "phasePost": "—",
         "forecast": "35 分（低雲 1%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 35,
+          "peakScore": 12,
+          "avgScore": 7.2,
+          "peakOffsetMin": -30,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 72,
+          "avgScore": 30.9,
+          "peakOffsetMin": -20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "基隆外木山濱海",
@@ -1720,7 +3522,25 @@
         "phasePost": "—",
         "forecast": "31 分（低雲 13%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24"
+        "verdictColor": "#FBBF24",
+        "fireCloud": {
+          "predicted": 31,
+          "peakScore": 5,
+          "avgScore": 6.4,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 19,
+          "avgScore": 16.2,
+          "peakOffsetMin": 0,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -1733,7 +3553,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 1%。",
-      "modelPerformance": "模型預報 35 分，實況縮時光學觀測：平均 30.9 分（誤差 4.100000000000001 分）、峰值 72 分（T-20，誤差 37 分）（MISMATCH）。"
+      "modelPerformance": "🔥 火燒雲：預報 35 分，實測平均 7.2 分、峰值 12 分（T-30，峰值誤差 23 分）。🌅 天空美感：實測平均 30.9 分、峰值 72 分（T-20），本場無預報可比對。"
     }
   },
   {
@@ -1751,7 +3571,8 @@
       "highCloud": null,
       "midCloud": null,
       "lowCloud": null,
-      "summary": ""
+      "summary": "",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": null,
@@ -1759,7 +3580,25 @@
       "verdict": "PENDING",
       "verdictBadge": "⏳ 實測待驗證",
       "color": "#94A3B8",
-      "captureStatus": "no_locked_prediction"
+      "captureStatus": "no_locked_prediction",
+      "fireCloud": {
+        "predicted": null,
+        "peakScore": 17,
+        "avgScore": 13.2,
+        "peakOffsetMin": 10,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 41,
+        "avgScore": 31.2,
+        "peakOffsetMin": 10,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -1771,7 +3610,25 @@
         "phasePost": "—",
         "forecast": "—",
         "verdict": "⏳ 實測待驗證",
-        "verdictColor": "#94A3B8"
+        "verdictColor": "#94A3B8",
+        "fireCloud": {
+          "predicted": null,
+          "peakScore": 17,
+          "avgScore": 13.2,
+          "peakOffsetMin": 10,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 41,
+          "avgScore": 31.2,
+          "peakOffsetMin": 10,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北貓空指南宮",
@@ -1782,7 +3639,25 @@
         "phasePost": "—",
         "forecast": "—",
         "verdict": "⏳ 實測待驗證",
-        "verdictColor": "#94A3B8"
+        "verdictColor": "#94A3B8",
+        "fireCloud": {
+          "predicted": null,
+          "peakScore": 97,
+          "avgScore": 30.4,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 96,
+          "avgScore": 58.1,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北九份即時影像",
@@ -1793,7 +3668,25 @@
         "phasePost": "—",
         "forecast": "—",
         "verdict": "⏳ 實測待驗證",
-        "verdictColor": "#94A3B8"
+        "verdictColor": "#94A3B8",
+        "fireCloud": {
+          "predicted": null,
+          "peakScore": 33,
+          "avgScore": 14.2,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 85,
+          "avgScore": 44.6,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北八里左岸",
@@ -1804,7 +3697,25 @@
         "phasePost": "—",
         "forecast": "—",
         "verdict": "⏳ 實測待驗證",
-        "verdictColor": "#94A3B8"
+        "verdictColor": "#94A3B8",
+        "fireCloud": {
+          "predicted": null,
+          "peakScore": 8,
+          "avgScore": 5.8,
+          "peakOffsetMin": 0,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 78,
+          "avgScore": 45.4,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北淡水漁人碼頭",
@@ -1815,7 +3726,25 @@
         "phasePost": "—",
         "forecast": "—",
         "verdict": "⏳ 實測待驗證",
-        "verdictColor": "#94A3B8"
+        "verdictColor": "#94A3B8",
+        "fireCloud": {
+          "predicted": null,
+          "peakScore": 12,
+          "avgScore": 7.0,
+          "peakOffsetMin": 30,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 95,
+          "avgScore": 61.1,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北象山看 101",
@@ -1826,7 +3755,25 @@
         "phasePost": "—",
         "forecast": "—",
         "verdict": "⏳ 實測待驗證",
-        "verdictColor": "#94A3B8"
+        "verdictColor": "#94A3B8",
+        "fireCloud": {
+          "predicted": null,
+          "peakScore": 15,
+          "avgScore": 7.2,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 48,
+          "avgScore": 29.1,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -1839,7 +3786,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "本場預報雲量細項未隨鎖定檔存下。",
-      "modelPerformance": "本場實測影格擷取失敗或找不到對應鎖定預測，暫無模型誤差判定。"
+      "modelPerformance": "🔥 火燒雲：實測平均 13.2 分、峰值 17 分（T+10），本場無預報可比對。🌅 天空美感：實測平均 31.2 分、峰值 41 分（T+10），本場無預報可比對。"
     }
   },
   {
@@ -1857,7 +3804,8 @@
       "highCloud": 9,
       "midCloud": 4,
       "lowCloud": 91,
-      "summary": "厚重低雲覆蓋天際或有陣雨，天色灰暗難見彩霞。"
+      "summary": "厚重低雲覆蓋天際或有陣雨，天色灰暗難見彩霞。",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": 24,
@@ -1868,7 +3816,25 @@
       "verdictAvg": "SLIGHT_DEVIATION",
       "verdictPeak": "MISMATCH",
       "verdictBadge": "⚠️ 出現偏差需校準（峰值 24 分／平均 14.2 分）",
-      "color": "#F87171"
+      "color": "#F87171",
+      "fireCloud": {
+        "predicted": 5,
+        "peakScore": 5,
+        "avgScore": 5.1,
+        "peakOffsetMin": -40,
+        "verdict": "EXACT_MATCH",
+        "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+        "color": "#4ADE80"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 24,
+        "avgScore": 14.2,
+        "peakOffsetMin": -10,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -1880,7 +3846,25 @@
         "phasePost": "—",
         "forecast": "5 分（低雲 91%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 5,
+          "peakScore": 5,
+          "avgScore": 5.1,
+          "peakOffsetMin": -40,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 24,
+          "avgScore": 14.2,
+          "peakOffsetMin": -10,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "基隆外木山濱海",
@@ -1891,7 +3875,25 @@
         "phasePost": "—",
         "forecast": "5 分（低雲 89%）",
         "verdict": "⏳ 實測待驗證",
-        "verdictColor": "#94A3B8"
+        "verdictColor": "#94A3B8",
+        "fireCloud": {
+          "predicted": 5,
+          "peakScore": null,
+          "avgScore": null,
+          "peakOffsetMin": null,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": null,
+          "avgScore": null,
+          "peakOffsetMin": null,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -1904,7 +3906,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 9% ／ 中空 4% ／ 低空 91%。",
-      "modelPerformance": "模型預報 5 分，實況縮時光學觀測：平均 14.2 分（誤差 9.2 分）、峰值 24 分（T-10，誤差 19 分）（MISMATCH）。"
+      "modelPerformance": "🔥 火燒雲：預報 5 分，實測平均 5.1 分、峰值 5 分（峰值誤差 0 分）。🌅 天空美感：實測平均 14.2 分、峰值 24 分（T-10），本場無預報可比對。"
     }
   },
   {
@@ -1922,7 +3924,8 @@
       "highCloud": null,
       "midCloud": null,
       "lowCloud": null,
-      "summary": ""
+      "summary": "",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": null,
@@ -1930,7 +3933,25 @@
       "verdict": "PENDING",
       "verdictBadge": "⏳ 實測待驗證",
       "color": "#94A3B8",
-      "captureStatus": "no_locked_prediction"
+      "captureStatus": "no_locked_prediction",
+      "fireCloud": {
+        "predicted": null,
+        "peakScore": 43,
+        "avgScore": 17.3,
+        "peakOffsetMin": 20,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 51,
+        "avgScore": 26.0,
+        "peakOffsetMin": 20,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -1942,7 +3963,25 @@
         "phasePost": "—",
         "forecast": "—",
         "verdict": "⏳ 實測待驗證",
-        "verdictColor": "#94A3B8"
+        "verdictColor": "#94A3B8",
+        "fireCloud": {
+          "predicted": null,
+          "peakScore": 43,
+          "avgScore": 17.3,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 51,
+          "avgScore": 26.0,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北貓空指南宮",
@@ -1953,7 +3992,25 @@
         "phasePost": "—",
         "forecast": "—",
         "verdict": "⏳ 實測待驗證",
-        "verdictColor": "#94A3B8"
+        "verdictColor": "#94A3B8",
+        "fireCloud": {
+          "predicted": null,
+          "peakScore": 9,
+          "avgScore": 18.3,
+          "peakOffsetMin": 40,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 31,
+          "avgScore": 35.7,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北九份即時影像",
@@ -1964,7 +4021,25 @@
         "phasePost": "—",
         "forecast": "—",
         "verdict": "⏳ 實測待驗證",
-        "verdictColor": "#94A3B8"
+        "verdictColor": "#94A3B8",
+        "fireCloud": {
+          "predicted": null,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 30,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 12,
+          "avgScore": 8.5,
+          "peakOffsetMin": 40,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北八里左岸",
@@ -1975,7 +4050,25 @@
         "phasePost": "—",
         "forecast": "—",
         "verdict": "⏳ 實測待驗證",
-        "verdictColor": "#94A3B8"
+        "verdictColor": "#94A3B8",
+        "fireCloud": {
+          "predicted": null,
+          "peakScore": 12,
+          "avgScore": 6.0,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 46,
+          "avgScore": 39.8,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北淡水漁人碼頭",
@@ -1986,7 +4079,25 @@
         "phasePost": "—",
         "forecast": "—",
         "verdict": "⏳ 實測待驗證",
-        "verdictColor": "#94A3B8"
+        "verdictColor": "#94A3B8",
+        "fireCloud": {
+          "predicted": null,
+          "peakScore": 12,
+          "avgScore": 7.9,
+          "peakOffsetMin": 30,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 57,
+          "avgScore": 44.9,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北象山看 101",
@@ -1997,7 +4108,25 @@
         "phasePost": "—",
         "forecast": "—",
         "verdict": "⏳ 實測待驗證",
-        "verdictColor": "#94A3B8"
+        "verdictColor": "#94A3B8",
+        "fireCloud": {
+          "predicted": null,
+          "peakScore": 19,
+          "avgScore": 6.7,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 40,
+          "avgScore": 20.8,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -2010,7 +4139,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "本場預報雲量細項未隨鎖定檔存下。",
-      "modelPerformance": "本場實測影格擷取失敗或找不到對應鎖定預測，暫無模型誤差判定。"
+      "modelPerformance": "🔥 火燒雲：實測平均 17.3 分、峰值 43 分（T+20），本場無預報可比對。🌅 天空美感：實測平均 26.0 分、峰值 51 分（T+20），本場無預報可比對。"
     }
   },
   {
@@ -2028,7 +4157,8 @@
       "highCloud": 1,
       "midCloud": 11,
       "lowCloud": 59,
-      "summary": "厚重低雲覆蓋天際或有陣雨，天色灰暗難見彩霞。"
+      "summary": "厚重低雲覆蓋天際或有陣雨，天色灰暗難見彩霞。",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": 24,
@@ -2039,7 +4169,25 @@
       "verdictAvg": "SLIGHT_DEVIATION",
       "verdictPeak": "MISMATCH",
       "verdictBadge": "⚠️ 出現偏差需校準（峰值 24 分／平均 15.2 分）",
-      "color": "#F87171"
+      "color": "#F87171",
+      "fireCloud": {
+        "predicted": 5,
+        "peakScore": 5,
+        "avgScore": 5.0,
+        "peakOffsetMin": -40,
+        "verdict": "EXACT_MATCH",
+        "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+        "color": "#4ADE80"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 24,
+        "avgScore": 15.2,
+        "peakOffsetMin": -10,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -2051,7 +4199,25 @@
         "phasePost": "—",
         "forecast": "5 分（低雲 59%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 5,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": -40,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 24,
+          "avgScore": 15.2,
+          "peakOffsetMin": -10,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "基隆外木山濱海",
@@ -2062,7 +4228,25 @@
         "phasePost": "—",
         "forecast": "92 分（低雲 20%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 92,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 10,
+          "avgScore": 11.9,
+          "peakOffsetMin": 0,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -2075,7 +4259,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 1% ／ 中空 11% ／ 低空 59%。",
-      "modelPerformance": "模型預報 5 分，實況縮時光學觀測：平均 15.2 分（誤差 10.2 分）、峰值 24 分（T-10，誤差 19 分）（MISMATCH）。"
+      "modelPerformance": "🔥 火燒雲：預報 5 分，實測平均 5.0 分、峰值 5 分（峰值誤差 0 分）。🌅 天空美感：實測平均 15.2 分、峰值 24 分（T-10），本場無預報可比對。"
     }
   },
   {
@@ -2093,7 +4277,8 @@
       "highCloud": 0,
       "midCloud": 11,
       "lowCloud": 59,
-      "summary": "厚重低雲覆蓋天際或有陣雨，天色灰暗難見彩霞。"
+      "summary": "厚重低雲覆蓋天際或有陣雨，天色灰暗難見彩霞。",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": 28,
@@ -2104,7 +4289,25 @@
       "verdictAvg": "SLIGHT_DEVIATION",
       "verdictPeak": "MISMATCH",
       "verdictBadge": "⚠️ 出現偏差需校準（峰值 28 分／平均 21.1 分）",
-      "color": "#F87171"
+      "color": "#F87171",
+      "fireCloud": {
+        "predicted": 5,
+        "peakScore": 5,
+        "avgScore": 5.7,
+        "peakOffsetMin": 0,
+        "verdict": "EXACT_MATCH",
+        "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+        "color": "#4ADE80"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 28,
+        "avgScore": 21.1,
+        "peakOffsetMin": 10,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -2116,7 +4319,25 @@
         "phasePost": "—",
         "forecast": "5 分（低雲 59%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 5,
+          "peakScore": 5,
+          "avgScore": 5.7,
+          "peakOffsetMin": 0,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 28,
+          "avgScore": 21.1,
+          "peakOffsetMin": 10,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北貓空指南宮",
@@ -2127,7 +4348,25 @@
         "phasePost": "—",
         "forecast": "5 分（低雲 75%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 5,
+          "peakScore": 8,
+          "avgScore": 5.9,
+          "peakOffsetMin": 40,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 26,
+          "avgScore": 19.4,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北九份即時影像",
@@ -2138,7 +4377,25 @@
         "phasePost": "—",
         "forecast": "5 分（低雲 90%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80"
+        "verdictColor": "#4ADE80",
+        "fireCloud": {
+          "predicted": 5,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 30,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 12,
+          "avgScore": 8.5,
+          "peakOffsetMin": 30,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北八里左岸",
@@ -2149,7 +4406,25 @@
         "phasePost": "—",
         "forecast": "5 分（低雲 45%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 5,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 42,
+          "avgScore": 18.7,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北淡水漁人碼頭",
@@ -2160,7 +4435,25 @@
         "phasePost": "—",
         "forecast": "5 分（低雲 45%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 5,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 48,
+          "avgScore": 22.3,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北象山看 101",
@@ -2171,7 +4464,25 @@
         "phasePost": "—",
         "forecast": "5 分（低雲 75%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24"
+        "verdictColor": "#FBBF24",
+        "fireCloud": {
+          "predicted": 5,
+          "peakScore": 10,
+          "avgScore": 5.6,
+          "peakOffsetMin": 40,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 21,
+          "avgScore": 15.2,
+          "peakOffsetMin": 10,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -2184,7 +4495,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 11% ／ 低空 59%。",
-      "modelPerformance": "模型預報 5 分，實況縮時光學觀測：平均 21.1 分（誤差 16.1 分）、峰值 28 分（T+10，誤差 23 分）（MISMATCH）。"
+      "modelPerformance": "🔥 火燒雲：預報 5 分，實測平均 5.7 分、峰值 5 分（峰值誤差 0 分）。🌅 天空美感：實測平均 21.1 分、峰值 28 分（T+10），本場無預報可比對。"
     }
   },
   {
@@ -2202,7 +4513,8 @@
       "highCloud": 0,
       "midCloud": 5,
       "lowCloud": 16,
-      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。"
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": 18,
@@ -2213,7 +4525,25 @@
       "verdictAvg": "SLIGHT_DEVIATION",
       "verdictPeak": "SLIGHT_DEVIATION",
       "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)（峰值 18 分／平均 17.1 分）",
-      "color": "#FBBF24"
+      "color": "#FBBF24",
+      "fireCloud": {
+        "predicted": 30,
+        "peakScore": 5,
+        "avgScore": 5.4,
+        "peakOffsetMin": -40,
+        "verdict": "MISMATCH",
+        "verdictBadge": "⚠️ 出現偏差需校準",
+        "color": "#F87171"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 18,
+        "avgScore": 17.1,
+        "peakOffsetMin": -20,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -2225,7 +4555,25 @@
         "phasePost": "—",
         "forecast": "30 分（低雲 16%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24"
+        "verdictColor": "#FBBF24",
+        "fireCloud": {
+          "predicted": 30,
+          "peakScore": 5,
+          "avgScore": 5.4,
+          "peakOffsetMin": -40,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 18,
+          "avgScore": 17.1,
+          "peakOffsetMin": -20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "基隆外木山濱海",
@@ -2236,7 +4584,25 @@
         "phasePost": "—",
         "forecast": "24 分（低雲 28%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24"
+        "verdictColor": "#FBBF24",
+        "fireCloud": {
+          "predicted": 24,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 11,
+          "avgScore": 10.9,
+          "peakOffsetMin": 0,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -2249,7 +4615,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 5% ／ 低空 16%。",
-      "modelPerformance": "模型預報 30 分，實況縮時光學觀測：平均 17.1 分（誤差 12.899999999999999 分）、峰值 18 分（T-20，誤差 12 分）（SLIGHT_DEVIATION）。"
+      "modelPerformance": "🔥 火燒雲：預報 30 分，實測平均 5.4 分、峰值 5 分（峰值誤差 25 分）。🌅 天空美感：實測平均 17.1 分、峰值 18 分（T-20），本場無預報可比對。"
     }
   },
   {
@@ -2267,7 +4633,8 @@
       "highCloud": 49,
       "midCloud": 9,
       "lowCloud": 6,
-      "summary": "局部泛紅・唯美溫潤。地平線或天際線邊緣可見金橘色光芒。"
+      "summary": "局部泛紅・唯美溫潤。地平線或天際線邊緣可見金橘色光芒。",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": 53,
@@ -2278,7 +4645,25 @@
       "verdictAvg": "MISMATCH",
       "verdictPeak": "SLIGHT_DEVIATION",
       "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)（峰值 53 分／平均 28.6 分）",
-      "color": "#FBBF24"
+      "color": "#FBBF24",
+      "fireCloud": {
+        "predicted": 67,
+        "peakScore": 15,
+        "avgScore": 9.9,
+        "peakOffsetMin": 0,
+        "verdict": "MISMATCH",
+        "verdictBadge": "⚠️ 出現偏差需校準",
+        "color": "#F87171"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 53,
+        "avgScore": 28.6,
+        "peakOffsetMin": 0,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -2290,7 +4675,25 @@
         "phasePost": "—",
         "forecast": "67 分（低雲 6%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24"
+        "verdictColor": "#FBBF24",
+        "fireCloud": {
+          "predicted": 67,
+          "peakScore": 15,
+          "avgScore": 9.9,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 53,
+          "avgScore": 28.6,
+          "peakOffsetMin": 0,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北貓空指南宮",
@@ -2301,7 +4704,25 @@
         "phasePost": "—",
         "forecast": "64 分（低雲 10%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 64,
+          "peakScore": 43,
+          "avgScore": 17.0,
+          "peakOffsetMin": 20,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 100,
+          "avgScore": 68.7,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北九份即時影像",
@@ -2312,7 +4733,25 @@
         "phasePost": "—",
         "forecast": "39 分（低雲 28%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 39,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 40,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 12,
+          "avgScore": 12.0,
+          "peakOffsetMin": 40,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北八里左岸",
@@ -2323,7 +4762,25 @@
         "phasePost": "—",
         "forecast": "47 分（低雲 9%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24"
+        "verdictColor": "#FBBF24",
+        "fireCloud": {
+          "predicted": 47,
+          "peakScore": 21,
+          "avgScore": 9.3,
+          "peakOffsetMin": 20,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 59,
+          "avgScore": 41.0,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "新北淡水漁人碼頭",
@@ -2334,7 +4791,25 @@
         "phasePost": "—",
         "forecast": "48 分（低雲 9%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 48,
+          "peakScore": 79,
+          "avgScore": 22.2,
+          "peakOffsetMin": 20,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 100,
+          "avgScore": 66.9,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "台北象山看 101",
@@ -2345,7 +4820,25 @@
         "phasePost": "—",
         "forecast": "64 分（低雲 10%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 64,
+          "peakScore": 12,
+          "avgScore": 7.0,
+          "peakOffsetMin": 30,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 34,
+          "avgScore": 25.4,
+          "peakOffsetMin": 20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -2358,7 +4851,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 49% ／ 中空 9% ／ 低空 6%。",
-      "modelPerformance": "模型預報 67 分，實況縮時光學觀測：平均 28.6 分（誤差 38.4 分）、峰值 53 分（T+0，誤差 14 分）（SLIGHT_DEVIATION）。"
+      "modelPerformance": "🔥 火燒雲：預報 67 分，實測平均 9.9 分、峰值 15 分（T+0，峰值誤差 52 分）。🌅 天空美感：實測平均 28.6 分、峰值 53 分（T+0），本場無預報可比對。"
     }
   },
   {
@@ -2376,7 +4869,8 @@
       "highCloud": 59,
       "midCloud": 0,
       "lowCloud": 5,
-      "summary": "局部泛紅・唯美溫潤。地平線或天際線邊緣可見金橘色光芒。"
+      "summary": "局部泛紅・唯美溫潤。地平線或天際線邊緣可見金橘色光芒。",
+      "beautyScore": null
     },
     "groundTruth": {
       "score": 18,
@@ -2387,7 +4881,25 @@
       "verdictAvg": "MISMATCH",
       "verdictPeak": "MISMATCH",
       "verdictBadge": "⚠️ 出現偏差需校準（峰值 18 分／平均 15.9 分）",
-      "color": "#F87171"
+      "color": "#F87171",
+      "fireCloud": {
+        "predicted": 54,
+        "peakScore": 18,
+        "avgScore": 7.7,
+        "peakOffsetMin": -20,
+        "verdict": "MISMATCH",
+        "verdictBadge": "⚠️ 出現偏差需校準",
+        "color": "#F87171"
+      },
+      "beauty": {
+        "predicted": null,
+        "peakScore": 18,
+        "avgScore": 15.9,
+        "peakOffsetMin": -20,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
     },
     "stations": [
       {
@@ -2399,7 +4911,25 @@
         "phasePost": "—",
         "forecast": "54 分（低雲 5%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 54,
+          "peakScore": 18,
+          "avgScore": 7.7,
+          "peakOffsetMin": -20,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 18,
+          "avgScore": 15.9,
+          "peakOffsetMin": -20,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       },
       {
         "name": "基隆外木山濱海",
@@ -2410,7 +4940,25 @@
         "phasePost": "—",
         "forecast": "53 分（低雲 2%）",
         "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171"
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 53,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": -10,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": null,
+          "peakScore": 22,
+          "avgScore": 20.4,
+          "peakOffsetMin": 0,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
       }
     ],
     "stationSummary": {
@@ -2423,7 +4971,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 59% ／ 中空 0% ／ 低空 5%。",
-      "modelPerformance": "模型預報 54 分，實況縮時光學觀測：平均 15.9 分（誤差 38.1 分）、峰值 18 分（T-20，誤差 36 分）（MISMATCH）。"
+      "modelPerformance": "🔥 火燒雲：預報 54 分，實測平均 7.7 分、峰值 18 分（T-20，峰值誤差 36 分）。🌅 天空美感：實測平均 15.9 分、峰值 18 分（T-20），本場無預報可比對。"
     }
   },
   {
