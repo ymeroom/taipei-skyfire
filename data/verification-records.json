@@ -26,7 +26,7 @@
     "capture": {
       "kind": "timelapse-multi-frame",
       "frameCount": 9,
-      "okFrameCount": 3,
+      "okFrameCount": 7,
       "offsetsMin": [
         -40,
         -30,
@@ -40,13 +40,13 @@
       ]
     },
     "verification": {
-      "avgScore": 15.0,
+      "avgScore": 10.3,
       "peakScore": 21,
       "peakOffsetMin": -20,
       "peakSide": "pre-sunrise",
-      "verifiedAt": "2026-09-26T21:30:58.099716+00:00",
+      "verifiedAt": "2026-09-27T01:01:06.983329+00:00",
       "status": "verified_completed",
-      "errorAvgAbsolute": 45.0,
+      "errorAvgAbsolute": 49.7,
       "verdictAvg": "MISMATCH",
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 39,
@@ -56,7 +56,7 @@
         "avgScore": 5.0,
         "peakScore": 5,
         "peakOffsetMin": -40,
-        "okFrameCount": 3,
+        "okFrameCount": 7,
         "unreadableFrameCount": 0,
         "predicted": 60,
         "errorPeakAbsolute": 55,
@@ -98,7 +98,7 @@
     "capture": {
       "kind": "timelapse-multi-frame",
       "frameCount": 9,
-      "okFrameCount": 3,
+      "okFrameCount": 9,
       "offsetsMin": [
         -40,
         -30,
@@ -112,24 +112,24 @@
       ]
     },
     "verification": {
-      "avgScore": 9.3,
-      "peakScore": 18,
-      "peakOffsetMin": -20,
+      "avgScore": 17.9,
+      "peakScore": 21,
+      "peakOffsetMin": -10,
       "peakSide": "pre-sunrise",
-      "verifiedAt": "2026-09-26T21:30:58.099183+00:00",
+      "verifiedAt": "2026-09-27T01:01:06.982802+00:00",
       "status": "verified_completed",
-      "errorAvgAbsolute": 38.7,
+      "errorAvgAbsolute": 30.1,
       "verdictAvg": "MISMATCH",
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
-      "errorPeakAbsolute": 30,
+      "errorPeakAbsolute": 27,
       "verdictPeak": "MISMATCH",
       "verdictPeakBadge": "⚠️ 出現偏差需校準",
       "fireCloud": {
         "avgScore": 5.0,
         "peakScore": 5,
-        "peakOffsetMin": -20,
-        "okFrameCount": 1,
-        "unreadableFrameCount": 2,
+        "peakOffsetMin": -10,
+        "okFrameCount": 6,
+        "unreadableFrameCount": 3,
         "predicted": 48,
         "errorPeakAbsolute": 43,
         "verdictPeak": "MISMATCH",
@@ -137,7 +137,7 @@
       },
       "beauty": {
         "predicted": 19,
-        "errorPeakAbsolute": 1,
+        "errorPeakAbsolute": 2,
         "verdictPeak": "EXACT_MATCH",
         "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
       }
