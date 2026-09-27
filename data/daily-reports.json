@@ -88,8 +88,8 @@
         "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 10,
-          "peakScore": 14,
-          "avgScore": 7.4,
+          "peakScore": 13,
+          "avgScore": 7.3,
           "peakOffsetMin": 10,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -110,7 +110,7 @@
         "icon": "🏮",
         "tag": "新北觀光 4K 直播・山海交界落日",
         "phasePrep": "—",
-        "phasePeak": "平均 47.9 分・峰值 81 分（T+10）",
+        "phasePeak": "平均 48.6 分・峰值 81 分（T+20）",
         "phasePost": "—",
         "forecast": "10 分（低雲 1%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -118,7 +118,7 @@
         "fireCloud": {
           "predicted": 10,
           "peakScore": 39,
-          "avgScore": 14.2,
+          "avgScore": 14.1,
           "peakOffsetMin": 10,
           "verdict": "MISMATCH",
           "verdictBadge": "⚠️ 出現偏差需校準",
@@ -127,8 +127,8 @@
         "beauty": {
           "predicted": 53,
           "peakScore": 81,
-          "avgScore": 47.9,
-          "peakOffsetMin": 10,
+          "avgScore": 48.6,
+          "peakOffsetMin": 20,
           "verdict": "MISMATCH",
           "verdictBadge": "⚠️ 出現偏差需校準",
           "color": "#F87171"
@@ -176,7 +176,7 @@
         "fireCloud": {
           "predicted": 10,
           "peakScore": 23,
-          "avgScore": 9.4,
+          "avgScore": 9.2,
           "peakOffsetMin": 10,
           "verdict": "SLIGHT_DEVIATION",
           "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
