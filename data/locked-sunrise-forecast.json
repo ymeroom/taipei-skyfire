@@ -1,7 +1,7 @@
 {
-  "date": "2026-09-28",
+  "date": "2026-09-29",
   "session": "sunrise",
-  "lockedAt": "2026-09-27T15:45:18.986Z",
+  "lockedAt": "2026-09-28T15:45:19.939Z",
   "skyfire": {
     "score": 10,
     "rating": {
@@ -15,12 +15,12 @@
     },
     "metrics": {
       "cloudQualityScore": 0,
-      "lowCloudPenalty": 16,
-      "horizonScore": 12,
+      "lowCloudPenalty": 13,
+      "horizonScore": 14,
       "visibilityScore": 15,
-      "horizonClearance": 41,
-      "visKm": 260,
-      "clearSkyUncappedScore": 17
+      "horizonClearance": 46,
+      "visKm": 380,
+      "clearSkyUncappedScore": 22
     },
     "diagnostics": [
       {
@@ -36,12 +36,12 @@
       {
         "label": "遠方東方（太平洋/宜蘭外海）透光窗",
         "status": "fair",
-        "desc": "低雲量約 48%，地平線具有部分透光縫隙，呈現局部霞光。"
+        "desc": "低雲量約 44%，地平線具有部分透光縫隙，呈現局部霞光。"
       },
       {
         "label": "大氣能見度與通透度",
         "status": "optimal",
-        "desc": "能見度優異（260 公里），大氣清澈通透，晚霞色彩飽和純淨。"
+        "desc": "能見度優異（380 公里），大氣清澈通透，晚霞色彩飽和純淨。"
       }
     ],
     "photoTips": {
@@ -56,11 +56,11 @@
   "weather": {
     "cloudHigh": 0,
     "cloudMid": 0,
-    "cloudLow": 48,
-    "cloudTotal": 48,
+    "cloudLow": 44,
+    "cloudTotal": 44,
     "humidity": 96,
     "precipProb": 0,
-    "visibilityKm": 260
+    "visibilityKm": 380
   },
   "stations": {
     "hongludi": {
@@ -71,16 +71,16 @@
       "weather": {
         "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 48,
-        "cloudTotal": 48,
+        "cloudLow": 44,
+        "cloudTotal": 44,
         "humidity": 96,
         "precipProb": 0,
-        "visibilityKm": 260
+        "visibilityKm": 380
       },
       "metrics": {
-        "horizonClearance": 41,
-        "visKm": 260,
-        "clearSkyUncappedScore": 17
+        "horizonClearance": 46,
+        "visKm": 380,
+        "clearSkyUncappedScore": 22
       }
     },
     "waimushan": {
@@ -91,15 +91,15 @@
       "weather": {
         "cloudHigh": 1,
         "cloudMid": 0,
-        "cloudLow": 60,
-        "cloudTotal": 60,
-        "humidity": 94,
+        "cloudLow": 66,
+        "cloudTotal": 66,
+        "humidity": 96,
         "precipProb": 0,
-        "visibilityKm": 280
+        "visibilityKm": 320
       },
       "metrics": {
-        "horizonClearance": 27,
-        "visKm": 280,
+        "horizonClearance": 22,
+        "visKm": 320,
         "clearSkyUncappedScore": 5
       }
     }
