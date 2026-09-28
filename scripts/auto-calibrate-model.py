@@ -16,18 +16,24 @@ if sys.platform == 'win32':
     except Exception:
         pass
 
+def _get(params, key, default):
+    """dict.get 只在鍵不存在時給預設值；紀錄裡存成 null 的欄位 (如 9/11 的 totalCloud) 也要給。"""
+    v = params.get(key)
+    return default if v is None else v
+
+
 def calculate_score(params, weights):
     """依照物理模型計算火燒雲分數"""
-    high = params.get('highCloud', 0)
-    mid = params.get('midCloud', 0)
-    low = params.get('lowCloud', 0)
-    total = params.get('totalCloud', min(100, high + mid * 0.5))
-    vis = params.get('visibilityKm', 20.0)
+    high = _get(params, 'highCloud', 0)
+    mid = _get(params, 'midCloud', 0)
+    low = _get(params, 'lowCloud', 0)
+    total = _get(params, 'totalCloud', min(100, high + mid * 0.5))
+    vis = _get(params, 'visibilityKm', 20.0)
     # 2026-09-29 前起霧的 380 公尺被存成 visibilityKm: 380；超過 100 公里的是公尺原值
-    if isinstance(vis, (int, float)) and vis > 100:
+    if vis > 100:
         vis = vis / 1000.0
-    humidity = params.get('humidity', 65)
-    precip = params.get('precipProb', 0)
+    humidity = _get(params, 'humidity', 65)
+    precip = _get(params, 'precipProb', 0)
 
     # 1. 高雲
     if high >= 25 and high <= 75:
@@ -61,7 +67,7 @@ def calculate_score(params, weights):
         low_penalty = 35.0 + (low - 65) * 0.6 * slope
 
     # 4. 透光窗
-    horizon = params.get('horizonClearance', max(0, 100 - (low * 1.1 + max(0, total - 60) * 0.5)))
+    horizon = _get(params, 'horizonClearance', max(0, 100 - (low * 1.1 + max(0, total - 60) * 0.5)))
     horizon_score = (horizon / 100.0) * weights['horizonMax']
 
     # 5. 能見度
