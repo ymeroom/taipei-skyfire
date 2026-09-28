@@ -1,5 +1,437 @@
 [
   {
+    "id": "rec-2026-09-28-sunset-maokong",
+    "date": "2026-09-28",
+    "session": "sunset",
+    "station": "maokong",
+    "targetTime": "2026-09-28T09:45:46.102000+00:00",
+    "source": "貓空（縮時多影格）",
+    "prediction": {
+      "score": 10,
+      "rating": "晴空無雲",
+      "color": "#7B88A8",
+      "beautyScore": 84,
+      "clearSkyUncappedScore": 53,
+      "highCloud": 0,
+      "midCloud": 0,
+      "lowCloud": 5,
+      "totalCloud": 5,
+      "humidity": 72,
+      "precipProb": 0,
+      "horizonClearance": 94,
+      "visibilityKm": 28.2,
+      "isSimulated": false,
+      "lockedAt": "2026-09-28T07:30:24.140Z"
+    },
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 9,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 69.1,
+      "peakScore": 100,
+      "peakOffsetMin": 20,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-09-28T10:46:43.493169+00:00",
+      "status": "verified_completed",
+      "errorAvgAbsolute": 59.099999999999994,
+      "verdictAvg": "MISMATCH",
+      "verdictAvgBadge": "⚠️ 出現偏差需校準",
+      "errorPeakAbsolute": 90,
+      "verdictPeak": "MISMATCH",
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 13.8,
+        "peakScore": 39,
+        "peakOffsetMin": 10,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 10,
+        "errorPeakAbsolute": 29,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      },
+      "beauty": {
+        "predicted": 84,
+        "errorPeakAbsolute": 16,
+        "verdictPeak": "SLIGHT_DEVIATION",
+        "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+      }
+    }
+  },
+  {
+    "id": "rec-2026-09-28-sunset-jiufen",
+    "date": "2026-09-28",
+    "session": "sunset",
+    "station": "jiufen",
+    "targetTime": "2026-09-28T09:45:46.102000+00:00",
+    "source": "九份（縮時多影格）",
+    "prediction": {
+      "score": 10,
+      "rating": "晴空無雲",
+      "color": "#7B88A8",
+      "beautyScore": 51,
+      "clearSkyUncappedScore": 50,
+      "highCloud": 0,
+      "midCloud": 0,
+      "lowCloud": 4,
+      "totalCloud": 4,
+      "humidity": 84,
+      "precipProb": 6,
+      "horizonClearance": 96,
+      "visibilityKm": 27.1,
+      "isSimulated": false,
+      "lockedAt": "2026-09-28T07:30:24.140Z"
+    },
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 9,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 46.1,
+      "peakScore": 89,
+      "peakOffsetMin": 20,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-09-28T10:46:43.492701+00:00",
+      "status": "verified_completed",
+      "errorAvgAbsolute": 36.1,
+      "verdictAvg": "MISMATCH",
+      "verdictAvgBadge": "⚠️ 出現偏差需校準",
+      "errorPeakAbsolute": 79,
+      "verdictPeak": "MISMATCH",
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.7,
+        "peakScore": 7,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 10,
+        "errorPeakAbsolute": 3,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      },
+      "beauty": {
+        "predicted": 51,
+        "errorPeakAbsolute": 38,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      }
+    }
+  },
+  {
+    "id": "rec-2026-09-28-sunset-bali",
+    "date": "2026-09-28",
+    "session": "sunset",
+    "station": "bali",
+    "targetTime": "2026-09-28T09:45:46.102000+00:00",
+    "source": "八里左岸（縮時多影格）",
+    "prediction": {
+      "score": 10,
+      "rating": "晴空無雲",
+      "color": "#7B88A8",
+      "beautyScore": 88,
+      "clearSkyUncappedScore": 55,
+      "highCloud": 0,
+      "midCloud": 0,
+      "lowCloud": 0,
+      "totalCloud": 0,
+      "humidity": 75,
+      "precipProb": 0,
+      "horizonClearance": 100,
+      "visibilityKm": 24.5,
+      "isSimulated": false,
+      "lockedAt": "2026-09-28T07:30:24.140Z"
+    },
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 9,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 52.3,
+      "peakScore": 85,
+      "peakOffsetMin": 20,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-09-28T10:46:43.492269+00:00",
+      "status": "verified_completed",
+      "errorAvgAbsolute": 42.3,
+      "verdictAvg": "MISMATCH",
+      "verdictAvgBadge": "⚠️ 出現偏差需校準",
+      "errorPeakAbsolute": 75,
+      "verdictPeak": "MISMATCH",
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.1,
+        "peakScore": 6,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 10,
+        "errorPeakAbsolute": 4,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      },
+      "beauty": {
+        "predicted": 88,
+        "errorPeakAbsolute": 3,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      }
+    }
+  },
+  {
+    "id": "rec-2026-09-28-sunset-tamsui",
+    "date": "2026-09-28",
+    "session": "sunset",
+    "station": "tamsui",
+    "targetTime": "2026-09-28T09:45:46.102000+00:00",
+    "source": "淡水漁人碼頭（縮時多影格）",
+    "prediction": {
+      "score": 10,
+      "rating": "晴空無雲",
+      "color": "#7B88A8",
+      "beautyScore": 97,
+      "clearSkyUncappedScore": 55,
+      "highCloud": 0,
+      "midCloud": 0,
+      "lowCloud": 0,
+      "totalCloud": 0,
+      "humidity": 75,
+      "precipProb": 0,
+      "horizonClearance": 100,
+      "visibilityKm": 24.5,
+      "isSimulated": false,
+      "lockedAt": "2026-09-28T07:30:24.140Z"
+    },
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 9,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 65.4,
+      "peakScore": 100,
+      "peakOffsetMin": 20,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-09-28T10:46:43.491843+00:00",
+      "status": "verified_completed",
+      "errorAvgAbsolute": 55.400000000000006,
+      "verdictAvg": "MISMATCH",
+      "verdictAvgBadge": "⚠️ 出現偏差需校準",
+      "errorPeakAbsolute": 90,
+      "verdictPeak": "MISMATCH",
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 5.6,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 10,
+        "errorPeakAbsolute": 5,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      },
+      "beauty": {
+        "predicted": 97,
+        "errorPeakAbsolute": 3,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      }
+    }
+  },
+  {
+    "id": "rec-2026-09-28-sunset-dadaocheng",
+    "date": "2026-09-28",
+    "session": "sunset",
+    "station": "dadaocheng",
+    "targetTime": "2026-09-28T09:45:46.102000+00:00",
+    "source": "大稻埕（縮時多影格）",
+    "prediction": {
+      "score": 10,
+      "rating": "晴空無雲",
+      "color": "#7B88A8",
+      "beautyScore": 51,
+      "clearSkyUncappedScore": 54,
+      "highCloud": 0,
+      "midCloud": 0,
+      "lowCloud": 1,
+      "totalCloud": 1,
+      "humidity": 61,
+      "precipProb": 0,
+      "horizonClearance": 98,
+      "visibilityKm": 30.5,
+      "isSimulated": false,
+      "lockedAt": "2026-09-28T07:30:24.140Z"
+    },
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 9,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 45.9,
+      "peakScore": 57,
+      "peakOffsetMin": 10,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-09-28T10:46:43.491371+00:00",
+      "status": "verified_completed",
+      "errorAvgAbsolute": 35.9,
+      "verdictAvg": "MISMATCH",
+      "verdictAvgBadge": "⚠️ 出現偏差需校準",
+      "errorPeakAbsolute": 47,
+      "verdictPeak": "MISMATCH",
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 14.1,
+        "peakScore": 9,
+        "peakOffsetMin": 10,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 10,
+        "errorPeakAbsolute": 1,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      },
+      "beauty": {
+        "predicted": 51,
+        "errorPeakAbsolute": 6,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      }
+    }
+  },
+  {
+    "id": "rec-2026-09-28-sunset-xiangshan",
+    "date": "2026-09-28",
+    "session": "sunset",
+    "station": "xiangshan",
+    "targetTime": "2026-09-28T09:45:46.102000+00:00",
+    "source": "101大樓（縮時多影格）",
+    "prediction": {
+      "score": 10,
+      "rating": "晴空無雲",
+      "color": "#7B88A8",
+      "beautyScore": 33,
+      "clearSkyUncappedScore": 53,
+      "highCloud": 0,
+      "midCloud": 0,
+      "lowCloud": 5,
+      "totalCloud": 5,
+      "humidity": 72,
+      "precipProb": 0,
+      "horizonClearance": 94,
+      "visibilityKm": 28.2,
+      "isSimulated": false,
+      "lockedAt": "2026-09-28T07:30:24.140Z"
+    },
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 9,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 33.7,
+      "peakScore": 53,
+      "peakOffsetMin": 20,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-09-28T10:46:43.490731+00:00",
+      "status": "verified_completed",
+      "errorAvgAbsolute": 23.700000000000003,
+      "verdictAvg": "MISMATCH",
+      "verdictAvgBadge": "⚠️ 出現偏差需校準",
+      "errorPeakAbsolute": 43,
+      "verdictPeak": "MISMATCH",
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
+      "fireCloud": {
+        "avgScore": 8.9,
+        "peakScore": 11,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 10,
+        "errorPeakAbsolute": 1,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      },
+      "beauty": {
+        "predicted": 33,
+        "errorPeakAbsolute": 20,
+        "verdictPeak": "MISMATCH",
+        "verdictPeakBadge": "⚠️ 出現偏差需校準"
+      }
+    }
+  },
+  {
     "id": "rec-2026-09-28-sunrise-hongludi",
     "date": "2026-09-28",
     "session": "sunrise",
