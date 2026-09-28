@@ -18,14 +18,14 @@
       "beautyScore": 27
     },
     "groundTruth": {
-      "score": 14,
-      "avgScore": 12.7,
-      "peakScore": 14,
+      "score": 16,
+      "avgScore": 18.3,
+      "peakScore": 16,
       "peakOffsetMin": -20,
       "verdict": "EXACT_MATCH",
-      "verdictAvg": "EXACT_MATCH",
+      "verdictAvg": "SLIGHT_DEVIATION",
       "verdictPeak": "EXACT_MATCH",
-      "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)（峰值 14 分／平均 12.7 分）",
+      "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)（峰值 16 分／平均 18.3 分）",
       "color": "#4ADE80",
       "fireCloud": {
         "predicted": 10,
@@ -38,8 +38,8 @@
       },
       "beauty": {
         "predicted": 27,
-        "peakScore": 14,
-        "avgScore": 12.7,
+        "peakScore": 16,
+        "avgScore": 18.3,
         "peakOffsetMin": -20,
         "verdict": "SLIGHT_DEVIATION",
         "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
@@ -52,7 +52,7 @@
         "icon": "⛰️",
         "tag": "新北觀光・雙北盆地俯瞰晨光",
         "phasePrep": "—",
-        "phasePeak": "平均 12.7 分・峰值 14 分（T-20）",
+        "phasePeak": "平均 18.3 分・峰值 16 分（T-20）",
         "phasePost": "—",
         "forecast": "10 分（低雲 48%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -68,8 +68,8 @@
         },
         "beauty": {
           "predicted": 27,
-          "peakScore": 14,
-          "avgScore": 12.7,
+          "peakScore": 16,
+          "avgScore": 18.3,
           "peakOffsetMin": -20,
           "verdict": "SLIGHT_DEVIATION",
           "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
@@ -81,42 +81,42 @@
         "icon": "🌊",
         "tag": "國海院・太平洋日出第一線",
         "phasePrep": "—",
-        "phasePeak": "平均 11.0 分・峰值 23 分（T-20）",
+        "phasePeak": "9 張縮時影格全數擷取失敗，本場無實測資料",
         "phasePost": "—",
         "forecast": "5 分（低雲 60%）",
-        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24",
+        "verdict": "⏳ 實測待驗證",
+        "verdictColor": "#94A3B8",
         "fireCloud": {
           "predicted": 5,
-          "peakScore": 5,
-          "avgScore": 5.0,
-          "peakOffsetMin": -20,
-          "verdict": "EXACT_MATCH",
-          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
-          "color": "#4ADE80"
+          "peakScore": null,
+          "avgScore": null,
+          "peakOffsetMin": null,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
         },
         "beauty": {
           "predicted": 25,
-          "peakScore": 23,
-          "avgScore": 11.0,
-          "peakOffsetMin": -20,
-          "verdict": "EXACT_MATCH",
-          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
-          "color": "#4ADE80"
+          "peakScore": null,
+          "avgScore": null,
+          "peakOffsetMin": null,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
         }
       }
     ],
     "stationSummary": {
-      "verified": 2,
-      "pending": 0,
-      "bestStation": "waimushan",
-      "bestScore": 23,
-      "worstError": 18,
-      "meanError": 11.0
+      "verified": 1,
+      "pending": 1,
+      "bestStation": "hongludi",
+      "bestScore": 16,
+      "worstError": 6,
+      "meanError": 6.0
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 48%。",
-      "modelPerformance": "🔥 火燒雲：預報 10 分，實測平均 5.0 分、峰值 5 分（峰值誤差 5 分）。🌅 天空美感：預報 27 分，實測平均 12.7 分、峰值 14 分（T-20，峰值誤差 13 分）。"
+      "modelPerformance": "🔥 火燒雲：預報 10 分，實測平均 5.0 分、峰值 5 分（峰值誤差 5 分）。🌅 天空美感：預報 27 分，實測平均 18.3 分、峰值 16 分（T-20，峰值誤差 11 分）。"
     }
   },
   {
