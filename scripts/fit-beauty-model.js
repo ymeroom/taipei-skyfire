@@ -14,8 +14,20 @@ const path = require('path');
 const SkyFireEngine = require('../js/skyfire-engine.js');
 const { fitStation } = require('../js/beauty-model.js');
 
+// 2026-09-29 前引擎把 < 1000 的能見度當公里，起霧時的 380 公尺被存成 visibilityKm: 380。
+// 地面能見度不會超過 100 公里，超過的就是當年的公尺原值。
+const LEGACY_METERS_THRESHOLD_KM = 100;
+
+function visibilityMeters(visibilityKm) {
+  // 缺值原樣傳回：鎖定時 null 就是以 null 計分，重跑要一致
+  if (typeof visibilityKm !== 'number') return visibilityKm;
+  return visibilityKm > LEGACY_METERS_THRESHOLD_KM ? visibilityKm : visibilityKm * 1000;
+}
+
 function engineInputX(prediction, session) {
-  if (typeof prediction.clearSkyUncappedScore === 'number') return prediction.clearSkyUncappedScore;
+  // 能見度被存錯的紀錄，存下的 clearSkyUncappedScore 也是用錯的能見度算的，要重跑
+  const legacyVis = prediction.visibilityKm > LEGACY_METERS_THRESHOLD_KM;
+  if (typeof prediction.clearSkyUncappedScore === 'number' && !legacyVis) return prediction.clearSkyUncappedScore;
   const { highCloud, midCloud, lowCloud } = prediction;
   if ([highCloud, midCloud, lowCloud].some(v => typeof v !== 'number')) return null;
   return SkyFireEngine.calculate({
@@ -24,7 +36,7 @@ function engineInputX(prediction, session) {
     humidity: prediction.humidity,
     precipProb: prediction.precipProb,
     horizonClearance: prediction.horizonClearance,
-    visibility: prediction.visibilityKm,
+    visibility: visibilityMeters(prediction.visibilityKm),
     type: session,
   }).metrics.clearSkyUncappedScore;
 }

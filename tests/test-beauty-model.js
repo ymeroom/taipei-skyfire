@@ -31,11 +31,20 @@ assert.strictEqual(predictBeauty(undefined, 'tamsui', 20), null);
 const pred = { score: 35, highCloud: 0, midCloud: 0, lowCloud: 2, totalCloud: 2, humidity: 72,
   precipProb: 0, horizonClearance: 97, visibilityKm: 25.1 };
 const replay = SkyFireEngine.calculate({ highCloud: 0, midCloud: 0, lowCloud: 2, totalCloud: 2, humidity: 72,
-  precipProb: 0, horizonClearance: 97, visibility: 25.1, type: 'sunset' });
+  precipProb: 0, horizonClearance: 97, visibility: 25100, type: 'sunset' });
 assert(replay.metrics.clearSkyUncappedScore > 35, '美感模型的輸入不受火燒雲無雲上限影響');
 assert.strictEqual(engineInputX(pred, 'sunset'), replay.metrics.clearSkyUncappedScore);
 assert.strictEqual(engineInputX({ ...pred, clearSkyUncappedScore: 44 }, 'sunset'), 44, '有存就直接用');
 assert.strictEqual(engineInputX({ score: 5 }, 'sunset'), null, '缺雲量輸入不猜');
+
+// 舊紀錄起霧時把 380 公尺存成 visibilityKm: 380，重跑時要當公尺，存下的 clearSkyUncappedScore 也不能信
+const foggy = { highCloud: 0, midCloud: 0, lowCloud: 44, totalCloud: 44, humidity: 96, precipProb: 0,
+  horizonClearance: 46 };
+const foggyTruth = SkyFireEngine.calculate({ ...foggy, visibility: 380, type: 'sunrise' }).metrics.clearSkyUncappedScore;
+assert.strictEqual(engineInputX({ ...foggy, visibilityKm: 380, clearSkyUncappedScore: 22 }, 'sunrise'), foggyTruth,
+  '能見度存錯的紀錄要用 380 公尺重跑');
+assert(foggyTruth < 22, `380 公尺的霧不該拿能見度滿分，實際: ${foggyTruth}`);
+assert.strictEqual(engineInputX({ ...foggy, visibilityKm: 0.38 }, 'sunrise'), foggyTruth, '正確存成 0.38 公里結果相同');
 
 const rec = (station, peak, extra = {}) => ({
   station, session: 'sunset', capture: { kind: 'timelapse-multi-frame' },

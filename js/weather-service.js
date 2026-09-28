@@ -342,7 +342,7 @@ class WeatherService {
         cloudMid: h.cloudcover_mid ? h.cloudcover_mid[i] : 0,
         cloudLow: h.cloudcover_low ? h.cloudcover_low[i] : 0,
         cloudTotal: h.cloudcover ? h.cloudcover[i] : 0,
-        visibility: h.visibility ? h.visibility[i] : 20000,
+        visibility: h.visibility?.[i] ?? 20000,
         humidity: h.relativehumidity_2m ? h.relativehumidity_2m[i] : 70,
         precipProb: h.precipitation_probability ? h.precipitation_probability[i] : 0,
         temp: h.temperature_2m ? h.temperature_2m[i] : 28,

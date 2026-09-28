@@ -23,6 +23,9 @@ def calculate_score(params, weights):
     low = params.get('lowCloud', 0)
     total = params.get('totalCloud', min(100, high + mid * 0.5))
     vis = params.get('visibilityKm', 20.0)
+    # 2026-09-29 前起霧的 380 公尺被存成 visibilityKm: 380；超過 100 公里的是公尺原值
+    if isinstance(vis, (int, float)) and vis > 100:
+        vis = vis / 1000.0
     humidity = params.get('humidity', 65)
     precip = params.get('precipProb', 0)
 

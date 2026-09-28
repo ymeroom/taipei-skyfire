@@ -58,4 +58,14 @@ assert(overcast.metrics.clearSkyUncappedScore <= 15,
 assert.strictEqual(epic.metrics.clearSkyUncappedScore, epic.score, '有雲時兩個分數相同');
 console.log('✅ clearSkyUncappedScore 只略過無雲上限:', clear.metrics.clearSkyUncappedScore, '分');
 
+// 5. 能見度一律是公尺：起霧 380 公尺不能被當成 380 公里
+const fog = SkyFireEngine.calculate({ highCloud: 0, midCloud: 0, lowCloud: 44, totalCloud: 44,
+  humidity: 96, visibility: 380, type: 'sunrise' });
+assert.strictEqual(fog.metrics.visKm, 0.4, `380 公尺應為 0.4 公里，實際: ${fog.metrics.visKm}`);
+assert.strictEqual(fog.metrics.visibilityScore, 0, `濃霧能見度不該得分，實際: ${fog.metrics.visibilityScore}`);
+const clearVis = SkyFireEngine.calculate({ highCloud: 0, midCloud: 0, lowCloud: 44, totalCloud: 44,
+  humidity: 96, visibility: 30000, type: 'sunrise' });
+assert.strictEqual(clearVis.metrics.visibilityScore, 15, '30 公里仍拿能見度滿分');
+console.log('✅ 起霧 380 公尺不再被當成 380 公里');
+
 console.log('🎉 Taipei SkyFireEngine 測試案例全數 PASS!\n');
