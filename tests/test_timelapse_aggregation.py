@@ -132,9 +132,21 @@ fire_frames[8] = dict(fire_frames[8], ok=False, fireCloudScore=None)
 fagg = tl.aggregate_fire_cloud_scores(fire_frames, "sunrise")
 assert fagg["unreadableFrameCount"] == 2, "兩張黑白夜視 (ok 但 fireCloudScore=None)"
 assert fagg["okFrameCount"] == 6
-assert fagg["avgScore"] == round((40 + 12 + 8 + 70 + 5 + 5) / 6, 1), "平均不含無法判讀與擷取失敗的影格"
+assert fagg["avgScore"] == round((40 + 12 + 8) / 3, 1), "平均只算日出前那側，且不含無法判讀的影格"
 assert fagg["peakScore"] == 40 and fagg["peakOffsetMin"] == -20, "日出峰值同樣只看 T<=0"
 print("✅ aggregate_fire_cloud_scores：無法判讀影格排除並計數，峰值側別規則同美感分")
+
+# --- aggregate_fire_cloud_scores: 平均與峰值看同一側 ---
+# 2026-09-28 大稻埕實際影格：日落前太陽旁的雲被照成金色 (26-28)，日落後散了 (≤9)。
+# 日落前被照亮的雲不算火燒雲；平均若用全段會變成 14.1，比峰值 9 還高
+dadaocheng_0928 = [dict(mk_frame(o, 50), fireCloudScore=fs) for o, fs in zip(
+    tl.OFFSETS_MIN, [12, 28, 26, 26, 8, 9, 5, 8, 5])]
+fagg2 = tl.aggregate_fire_cloud_scores(dadaocheng_0928, "sunset")
+assert fagg2["peakScore"] == 9 and fagg2["peakOffsetMin"] == 10
+assert fagg2["avgScore"] == round((8 + 9 + 5 + 8 + 5) / 5, 1), "平均只算 T>=0"
+assert fagg2["avgScore"] <= fagg2["peakScore"], "同一側的平均不可能高於峰值"
+assert fagg2["okFrameCount"] == 9, "okFrameCount 仍是全段可判讀張數，只有分數限縮在同一側"
+print("✅ aggregate_fire_cloud_scores：平均只算峰值那一側，日落前被照亮的雲不算")
 
 # ----------------------------------------------------------------
 # build_station_verification_record / write_verification_records

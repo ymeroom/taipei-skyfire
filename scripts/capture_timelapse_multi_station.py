@@ -537,14 +537,22 @@ def run(session, date_str=None):
 
 
 def aggregate_fire_cloud_scores(frames, session):
-    """火燒雲分的平均/峰值，規則同 aggregate_station_scores。無法判讀的影格
-    (黑白夜視，fireCloudScore=None) 排除在外並計數，不當成 0 分拉低平均。"""
+    """火燒雲分的平均/峰值。峰值規則同 aggregate_station_scores，但平均也只算
+    峰值那一側：日落前 (日出後) 被陽光照亮的雲不算火燒雲，算進平均會出現
+    平均高於峰值 (2026-09-28 大稻埕 14.1 vs 9)。美感分的平均仍涵蓋全段。
+    無法判讀的影格 (黑白夜視，fireCloudScore=None) 排除在外並計數，不當成 0 分拉低平均。"""
     ok = [f for f in frames if f.get("ok")]
     scored = [{"offsetMin": f["offsetMin"], "ok": True, "score": f["fireCloudScore"]}
               for f in ok if f.get("fireCloudScore") is not None]
     agg = aggregate_station_scores(scored, session)
+    side = [f["score"] for f in scored if _on_peak_side(f["offsetMin"], session)]
+    agg["avgScore"] = round(sum(side) / len(side), 1) if side else None
     agg["unreadableFrameCount"] = len(ok) - len(scored)
     return agg
+
+
+def _on_peak_side(offset_min, session):
+    return offset_min <= 0 if session == "sunrise" else offset_min >= 0
 
 
 def aggregate_station_scores(frames, session):
@@ -570,10 +578,7 @@ def aggregate_station_scores(frames, session):
 
     avg_score = round(sum(f["score"] for f in ok_frames) / len(ok_frames), 1)
 
-    if session == "sunrise":
-        peak_candidates = [f for f in ok_frames if f["offsetMin"] <= 0]
-    else:
-        peak_candidates = [f for f in ok_frames if f["offsetMin"] >= 0]
+    peak_candidates = [f for f in ok_frames if _on_peak_side(f["offsetMin"], session)]
 
     if peak_candidates:
         best = max(peak_candidates, key=lambda f: f["score"])
