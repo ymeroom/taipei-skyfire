@@ -5,6 +5,7 @@ auto-calibrate-model.py - Phase 4: 物理演算法參數自適應進化與閉環
 """
 
 import json
+import math
 import os
 import sys
 import copy
@@ -23,11 +24,13 @@ def _get(params, key, default):
 
 
 def calculate_score(params, weights):
-    """依照物理模型計算火燒雲分數"""
+    """js/skyfire-engine.js calculate() 的火燒雲分數，逐項照搬。
+    tests/test_auto_calibrate.py 會逐點比對兩邊，引擎改了這裡要跟著改。"""
     high = _get(params, 'highCloud', 0)
     mid = _get(params, 'midCloud', 0)
     low = _get(params, 'lowCloud', 0)
-    total = _get(params, 'totalCloud', min(100, high + mid * 0.5))
+    total = _get(params, 'totalCloud', 0)
+    aqi = _get(params, 'aqi', 45)
     vis = _get(params, 'visibilityKm', 20.0)
     # 2026-09-29 前起霧的 380 公尺被存成 visibilityKm: 380；超過 100 公里的是公尺原值
     if vis > 100:
@@ -88,14 +91,24 @@ def calculate_score(params, weights):
     else:
         moisture = weights['moistureMax'] if (50 <= humidity <= 82) else (weights['moistureMax'] * 0.5)
 
-    raw = cloud_base - low_penalty + horizon_score + vis_score + moisture
+    # AQI：鎖定預報時沒有傳 aqi，引擎用預設 45 (+2)
+    if 30 <= aqi <= 75:
+        aqi_modifier = 2.0
+    elif aqi > 110:
+        aqi_modifier = -min(10.0, (aqi - 110) * 0.2)
+    else:
+        aqi_modifier = 0.0
 
-    if high < 6 and mid < 6:
-        raw = min(raw, 35.0)
+    raw = cloud_base - low_penalty + horizon_score + vis_score + aqi_modifier + moisture
+
     if low > 85:
         raw = min(raw, 15.0)
+    # 高中空幾乎無雲 = 沒有可被染紅的雲 (引擎 2026-09-26 起上限 10)
+    if high < 6 and mid < 6:
+        raw = min(raw, 10.0)
 
-    return max(5, min(100, int(round(raw))))
+    # JS Math.round：.5 一律進位 (Python round 是銀行家捨入)
+    return max(5, min(100, math.floor(raw + 0.5)))
 
 def has_usable_cloud_inputs(prediction):
     """判斷一筆紀錄的雲量輸入是否足以重算 sim_pred。
@@ -116,27 +129,21 @@ def has_usable_cloud_inputs(prediction):
 
 
 def expand_to_calibration_samples(records):
-    """把每筆紀錄展開成 0~2 個等權重的校準樣本。
+    """每筆紀錄取 0~1 個校準樣本：火燒雲實測峰值 verification.fireCloud.peakScore。
 
-    新版紀錄一場實測有「平均分」+「峰值分」兩個獨立數字 (見
-    capture_timelapse_multi_station.py 的 aggregate_station_scores) ——
-    「全部平等餵進校準」延伸到這裡的自然意思是：兩個數字各自都是一筆獨立、
-    equally-weighted 的樣本，不能合併成一個代表值去訓練，否則等於用一半的
-    真實觀測換取另一半被丟棄。舊版單一 groundTruthScore 紀錄視為 1 個樣本
-    (相容 —— verification-records.json 最多留 720 筆歷史，切換過渡期間
-    新舊兩種形狀會同時存在)。
+    引擎分數是火燒雲分 (雲有沒有被染紅)，實測就要用同一個定義。
+    avgScore / peakScore / groundTruthScore 是攝影機暖色分 (天空美感分，晴空暮光
+    也給高分)，拿來調火燒雲權重會把引擎往美感分拉；沒有 fireCloud 的舊紀錄
+    直接排除，不拿暖色分頂替。只用峰值：日報判定看峰值，而 2026-09-29 之前的
+    fireCloud.avgScore 把日落前被照亮的雲也算進去了，定義跟現在不同。
     """
     samples = []
     for r in records:
-        v = r.get('verification') or {}
-        pred = r.get('prediction') or {}
-        if v.get('groundTruthScore') is not None:
-            samples.append({'prediction': pred, 'verification': {'groundTruthScore': v['groundTruthScore']}})
+        fire = (r.get('verification') or {}).get('fireCloud') or {}
+        if fire.get('peakScore') is None:
             continue
-        if v.get('avgScore') is not None:
-            samples.append({'prediction': pred, 'verification': {'groundTruthScore': v['avgScore']}})
-        if v.get('peakScore') is not None:
-            samples.append({'prediction': pred, 'verification': {'groundTruthScore': v['peakScore']}})
+        samples.append({'date': r.get('date'), 'prediction': r.get('prediction') or {},
+                        'verification': {'groundTruthScore': fire['peakScore']}})
     return samples
 
 
@@ -170,7 +177,7 @@ def run_calibration(records_path, params_path):
     with open(records_path, 'r', encoding='utf-8') as f:
         records = json.load(f)
 
-    # 每筆紀錄展開成平均分/峰值分各自獨立的校準樣本 (見 expand_to_calibration_samples)。
+    # 每筆紀錄取火燒雲實測峰值當校準樣本 (見 expand_to_calibration_samples)。
     ground_truthed = expand_to_calibration_samples(records)
 
     # 再排除雲量輸入不可用者 —— calculate_score 全靠雲量三頻驅動，
@@ -179,7 +186,7 @@ def run_calibration(records_path, params_path):
     n_samples = len(verified_records)
     n_excluded = len(ground_truthed) - n_samples
 
-    print(f"📊 已驗證觀測樣本 (平均分/峰值分各自計): {len(ground_truthed)} 筆；雲量輸入可用: {n_samples} 筆", end="")
+    print(f"📊 火燒雲實測樣本: {len(ground_truthed)} 筆；雲量輸入可用: {n_samples} 筆", end="")
     print(f"（排除 {n_excluded} 筆雲量輸入缺失／全 0）" if n_excluded else "")
 
     if n_samples < 2:

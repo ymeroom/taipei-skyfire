@@ -216,6 +216,20 @@ def build_dual_scores(record):
     }
 
 
+VERDICT_SEVERITY = ["EXACT_MATCH", "SLIGHT_DEVIATION", "MISMATCH"]
+
+
+def worst_dual_verdict(dual):
+    """雙分數紀錄的代表判定：火燒雲、美感兩者中較差的那個 (PENDING 不算)。
+    舊的 verdictPeak 是「火燒雲預報 vs 美感實測」，雙分數紀錄不能再拿它當代表。
+    兩個都 PENDING 回傳 None。"""
+    judged = [d for d in (dual["fireCloud"], dual["beauty"]) if d["verdict"] in VERDICT_SEVERITY]
+    if not judged:
+        return None
+    worst = max(judged, key=lambda d: VERDICT_SEVERITY.index(d["verdict"]))
+    return {"verdict": worst["verdict"], "verdictBadge": worst["verdictBadge"], "color": worst["color"]}
+
+
 def is_verified(ground_truth):
     return ground_truth.get("verdict") not in (None, "PENDING")
 
@@ -276,6 +290,9 @@ def build_station_rows(station_records):
         dual = build_dual_scores(r)
         if dual:
             row.update(dual)
+            worst = worst_dual_verdict(dual)
+            if worst and status == "verified_completed":
+                row["verdict"], row["verdictColor"] = worst["verdictBadge"], worst["color"]
         rows.append(row)
     return rows
 
@@ -363,6 +380,9 @@ def generate_briefing_obj(records, locked, session, date_str, published_at=None)
     if dual:
         ground_truth.update(dual)
         prediction["beautyScore"] = dual["beauty"]["predicted"]
+        worst = worst_dual_verdict(dual)
+        if worst and is_verified(ground_truth):
+            ground_truth.update(worst)
 
     return {
         "id": f"report-{date_str}-{session}",

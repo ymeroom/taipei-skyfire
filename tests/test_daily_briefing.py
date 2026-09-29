@@ -137,23 +137,6 @@ assert calib.has_usable_cloud_inputs(
 assert calib.has_usable_cloud_inputs({"highCloud": None, "midCloud": 0, "lowCloud": 0}) is False
 print("✅ has_usable_cloud_inputs：舊 bug 全 0 紀錄不進校準樣本")
 
-# --- expand_to_calibration_samples：平均分+峰值分各自算一個等權重樣本 ---
-mixed_records = [
-    # 新版：平均分+峰值分都有 → 展開成 2 個樣本
-    {"prediction": {"highCloud": 10}, "verification": {"avgScore": 20, "peakScore": 35}},
-    # 新版：只有平均分那一側成功 (峰值那一側全數擷取失敗) → 只展開 1 個樣本
-    {"prediction": {"highCloud": 15}, "verification": {"avgScore": 12, "peakScore": None}},
-    # 舊版單一 groundTruthScore (切換過渡期間仍會存在) → 相容成 1 個樣本
-    {"prediction": {"highCloud": 20}, "verification": {"groundTruthScore": 18}},
-    # 完全沒實測 (capture_unavailable) → 0 個樣本
-    {"prediction": {"highCloud": 25}, "verification": {"avgScore": None, "peakScore": None}},
-]
-samples = calib.expand_to_calibration_samples(mixed_records)
-assert len(samples) == 4, "2 (新版兩個都有) + 1 (只有平均) + 1 (舊版相容) + 0 (無實測) = 4"
-scores = sorted(s["verification"]["groundTruthScore"] for s in samples)
-assert scores == [12, 18, 20, 35], "平均分與峰值分都各自成為獨立樣本，全部平等餵進校準"
-print("✅ expand_to_calibration_samples：平均分/峰值分各自等權重展開，舊版單一分數相容")
-
 # --- 雙分數：火燒雲分 / 天空美感分各自的預報、實測、判定 ---
 dual_rec = {
     "id": "rec-2026-09-22-sunset-dadaocheng", "station": "dadaocheng", "date": "2026-09-22", "session": "sunset",
@@ -174,12 +157,33 @@ assert gt["fireCloud"]["predicted"] == 35 and gt["fireCloud"]["peakScore"] == 12
 assert gt["fireCloud"]["verdict"] == "MISMATCH"
 assert gt["beauty"]["predicted"] == 58 and gt["beauty"]["peakScore"] == 51, "美感實測 = 既有暖色峰值"
 assert gt["beauty"]["verdict"] == "EXACT_MATCH"
-assert gt["verdictBadge"].startswith("⚠️"), "舊欄位原樣保留，舊版前端照常可讀"
+assert gt["verdict"] == "MISMATCH" and gt["verdictBadge"].startswith("⚠️"), "代表判定取兩個分數中較差的"
 assert rep["prediction"]["beautyScore"] == 58
 row = rep["stations"][0]
 assert row["fireCloud"]["peakOffsetMin"] == 20 and row["beauty"]["verdictBadge"].startswith("🎯")
 assert "🔥 火燒雲：預報 35 分，實測平均 10.8 分、峰值 12 分" in rep["summaryAnalysis"]["modelPerformance"]
 assert "🌅 天空美感：預報 58 分，實測平均 33.9 分、峰值 51 分" in rep["summaryAnalysis"]["modelPerformance"]
+
+# 2026-09-28 大稻埕：兩個分數都 🎯，但舊的 verdictPeak (火燒雲預報 10 vs 美感實測 57)
+# 是 MISMATCH。代表判定與每站判定都要跟著雙分數走，不能再顯示「⚠️ 出現偏差需校準」
+exact = {"verdictPeak": "EXACT_MATCH", "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"}
+rec_0928 = {**dual_rec, "id": "rec-2026-09-28-sunset-dadaocheng", "date": "2026-09-28",
+            "prediction": {"score": 10, "beautyScore": 51}, "verification": {
+    **dual_rec["verification"], "avgScore": 45.9, "peakScore": 57, "verdictPeak": "MISMATCH",
+    "verdictPeakBadge": "⚠️ 出現偏差需校準", "verdictAvg": "MISMATCH",
+    "fireCloud": {**dual_rec["verification"]["fireCloud"], "peakScore": 9, "predicted": 10, **exact},
+    "beauty": {"predicted": 51, "errorPeakAbsolute": 6, **exact}}}
+rep_0928 = briefing.generate_briefing_obj([rec_0928], {}, "sunset", "2026-09-28", published_at="x")
+assert rep_0928["groundTruth"]["verdict"] == "EXACT_MATCH", rep_0928["groundTruth"]["verdict"]
+assert rep_0928["groundTruth"]["verdictBadge"].startswith("🎯")
+assert rep_0928["groundTruth"]["color"] == briefing.VERDICT_COLORS["EXACT_MATCH"]
+assert rep_0928["stations"][0]["verdict"].startswith("🎯")
+assert rep_0928["stations"][0]["verdictColor"] == briefing.VERDICT_COLORS["EXACT_MATCH"]
+
+# 美感沒預報可比 (PENDING) → 只看火燒雲，不因為缺一個就變成待驗證
+only_fire = {**rec_0928, "verification": {k: v for k, v in rec_0928["verification"].items() if k != "beauty"}}
+rep_of = briefing.generate_briefing_obj([only_fire], {}, "sunset", "2026-09-28", published_at="x")
+assert rep_of["groundTruth"]["verdict"] == "EXACT_MATCH"
 
 # 回填的歷史紀錄：有火燒雲實測、但當時沒有美感預報 → 美感格誠實標「無法比對」
 hist = {**dual_rec, "prediction": {"score": 35}, "verification": {
