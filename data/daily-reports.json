@@ -18,15 +18,15 @@
       "beautyScore": 27
     },
     "groundTruth": {
-      "score": 14,
-      "avgScore": 10.8,
-      "peakScore": 14,
+      "score": 45,
+      "avgScore": 16.3,
+      "peakScore": 45,
       "peakOffsetMin": -20,
-      "verdict": "EXACT_MATCH",
+      "verdict": "MISMATCH",
       "verdictAvg": "EXACT_MATCH",
-      "verdictPeak": "EXACT_MATCH",
-      "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)（峰值 14 分／平均 10.8 分）",
-      "color": "#4ADE80",
+      "verdictPeak": "MISMATCH",
+      "verdictBadge": "⚠️ 出現偏差需校準（峰值 45 分／平均 16.3 分）",
+      "color": "#F87171",
       "fireCloud": {
         "predicted": 10,
         "peakScore": 5,
@@ -38,8 +38,8 @@
       },
       "beauty": {
         "predicted": 27,
-        "peakScore": 14,
-        "avgScore": 10.8,
+        "peakScore": 45,
+        "avgScore": 16.3,
         "peakOffsetMin": -20,
         "verdict": "SLIGHT_DEVIATION",
         "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
@@ -52,11 +52,11 @@
         "icon": "⛰️",
         "tag": "新北觀光・雙北盆地俯瞰晨光",
         "phasePrep": "—",
-        "phasePeak": "平均 10.8 分・峰值 14 分（T-20）",
+        "phasePeak": "平均 16.3 分・峰值 45 分（T-20）",
         "phasePost": "—",
         "forecast": "10 分（低雲 44%）",
-        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80",
+        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "verdictColor": "#FBBF24",
         "fireCloud": {
           "predicted": 10,
           "peakScore": 5,
@@ -68,8 +68,8 @@
         },
         "beauty": {
           "predicted": 27,
-          "peakScore": 14,
-          "avgScore": 10.8,
+          "peakScore": 45,
+          "avgScore": 16.3,
           "peakOffsetMin": -20,
           "verdict": "SLIGHT_DEVIATION",
           "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
@@ -84,8 +84,8 @@
         "phasePeak": "平均 15.8 分・峰值 22 分（T-10）",
         "phasePost": "—",
         "forecast": "5 分（低雲 66%）",
-        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24",
+        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
+        "verdictColor": "#4ADE80",
         "fireCloud": {
           "predicted": 5,
           "peakScore": 5,
@@ -109,14 +109,14 @@
     "stationSummary": {
       "verified": 2,
       "pending": 0,
-      "bestStation": "waimushan",
-      "bestScore": 22,
-      "worstError": 17,
-      "meanError": 10.5
+      "bestStation": "hongludi",
+      "bestScore": 45,
+      "worstError": 35,
+      "meanError": 26.0
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 44%。",
-      "modelPerformance": "🔥 火燒雲：預報 10 分，實測平均 5.0 分、峰值 5 分（峰值誤差 5 分）。🌅 天空美感：預報 27 分，實測平均 10.8 分、峰值 14 分（T-20，峰值誤差 13 分）。"
+      "modelPerformance": "🔥 火燒雲：預報 10 分，實測平均 5.0 分、峰值 5 分（峰值誤差 5 分）。🌅 天空美感：預報 27 分，實測平均 16.3 分、峰值 45 分（T-20，峰值誤差 18 分）。"
     }
   },
   {
@@ -175,8 +175,8 @@
         "phasePeak": "平均 45.9 分・峰值 57 分（T+10）",
         "phasePost": "—",
         "forecast": "10 分（低雲 1%）",
-        "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171",
+        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
+        "verdictColor": "#4ADE80",
         "fireCloud": {
           "predicted": 10,
           "peakScore": 9,
@@ -201,28 +201,28 @@
         "icon": "⛩️",
         "tag": "臺北旅遊網 4K 直播・高處俯瞰盆地火燒雲",
         "phasePrep": "—",
-        "phasePeak": "9 張縮時影格全數擷取失敗，本場無實測資料",
+        "phasePeak": "平均 69.1 分・峰值 100 分（T+20）",
         "phasePost": "—",
         "forecast": "10 分（低雲 5%）",
-        "verdict": "⏳ 實測待驗證",
-        "verdictColor": "#94A3B8",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 10,
-          "peakScore": null,
-          "avgScore": null,
-          "peakOffsetMin": null,
-          "verdict": "PENDING",
-          "verdictBadge": "⏳ 無法比對",
-          "color": "#94A3B8"
+          "peakScore": 39,
+          "avgScore": 18.4,
+          "peakOffsetMin": 10,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
         },
         "beauty": {
           "predicted": 84,
-          "peakScore": null,
-          "avgScore": null,
-          "peakOffsetMin": null,
-          "verdict": "PENDING",
-          "verdictBadge": "⏳ 無法比對",
-          "color": "#94A3B8"
+          "peakScore": 100,
+          "avgScore": 69.1,
+          "peakOffsetMin": 20,
+          "verdict": "SLIGHT_DEVIATION",
+          "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+          "color": "#FBBF24"
         }
       },
       {
@@ -262,8 +262,8 @@
         "phasePeak": "平均 52.3 分・峰值 85 分（T+20）",
         "phasePost": "—",
         "forecast": "10 分（低雲 0%）",
-        "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171",
+        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
+        "verdictColor": "#4ADE80",
         "fireCloud": {
           "predicted": 10,
           "peakScore": 6,
@@ -288,11 +288,11 @@
         "icon": "🌉",
         "tag": "新北觀光 4K 直播・情人橋烈焰落日",
         "phasePrep": "—",
-        "phasePeak": "平均 65.4 分・峰值 100 分（T+20）",
+        "phasePeak": "平均 65.6 分・峰值 100 分（T+20）",
         "phasePost": "—",
         "forecast": "10 分（低雲 0%）",
-        "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171",
+        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
+        "verdictColor": "#4ADE80",
         "fireCloud": {
           "predicted": 10,
           "peakScore": 5,
@@ -305,7 +305,7 @@
         "beauty": {
           "predicted": 97,
           "peakScore": 100,
-          "avgScore": 65.4,
+          "avgScore": 65.6,
           "peakOffsetMin": 20,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -343,12 +343,12 @@
       }
     ],
     "stationSummary": {
-      "verified": 5,
-      "pending": 1,
-      "bestStation": "tamsui",
+      "verified": 6,
+      "pending": 0,
+      "bestStation": "maokong",
       "bestScore": 100,
       "worstError": 90,
-      "meanError": 66.8
+      "meanError": 70.7
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 1%。",
@@ -374,15 +374,15 @@
       "beautyScore": 27
     },
     "groundTruth": {
-      "score": 16,
-      "avgScore": 18.3,
-      "peakScore": 16,
-      "peakOffsetMin": -20,
-      "verdict": "EXACT_MATCH",
+      "score": 33,
+      "avgScore": 20.4,
+      "peakScore": 33,
+      "peakOffsetMin": -10,
+      "verdict": "MISMATCH",
       "verdictAvg": "SLIGHT_DEVIATION",
-      "verdictPeak": "EXACT_MATCH",
-      "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)（峰值 16 分／平均 18.3 分）",
-      "color": "#4ADE80",
+      "verdictPeak": "MISMATCH",
+      "verdictBadge": "⚠️ 出現偏差需校準（峰值 33 分／平均 20.4 分）",
+      "color": "#F87171",
       "fireCloud": {
         "predicted": 10,
         "peakScore": 5,
@@ -394,12 +394,12 @@
       },
       "beauty": {
         "predicted": 27,
-        "peakScore": 16,
-        "avgScore": 18.3,
-        "peakOffsetMin": -20,
-        "verdict": "SLIGHT_DEVIATION",
-        "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "color": "#FBBF24"
+        "peakScore": 33,
+        "avgScore": 20.4,
+        "peakOffsetMin": -10,
+        "verdict": "EXACT_MATCH",
+        "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+        "color": "#4ADE80"
       }
     },
     "stations": [
@@ -408,7 +408,7 @@
         "icon": "⛰️",
         "tag": "新北觀光・雙北盆地俯瞰晨光",
         "phasePrep": "—",
-        "phasePeak": "平均 18.3 分・峰值 16 分（T-20）",
+        "phasePeak": "平均 20.4 分・峰值 33 分（T-10）",
         "phasePost": "—",
         "forecast": "10 分（低雲 48%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -424,12 +424,12 @@
         },
         "beauty": {
           "predicted": 27,
-          "peakScore": 16,
-          "avgScore": 18.3,
-          "peakOffsetMin": -20,
-          "verdict": "SLIGHT_DEVIATION",
-          "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-          "color": "#FBBF24"
+          "peakScore": 33,
+          "avgScore": 20.4,
+          "peakOffsetMin": -10,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
         }
       },
       {
@@ -466,13 +466,13 @@
       "verified": 1,
       "pending": 1,
       "bestStation": "hongludi",
-      "bestScore": 16,
-      "worstError": 6,
-      "meanError": 6.0
+      "bestScore": 33,
+      "worstError": 23,
+      "meanError": 23.0
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 48%。",
-      "modelPerformance": "🔥 火燒雲：預報 10 分，實測平均 5.0 分、峰值 5 分（峰值誤差 5 分）。🌅 天空美感：預報 27 分，實測平均 18.3 分、峰值 16 分（T-20，峰值誤差 11 分）。"
+      "modelPerformance": "🔥 火燒雲：預報 10 分，實測平均 5.0 分、峰值 5 分（峰值誤差 5 分）。🌅 天空美感：預報 27 分，實測平均 20.4 分、峰值 33 分（T-10，峰值誤差 6 分）。"
     }
   },
   {
@@ -560,8 +560,8 @@
         "phasePeak": "平均 68.6 分・峰值 100 分（T+20）",
         "phasePost": "—",
         "forecast": "10 分（低雲 0%）",
-        "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171",
+        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "verdictColor": "#FBBF24",
         "fireCloud": {
           "predicted": 10,
           "peakScore": 13,
@@ -644,11 +644,11 @@
         "icon": "🌉",
         "tag": "新北觀光 4K 直播・情人橋烈焰落日",
         "phasePrep": "—",
-        "phasePeak": "平均 63.6 分・峰值 100 分（T+20）",
+        "phasePeak": "平均 63.8 分・峰值 100 分（T+20）",
         "phasePost": "—",
         "forecast": "10 分（低雲 0%）",
-        "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171",
+        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "verdictColor": "#FBBF24",
         "fireCloud": {
           "predicted": 10,
           "peakScore": 23,
@@ -661,7 +661,7 @@
         "beauty": {
           "predicted": 97,
           "peakScore": 100,
-          "avgScore": 63.6,
+          "avgScore": 63.8,
           "peakOffsetMin": 20,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -673,11 +673,11 @@
         "icon": "🏙️",
         "tag": "臺北旅遊網 4K 直播・101 與西方天際線",
         "phasePrep": "—",
-        "phasePeak": "平均 24.6 分・峰值 39 分（T+20）",
+        "phasePeak": "平均 24.7 分・峰值 39 分（T+20）",
         "phasePost": "—",
         "forecast": "10 分（低雲 0%）",
-        "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171",
+        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
+        "verdictColor": "#4ADE80",
         "fireCloud": {
           "predicted": 10,
           "peakScore": 9,
@@ -690,7 +690,7 @@
         "beauty": {
           "predicted": 34,
           "peakScore": 39,
-          "avgScore": 24.6,
+          "avgScore": 24.7,
           "peakOffsetMin": 20,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -730,14 +730,14 @@
       "beautyScore": 32
     },
     "groundTruth": {
-      "score": 21,
-      "avgScore": 10.3,
-      "peakScore": 21,
-      "peakOffsetMin": -20,
+      "score": 26,
+      "avgScore": 13.3,
+      "peakScore": 26,
+      "peakOffsetMin": -10,
       "verdict": "MISMATCH",
       "verdictAvg": "MISMATCH",
       "verdictPeak": "MISMATCH",
-      "verdictBadge": "⚠️ 出現偏差需校準（峰值 21 分／平均 10.3 分）",
+      "verdictBadge": "⚠️ 出現偏差需校準（峰值 26 分／平均 13.3 分）",
       "color": "#F87171",
       "fireCloud": {
         "predicted": 60,
@@ -750,12 +750,12 @@
       },
       "beauty": {
         "predicted": 32,
-        "peakScore": 21,
-        "avgScore": 10.3,
-        "peakOffsetMin": -20,
-        "verdict": "SLIGHT_DEVIATION",
-        "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "color": "#FBBF24"
+        "peakScore": 26,
+        "avgScore": 13.3,
+        "peakOffsetMin": -10,
+        "verdict": "EXACT_MATCH",
+        "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+        "color": "#4ADE80"
       }
     },
     "stations": [
@@ -764,7 +764,7 @@
         "icon": "⛰️",
         "tag": "新北觀光・雙北盆地俯瞰晨光",
         "phasePrep": "—",
-        "phasePeak": "平均 10.3 分・峰值 21 分（T-20）",
+        "phasePeak": "平均 13.3 分・峰值 26 分（T-10）",
         "phasePost": "—",
         "forecast": "60 分（低雲 0%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -780,12 +780,12 @@
         },
         "beauty": {
           "predicted": 32,
-          "peakScore": 21,
-          "avgScore": 10.3,
-          "peakOffsetMin": -20,
-          "verdict": "SLIGHT_DEVIATION",
-          "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-          "color": "#FBBF24"
+          "peakScore": 26,
+          "avgScore": 13.3,
+          "peakOffsetMin": -10,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
         }
       },
       {
@@ -822,13 +822,13 @@
       "verified": 2,
       "pending": 0,
       "bestStation": "hongludi",
-      "bestScore": 21,
-      "worstError": 39,
-      "meanError": 33.0
+      "bestScore": 26,
+      "worstError": 34,
+      "meanError": 30.5
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 88% ／ 中空 0% ／ 低空 0%。",
-      "modelPerformance": "🔥 火燒雲：預報 60 分，實測平均 5.0 分、峰值 5 分（峰值誤差 55 分）。🌅 天空美感：預報 32 分，實測平均 10.3 分、峰值 21 分（T-20，峰值誤差 11 分）。"
+      "modelPerformance": "🔥 火燒雲：預報 60 分，實測平均 5.0 分、峰值 5 分（峰值誤差 55 分）。🌅 天空美感：預報 32 分，實測平均 13.3 分、峰值 26 分（T-10，峰值誤差 6 分）。"
     }
   },
   {
@@ -850,14 +850,14 @@
       "beautyScore": null
     },
     "groundTruth": {
-      "score": 48,
-      "avgScore": 24.9,
-      "peakScore": 48,
+      "score": 49,
+      "avgScore": 25.2,
+      "peakScore": 49,
       "peakOffsetMin": 20,
       "verdict": "SLIGHT_DEVIATION",
       "verdictAvg": "SLIGHT_DEVIATION",
       "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)（峰值 48 分／平均 24.9 分）",
+      "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)（峰值 49 分／平均 25.2 分）",
       "color": "#FBBF24",
       "fireCloud": {
         "predicted": 35,
@@ -870,8 +870,8 @@
       },
       "beauty": {
         "predicted": null,
-        "peakScore": 48,
-        "avgScore": 24.9,
+        "peakScore": 49,
+        "avgScore": 25.2,
         "peakOffsetMin": 20,
         "verdict": "PENDING",
         "verdictBadge": "⏳ 無法比對",
@@ -884,11 +884,11 @@
         "icon": "⛵",
         "tag": "臺北旅遊網 4K 直播・淡水河倒影晚霞",
         "phasePrep": "—",
-        "phasePeak": "平均 24.9 分・峰值 48 分（T+20）",
+        "phasePeak": "平均 25.2 分・峰值 49 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 8%）",
-        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 5,
@@ -900,8 +900,8 @@
         },
         "beauty": {
           "predicted": null,
-          "peakScore": 48,
-          "avgScore": 24.9,
+          "peakScore": 49,
+          "avgScore": 25.2,
           "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -913,11 +913,11 @@
         "icon": "⛩️",
         "tag": "臺北旅遊網 4K 直播・高處俯瞰盆地火燒雲",
         "phasePrep": "—",
-        "phasePeak": "平均 34.7 分・峰值 36 分（T+10）",
+        "phasePeak": "平均 42.1 分・峰值 65 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 38%）",
-        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 5,
@@ -929,9 +929,9 @@
         },
         "beauty": {
           "predicted": null,
-          "peakScore": 36,
-          "avgScore": 34.7,
-          "peakOffsetMin": 10,
+          "peakScore": 65,
+          "avgScore": 42.1,
+          "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
           "color": "#94A3B8"
@@ -945,8 +945,8 @@
         "phasePeak": "平均 25.1 分・峰值 66 分（T+20）",
         "phasePost": "—",
         "forecast": "5 分（低雲 98%）",
-        "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171",
+        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
+        "verdictColor": "#4ADE80",
         "fireCloud": {
           "predicted": 5,
           "peakScore": 5,
@@ -1000,7 +1000,7 @@
         "icon": "🌉",
         "tag": "新北觀光 4K 直播・情人橋烈焰落日",
         "phasePrep": "—",
-        "phasePeak": "平均 64.3 分・峰值 100 分（T+20）",
+        "phasePeak": "平均 64.4 分・峰值 100 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 1%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -1017,7 +1017,7 @@
         "beauty": {
           "predicted": null,
           "peakScore": 100,
-          "avgScore": 64.3,
+          "avgScore": 64.4,
           "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -1029,11 +1029,11 @@
         "icon": "🏙️",
         "tag": "臺北旅遊網 4K 直播・101 與西方天際線",
         "phasePrep": "—",
-        "phasePeak": "平均 15.6 分・峰值 22 分（T+10）",
+        "phasePeak": "平均 16.1 分・峰值 22 分（T+0）",
         "phasePost": "—",
         "forecast": "35 分（低雲 38%）",
-        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 5,
@@ -1046,8 +1046,8 @@
         "beauty": {
           "predicted": null,
           "peakScore": 22,
-          "avgScore": 15.6,
-          "peakOffsetMin": 10,
+          "avgScore": 16.1,
+          "peakOffsetMin": 0,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
           "color": "#94A3B8"
@@ -1060,11 +1060,11 @@
       "bestStation": "tamsui",
       "bestScore": 100,
       "worstError": 65,
-      "meanError": 35.7
+      "meanError": 40.7
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 5% ／ 中空 2% ／ 低空 8%。",
-      "modelPerformance": "🔥 火燒雲：預報 35 分，實測平均 8.9 分、峰值 5 分（峰值誤差 30 分）。🌅 天空美感：實測平均 24.9 分、峰值 48 分（T+20），本場無預報可比對。"
+      "modelPerformance": "🔥 火燒雲：預報 35 分，實測平均 8.9 分、峰值 5 分（峰值誤差 30 分）。🌅 天空美感：實測平均 25.2 分、峰值 49 分（T+20），本場無預報可比對。"
     }
   },
   {
@@ -1086,15 +1086,15 @@
       "beautyScore": null
     },
     "groundTruth": {
-      "score": 17,
-      "avgScore": 24.7,
-      "peakScore": 17,
+      "score": 27,
+      "avgScore": 28.3,
+      "peakScore": 27,
       "peakOffsetMin": -20,
-      "verdict": "SLIGHT_DEVIATION",
-      "verdictAvg": "SLIGHT_DEVIATION",
-      "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)（峰值 17 分／平均 24.7 分）",
-      "color": "#FBBF24",
+      "verdict": "EXACT_MATCH",
+      "verdictAvg": "EXACT_MATCH",
+      "verdictPeak": "EXACT_MATCH",
+      "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)（峰值 27 分／平均 28.3 分）",
+      "color": "#4ADE80",
       "fireCloud": {
         "predicted": 35,
         "peakScore": 5,
@@ -1106,8 +1106,8 @@
       },
       "beauty": {
         "predicted": null,
-        "peakScore": 17,
-        "avgScore": 24.7,
+        "peakScore": 27,
+        "avgScore": 28.3,
         "peakOffsetMin": -20,
         "verdict": "PENDING",
         "verdictBadge": "⏳ 無法比對",
@@ -1120,11 +1120,11 @@
         "icon": "⛰️",
         "tag": "新北觀光・雙北盆地俯瞰晨光",
         "phasePrep": "—",
-        "phasePeak": "平均 24.7 分・峰值 17 分（T-20）",
+        "phasePeak": "平均 28.3 分・峰值 27 分（T-20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 14%）",
-        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 5,
@@ -1136,8 +1136,8 @@
         },
         "beauty": {
           "predicted": null,
-          "peakScore": 17,
-          "avgScore": 24.7,
+          "peakScore": 27,
+          "avgScore": 28.3,
           "peakOffsetMin": -20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -1152,8 +1152,8 @@
         "phasePeak": "平均 21.7 分・峰值 36 分（T-10）",
         "phasePost": "—",
         "forecast": "35 分（低雲 2%）",
-        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 5,
@@ -1179,12 +1179,12 @@
       "pending": 0,
       "bestStation": "waimushan",
       "bestScore": 36,
-      "worstError": 18,
-      "meanError": 9.5
+      "worstError": 8,
+      "meanError": 4.5
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 14%。",
-      "modelPerformance": "🔥 火燒雲：預報 35 分，實測平均 7.2 分、峰值 5 分（峰值誤差 30 分）。🌅 天空美感：實測平均 24.7 分、峰值 17 分（T-20），本場無預報可比對。"
+      "modelPerformance": "🔥 火燒雲：預報 35 分，實測平均 7.2 分、峰值 5 分（峰值誤差 30 分）。🌅 天空美感：實測平均 28.3 分、峰值 27 分（T-20），本場無預報可比對。"
     }
   },
   {
@@ -1206,15 +1206,15 @@
       "beautyScore": null
     },
     "groundTruth": {
-      "score": 32,
-      "avgScore": 35.7,
-      "peakScore": 32,
+      "score": 45,
+      "avgScore": 37.3,
+      "peakScore": 45,
       "peakOffsetMin": 20,
-      "verdict": "EXACT_MATCH",
+      "verdict": "SLIGHT_DEVIATION",
       "verdictAvg": "EXACT_MATCH",
-      "verdictPeak": "EXACT_MATCH",
-      "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)（峰值 32 分／平均 35.7 分）",
-      "color": "#4ADE80",
+      "verdictPeak": "SLIGHT_DEVIATION",
+      "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)（峰值 45 分／平均 37.3 分）",
+      "color": "#FBBF24",
       "fireCloud": {
         "predicted": 35,
         "peakScore": 5,
@@ -1226,8 +1226,8 @@
       },
       "beauty": {
         "predicted": null,
-        "peakScore": 32,
-        "avgScore": 35.7,
+        "peakScore": 45,
+        "avgScore": 37.3,
         "peakOffsetMin": 20,
         "verdict": "PENDING",
         "verdictBadge": "⏳ 無法比對",
@@ -1240,11 +1240,11 @@
         "icon": "⛵",
         "tag": "臺北旅遊網 4K 直播・淡水河倒影晚霞",
         "phasePrep": "—",
-        "phasePeak": "平均 35.7 分・峰值 32 分（T+20）",
+        "phasePeak": "平均 37.3 分・峰值 45 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 2%）",
-        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 5,
@@ -1256,8 +1256,8 @@
         },
         "beauty": {
           "predicted": null,
-          "peakScore": 32,
-          "avgScore": 35.7,
+          "peakScore": 45,
+          "avgScore": 37.3,
           "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -1269,11 +1269,11 @@
         "icon": "⛩️",
         "tag": "臺北旅遊網 4K 直播・高處俯瞰盆地火燒雲",
         "phasePrep": "—",
-        "phasePeak": "平均 36.8 分・峰值 65 分（T+20）",
+        "phasePeak": "平均 41.8 分・峰值 83 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 9%）",
-        "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171",
+        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "verdictColor": "#FBBF24",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 24,
@@ -1285,8 +1285,8 @@
         },
         "beauty": {
           "predicted": null,
-          "peakScore": 65,
-          "avgScore": 36.8,
+          "peakScore": 83,
+          "avgScore": 41.8,
           "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -1356,7 +1356,7 @@
         "icon": "🌉",
         "tag": "新北觀光 4K 直播・情人橋烈焰落日",
         "phasePrep": "—",
-        "phasePeak": "平均 62.3 分・峰值 100 分（T+20）",
+        "phasePeak": "平均 62.7 分・峰值 100 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 5%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -1373,7 +1373,7 @@
         "beauty": {
           "predicted": null,
           "peakScore": 100,
-          "avgScore": 62.3,
+          "avgScore": 62.7,
           "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -1388,8 +1388,8 @@
         "phasePeak": "平均 18.1 分・峰值 20 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 9%）",
-        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 5,
@@ -1416,11 +1416,11 @@
       "bestStation": "tamsui",
       "bestScore": 100,
       "worstError": 65,
-      "meanError": 35.8
+      "meanError": 40.0
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 1% ／ 低空 2%。",
-      "modelPerformance": "🔥 火燒雲：預報 35 分，實測平均 9.9 分、峰值 5 分（峰值誤差 30 分）。🌅 天空美感：實測平均 35.7 分、峰值 32 分（T+20），本場無預報可比對。"
+      "modelPerformance": "🔥 火燒雲：預報 35 分，實測平均 9.9 分、峰值 5 分（峰值誤差 30 分）。🌅 天空美感：實測平均 37.3 分、峰值 45 分（T+20），本場無預報可比對。"
     }
   },
   {
@@ -1442,15 +1442,15 @@
       "beautyScore": null
     },
     "groundTruth": {
-      "score": 34,
-      "avgScore": 33.0,
-      "peakScore": 34,
+      "score": 53,
+      "avgScore": 36.9,
+      "peakScore": 53,
       "peakOffsetMin": -20,
-      "verdict": "EXACT_MATCH",
-      "verdictAvg": "EXACT_MATCH",
-      "verdictPeak": "EXACT_MATCH",
-      "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)（峰值 34 分／平均 33.0 分）",
-      "color": "#4ADE80",
+      "verdict": "MISMATCH",
+      "verdictAvg": "SLIGHT_DEVIATION",
+      "verdictPeak": "MISMATCH",
+      "verdictBadge": "⚠️ 出現偏差需校準（峰值 53 分／平均 36.9 分）",
+      "color": "#F87171",
       "fireCloud": {
         "predicted": 26,
         "peakScore": 5,
@@ -1462,8 +1462,8 @@
       },
       "beauty": {
         "predicted": null,
-        "peakScore": 34,
-        "avgScore": 33.0,
+        "peakScore": 53,
+        "avgScore": 36.9,
         "peakOffsetMin": -20,
         "verdict": "PENDING",
         "verdictBadge": "⏳ 無法比對",
@@ -1476,11 +1476,11 @@
         "icon": "⛰️",
         "tag": "新北觀光・雙北盆地俯瞰晨光",
         "phasePrep": "—",
-        "phasePeak": "平均 33.0 分・峰值 34 分（T-20）",
+        "phasePeak": "平均 36.9 分・峰值 53 分（T-20）",
         "phasePost": "—",
         "forecast": "26 分（低雲 30%）",
-        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 26,
           "peakScore": 5,
@@ -1492,8 +1492,8 @@
         },
         "beauty": {
           "predicted": null,
-          "peakScore": 34,
-          "avgScore": 33.0,
+          "peakScore": 53,
+          "avgScore": 36.9,
           "peakOffsetMin": -20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -1508,8 +1508,8 @@
         "phasePeak": "平均 17.3 分・峰值 16 分（T+0）",
         "phasePost": "—",
         "forecast": "34 分（低雲 13%）",
-        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 34,
           "peakScore": 5,
@@ -1534,13 +1534,13 @@
       "verified": 2,
       "pending": 0,
       "bestStation": "hongludi",
-      "bestScore": 34,
-      "worstError": 18,
-      "meanError": 13.0
+      "bestScore": 53,
+      "worstError": 27,
+      "meanError": 22.5
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 30%。",
-      "modelPerformance": "🔥 火燒雲：預報 26 分，實測平均 9.1 分、峰值 5 分（峰值誤差 21 分）。🌅 天空美感：實測平均 33.0 分、峰值 34 分（T-20），本場無預報可比對。"
+      "modelPerformance": "🔥 火燒雲：預報 26 分，實測平均 9.1 分、峰值 5 分（峰值誤差 21 分）。🌅 天空美感：實測平均 36.9 分、峰值 53 分（T-20），本場無預報可比對。"
     }
   },
   {
@@ -1625,11 +1625,11 @@
         "icon": "⛩️",
         "tag": "臺北旅遊網 4K 直播・高處俯瞰盆地火燒雲",
         "phasePrep": "—",
-        "phasePeak": "平均 44.6 分・峰值 100 分（T+20）",
+        "phasePeak": "平均 46.2 分・峰值 100 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 5%）",
-        "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171",
+        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
+        "verdictColor": "#4ADE80",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 40,
@@ -1642,7 +1642,7 @@
         "beauty": {
           "predicted": null,
           "peakScore": 100,
-          "avgScore": 44.6,
+          "avgScore": 46.2,
           "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -1712,7 +1712,7 @@
         "icon": "🌉",
         "tag": "新北觀光 4K 直播・情人橋烈焰落日",
         "phasePrep": "—",
-        "phasePeak": "平均 51.8 分・峰值 95 分（T+20）",
+        "phasePeak": "平均 52.0 分・峰值 95 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 2%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -1729,7 +1729,7 @@
         "beauty": {
           "predicted": null,
           "peakScore": 95,
-          "avgScore": 51.8,
+          "avgScore": 52.0,
           "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -1741,11 +1741,11 @@
         "icon": "🏙️",
         "tag": "臺北旅遊網 4K 直播・101 與西方天際線",
         "phasePrep": "—",
-        "phasePeak": "平均 21.7 分・峰值 21 分（T+20）",
+        "phasePeak": "平均 22.1 分・峰值 21 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 5%）",
-        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 5,
@@ -1758,7 +1758,7 @@
         "beauty": {
           "predicted": null,
           "peakScore": 21,
-          "avgScore": 21.7,
+          "avgScore": 22.1,
           "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -1798,15 +1798,15 @@
       "beautyScore": null
     },
     "groundTruth": {
-      "score": 39,
-      "avgScore": 31.2,
-      "peakScore": 39,
+      "score": 64,
+      "avgScore": 36.0,
+      "peakScore": 64,
       "peakOffsetMin": -20,
-      "verdict": "EXACT_MATCH",
+      "verdict": "MISMATCH",
       "verdictAvg": "EXACT_MATCH",
-      "verdictPeak": "EXACT_MATCH",
-      "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)（峰值 39 分／平均 31.2 分）",
-      "color": "#4ADE80",
+      "verdictPeak": "MISMATCH",
+      "verdictBadge": "⚠️ 出現偏差需校準（峰值 64 分／平均 36.0 分）",
+      "color": "#F87171",
       "fireCloud": {
         "predicted": 32,
         "peakScore": 10,
@@ -1818,8 +1818,8 @@
       },
       "beauty": {
         "predicted": null,
-        "peakScore": 39,
-        "avgScore": 31.2,
+        "peakScore": 64,
+        "avgScore": 36.0,
         "peakOffsetMin": -20,
         "verdict": "PENDING",
         "verdictBadge": "⏳ 無法比對",
@@ -1832,11 +1832,11 @@
         "icon": "⛰️",
         "tag": "新北觀光・雙北盆地俯瞰晨光",
         "phasePrep": "—",
-        "phasePeak": "平均 31.2 分・峰值 39 分（T-20）",
+        "phasePeak": "平均 36.0 分・峰值 64 分（T-20）",
         "phasePost": "—",
         "forecast": "32 分（低雲 5%）",
-        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 32,
           "peakScore": 10,
@@ -1848,8 +1848,8 @@
         },
         "beauty": {
           "predicted": null,
-          "peakScore": 39,
-          "avgScore": 31.2,
+          "peakScore": 64,
+          "avgScore": 36.0,
           "peakOffsetMin": -20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -1864,8 +1864,8 @@
         "phasePeak": "平均 20.4 分・峰值 23 分（T-10）",
         "phasePost": "—",
         "forecast": "35 分（低雲 23%）",
-        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 5,
@@ -1890,13 +1890,13 @@
       "verified": 2,
       "pending": 0,
       "bestStation": "hongludi",
-      "bestScore": 39,
-      "worstError": 12,
-      "meanError": 9.5
+      "bestScore": 64,
+      "worstError": 32,
+      "meanError": 22.0
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 27% ／ 中空 0% ／ 低空 5%。",
-      "modelPerformance": "🔥 火燒雲：預報 32 分，實測平均 7.1 分、峰值 10 分（T-20，峰值誤差 22 分）。🌅 天空美感：實測平均 31.2 分、峰值 39 分（T-20），本場無預報可比對。"
+      "modelPerformance": "🔥 火燒雲：預報 32 分，實測平均 7.1 分、峰值 10 分（T-20，峰值誤差 22 分）。🌅 天空美感：實測平均 36.0 分、峰值 64 分（T-20），本場無預報可比對。"
     }
   },
   {
@@ -1984,8 +1984,8 @@
         "phasePeak": "平均 67.1 分・峰值 98 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 5%）",
-        "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171",
+        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "verdictColor": "#FBBF24",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 19,
@@ -2010,11 +2010,11 @@
         "icon": "🏮",
         "tag": "新北觀光 4K 直播・山海交界落日",
         "phasePrep": "—",
-        "phasePeak": "平均 22.6 分・峰值 34 分（T+10）",
+        "phasePeak": "平均 22.8 分・峰值 34 分（T+10）",
         "phasePost": "—",
         "forecast": "35 分（低雲 24%）",
-        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 7,
@@ -2027,7 +2027,7 @@
         "beauty": {
           "predicted": null,
           "peakScore": 34,
-          "avgScore": 22.6,
+          "avgScore": 22.8,
           "peakOffsetMin": 10,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -2068,7 +2068,7 @@
         "icon": "🌉",
         "tag": "新北觀光 4K 直播・情人橋烈焰落日",
         "phasePrep": "—",
-        "phasePeak": "平均 58.9 分・峰值 87 分（T+10）",
+        "phasePeak": "平均 59.1 分・峰值 87 分（T+10）",
         "phasePost": "—",
         "forecast": "35 分（低雲 4%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -2085,7 +2085,7 @@
         "beauty": {
           "predicted": null,
           "peakScore": 87,
-          "avgScore": 58.9,
+          "avgScore": 59.1,
           "peakOffsetMin": 10,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -2100,8 +2100,8 @@
         "phasePeak": "平均 26.3 分・峰值 32 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 5%）",
-        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 7,
@@ -2311,8 +2311,8 @@
         "phasePeak": "平均 33.9 分・峰值 51 分（T+10）",
         "phasePost": "—",
         "forecast": "35 分（低雲 2%）",
-        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 12,
@@ -2395,7 +2395,7 @@
         "icon": "🌊",
         "tag": "新北觀光 4K 直播・淡江大橋與台灣海峽晚霞",
         "phasePrep": "—",
-        "phasePeak": "平均 47.0 分・峰值 90 分（T+20）",
+        "phasePeak": "平均 47.1 分・峰值 90 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 2%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -2412,7 +2412,7 @@
         "beauty": {
           "predicted": null,
           "peakScore": 90,
-          "avgScore": 47.0,
+          "avgScore": 47.1,
           "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -2424,7 +2424,7 @@
         "icon": "🌉",
         "tag": "新北觀光 4K 直播・情人橋烈焰落日",
         "phasePrep": "—",
-        "phasePeak": "平均 58.3 分・峰值 88 分（T+10）",
+        "phasePeak": "平均 58.8 分・峰值 88 分（T+10）",
         "phasePost": "—",
         "forecast": "35 分（低雲 2%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -2441,7 +2441,7 @@
         "beauty": {
           "predicted": null,
           "peakScore": 88,
-          "avgScore": 58.3,
+          "avgScore": 58.8,
           "peakOffsetMin": 10,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -2453,11 +2453,11 @@
         "icon": "🏙️",
         "tag": "臺北旅遊網 4K 直播・101 與西方天際線",
         "phasePrep": "—",
-        "phasePeak": "平均 28.3 分・峰值 49 分（T+20）",
+        "phasePeak": "平均 28.4 分・峰值 49 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 1%）",
-        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 16,
@@ -2470,7 +2470,7 @@
         "beauty": {
           "predicted": null,
           "peakScore": 49,
-          "avgScore": 28.3,
+          "avgScore": 28.4,
           "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -2510,15 +2510,15 @@
       "beautyScore": null
     },
     "groundTruth": {
-      "score": 32,
-      "avgScore": 30.2,
-      "peakScore": 32,
+      "score": 61,
+      "avgScore": 35.4,
+      "peakScore": 61,
       "peakOffsetMin": -20,
-      "verdict": "EXACT_MATCH",
+      "verdict": "MISMATCH",
       "verdictAvg": "EXACT_MATCH",
-      "verdictPeak": "EXACT_MATCH",
-      "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)（峰值 32 分／平均 30.2 分）",
-      "color": "#4ADE80",
+      "verdictPeak": "MISMATCH",
+      "verdictBadge": "⚠️ 出現偏差需校準（峰值 61 分／平均 35.4 分）",
+      "color": "#F87171",
       "fireCloud": {
         "predicted": 32,
         "peakScore": 11,
@@ -2530,8 +2530,8 @@
       },
       "beauty": {
         "predicted": null,
-        "peakScore": 32,
-        "avgScore": 30.2,
+        "peakScore": 61,
+        "avgScore": 35.4,
         "peakOffsetMin": -20,
         "verdict": "PENDING",
         "verdictBadge": "⏳ 無法比對",
@@ -2544,11 +2544,11 @@
         "icon": "⛰️",
         "tag": "新北觀光・雙北盆地俯瞰晨光",
         "phasePrep": "—",
-        "phasePeak": "平均 30.2 分・峰值 32 分（T-20）",
+        "phasePeak": "平均 35.4 分・峰值 61 分（T-20）",
         "phasePost": "—",
         "forecast": "32 分（低雲 3%）",
-        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 32,
           "peakScore": 11,
@@ -2560,8 +2560,8 @@
         },
         "beauty": {
           "predicted": null,
-          "peakScore": 32,
-          "avgScore": 30.2,
+          "peakScore": 61,
+          "avgScore": 35.4,
           "peakOffsetMin": -20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -2602,13 +2602,13 @@
       "verified": 2,
       "pending": 0,
       "bestStation": "hongludi",
-      "bestScore": 32,
-      "worstError": 3.0,
-      "meanError": 1.5
+      "bestScore": 61,
+      "worstError": 29,
+      "meanError": 16.0
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 3%。",
-      "modelPerformance": "🔥 火燒雲：預報 32 分，實測平均 6.0 分、峰值 11 分（T-30，峰值誤差 21 分）。🌅 天空美感：實測平均 30.2 分、峰值 32 分（T-20），本場無預報可比對。"
+      "modelPerformance": "🔥 火燒雲：預報 32 分，實測平均 6.0 分、峰值 11 分（T-30，峰值誤差 21 分）。🌅 天空美感：實測平均 35.4 分、峰值 61 分（T-20），本場無預報可比對。"
     }
   },
   {
@@ -2693,7 +2693,7 @@
         "icon": "⛩️",
         "tag": "臺北旅遊網 4K 直播・高處俯瞰盆地火燒雲",
         "phasePrep": "—",
-        "phasePeak": "平均 62.7 分・峰值 100 分（T+20）",
+        "phasePeak": "平均 62.9 分・峰值 100 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 2%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -2710,7 +2710,7 @@
         "beauty": {
           "predicted": null,
           "peakScore": 100,
-          "avgScore": 62.7,
+          "avgScore": 62.9,
           "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -2725,8 +2725,8 @@
         "phasePeak": "平均 37.2 分・峰值 72 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 22%）",
-        "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171",
+        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
+        "verdictColor": "#4ADE80",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 29,
@@ -2751,7 +2751,7 @@
         "icon": "🌊",
         "tag": "新北觀光 4K 直播・淡江大橋與台灣海峽晚霞",
         "phasePrep": "—",
-        "phasePeak": "平均 49.1 分・峰值 90 分（T+20）",
+        "phasePeak": "平均 49.2 分・峰值 90 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 0%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -2768,7 +2768,7 @@
         "beauty": {
           "predicted": null,
           "peakScore": 90,
-          "avgScore": 49.1,
+          "avgScore": 49.2,
           "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -2780,7 +2780,7 @@
         "icon": "🌉",
         "tag": "新北觀光 4K 直播・情人橋烈焰落日",
         "phasePrep": "—",
-        "phasePeak": "平均 59.1 分・峰值 95 分（T+20）",
+        "phasePeak": "平均 59.2 分・峰值 95 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 0%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -2797,7 +2797,7 @@
         "beauty": {
           "predicted": null,
           "peakScore": 95,
-          "avgScore": 59.1,
+          "avgScore": 59.2,
           "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -2809,7 +2809,7 @@
         "icon": "🏙️",
         "tag": "臺北旅遊網 4K 直播・101 與西方天際線",
         "phasePrep": "—",
-        "phasePeak": "平均 29.1 分・峰值 50 分（T+20）",
+        "phasePeak": "平均 29.2 分・峰值 50 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 2%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
@@ -2826,7 +2826,7 @@
         "beauty": {
           "predicted": null,
           "peakScore": 50,
-          "avgScore": 29.1,
+          "avgScore": 29.2,
           "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -2867,13 +2867,13 @@
     },
     "groundTruth": {
       "score": 31,
-      "avgScore": 13.0,
+      "avgScore": 13.6,
       "peakScore": 31,
       "peakOffsetMin": -10,
       "verdict": "EXACT_MATCH",
       "verdictAvg": "MISMATCH",
       "verdictPeak": "EXACT_MATCH",
-      "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)（峰值 31 分／平均 13.0 分）",
+      "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)（峰值 31 分／平均 13.6 分）",
       "color": "#4ADE80",
       "fireCloud": {
         "predicted": 36,
@@ -2887,7 +2887,7 @@
       "beauty": {
         "predicted": null,
         "peakScore": 31,
-        "avgScore": 13.0,
+        "avgScore": 13.6,
         "peakOffsetMin": -10,
         "verdict": "PENDING",
         "verdictBadge": "⏳ 無法比對",
@@ -2900,11 +2900,11 @@
         "icon": "⛰️",
         "tag": "新北觀光・雙北盆地俯瞰晨光",
         "phasePrep": "—",
-        "phasePeak": "平均 13.0 分・峰值 31 分（T-10）",
+        "phasePeak": "平均 13.6 分・峰值 31 分（T-10）",
         "phasePost": "—",
         "forecast": "36 分（低雲 13%）",
-        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 36,
           "peakScore": 5,
@@ -2917,7 +2917,7 @@
         "beauty": {
           "predicted": null,
           "peakScore": 31,
-          "avgScore": 13.0,
+          "avgScore": 13.6,
           "peakOffsetMin": -10,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -2964,7 +2964,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 16% ／ 低空 13%。",
-      "modelPerformance": "🔥 火燒雲：預報 36 分，實測平均 5.0 分、峰值 5 分（峰值誤差 31 分）。🌅 天空美感：實測平均 13.0 分、峰值 31 分（T-10），本場無預報可比對。"
+      "modelPerformance": "🔥 火燒雲：預報 36 分，實測平均 5.0 分、峰值 5 分（峰值誤差 31 分）。🌅 天空美感：實測平均 13.6 分、峰值 31 分（T-10），本場無預報可比對。"
     }
   },
   {
@@ -2987,13 +2987,13 @@
     },
     "groundTruth": {
       "score": 55,
-      "avgScore": 33.9,
+      "avgScore": 34.6,
       "peakScore": 55,
       "peakOffsetMin": 20,
       "verdict": "MISMATCH",
       "verdictAvg": "EXACT_MATCH",
       "verdictPeak": "MISMATCH",
-      "verdictBadge": "⚠️ 出現偏差需校準（峰值 55 分／平均 33.9 分）",
+      "verdictBadge": "⚠️ 出現偏差需校準（峰值 55 分／平均 34.6 分）",
       "color": "#F87171",
       "fireCloud": {
         "predicted": 35,
@@ -3007,7 +3007,7 @@
       "beauty": {
         "predicted": null,
         "peakScore": 55,
-        "avgScore": 33.9,
+        "avgScore": 34.6,
         "peakOffsetMin": 20,
         "verdict": "PENDING",
         "verdictBadge": "⏳ 無法比對",
@@ -3020,7 +3020,7 @@
         "icon": "⛵",
         "tag": "臺北旅遊網 4K 直播・淡水河倒影晚霞",
         "phasePrep": "—",
-        "phasePeak": "平均 33.9 分・峰值 55 分（T+20）",
+        "phasePeak": "平均 34.6 分・峰值 55 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 0%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -3037,7 +3037,7 @@
         "beauty": {
           "predicted": null,
           "peakScore": 55,
-          "avgScore": 33.9,
+          "avgScore": 34.6,
           "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -3049,7 +3049,7 @@
         "icon": "⛩️",
         "tag": "臺北旅遊網 4K 直播・高處俯瞰盆地火燒雲",
         "phasePrep": "—",
-        "phasePeak": "平均 45.0 分・峰值 97 分（T+20）",
+        "phasePeak": "平均 46.3 分・峰值 97 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 1%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -3066,7 +3066,7 @@
         "beauty": {
           "predicted": null,
           "peakScore": 97,
-          "avgScore": 45.0,
+          "avgScore": 46.3,
           "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -3078,11 +3078,11 @@
         "icon": "🏮",
         "tag": "新北觀光 4K 直播・山海交界落日",
         "phasePrep": "—",
-        "phasePeak": "平均 20.0 分・峰值 39 分（T+20）",
+        "phasePeak": "平均 20.1 分・峰值 40 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 11%）",
-        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 16,
@@ -3094,8 +3094,8 @@
         },
         "beauty": {
           "predicted": null,
-          "peakScore": 39,
-          "avgScore": 20.0,
+          "peakScore": 40,
+          "avgScore": 20.1,
           "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -3139,8 +3139,8 @@
         "phasePeak": "平均 57.3 分・峰值 94 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 0%）",
-        "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171",
+        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "verdictColor": "#FBBF24",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 25,
@@ -3165,11 +3165,11 @@
         "icon": "🏙️",
         "tag": "臺北旅遊網 4K 直播・101 與西方天際線",
         "phasePrep": "—",
-        "phasePeak": "平均 22.9 分・峰值 35 分（T+20）",
+        "phasePeak": "平均 23.1 分・峰值 36 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 1%）",
-        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 13,
@@ -3181,8 +3181,8 @@
         },
         "beauty": {
           "predicted": null,
-          "peakScore": 35,
-          "avgScore": 22.9,
+          "peakScore": 36,
+          "avgScore": 23.1,
           "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -3196,11 +3196,11 @@
       "bestStation": "maokong",
       "bestScore": 97,
       "worstError": 62,
-      "meanError": 32.2
+      "meanError": 32.5
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 0%。",
-      "modelPerformance": "🔥 火燒雲：預報 35 分，實測平均 12.1 分、峰值 16 分（T+20，峰值誤差 19 分）。🌅 天空美感：實測平均 33.9 分、峰值 55 分（T+20），本場無預報可比對。"
+      "modelPerformance": "🔥 火燒雲：預報 35 分，實測平均 12.1 分、峰值 16 分（T+20，峰值誤差 19 分）。🌅 天空美感：實測平均 34.6 分、峰值 55 分（T+20），本場無預報可比對。"
     }
   },
   {
@@ -3223,13 +3223,13 @@
     },
     "groundTruth": {
       "score": 22,
-      "avgScore": 14.2,
+      "avgScore": 14.6,
       "peakScore": 22,
       "peakOffsetMin": -10,
       "verdict": "SLIGHT_DEVIATION",
       "verdictAvg": "SLIGHT_DEVIATION",
       "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)（峰值 22 分／平均 14.2 分）",
+      "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)（峰值 22 分／平均 14.6 分）",
       "color": "#FBBF24",
       "fireCloud": {
         "predicted": 32,
@@ -3243,7 +3243,7 @@
       "beauty": {
         "predicted": null,
         "peakScore": 22,
-        "avgScore": 14.2,
+        "avgScore": 14.6,
         "peakOffsetMin": -10,
         "verdict": "PENDING",
         "verdictBadge": "⏳ 無法比對",
@@ -3256,11 +3256,11 @@
         "icon": "⛰️",
         "tag": "新北觀光・雙北盆地俯瞰晨光",
         "phasePrep": "—",
-        "phasePeak": "平均 14.2 分・峰值 22 分（T-10）",
+        "phasePeak": "平均 14.6 分・峰值 22 分（T-10）",
         "phasePost": "—",
         "forecast": "32 分（低雲 15%）",
-        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 32,
           "peakScore": 5,
@@ -3273,7 +3273,7 @@
         "beauty": {
           "predicted": null,
           "peakScore": 22,
-          "avgScore": 14.2,
+          "avgScore": 14.6,
           "peakOffsetMin": -10,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -3288,8 +3288,8 @@
         "phasePeak": "平均 11.8 分・峰值 29 分（T+0）",
         "phasePost": "—",
         "forecast": "5 分（低雲 81%）",
-        "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171",
+        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
+        "verdictColor": "#4ADE80",
         "fireCloud": {
           "predicted": 5,
           "peakScore": 5,
@@ -3320,7 +3320,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 15%。",
-      "modelPerformance": "🔥 火燒雲：預報 32 分，實測平均 5.0 分、峰值 5 分（峰值誤差 27 分）。🌅 天空美感：實測平均 14.2 分、峰值 22 分（T-10），本場無預報可比對。"
+      "modelPerformance": "🔥 火燒雲：預報 32 分，實測平均 5.0 分、峰值 5 分（峰值誤差 27 分）。🌅 天空美感：實測平均 14.6 分、峰值 22 分（T-10），本場無預報可比對。"
     }
   },
   {
@@ -3437,8 +3437,8 @@
         "phasePeak": "平均 36.1 分・峰值 53 分（T+10）",
         "phasePost": "—",
         "forecast": "35 分（低雲 27%）",
-        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 5,
@@ -3492,7 +3492,7 @@
         "icon": "🌉",
         "tag": "新北觀光 4K 直播・情人橋烈焰落日",
         "phasePrep": "—",
-        "phasePeak": "平均 58.5 分・峰值 95 分（T+20）",
+        "phasePeak": "平均 58.6 分・峰值 95 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 5%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -3509,7 +3509,7 @@
         "beauty": {
           "predicted": null,
           "peakScore": 95,
-          "avgScore": 58.5,
+          "avgScore": 58.6,
           "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -3524,8 +3524,8 @@
         "phasePeak": "平均 27.1 分・峰值 43 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 0%）",
-        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 9,
@@ -3578,15 +3578,15 @@
       "beautyScore": null
     },
     "groundTruth": {
-      "score": 37,
-      "avgScore": 20.2,
-      "peakScore": 37,
+      "score": 61,
+      "avgScore": 24.0,
+      "peakScore": 61,
       "peakOffsetMin": -20,
-      "verdict": "EXACT_MATCH",
+      "verdict": "MISMATCH",
       "verdictAvg": "SLIGHT_DEVIATION",
-      "verdictPeak": "EXACT_MATCH",
-      "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)（峰值 37 分／平均 20.2 分）",
-      "color": "#4ADE80",
+      "verdictPeak": "MISMATCH",
+      "verdictBadge": "⚠️ 出現偏差需校準（峰值 61 分／平均 24.0 分）",
+      "color": "#F87171",
       "fireCloud": {
         "predicted": 35,
         "peakScore": 5,
@@ -3598,8 +3598,8 @@
       },
       "beauty": {
         "predicted": null,
-        "peakScore": 37,
-        "avgScore": 20.2,
+        "peakScore": 61,
+        "avgScore": 24.0,
         "peakOffsetMin": -20,
         "verdict": "PENDING",
         "verdictBadge": "⏳ 無法比對",
@@ -3612,11 +3612,11 @@
         "icon": "⛰️",
         "tag": "新北觀光・雙北盆地俯瞰晨光",
         "phasePrep": "—",
-        "phasePeak": "平均 20.2 分・峰值 37 分（T-20）",
+        "phasePeak": "平均 24.0 分・峰值 61 分（T-20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 16%）",
-        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 5,
@@ -3628,8 +3628,8 @@
         },
         "beauty": {
           "predicted": null,
-          "peakScore": 37,
-          "avgScore": 20.2,
+          "peakScore": 61,
+          "avgScore": 24.0,
           "peakOffsetMin": -20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -3644,8 +3644,8 @@
         "phasePeak": "平均 14.7 分・峰值 20 分（T-10）",
         "phasePost": "—",
         "forecast": "19 分（低雲 23%）",
-        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80",
+        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "verdictColor": "#FBBF24",
         "fireCloud": {
           "predicted": 19,
           "peakScore": 5,
@@ -3670,13 +3670,13 @@
       "verified": 2,
       "pending": 0,
       "bestStation": "hongludi",
-      "bestScore": 37,
-      "worstError": 2,
-      "meanError": 1.5
+      "bestScore": 61,
+      "worstError": 26,
+      "meanError": 13.5
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 16%。",
-      "modelPerformance": "🔥 火燒雲：預報 35 分，實測平均 5.0 分、峰值 5 分（峰值誤差 30 分）。🌅 天空美感：實測平均 20.2 分、峰值 37 分（T-20），本場無預報可比對。"
+      "modelPerformance": "🔥 火燒雲：預報 35 分，實測平均 5.0 分、峰值 5 分（峰值誤差 30 分）。🌅 天空美感：實測平均 24.0 分、峰值 61 分（T-20），本場無預報可比對。"
     }
   },
   {
@@ -3735,8 +3735,8 @@
         "phasePeak": "平均 38.7 分・峰值 41 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 5%）",
-        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80",
+        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "verdictColor": "#FBBF24",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 17,
@@ -3761,11 +3761,11 @@
         "icon": "⛩️",
         "tag": "臺北旅遊網 4K 直播・高處俯瞰盆地火燒雲",
         "phasePrep": "—",
-        "phasePeak": "平均 53.6 分・峰值 64 分（T+20）",
+        "phasePeak": "平均 54.2 分・峰值 68 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 5%）",
-        "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171",
+        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "verdictColor": "#FBBF24",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 17,
@@ -3777,8 +3777,8 @@
         },
         "beauty": {
           "predicted": null,
-          "peakScore": 64,
-          "avgScore": 53.6,
+          "peakScore": 68,
+          "avgScore": 54.2,
           "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -3848,7 +3848,7 @@
         "icon": "🌉",
         "tag": "新北觀光 4K 直播・情人橋烈焰落日",
         "phasePrep": "—",
-        "phasePeak": "平均 63.7 分・峰值 91 分（T+20）",
+        "phasePeak": "平均 64.1 分・峰值 95 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 1%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -3864,8 +3864,8 @@
         },
         "beauty": {
           "predicted": null,
-          "peakScore": 91,
-          "avgScore": 63.7,
+          "peakScore": 95,
+          "avgScore": 64.1,
           "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -3877,11 +3877,11 @@
         "icon": "🏙️",
         "tag": "臺北旅遊網 4K 直播・101 與西方天際線",
         "phasePrep": "—",
-        "phasePeak": "平均 26.2 分・峰值 35 分（T+20）",
+        "phasePeak": "平均 26.3 分・峰值 35 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 5%）",
-        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 9,
@@ -3894,7 +3894,7 @@
         "beauty": {
           "predicted": null,
           "peakScore": 35,
-          "avgScore": 26.2,
+          "avgScore": 26.3,
           "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -3906,9 +3906,9 @@
       "verified": 5,
       "pending": 1,
       "bestStation": "tamsui",
-      "bestScore": 91,
-      "worstError": 56,
-      "meanError": 28.0
+      "bestScore": 95,
+      "worstError": 60,
+      "meanError": 29.6
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 5%。",
@@ -3934,14 +3934,14 @@
       "beautyScore": null
     },
     "groundTruth": {
-      "score": 20,
-      "avgScore": 11.3,
-      "peakScore": 20,
+      "score": 22,
+      "avgScore": 13.8,
+      "peakScore": 22,
       "peakOffsetMin": -20,
       "verdict": "SLIGHT_DEVIATION",
-      "verdictAvg": "EXACT_MATCH",
+      "verdictAvg": "SLIGHT_DEVIATION",
       "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)（峰值 20 分／平均 11.3 分）",
+      "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)（峰值 22 分／平均 13.8 分）",
       "color": "#FBBF24",
       "fireCloud": {
         "predicted": 5,
@@ -3954,8 +3954,8 @@
       },
       "beauty": {
         "predicted": null,
-        "peakScore": 20,
-        "avgScore": 11.3,
+        "peakScore": 22,
+        "avgScore": 13.8,
         "peakOffsetMin": -20,
         "verdict": "PENDING",
         "verdictBadge": "⏳ 無法比對",
@@ -3968,11 +3968,11 @@
         "icon": "⛰️",
         "tag": "新北觀光・雙北盆地俯瞰晨光",
         "phasePrep": "—",
-        "phasePeak": "平均 11.3 分・峰值 20 分（T-20）",
+        "phasePeak": "平均 13.8 分・峰值 22 分（T-20）",
         "phasePost": "—",
         "forecast": "5 分（低雲 54%）",
-        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24",
+        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
+        "verdictColor": "#4ADE80",
         "fireCloud": {
           "predicted": 5,
           "peakScore": 5,
@@ -3984,8 +3984,8 @@
         },
         "beauty": {
           "predicted": null,
-          "peakScore": 20,
-          "avgScore": 11.3,
+          "peakScore": 22,
+          "avgScore": 13.8,
           "peakOffsetMin": -20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -4000,8 +4000,8 @@
         "phasePeak": "平均 17.7 分・峰值 29 分（T+0）",
         "phasePost": "—",
         "forecast": "5 分（低雲 70%）",
-        "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171",
+        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
+        "verdictColor": "#4ADE80",
         "fireCloud": {
           "predicted": 5,
           "peakScore": 5,
@@ -4028,11 +4028,11 @@
       "bestStation": "waimushan",
       "bestScore": 29,
       "worstError": 24,
-      "meanError": 19.5
+      "meanError": 20.5
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 54%。",
-      "modelPerformance": "🔥 火燒雲：預報 5 分，實測平均 5.0 分、峰值 5 分（峰值誤差 0 分）。🌅 天空美感：實測平均 11.3 分、峰值 20 分（T-20），本場無預報可比對。"
+      "modelPerformance": "🔥 火燒雲：預報 5 分，實測平均 5.0 分、峰值 5 分（峰值誤差 0 分）。🌅 天空美感：實測平均 13.8 分、峰值 22 分（T-20），本場無預報可比對。"
     }
   },
   {
@@ -4146,8 +4146,8 @@
         "phasePeak": "平均 12.8 分・峰值 17 分（T+10）",
         "phasePost": "—",
         "forecast": "5 分（低雲 91%）",
-        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24",
+        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
+        "verdictColor": "#4ADE80",
         "fireCloud": {
           "predicted": 5,
           "peakScore": 5,
@@ -4175,8 +4175,8 @@
         "phasePeak": "平均 47.6 分・峰值 86 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 12%）",
-        "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171",
+        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
+        "verdictColor": "#4ADE80",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 40,
@@ -4201,11 +4201,11 @@
         "icon": "🌉",
         "tag": "新北觀光 4K 直播・情人橋烈焰落日",
         "phasePrep": "—",
-        "phasePeak": "平均 54.7 分・峰值 84 分（T+10）",
+        "phasePeak": "平均 56.4 分・峰值 86 分（T+20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 12%）",
-        "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171",
+        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
+        "verdictColor": "#4ADE80",
         "fireCloud": {
           "predicted": 35,
           "peakScore": 33,
@@ -4217,9 +4217,9 @@
         },
         "beauty": {
           "predicted": null,
-          "peakScore": 84,
-          "avgScore": 54.7,
-          "peakOffsetMin": 10,
+          "peakScore": 86,
+          "avgScore": 56.4,
+          "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
           "color": "#94A3B8"
@@ -4261,7 +4261,7 @@
       "bestStation": "bali",
       "bestScore": 86,
       "worstError": 51,
-      "meanError": 37.3
+      "meanError": 38.0
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 28%。",
@@ -4287,14 +4287,14 @@
       "beautyScore": null
     },
     "groundTruth": {
-      "score": 72,
-      "avgScore": 30.9,
-      "peakScore": 72,
+      "score": 75,
+      "avgScore": 32.2,
+      "peakScore": 75,
       "peakOffsetMin": -20,
       "verdict": "MISMATCH",
       "verdictAvg": "EXACT_MATCH",
       "verdictPeak": "MISMATCH",
-      "verdictBadge": "⚠️ 出現偏差需校準（峰值 72 分／平均 30.9 分）",
+      "verdictBadge": "⚠️ 出現偏差需校準（峰值 75 分／平均 32.2 分）",
       "color": "#F87171",
       "fireCloud": {
         "predicted": 35,
@@ -4307,8 +4307,8 @@
       },
       "beauty": {
         "predicted": null,
-        "peakScore": 72,
-        "avgScore": 30.9,
+        "peakScore": 75,
+        "avgScore": 32.2,
         "peakOffsetMin": -20,
         "verdict": "PENDING",
         "verdictBadge": "⏳ 無法比對",
@@ -4321,7 +4321,7 @@
         "icon": "⛰️",
         "tag": "新北觀光・雙北盆地俯瞰晨光",
         "phasePrep": "—",
-        "phasePeak": "平均 30.9 分・峰值 72 分（T-20）",
+        "phasePeak": "平均 32.2 分・峰值 75 分（T-20）",
         "phasePost": "—",
         "forecast": "35 分（低雲 1%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -4337,8 +4337,8 @@
         },
         "beauty": {
           "predicted": null,
-          "peakScore": 72,
-          "avgScore": 30.9,
+          "peakScore": 75,
+          "avgScore": 32.2,
           "peakOffsetMin": -20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -4353,8 +4353,8 @@
         "phasePeak": "平均 16.2 分・峰值 19 分（T+0）",
         "phasePost": "—",
         "forecast": "31 分（低雲 13%）",
-        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-        "verdictColor": "#FBBF24",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 31,
           "peakScore": 5,
@@ -4379,13 +4379,13 @@
       "verified": 2,
       "pending": 0,
       "bestStation": "hongludi",
-      "bestScore": 72,
-      "worstError": 37,
-      "meanError": 24.5
+      "bestScore": 75,
+      "worstError": 40,
+      "meanError": 26.0
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 1%。",
-      "modelPerformance": "🔥 火燒雲：預報 35 分，實測平均 7.2 分、峰值 12 分（T-30，峰值誤差 23 分）。🌅 天空美感：實測平均 30.9 分、峰值 72 分（T-20），本場無預報可比對。"
+      "modelPerformance": "🔥 火燒雲：預報 35 分，實測平均 7.2 分、峰值 12 分（T-30，峰值誤差 23 分）。🌅 天空美感：實測平均 32.2 分、峰值 75 分（T-20），本場無預報可比對。"
     }
   },
   {
@@ -4425,7 +4425,7 @@
       "beauty": {
         "predicted": null,
         "peakScore": 41,
-        "avgScore": 31.2,
+        "avgScore": 31.7,
         "peakOffsetMin": 10,
         "verdict": "PENDING",
         "verdictBadge": "⏳ 無法比對",
@@ -4438,7 +4438,7 @@
         "icon": "⛵",
         "tag": "臺北旅遊網 4K 直播・淡水河倒影晚霞",
         "phasePrep": "—",
-        "phasePeak": "平均 31.2 分・峰值 41 分（找不到鎖定預測，無法算誤差）",
+        "phasePeak": "平均 31.7 分・峰值 41 分（找不到鎖定預測，無法算誤差）",
         "phasePost": "—",
         "forecast": "—",
         "verdict": "⏳ 實測待驗證",
@@ -4455,7 +4455,7 @@
         "beauty": {
           "predicted": null,
           "peakScore": 41,
-          "avgScore": 31.2,
+          "avgScore": 31.7,
           "peakOffsetMin": 10,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -4467,7 +4467,7 @@
         "icon": "⛩️",
         "tag": "臺北旅遊網 4K 直播・高處俯瞰盆地火燒雲",
         "phasePrep": "—",
-        "phasePeak": "平均 58.1 分・峰值 96 分（找不到鎖定預測，無法算誤差）",
+        "phasePeak": "平均 59.9 分・峰值 96 分（找不到鎖定預測，無法算誤差）",
         "phasePost": "—",
         "forecast": "—",
         "verdict": "⏳ 實測待驗證",
@@ -4484,7 +4484,7 @@
         "beauty": {
           "predicted": null,
           "peakScore": 96,
-          "avgScore": 58.1,
+          "avgScore": 59.9,
           "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -4618,7 +4618,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "本場預報雲量細項未隨鎖定檔存下。",
-      "modelPerformance": "🔥 火燒雲：實測平均 13.2 分、峰值 17 分（T+10），本場無預報可比對。🌅 天空美感：實測平均 31.2 分、峰值 41 分（T+10），本場無預報可比對。"
+      "modelPerformance": "🔥 火燒雲：實測平均 13.2 分、峰值 17 分（T+10），本場無預報可比對。🌅 天空美感：實測平均 31.7 分、峰值 41 分（T+10），本場無預報可比對。"
     }
   },
   {
@@ -4641,13 +4641,13 @@
     },
     "groundTruth": {
       "score": 24,
-      "avgScore": 14.2,
+      "avgScore": 15.7,
       "peakScore": 24,
       "peakOffsetMin": -10,
       "verdict": "MISMATCH",
       "verdictAvg": "SLIGHT_DEVIATION",
       "verdictPeak": "MISMATCH",
-      "verdictBadge": "⚠️ 出現偏差需校準（峰值 24 分／平均 14.2 分）",
+      "verdictBadge": "⚠️ 出現偏差需校準（峰值 24 分／平均 15.7 分）",
       "color": "#F87171",
       "fireCloud": {
         "predicted": 5,
@@ -4661,7 +4661,7 @@
       "beauty": {
         "predicted": null,
         "peakScore": 24,
-        "avgScore": 14.2,
+        "avgScore": 15.7,
         "peakOffsetMin": -10,
         "verdict": "PENDING",
         "verdictBadge": "⏳ 無法比對",
@@ -4674,11 +4674,11 @@
         "icon": "⛰️",
         "tag": "新北觀光・雙北盆地俯瞰晨光",
         "phasePrep": "—",
-        "phasePeak": "平均 14.2 分・峰值 24 分（T-10）",
+        "phasePeak": "平均 15.7 分・峰值 24 分（T-10）",
         "phasePost": "—",
         "forecast": "5 分（低雲 91%）",
-        "verdict": "⚠️ 出現偏差需校準",
-        "verdictColor": "#F87171",
+        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
+        "verdictColor": "#4ADE80",
         "fireCloud": {
           "predicted": 5,
           "peakScore": 5,
@@ -4691,7 +4691,7 @@
         "beauty": {
           "predicted": null,
           "peakScore": 24,
-          "avgScore": 14.2,
+          "avgScore": 15.7,
           "peakOffsetMin": -10,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -4738,7 +4738,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 9% ／ 中空 4% ／ 低空 91%。",
-      "modelPerformance": "🔥 火燒雲：預報 5 分，實測平均 5.1 分、峰值 5 分（峰值誤差 0 分）。🌅 天空美感：實測平均 14.2 分、峰值 24 分（T-10），本場無預報可比對。"
+      "modelPerformance": "🔥 火燒雲：預報 5 分，實測平均 5.1 分、峰值 5 分（峰值誤差 0 分）。🌅 天空美感：實測平均 15.7 分、峰值 24 分（T-10），本場無預報可比對。"
     }
   },
   {
@@ -4778,7 +4778,7 @@
       "beauty": {
         "predicted": null,
         "peakScore": 51,
-        "avgScore": 26.0,
+        "avgScore": 26.7,
         "peakOffsetMin": 20,
         "verdict": "PENDING",
         "verdictBadge": "⏳ 無法比對",
@@ -4791,7 +4791,7 @@
         "icon": "⛵",
         "tag": "臺北旅遊網 4K 直播・淡水河倒影晚霞",
         "phasePrep": "—",
-        "phasePeak": "平均 26.0 分・峰值 51 分（找不到鎖定預測，無法算誤差）",
+        "phasePeak": "平均 26.7 分・峰值 51 分（找不到鎖定預測，無法算誤差）",
         "phasePost": "—",
         "forecast": "—",
         "verdict": "⏳ 實測待驗證",
@@ -4808,7 +4808,7 @@
         "beauty": {
           "predicted": null,
           "peakScore": 51,
-          "avgScore": 26.0,
+          "avgScore": 26.7,
           "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -4820,7 +4820,7 @@
         "icon": "⛩️",
         "tag": "臺北旅遊網 4K 直播・高處俯瞰盆地火燒雲",
         "phasePrep": "—",
-        "phasePeak": "平均 35.7 分・峰值 31 分（找不到鎖定預測，無法算誤差）",
+        "phasePeak": "平均 42.7 分・峰值 43 分（找不到鎖定預測，無法算誤差）",
         "phasePost": "—",
         "forecast": "—",
         "verdict": "⏳ 實測待驗證",
@@ -4836,9 +4836,9 @@
         },
         "beauty": {
           "predicted": null,
-          "peakScore": 31,
-          "avgScore": 35.7,
-          "peakOffsetMin": 20,
+          "peakScore": 43,
+          "avgScore": 42.7,
+          "peakOffsetMin": 10,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
           "color": "#94A3B8"
@@ -4907,7 +4907,7 @@
         "icon": "🌉",
         "tag": "新北觀光 4K 直播・情人橋烈焰落日",
         "phasePrep": "—",
-        "phasePeak": "平均 44.9 分・峰值 57 分（找不到鎖定預測，無法算誤差）",
+        "phasePeak": "平均 47.2 分・峰值 72 分（找不到鎖定預測，無法算誤差）",
         "phasePost": "—",
         "forecast": "—",
         "verdict": "⏳ 實測待驗證",
@@ -4923,8 +4923,8 @@
         },
         "beauty": {
           "predicted": null,
-          "peakScore": 57,
-          "avgScore": 44.9,
+          "peakScore": 72,
+          "avgScore": 47.2,
           "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -4965,13 +4965,13 @@
       "verified": 6,
       "pending": 0,
       "bestStation": "tamsui",
-      "bestScore": 57,
+      "bestScore": 72,
       "worstError": null,
       "meanError": null
     },
     "summaryAnalysis": {
       "atmosphericReason": "本場預報雲量細項未隨鎖定檔存下。",
-      "modelPerformance": "🔥 火燒雲：實測平均 17.3 分、峰值 43 分（T+20），本場無預報可比對。🌅 天空美感：實測平均 26.0 分、峰值 51 分（T+20），本場無預報可比對。"
+      "modelPerformance": "🔥 火燒雲：實測平均 17.3 分、峰值 43 分（T+20），本場無預報可比對。🌅 天空美感：實測平均 26.7 分、峰值 51 分（T+20），本場無預報可比對。"
     }
   },
   {

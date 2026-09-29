@@ -54,55 +54,55 @@
   "beautyModel": {
     "input": "clearSkyUncappedScore",
     "target": "verification.peakScore",
-    "fittedAt": "2026-09-28T16:28:06.829Z",
+    "fittedAt": "2026-09-29T05:25:47.718Z",
     "stations": {
-      "jiufen": {
-        "slope": 0.75,
-        "intercept": 23.664,
-        "n": 12,
-        "mae": 20.5
-      },
-      "bali": {
-        "slope": 1.125,
-        "intercept": 26.648,
-        "n": 15,
-        "mae": 9.007
-      },
-      "tamsui": {
-        "slope": 1.209,
-        "intercept": 31.058,
-        "n": 15,
-        "mae": 7.631
-      },
-      "dadaocheng": {
-        "slope": 0.48,
-        "intercept": 27.455,
-        "n": 14,
-        "mae": 9.791
-      },
-      "xiangshan": {
-        "slope": 0.309,
-        "intercept": 18.895,
-        "n": 14,
-        "mae": 8.66
-      },
       "hongludi": {
-        "slope": 0.045,
-        "intercept": 25.597,
-        "n": 16,
-        "mae": 10.423
-      },
-      "maokong": {
-        "slope": 1.565,
-        "intercept": 2.048,
-        "n": 13,
-        "mae": 17.164
+        "slope": -0.018,
+        "intercept": 39.699,
+        "n": 14,
+        "mae": 17.647
       },
       "waimushan": {
-        "slope": -0.142,
-        "intercept": 26.022,
+        "slope": -0.073,
+        "intercept": 25.087,
+        "n": 10,
+        "mae": 4.585
+      },
+      "maokong": {
+        "slope": 2.151,
+        "intercept": -19.553,
+        "n": 11,
+        "mae": 6.109
+      },
+      "jiufen": {
+        "slope": 0.609,
+        "intercept": 34.607,
+        "n": 10,
+        "mae": 18.861
+      },
+      "bali": {
+        "slope": -0.018,
+        "intercept": 88.95,
         "n": 12,
-        "mae": 5.084
+        "mae": 3.98
+      },
+      "tamsui": {
+        "slope": 0.476,
+        "intercept": 70.187,
+        "n": 12,
+        "mae": 3.462
+      },
+      "dadaocheng": {
+        "slope": -0.145,
+        "intercept": 63.97,
+        "n": 11,
+        "mae": 7.712
+      },
+      "xiangshan": {
+        "slope": 0.286,
+        "intercept": 21.864,
+        "n": 11,
+        "mae": 9.313
       }
     }
   }

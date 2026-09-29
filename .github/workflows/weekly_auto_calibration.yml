@@ -36,6 +36,7 @@ jobs:
           python3 tests/test_timelapse_aggregation.py
           python3 tests/test_fire_cloud.py
           python3 tests/test_auto_calibrate.py
+          python3 tests/test_beauty_score.py
           node tests/test-beauty-model.js
 
       - name: 🤖 執行物理模型損失函數最佳化與參數微調 (Phase 4)

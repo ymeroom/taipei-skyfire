@@ -4,7 +4,9 @@
  *
  * 輸入 x = 鎖定當下的 clearSkyUncappedScore。舊紀錄沒存這個欄位，就用鎖定時
  * 存下的同一組氣象輸入重跑引擎取得 (與鎖定分數逐筆比對過，重跑結果一致)。
- * 目標 y = 攝影機實測的暖色峰值 verification.peakScore。
+ * 目標 y = 攝影機實測的暖色峰值 verification.peakScore。只用美感分評分器
+ * 目前版本 (verification.beautyScorerVersion) 量的紀錄：v1 看不到粉紅暮光，
+ * 同一片天空兩版分數可差 30 分，混在一起擬合會把斜率拉歪。
  *
  * 用法: node scripts/fit-beauty-model.js [records.json] [params.json]
  */
@@ -13,6 +15,9 @@ const fs = require('fs');
 const path = require('path');
 const SkyFireEngine = require('../js/skyfire-engine.js');
 const { fitStation } = require('../js/beauty-model.js');
+
+// 與 scripts/analyze_sky_ground_truth.py 的 BEAUTY_SCORER_VERSION 一致，改遮罩時兩邊一起升
+const BEAUTY_SCORER_VERSION = 2;
 
 // 2026-09-29 前引擎把 < 1000 的能見度當公里，起霧時的 380 公尺被存成 visibilityKm: 380。
 // 地面能見度不會超過 100 公里，超過的就是當年的公尺原值。
@@ -45,6 +50,7 @@ function collectPoints(records) {
   const byStation = {};
   for (const r of records) {
     if (r.capture?.kind !== 'timelapse-multi-frame') continue;
+    if (r.verification?.beautyScorerVersion !== BEAUTY_SCORER_VERSION) continue;
     const y = r.verification?.peakScore;
     if (typeof y !== 'number' || !r.prediction || !r.station) continue;
     const x = engineInputX(r.prediction, r.session);
@@ -79,4 +85,4 @@ if (require.main === module) {
       process.argv[3] || path.join(root, 'data/model-calibration-params.json'));
 }
 
-module.exports = { fitBeautyModel, engineInputX };
+module.exports = { fitBeautyModel, engineInputX, BEAUTY_SCORER_VERSION };

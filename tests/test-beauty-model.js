@@ -4,7 +4,7 @@
 
 const assert = require('assert');
 const { predictBeauty, fitStation } = require('../js/beauty-model.js');
-const { fitBeautyModel, engineInputX } = require('../scripts/fit-beauty-model.js');
+const { fitBeautyModel, engineInputX, BEAUTY_SCORER_VERSION } = require('../scripts/fit-beauty-model.js');
 const SkyFireEngine = require('../js/skyfire-engine.js');
 
 console.log('--- 🧪 測試: 天空美感分模型 ---');
@@ -48,15 +48,18 @@ assert.strictEqual(engineInputX({ ...foggy, visibilityKm: 0.38 }, 'sunrise'), fo
 
 const rec = (station, peak, extra = {}) => ({
   station, session: 'sunset', capture: { kind: 'timelapse-multi-frame' },
-  prediction: { ...pred, clearSkyUncappedScore: 40 + peak / 10 }, verification: { peakScore: peak }, ...extra
+  prediction: { ...pred, clearSkyUncappedScore: 40 + peak / 10 },
+  verification: { peakScore: peak, beautyScorerVersion: BEAUTY_SCORER_VERSION }, ...extra
 });
 const fitted = fitBeautyModel([
   rec('tamsui', 90), rec('tamsui', 95), rec('tamsui', 100),
   rec('tamsui', 50, { capture: { kind: 'youtube-live-frame' } }),
+  rec('tamsui', 20, { verification: { peakScore: 20 } }),
   rec('bali', 80), rec('bali', 85),
 ], 'fixed');
 assert.deepStrictEqual(Object.keys(fitted.stations), ['tamsui'], '只用縮時紀錄；樣本不足的站不輸出');
-assert.strictEqual(fitted.stations.tamsui.n, 3);
+assert.strictEqual(BEAUTY_SCORER_VERSION, 2);
+assert.strictEqual(fitted.stations.tamsui.n, 3, '沒有評分器版本的舊紀錄 (v1) 不進擬合');
 assert.strictEqual(fitted.fittedAt, 'fixed');
 
 console.log('✅ 天空美感分模型擬合／預報／缺值處理正確\n');

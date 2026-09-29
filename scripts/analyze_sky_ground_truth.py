@@ -267,6 +267,22 @@ def classify_score(score):
 # 9/13 淡水、9/16 貓空這種整片雲燒起來的畫面落在 22-27%。
 # ---------------------------------------------------------------------------
 FIRE_CLOUD_WIDTH = 320
+
+# ---------------------------------------------------------------------------
+# 天空美感分 v2：粉紅／洋紅暮光也算暖色。
+#
+# v1 只認 0-65° 與 345-360° (橘紅)，粉紅、洋紅 (300-345°) 一律不算。2026-09-29
+# 烘爐地日出前 20 分鐘霾層整片泛粉紫，天空 97% 是粉紫色，v1 卻判 0% 暖色、
+# 峰值只有 14 分。用 2026-09-15~29 的 942 張縮時影格比對過：
+#   - 分數大增的都是真的粉紅天空 (9/26 貓空洋紅雲 27→65、9/15 貓空粉紅雲 41→68)
+#   - 放寬到 290° 或飽和度 0.15 會開始把灰紫色的霾 (9/20 烘爐地) 算進來，所以不放
+#   - 260-300° 是藍紫色的藍調時刻，不算
+#   - 鮮豔橘紅晚霞 (v1 ≥ 70 分) 分數不會下降
+# 改了遮罩就要升 BEAUTY_SCORER_VERSION：不同版本的實測分數不能混在一起擬合美感模型。
+# ---------------------------------------------------------------------------
+BEAUTY_SCORER_VERSION = 2
+BEAUTY_PINK_HUE_MIN = 300
+BEAUTY_PINK_MIN_SAT = 0.18
 FIRE_CLOUD_DEFAULT_ROI_BOTTOM = 0.65
 FIRE_CLOUD_DARK_V = 0.18          # 低於此亮度視為地面／建築／暗雲剪影，不算天空
 FIRE_CLOUD_EDGE_ERODE_PX = 3      # 天空邊界內縮，避開山稜線、天際線與天空交界的強邊緣
@@ -431,8 +447,13 @@ def analyze_image_optics(image_path, capture_time=None, twilight_window=None, ra
         # 色相角: 345° ~ 360° (深紅) 與 0° ~ 65° (紅/橘/金黃/琥珀色)
         # 飽和度 S >= 0.25 (避免灰白死雲)
         # 亮度 V >= 0.20 (避免夜間死黑)
-        warm_mask = ((h_arr <= 65) | (h_arr >= 345)) & (s >= 0.22) & (v >= 0.20)
-        
+        orange_mask = ((h_arr <= 65) | (h_arr >= 345)) & (s >= 0.22) & (v >= 0.20)
+        # 粉紅／洋紅暮光 (見 BEAUTY_PINK_HUE_MIN 說明)：只擴大「算不算暖色」，
+        # 不進鮮豔核心，也不讓偏淡的粉紅拉低橘紅色的飽和度能量。
+        pink_mask = ((h_arr >= BEAUTY_PINK_HUE_MIN) & (h_arr < 345)
+                     & (s >= BEAUTY_PINK_MIN_SAT) & (v >= 0.20))
+        warm_mask = orange_mask | pink_mask
+
         # 強烈燃燒核心遮罩 (深橘紅、高飽和度 S >= 0.45)
         vivid_mask = ((h_arr <= 45) | (h_arr >= 350)) & (s >= 0.42) & (v >= 0.30)
 
@@ -443,8 +464,11 @@ def analyze_image_optics(image_path, capture_time=None, twilight_window=None, ra
         warm_coverage_pct = (warm_pixels_count / total_sky_pixels) * 100
         vivid_coverage_pct = (vivid_pixels_count / total_sky_pixels) * 100
 
-        # 2. 平均色彩純度與飽和度能量
+        # 2. 平均色彩純度與飽和度能量：取「只看橘紅」與「含粉紅」較高者，
+        #    加入粉紅只會加分，不會讓原本鮮豔的橘色晚霞變低分
+        avg_orange_saturation = float(np.mean(s[orange_mask])) if orange_mask.any() else 0
         avg_warm_saturation = float(np.mean(s[warm_mask])) if warm_pixels_count > 0 else 0
+        avg_warm_saturation = max(avg_orange_saturation, avg_warm_saturation)
         avg_warm_brightness = float(np.mean(v[warm_mask])) if warm_pixels_count > 0 else 0
 
         # 3. 綜合火燒雲出景強度公式 (0 - 100 分)
@@ -465,6 +489,8 @@ def analyze_image_optics(image_path, capture_time=None, twilight_window=None, ra
             "sky_coverage_pct": round(warm_coverage_pct, 1),
             "vivid_coverage_pct": round(vivid_coverage_pct, 1),
             "avg_brightness_pct": round(avg_warm_brightness * 100, 1),
+            "pink_coverage_pct": round(float(np.sum(pink_mask & ~orange_mask)) / total_sky_pixels * 100, 1),
+            "beautyScorerVersion": BEAUTY_SCORER_VERSION,
             "is_simulated": False
         }
         fire = analyze_fire_cloud(img_full, sky_roi_bottom)

@@ -52,6 +52,7 @@ if sys.platform == 'win32':
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, os.path.dirname(__file__))
 from analyze_sky_ground_truth import (  # noqa: E402
+    BEAUTY_SCORER_VERSION,
     analyze_image_optics,
     get_twilight_window,
     fetch_hourly_weather_series,
@@ -688,7 +689,9 @@ def build_station_verification_record(station, frames, session, date_str, anchor
             "peakScore": aggregate["peakScore"],
             "peakOffsetMin": aggregate["peakOffsetMin"],
             "peakSide": aggregate["peakSide"],
-            "verifiedAt": datetime.datetime.now(datetime.timezone.utc).isoformat()
+            "verifiedAt": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+            # 美感分遮罩改版後舊分數不可比，擬合美感模型只用同一版的實測 (fit-beauty-model.js)
+            "beautyScorerVersion": BEAUTY_SCORER_VERSION
         }
     }
 
