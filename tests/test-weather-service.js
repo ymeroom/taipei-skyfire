@@ -52,4 +52,25 @@ assert.deepStrictEqual(
 
 console.log('✅ 上游取樣座標與實際取樣點一致');
 
+// ----------------------------------------------------------------
+// 空氣品質併入：同時間的 US AQI / PM2.5 / AOD 進觀測點逐小時資料，只記錄不餵引擎；
+// 抓不到或時間對不上時欄位是 null (紀錄看得出沒有真實空品)。
+// ----------------------------------------------------------------
+const mockAq = { hourly: { time: ['2026-08-16T18:00'], us_aqi: [118], pm2_5: [42.5], aerosol_optical_depth: [0.61] } };
+const withAq = WeatherService.processRawData(mockRaw, null, null, WeatherService.TAIPEI_COORDS, null, mockAq).daysForecast[0].sunset;
+assert.strictEqual(withAq.weather.aqi, 118);
+assert.strictEqual(withAq.weather.pm25, 42.5);
+assert.strictEqual(withAq.weather.aod, 0.61);
+assert.strictEqual(withAq.skyfire.metrics.aqi, 45, '空品只記錄：引擎仍用預設 AQI，分數不受影響');
+assert.strictEqual(withAq.skyfire.score, WeatherService.processRawData(mockRaw).daysForecast[0].sunset.skyfire.score);
+
+const noAq = WeatherService.processRawData(mockRaw).daysForecast[0].sunset;
+assert.strictEqual(noAq.weather.aqi, null, '沒抓到空品要記 null，不冒充真實數值');
+
+const offHour = { hourly: { time: ['2026-08-16T05:00'], us_aqi: [80], pm2_5: [20], aerosol_optical_depth: [0.2] } };
+const mismatched = WeatherService.processRawData(mockRaw, null, null, WeatherService.TAIPEI_COORDS, null, offHour).daysForecast[0].sunset;
+assert.strictEqual(mismatched.weather.aqi, null, '空品時間對不上就是沒有，不拿別的小時頂替');
+
+console.log('✅ 空氣品質併入逐小時資料 (只記錄、不影響分數)，缺值誠實記 null');
+
 console.log('🎉 Taipei WeatherService 測試案例全數 PASS!\n');

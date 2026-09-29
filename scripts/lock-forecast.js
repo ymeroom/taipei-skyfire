@@ -47,11 +47,18 @@ function stationLockEntry(sf, stationId, beautyModel) {
       cloudTotal: w.cloudTotal ?? null,
       humidity: w.humidity ?? null,
       precipProb: w.precipProb ?? null,
-      visibilityKm: m.visKm ?? w.visibilityKm ?? null
+      visibilityKm: m.visKm ?? w.visibilityKm ?? null,
+      // Open-Meteo 空品 (CAMS) 原始預報，只記錄不進引擎；null = 這場沒抓到。
+      // 引擎實際用的 AQI 在 metrics.aqi。
+      aqiForecast: w.aqi ?? null,
+      pm25: w.pm25 ?? null,
+      aod: w.aod ?? null
     },
     metrics: {
       horizonClearance: m.horizonClearance ?? null,
       visKm: m.visKm ?? null,
+      aqi: m.aqi ?? null,
+      aqiModifier: m.aqiModifier ?? null,
       clearSkyUncappedScore
     }
   };

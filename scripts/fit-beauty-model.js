@@ -42,6 +42,7 @@ function engineInputX(prediction, session) {
     precipProb: prediction.precipProb,
     horizonClearance: prediction.horizonClearance,
     visibility: visibilityMeters(prediction.visibilityKm),
+    aqi: prediction.aqi ?? undefined,
     type: session,
   }).metrics.clearSkyUncappedScore;
 }

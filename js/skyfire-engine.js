@@ -186,6 +186,8 @@ class SkyFireEngine {
         visibilityScore: Math.round(visibilityScore),
         horizonClearance: Math.round(horizonClearance),
         visKm: parseFloat(visKm.toFixed(1)),
+        aqi,
+        aqiModifier: Math.round(aqiModifier),
         clearSkyUncappedScore
       },
       diagnostics,

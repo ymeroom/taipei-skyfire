@@ -46,6 +46,10 @@ function buildPredictionFromLock(lockedData) {
     precipProb: num(w.precipProb),
     horizonClearance: num(m.horizonClearance),
     visibilityKm: visKm !== null ? visKm : num(m.visKm),
+    aqi: num(m.aqi),
+    aqiForecast: num(w.aqiForecast),
+    pm25: num(w.pm25),
+    aod: num(w.aod),
     isSimulated: false,
     lockedAt: lockedData.lockedAt
   };
@@ -74,6 +78,10 @@ function buildPredictionFromStationLock(lockedData, stationId) {
     precipProb: num(w.precipProb),
     horizonClearance: num(m.horizonClearance),
     visibilityKm: visKm !== null ? visKm : num(m.visKm),
+    aqi: num(m.aqi),
+    aqiForecast: num(w.aqiForecast),
+    pm25: num(w.pm25),
+    aod: num(w.aod),
     isSimulated: false,
     lockedAt: lockedData.lockedAt
   };

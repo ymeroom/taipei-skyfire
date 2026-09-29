@@ -277,6 +277,27 @@ class WeatherService {
   }
 
   /**
+   * Open-Meteo 空氣品質 (CAMS) 逐小時預報：US AQI、PM2.5、氣膠光學厚度。
+   * 只取觀測點一個座標 —— 霾是觀測點上空的事，不必沿光路取樣。
+   */
+  static buildAirQualityRequestUrl(coords) {
+    return `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${coords.lat}&longitude=${coords.lng}` +
+      '&hourly=us_aqi,pm2_5,aerosol_optical_depth&timezone=Asia%2FTaipei&forecast_days=7';
+  }
+
+  /** 空品是附加資料：抓不到就回 null，氣象預報照常產出 (引擎退回預設 AQI)。 */
+  static async fetchAirQuality(coords) {
+    try {
+      const response = await fetch(this.buildAirQualityRequestUrl(coords), { cache: 'no-store' });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return await response.json();
+    } catch (err) {
+      console.warn('無法取得 Open-Meteo 空氣品質，本次引擎使用預設 AQI:', err.message);
+      return null;
+    }
+  }
+
+  /**
    * 取得台北未來 7 天逐小時氣象預報與雙版本雲層光路數據
    * @param {boolean} forceRefresh 是否強制重新整理
    * @param {Object} [customCoords] 自訂觀測點座標 (選填)
@@ -294,6 +315,7 @@ class WeatherService {
       // 2. Open-Meteo 多座標一次批次請求 (觀測點 + 日落光路 5 點 + 日出光路 5 點)
       const url = this.buildForecastRequestUrl(coords, samplingGeometry);
 
+      const airQualityPromise = this.fetchAirQuality(coords);
       const response = await fetch(url, { cache: 'no-store' });
       if (!response.ok) {
         throw new Error(`Open-Meteo API 請求失敗: HTTP ${response.status}`);
@@ -317,7 +339,8 @@ class WeatherService {
         rawUpstreamSunrise = data;
       }
 
-      const parsed = this.processRawData(rawLocal, rawUpstreamSunset, rawUpstreamSunrise, coords, samplingGeometry);
+      const rawAirQuality = await airQualityPromise;
+      const parsed = this.processRawData(rawLocal, rawUpstreamSunset, rawUpstreamSunrise, coords, samplingGeometry, rawAirQuality);
       if (!customCoords) {
         this.cacheForecast(parsed);
       }
@@ -331,7 +354,7 @@ class WeatherService {
   /**
    * 解析 Open-Meteo 原始數據並計算雙版本（單點 vs 向量光路雙點）火燒雲指數
    */
-  static processRawData(rawLocal, rawUpstreamSunset = null, rawUpstreamSunrise = null, localCoords = this.TAIPEI_COORDS, samplingGeometry = null) {
+  static processRawData(rawLocal, rawUpstreamSunset = null, rawUpstreamSunrise = null, localCoords = this.TAIPEI_COORDS, samplingGeometry = null, rawAirQuality = null) {
     const parseHourly = (raw) => {
       if (!raw || !raw.hourly || !raw.hourly.time) return [];
       const h = raw.hourly;
@@ -351,6 +374,20 @@ class WeatherService {
     };
 
     const hourlyLocal = parseHourly(rawLocal);
+
+    // 空品併入觀測點逐小時資料 (兩個 API 都用 Asia/Taipei，時間字串直接對得上)，缺資料一律 null。
+    // 只記錄、不餵引擎：2026-09-29 用 9/14 起的實測比對，AQI/PM2.5/AOD 與美感分殘差
+    // 各站方向不一致 (烘爐地粉紅早晨反而空氣乾淨)，引擎的 AQI 修正項從未驗證過。
+    // 累積 4-6 週美感 v2 資料後按站、按 AOD 區間重測，擬合出來的關係才進模型。
+    const aq = rawAirQuality && rawAirQuality.hourly;
+    const aqIndex = new Map((aq && aq.time ? aq.time : []).map((t, i) => [t, i]));
+    const aqAt = (series, i) => (series && series[i] != null ? series[i] : null);
+    hourlyLocal.forEach(entry => {
+      const i = aqIndex.get(entry.timeStr);
+      entry.aqi = i === undefined ? null : aqAt(aq.us_aqi, i);
+      entry.pm25 = i === undefined ? null : aqAt(aq.pm2_5, i);
+      entry.aod = i === undefined ? null : aqAt(aq.aerosol_optical_depth, i);
+    });
 
     // 上游資料可能是單一座標 (舊行為/降級) 或沿取樣階梯排列的陣列 (分層光路模型)。
     // 兩者一律正規化成 [{ distanceKm, hourly }]，下游邏輯不必分岔。

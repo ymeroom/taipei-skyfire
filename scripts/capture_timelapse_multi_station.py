@@ -639,6 +639,11 @@ def flatten_station_lock(station_lock, locked_at):
         "precipProb": _num(w.get("precipProb")),
         "horizonClearance": _num(m.get("horizonClearance")),
         "visibilityKm": vis_km if vis_km is not None else _num(m.get("visKm")),
+        # aqi = 引擎實際用的值 (校準重算要跟正式引擎一致)；空品原始預報另存
+        "aqi": _num(m.get("aqi")),
+        "aqiForecast": _num(w.get("aqiForecast")),
+        "pm25": _num(w.get("pm25")),
+        "aod": _num(w.get("aod")),
         "isSimulated": False,
         "lockedAt": locked_at
     }
