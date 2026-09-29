@@ -22,7 +22,7 @@ capture_timelapse_multi_station.py
   <base>/<date>-<session>-<HHMM>/<date>-<session>-report.html  (單檔 HTML 報告，圖片皆內嵌 base64)
 
   <base> 預設 = data/timelapse/ (本機檢視用、不進 git)。CI 以環境變數
-  SKYFIRE_TIMELAPSE_DIR 覆寫成 D:\working space\skyfire-timelapse\
+  SKYFIRE_TIMELAPSE_DIR 覆寫成 D:/working space/skyfire-timelapse/
   (checkout 目錄「之外」)，否則下一個在同一台自架 runner 上跑的 workflow
   其 actions/checkout `git clean -ffdx` 會把產出清掉。
 
