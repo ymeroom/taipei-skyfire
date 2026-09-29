@@ -241,6 +241,33 @@ try:
     on_disk = json.load(open(os.path.join(data_dir, "verification-records.json"), encoding="utf-8"))
     assert on_disk == records_v2
     print("✅ write_verification_records：同一天同站補跑時原地覆蓋，寫入內容與回傳一致")
+
+    # 補跑抓到的影格比較少 → 保留原紀錄。2026-09-28 貓空：19:00 那次 9/9 張成功、
+    # 峰值 100，21:00 補跑時 DVR 已回溯不到 T-40，9 張全 404，把好資料蓋成 capture_unavailable
+    before_fail = copy.deepcopy(records_v2)
+    report_fail = copy.deepcopy(report)
+    report_fail["stations"][0]["frames"] = failed_frames
+    records_v3 = tl.write_verification_records(report_fail, data_dir=data_dir)
+    assert records_v3 == before_fail, "0/9 的補跑不能蓋掉 9/9 的紀錄 (連 verifiedAt 都不動)"
+    on_disk = json.load(open(os.path.join(data_dir, "verification-records.json"), encoding="utf-8"))
+    assert on_disk == records_v3
+
+    partial = [mk_frame(o, 40) for o in tl.OFFSETS_MIN[:5]] + [mk_frame(o, None, ok=False) for o in tl.OFFSETS_MIN[5:]]
+    report_partial = copy.deepcopy(report)
+    report_partial["stations"][0]["frames"] = partial
+    records_v4 = tl.write_verification_records(report_partial, data_dir=data_dir)
+    assert records_v4 == before_fail, "5/9 的補跑也不能蓋掉 9/9 的紀錄"
+
+    # 反過來：原本失敗、補跑成功 → 照常覆蓋 (這正是 21:00 補跑存在的目的)
+    shutil.rmtree(data_dir)
+    os.makedirs(data_dir)
+    with open(os.path.join(data_dir, "locked-sunset-forecast.json"), "w", encoding="utf-8") as f:
+        json.dump(locked, f)
+    tl.write_verification_records(report_fail, data_dir=data_dir)
+    records_v5 = tl.write_verification_records(report, data_dir=data_dir)
+    assert records_v5[0]["verification"]["status"] == "verified_completed"
+    assert records_v5[0]["capture"]["okFrameCount"] == 9
+    print("✅ write_verification_records：補跑影格較少時保留原紀錄，較多或相同時覆蓋")
 finally:
     shutil.rmtree(dir_, ignore_errors=True)
 

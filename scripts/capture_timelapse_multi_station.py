@@ -744,11 +744,18 @@ def add_dual_score_verdicts(record, fire_aggregate):
         v["beauty"] = beauty
 
 
+def _ok_frame_count(record):
+    return (record.get("capture") or {}).get("okFrameCount") or 0
+
+
 def write_verification_records(report, data_dir=None):
     """把這場次每站的聚合結果 upsert 進 data/verification-records.json。
 
     Upsert 規則與 capture-validation.js 的 writeRecord 一致：同 id 就地
     取代 (保留原本位置)，否則塞到陣列最前面；上限 720 筆 (8 站 × ~90 天)。
+
+    例外：同 id 但這次成功影格比原紀錄少，就保留原紀錄。21:00 補跑距 T-40 已
+    超過 4 小時，DVR 回溯較短的直播 (貓空) 會整批 404，不能把 19:00 的好資料蓋掉。
     """
     if data_dir is None:
         data_dir = os.path.join(REPO_ROOT, "data")
@@ -769,6 +776,10 @@ def write_verification_records(report, data_dir=None):
         )
         idx = by_id.get(record["id"])
         if idx is not None:
+            if _ok_frame_count(record) < _ok_frame_count(records[idx]):
+                print(f"    ⏭️  {st['id']}: 補跑只抓到 {_ok_frame_count(record)} 張，"
+                      f"少於原紀錄的 {_ok_frame_count(records[idx])} 張，保留原紀錄")
+                continue
             records[idx] = record
         else:
             records.insert(0, record)
