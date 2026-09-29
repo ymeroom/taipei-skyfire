@@ -26,7 +26,7 @@
     "capture": {
       "kind": "timelapse-multi-frame",
       "frameCount": 9,
-      "okFrameCount": 3,
+      "okFrameCount": 9,
       "offsetsMin": [
         -40,
         -30,
@@ -40,23 +40,23 @@
       ]
     },
     "verification": {
-      "avgScore": 13.0,
-      "peakScore": 15,
+      "avgScore": 10.8,
+      "peakScore": 14,
       "peakOffsetMin": -20,
       "peakSide": "pre-sunrise",
-      "verifiedAt": "2026-09-28T21:31:04.531435+00:00",
+      "verifiedAt": "2026-09-29T01:00:59.539709+00:00",
       "status": "verified_completed",
-      "errorAvgAbsolute": 3.0,
+      "errorAvgAbsolute": 0.8000000000000007,
       "verdictAvg": "EXACT_MATCH",
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
-      "errorPeakAbsolute": 5,
+      "errorPeakAbsolute": 4,
       "verdictPeak": "EXACT_MATCH",
       "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "fireCloud": {
         "avgScore": 5.0,
         "peakScore": 5,
         "peakOffsetMin": -40,
-        "okFrameCount": 3,
+        "okFrameCount": 9,
         "unreadableFrameCount": 0,
         "predicted": 10,
         "errorPeakAbsolute": 5,
@@ -65,7 +65,7 @@
       },
       "beauty": {
         "predicted": 27,
-        "errorPeakAbsolute": 12,
+        "errorPeakAbsolute": 13,
         "verdictPeak": "SLIGHT_DEVIATION",
         "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
       }
@@ -98,7 +98,7 @@
     "capture": {
       "kind": "timelapse-multi-frame",
       "frameCount": 9,
-      "okFrameCount": 3,
+      "okFrameCount": 9,
       "offsetsMin": [
         -40,
         -30,
@@ -112,24 +112,24 @@
       ]
     },
     "verification": {
-      "avgScore": 9.3,
-      "peakScore": 18,
-      "peakOffsetMin": -20,
+      "avgScore": 15.8,
+      "peakScore": 22,
+      "peakOffsetMin": -10,
       "peakSide": "pre-sunrise",
-      "verifiedAt": "2026-09-28T21:31:04.530962+00:00",
+      "verifiedAt": "2026-09-29T01:00:59.539198+00:00",
       "status": "verified_completed",
-      "errorAvgAbsolute": 4.300000000000001,
-      "verdictAvg": "EXACT_MATCH",
-      "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
-      "errorPeakAbsolute": 13,
+      "errorAvgAbsolute": 10.8,
+      "verdictAvg": "SLIGHT_DEVIATION",
+      "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "errorPeakAbsolute": 17,
       "verdictPeak": "SLIGHT_DEVIATION",
       "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "fireCloud": {
         "avgScore": 5.0,
         "peakScore": 5,
-        "peakOffsetMin": -20,
-        "okFrameCount": 1,
-        "unreadableFrameCount": 2,
+        "peakOffsetMin": -10,
+        "okFrameCount": 6,
+        "unreadableFrameCount": 3,
         "predicted": 5,
         "errorPeakAbsolute": 0,
         "verdictPeak": "EXACT_MATCH",
@@ -137,7 +137,7 @@
       },
       "beauty": {
         "predicted": 25,
-        "errorPeakAbsolute": 7,
+        "errorPeakAbsolute": 3,
         "verdictPeak": "EXACT_MATCH",
         "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
       }
