@@ -1,5 +1,125 @@
 [
   {
+    "id": "report-2026-10-01-sunrise",
+    "date": "2026-10-01",
+    "session": "sunrise",
+    "sessionLabel": "清晨日出",
+    "publishedAt": "2026-10-01T07:41:05.444389",
+    "publishTimeLabel": "09:00 定時發布",
+    "title": "2026-10-01 清晨日出實況觀測 vs. 模型預報總結",
+    "prediction": {
+      "score": 10,
+      "rating": "晴空無雲",
+      "color": "#7B88A8",
+      "highCloud": 0,
+      "midCloud": 0,
+      "lowCloud": 28,
+      "summary": "高中空幾乎無雲，沒有雲層可被染紅，不會有火燒雲；地平線的橘色暮光請看各機位的天空美感分。",
+      "beautyScore": 39
+    },
+    "groundTruth": {
+      "score": 55,
+      "avgScore": 16.6,
+      "peakScore": 55,
+      "peakOffsetMin": -20,
+      "verdict": "SLIGHT_DEVIATION",
+      "verdictAvg": "EXACT_MATCH",
+      "verdictPeak": "MISMATCH",
+      "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "color": "#FBBF24",
+      "fireCloud": {
+        "predicted": 10,
+        "peakScore": 5,
+        "avgScore": 5.0,
+        "peakOffsetMin": -40,
+        "verdict": "EXACT_MATCH",
+        "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+        "color": "#4ADE80"
+      },
+      "beauty": {
+        "predicted": 39,
+        "peakScore": 55,
+        "avgScore": 16.6,
+        "peakOffsetMin": -20,
+        "verdict": "SLIGHT_DEVIATION",
+        "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "color": "#FBBF24"
+      }
+    },
+    "stations": [
+      {
+        "name": "新北中和烘爐地",
+        "icon": "⛰️",
+        "tag": "新北觀光・雙北盆地俯瞰晨光",
+        "phasePrep": "—",
+        "phasePeak": "平均 16.6 分・峰值 55 分（T-20）",
+        "phasePost": "—",
+        "forecast": "10 分（低雲 28%）",
+        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "verdictColor": "#FBBF24",
+        "fireCloud": {
+          "predicted": 10,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": -40,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
+        },
+        "beauty": {
+          "predicted": 39,
+          "peakScore": 55,
+          "avgScore": 16.6,
+          "peakOffsetMin": -20,
+          "verdict": "SLIGHT_DEVIATION",
+          "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+          "color": "#FBBF24"
+        }
+      },
+      {
+        "name": "基隆外木山濱海",
+        "icon": "🌊",
+        "tag": "國海院・太平洋日出第一線",
+        "phasePrep": "—",
+        "phasePeak": "平均 13.1 分・峰值 11 分（T+0）",
+        "phasePost": "—",
+        "forecast": "10 分（低雲 4%）",
+        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "verdictColor": "#FBBF24",
+        "fireCloud": {
+          "predicted": 10,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
+        },
+        "beauty": {
+          "predicted": 22,
+          "peakScore": 11,
+          "avgScore": 13.1,
+          "peakOffsetMin": 0,
+          "verdict": "SLIGHT_DEVIATION",
+          "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+          "color": "#FBBF24"
+        }
+      }
+    ],
+    "stationSummary": {
+      "verified": 2,
+      "pending": 0,
+      "bestStation": "hongludi",
+      "bestScore": 55,
+      "worstError": 45,
+      "meanError": 23.0
+    },
+    "summaryAnalysis": {
+      "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 28%。",
+      "modelPerformance": "🔥 火燒雲：預報 10 分，實測平均 5.0 分、峰值 5 分（峰值誤差 5 分）。🌅 天空美感：預報 39 分，實測平均 16.6 分、峰值 55 分（T-20，峰值誤差 16 分）。"
+    }
+  },
+  {
     "id": "report-2026-09-30-sunset",
     "date": "2026-09-30",
     "session": "sunset",
