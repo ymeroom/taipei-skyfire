@@ -1,7 +1,7 @@
 {
-  "date": "2026-09-30",
+  "date": "2026-10-01",
   "session": "sunrise",
-  "lockedAt": "2026-09-29T15:45:20.679Z",
+  "lockedAt": "2026-09-30T15:45:16.472Z",
   "skyfire": {
     "score": 10,
     "rating": {
@@ -15,14 +15,14 @@
     },
     "metrics": {
       "cloudQualityScore": 0,
-      "lowCloudPenalty": 0,
-      "horizonScore": 24,
-      "visibilityScore": 15,
-      "horizonClearance": 81,
-      "visKm": 25,
+      "lowCloudPenalty": 3,
+      "horizonScore": 17,
+      "visibilityScore": 14,
+      "horizonClearance": 57,
+      "visKm": 21.8,
       "aqi": 45,
       "aqiModifier": 2,
-      "clearSkyUncappedScore": 49
+      "clearSkyUncappedScore": 34
     },
     "diagnostics": [
       {
@@ -37,13 +37,13 @@
       },
       {
         "label": "遠方東方（太平洋/宜蘭外海）透光窗",
-        "status": "optimal",
-        "desc": "低雲遮蔽極低 (0%)，透光窗達 81%，夕陽/晨光無阻直射雲底！"
+        "status": "fair",
+        "desc": "低雲量約 28%，地平線具有部分透光縫隙，呈現局部霞光。"
       },
       {
         "label": "大氣能見度與通透度",
         "status": "optimal",
-        "desc": "能見度優異（25.04 公里），大氣清澈通透，晚霞色彩飽和純淨。"
+        "desc": "能見度優異（21.82 公里），大氣清澈通透，晚霞色彩飽和純淨。"
       }
     ],
     "photoTips": {
@@ -58,14 +58,14 @@
   "weather": {
     "cloudHigh": 0,
     "cloudMid": 0,
-    "cloudLow": 0,
-    "cloudTotal": 0,
-    "humidity": 82,
+    "cloudLow": 28,
+    "cloudTotal": 28,
+    "humidity": 83,
     "precipProb": 0,
-    "visibilityKm": 25,
-    "aqiForecast": 93,
-    "pm25": 42.8,
-    "aod": 0.48
+    "visibilityKm": 21.8,
+    "aqiForecast": 102,
+    "pm25": 33.3,
+    "aod": 0.31
   },
   "stations": {
     "hongludi": {
@@ -76,21 +76,21 @@
       "weather": {
         "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 0,
-        "cloudTotal": 0,
-        "humidity": 82,
+        "cloudLow": 28,
+        "cloudTotal": 28,
+        "humidity": 83,
         "precipProb": 0,
-        "visibilityKm": 25,
-        "aqiForecast": 93,
-        "pm25": 42.8,
-        "aod": 0.48
+        "visibilityKm": 21.8,
+        "aqiForecast": 102,
+        "pm25": 33.3,
+        "aod": 0.31
       },
       "metrics": {
-        "horizonClearance": 81,
-        "visKm": 25,
+        "horizonClearance": 57,
+        "visKm": 21.8,
         "aqi": 45,
         "aqiModifier": 2,
-        "clearSkyUncappedScore": 49
+        "clearSkyUncappedScore": 34
       }
     },
     "waimushan": {
@@ -101,21 +101,21 @@
       "weather": {
         "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 2,
-        "cloudTotal": 2,
-        "humidity": 94,
+        "cloudLow": 4,
+        "cloudTotal": 4,
+        "humidity": 96,
         "precipProb": 0,
-        "visibilityKm": 16.7,
-        "aqiForecast": 120,
-        "pm25": 62.2,
-        "aod": 0.34
+        "visibilityKm": 11.9,
+        "aqiForecast": 111,
+        "pm25": 58.8,
+        "aod": 0.42
       },
       "metrics": {
-        "horizonClearance": 79,
-        "visKm": 16.7,
+        "horizonClearance": 82,
+        "visKm": 11.9,
         "aqi": 45,
         "aqiModifier": 2,
-        "clearSkyUncappedScore": 41
+        "clearSkyUncappedScore": 39
       }
     }
   }
