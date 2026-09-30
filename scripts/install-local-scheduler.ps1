@@ -55,12 +55,18 @@ $principal = New-ScheduledTaskPrincipal -UserId $env:UserName -LogonType S4U -Ru
 $tasks = @(
     @{ Name = 'Lock-Sunset';        Time = '15:30'; File = 'lock_forecast.yml';           Session = 'sunset';  CatchUp = $false }
     @{ Name = 'Lock-Sunrise';       Time = '23:45'; File = 'lock_forecast.yml';           Session = 'sunrise'; CatchUp = $false }
-    # 06:30/19:00 (不是實際日出/日落時刻) —— 擷取現在是 T-40~T+40 的 9 張
-    # 縮時序列 (見 capture_timelapse_multi_station.py)，靠 DVR 回溯，只要
-    # 排在 T+40 之後執行都能一次抓完整段，不需要卡在出景當刻即時執行。
-    @{ Name = 'Capture-Sunrise';    Time = '06:30'; File = 'auto_validate_capture.yml';   Session = 'sunrise'; CatchUp = $true }
+    # 擷取是 T-40~T+40 的 9 張縮時序列 (見 capture_timelapse_multi_station.py)，
+    # 靠 DVR 回溯一次抓完，所以時間要同時滿足全年兩個條件：
+    #   1. 晚於最晚的 T+40，才抓得到整段：日出最晚 06:41 (1 月) → 07:21；
+    #      日落最晚 18:49 (6 月) → 19:29
+    #   2. 距最早的 T-40 不超過 DVR 回溯上限 (9/15~29 各站實測最深成功約 3.9-4.0 小時)：
+    #      日出最早 05:03 (6 月) → T-40 04:23；日落最早 17:03 (11 月) → T-40 16:23
+    # 07:40 / 19:45 全年都成立 (回溯最深 3.3 / 3.4 小時)，不必隨季節調整。
+    # 2026-09-30 前是 05:30 / 18:45：日出 05:30 永遠早於 T+40 (每天都只抓到半段)，
+    # 日落 18:45 在 4 月中到 8 月會早於 T+40。
+    @{ Name = 'Capture-Sunrise';    Time = '07:40'; File = 'auto_validate_capture.yml';   Session = 'sunrise'; CatchUp = $true }
     @{ Name = 'Briefing-Sunrise';   Time = '09:00'; File = 'auto_validate_capture.yml';   Session = 'sunrise'; CatchUp = $true }
-    @{ Name = 'Capture-Sunset';     Time = '19:00'; File = 'auto_validate_capture.yml';   Session = 'sunset';  CatchUp = $true }
+    @{ Name = 'Capture-Sunset';     Time = '19:45'; File = 'auto_validate_capture.yml';   Session = 'sunset';  CatchUp = $true }
     @{ Name = 'Briefing-Sunset';    Time = '21:00'; File = 'auto_validate_capture.yml';   Session = 'sunset';  CatchUp = $true }
     # 這個 workflow 沒有 session 輸入欄位，Session 留空；每週一次，非每天。
     @{ Name = 'Weekly-Calibration'; Time = '00:00'; File = 'weekly_auto_calibration.yml'; Session = '';        CatchUp = $true; Weekly = $true; DayOfWeek = 'Monday' }
