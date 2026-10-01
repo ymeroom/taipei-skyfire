@@ -1,5 +1,241 @@
 [
   {
+    "id": "report-2026-10-01-sunset",
+    "date": "2026-10-01",
+    "session": "sunset",
+    "sessionLabel": "傍晚日落",
+    "publishedAt": "2026-10-01T19:46:41.683350",
+    "publishTimeLabel": "21:00 定時發布",
+    "title": "2026-10-01 傍晚日落實況觀測 vs. 模型預報總結",
+    "prediction": {
+      "score": 37,
+      "rating": "平淡暮光",
+      "color": "#7B88A8",
+      "highCloud": 0,
+      "midCloud": 7,
+      "lowCloud": 12,
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
+      "beautyScore": 59
+    },
+    "groundTruth": {
+      "score": 28,
+      "avgScore": 15.9,
+      "peakScore": 28,
+      "peakOffsetMin": 20,
+      "verdict": "MISMATCH",
+      "verdictAvg": "MISMATCH",
+      "verdictPeak": "SLIGHT_DEVIATION",
+      "verdictBadge": "⚠️ 出現偏差需校準",
+      "color": "#F87171",
+      "fireCloud": {
+        "predicted": 37,
+        "peakScore": 5,
+        "avgScore": 5.0,
+        "peakOffsetMin": 0,
+        "verdict": "MISMATCH",
+        "verdictBadge": "⚠️ 出現偏差需校準",
+        "color": "#F87171"
+      },
+      "beauty": {
+        "predicted": 59,
+        "peakScore": 28,
+        "avgScore": 15.9,
+        "peakOffsetMin": 20,
+        "verdict": "MISMATCH",
+        "verdictBadge": "⚠️ 出現偏差需校準",
+        "color": "#F87171"
+      }
+    },
+    "stations": [
+      {
+        "name": "台北大稻埕碼頭",
+        "icon": "⛵",
+        "tag": "臺北旅遊網 4K 直播・淡水河倒影晚霞",
+        "phasePrep": "—",
+        "phasePeak": "平均 15.9 分・峰值 28 分（T+20）",
+        "phasePost": "—",
+        "forecast": "37 分（低雲 12%）",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 37,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": 59,
+          "peakScore": 28,
+          "avgScore": 15.9,
+          "peakOffsetMin": 20,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        }
+      },
+      {
+        "name": "台北貓空指南宮",
+        "icon": "⛩️",
+        "tag": "臺北旅遊網 4K 直播・高處俯瞰盆地火燒雲",
+        "phasePrep": "—",
+        "phasePeak": "平均 16.3 分・峰值 28 分（T+20）",
+        "phasePost": "—",
+        "forecast": "28 分（低雲 16%）",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 28,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": 41,
+          "peakScore": 28,
+          "avgScore": 16.3,
+          "peakOffsetMin": 20,
+          "verdict": "SLIGHT_DEVIATION",
+          "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+          "color": "#FBBF24"
+        }
+      },
+      {
+        "name": "新北九份即時影像",
+        "icon": "🏮",
+        "tag": "新北觀光 4K 直播・山海交界落日",
+        "phasePrep": "—",
+        "phasePeak": "平均 26.8 分・峰值 25 分（T+20）",
+        "phasePost": "—",
+        "forecast": "10 分（低雲 1%）",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 10,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
+        },
+        "beauty": {
+          "predicted": 60,
+          "peakScore": 25,
+          "avgScore": 26.8,
+          "peakOffsetMin": 20,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        }
+      },
+      {
+        "name": "新北八里左岸",
+        "icon": "🌊",
+        "tag": "新北觀光 4K 直播・淡江大橋與台灣海峽晚霞",
+        "phasePrep": "—",
+        "phasePeak": "平均 24.3 分・峰值 54 分（T+10）",
+        "phasePost": "—",
+        "forecast": "45 分（低雲 5%）",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 45,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": 88,
+          "peakScore": 54,
+          "avgScore": 24.3,
+          "peakOffsetMin": 10,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        }
+      },
+      {
+        "name": "新北淡水漁人碼頭",
+        "icon": "🌉",
+        "tag": "新北觀光 4K 直播・情人橋烈焰落日",
+        "phasePrep": "—",
+        "phasePeak": "平均 29.7 分・峰值 36 分（T+20）",
+        "phasePost": "—",
+        "forecast": "44 分（低雲 5%）",
+        "verdict": "⚠️ 出現偏差需校準",
+        "verdictColor": "#F87171",
+        "fireCloud": {
+          "predicted": 44,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        },
+        "beauty": {
+          "predicted": 91,
+          "peakScore": 36,
+          "avgScore": 29.7,
+          "peakOffsetMin": 20,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
+        }
+      },
+      {
+        "name": "台北象山看 101",
+        "icon": "🏙️",
+        "tag": "臺北旅遊網 4K 直播・101 與西方天際線",
+        "phasePrep": "—",
+        "phasePeak": "平均 16.0 分・峰值 42 分（T+20）",
+        "phasePost": "—",
+        "forecast": "28 分（低雲 16%）",
+        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "verdictColor": "#FBBF24",
+        "fireCloud": {
+          "predicted": 28,
+          "peakScore": 11,
+          "avgScore": 6.4,
+          "peakOffsetMin": 20,
+          "verdict": "SLIGHT_DEVIATION",
+          "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+          "color": "#FBBF24"
+        },
+        "beauty": {
+          "predicted": 30,
+          "peakScore": 42,
+          "avgScore": 16.0,
+          "peakOffsetMin": 20,
+          "verdict": "SLIGHT_DEVIATION",
+          "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+          "color": "#FBBF24"
+        }
+      }
+    ],
+    "stationSummary": {
+      "verified": 6,
+      "pending": 0,
+      "bestStation": "bali",
+      "bestScore": 54,
+      "worstError": 15,
+      "meanError": 9.2
+    },
+    "summaryAnalysis": {
+      "atmosphericReason": "預報雲量：高空 0% ／ 中空 7% ／ 低空 12%。",
+      "modelPerformance": "🔥 火燒雲：預報 37 分，實測平均 5.0 分、峰值 5 分（峰值誤差 32 分）。🌅 天空美感：預報 59 分，實測平均 15.9 分、峰值 28 分（T+20，峰值誤差 31 分）。"
+    }
+  },
+  {
     "id": "report-2026-10-01-sunrise",
     "date": "2026-10-01",
     "session": "sunrise",
