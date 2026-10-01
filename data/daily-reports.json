@@ -81,7 +81,7 @@
         "icon": "⛩️",
         "tag": "臺北旅遊網 4K 直播・高處俯瞰盆地火燒雲",
         "phasePrep": "—",
-        "phasePeak": "平均 16.3 分・峰值 28 分（T+20）",
+        "phasePeak": "平均 16.2 分・峰值 27 分（T+20）",
         "phasePost": "—",
         "forecast": "28 分（低雲 16%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -97,8 +97,8 @@
         },
         "beauty": {
           "predicted": 41,
-          "peakScore": 28,
-          "avgScore": 16.3,
+          "peakScore": 27,
+          "avgScore": 16.2,
           "peakOffsetMin": 20,
           "verdict": "SLIGHT_DEVIATION",
           "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
@@ -110,7 +110,7 @@
         "icon": "🏮",
         "tag": "新北觀光 4K 直播・山海交界落日",
         "phasePrep": "—",
-        "phasePeak": "平均 26.8 分・峰值 25 分（T+20）",
+        "phasePeak": "平均 26.4 分・峰值 23 分（T+0）",
         "phasePost": "—",
         "forecast": "10 分（低雲 1%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -126,9 +126,9 @@
         },
         "beauty": {
           "predicted": 60,
-          "peakScore": 25,
-          "avgScore": 26.8,
-          "peakOffsetMin": 20,
+          "peakScore": 23,
+          "avgScore": 26.4,
+          "peakOffsetMin": 0,
           "verdict": "MISMATCH",
           "verdictBadge": "⚠️ 出現偏差需校準",
           "color": "#F87171"
@@ -139,7 +139,7 @@
         "icon": "🌊",
         "tag": "新北觀光 4K 直播・淡江大橋與台灣海峽晚霞",
         "phasePrep": "—",
-        "phasePeak": "平均 24.3 分・峰值 54 分（T+10）",
+        "phasePeak": "平均 24.8 分・峰值 54 分（T+10）",
         "phasePost": "—",
         "forecast": "45 分（低雲 5%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -156,7 +156,7 @@
         "beauty": {
           "predicted": 88,
           "peakScore": 54,
-          "avgScore": 24.3,
+          "avgScore": 24.8,
           "peakOffsetMin": 10,
           "verdict": "MISMATCH",
           "verdictBadge": "⚠️ 出現偏差需校準",
@@ -168,7 +168,7 @@
         "icon": "🌉",
         "tag": "新北觀光 4K 直播・情人橋烈焰落日",
         "phasePrep": "—",
-        "phasePeak": "平均 29.7 分・峰值 36 分（T+20）",
+        "phasePeak": "平均 41.9 分・峰值 36 分（T+20）",
         "phasePost": "—",
         "forecast": "44 分（低雲 5%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -185,7 +185,7 @@
         "beauty": {
           "predicted": 91,
           "peakScore": 36,
-          "avgScore": 29.7,
+          "avgScore": 41.9,
           "peakOffsetMin": 20,
           "verdict": "MISMATCH",
           "verdictBadge": "⚠️ 出現偏差需校準",
@@ -227,8 +227,8 @@
       "pending": 0,
       "bestStation": "bali",
       "bestScore": 54,
-      "worstError": 15,
-      "meanError": 9.2
+      "worstError": 14,
+      "meanError": 9.0
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 7% ／ 低空 12%。",
