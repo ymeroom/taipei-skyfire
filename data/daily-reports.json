@@ -81,28 +81,28 @@
         "icon": "🌊",
         "tag": "國海院・太平洋日出第一線",
         "phasePrep": "—",
-        "phasePeak": "平均 8.8 分・峰值 16 分（T-10）",
+        "phasePeak": "平均 8.0 分・峰值 13 分（T+0）",
         "phasePost": "—",
         "forecast": "10 分（低雲 12%）",
-        "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
-        "verdictColor": "#4ADE80",
+        "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+        "verdictColor": "#FBBF24",
         "fireCloud": {
           "predicted": 10,
-          "peakScore": 5,
-          "avgScore": 5.0,
-          "peakOffsetMin": -10,
-          "verdict": "EXACT_MATCH",
-          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
-          "color": "#4ADE80"
+          "peakScore": null,
+          "avgScore": null,
+          "peakOffsetMin": null,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
         },
         "beauty": {
           "predicted": 22,
-          "peakScore": 16,
-          "avgScore": 8.8,
-          "peakOffsetMin": -10,
-          "verdict": "EXACT_MATCH",
-          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
-          "color": "#4ADE80"
+          "peakScore": 13,
+          "avgScore": 8.0,
+          "peakOffsetMin": 0,
+          "verdict": "SLIGHT_DEVIATION",
+          "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+          "color": "#FBBF24"
         }
       }
     ],
@@ -112,7 +112,7 @@
       "bestStation": "hongludi",
       "bestScore": 33,
       "worstError": 23,
-      "meanError": 14.5
+      "meanError": 13.0
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 1% ／ 低空 1%。",
