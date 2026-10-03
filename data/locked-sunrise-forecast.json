@@ -1,9 +1,9 @@
 {
-  "date": "2026-10-03",
+  "date": "2026-10-04",
   "session": "sunrise",
-  "lockedAt": "2026-10-02T15:45:17.863Z",
+  "lockedAt": "2026-10-03T15:45:18.526Z",
   "skyfire": {
-    "score": 5,
+    "score": 10,
     "rating": {
       "level": "CLEAR",
       "badge": "晴空無雲",
@@ -14,36 +14,36 @@
       "bgGradient": "linear-gradient(135deg, rgba(123,136,168,0.2) 0%, rgba(160,174,192,0.1) 100%)"
     },
     "metrics": {
-      "cloudQualityScore": 3,
-      "lowCloudPenalty": 44,
-      "horizonScore": 0,
-      "visibilityScore": 10,
-      "horizonClearance": 0,
-      "visKm": 14.3,
+      "cloudQualityScore": 0,
+      "lowCloudPenalty": 0,
+      "horizonScore": 20,
+      "visibilityScore": 8,
+      "horizonClearance": 66,
+      "visKm": 10.2,
       "aqi": 45,
       "aqiModifier": 2,
-      "clearSkyUncappedScore": 5
+      "clearSkyUncappedScore": 33
     },
     "diagnostics": [
       {
         "label": "高空卷雲 (6,000m+)",
         "status": "low",
-        "desc": "高雲量僅 3%，上方缺少大面積紅色漫射反光板。"
+        "desc": "高雲量僅 0%，上方缺少大面積紅色漫射反光板。"
       },
       {
         "label": "中空雲層 (2,000-6,000m)",
         "status": "low",
-        "desc": "中雲量稀疏 (2%)，雲彩層次感較為單純。"
+        "desc": "中雲量稀疏 (0%)，雲彩層次感較為單純。"
       },
       {
         "label": "遠方東方（太平洋/宜蘭外海）透光窗",
-        "status": "bad",
-        "desc": "低雲遮蔽高達 82%，厚雲層恐阻斷地平線入射光，投下暗灰色陰影。"
+        "status": "fair",
+        "desc": "低雲量約 2%，地平線具有部分透光縫隙，呈現局部霞光。"
       },
       {
         "label": "大氣能見度與通透度",
         "status": "fair",
-        "desc": "能見度正常（14.3 公里），色彩呈現良好。"
+        "desc": "能見度正常（10.22 公里），色彩呈現良好。"
       }
     ],
     "photoTips": {
@@ -56,66 +56,66 @@
     }
   },
   "weather": {
-    "cloudHigh": 3,
-    "cloudMid": 2,
-    "cloudLow": 82,
-    "cloudTotal": 83,
-    "humidity": 91,
-    "precipProb": 46,
-    "visibilityKm": 14.3,
-    "aqiForecast": 37,
-    "pm25": 3.2,
-    "aod": 0.13
+    "cloudHigh": 0,
+    "cloudMid": 0,
+    "cloudLow": 2,
+    "cloudTotal": 2,
+    "humidity": 96,
+    "precipProb": 0,
+    "visibilityKm": 10.2,
+    "aqiForecast": 32,
+    "pm25": 8.2,
+    "aod": 0.23
   },
   "stations": {
     "hongludi": {
-      "score": 5,
+      "score": 10,
       "rating": "晴空無雲",
       "color": "#7B88A8",
-      "beautyScore": 40,
+      "beautyScore": 38,
       "weather": {
-        "cloudHigh": 3,
-        "cloudMid": 2,
-        "cloudLow": 82,
-        "cloudTotal": 83,
-        "humidity": 91,
-        "precipProb": 46,
-        "visibilityKm": 14.3,
-        "aqiForecast": 37,
-        "pm25": 3.2,
-        "aod": 0.13
+        "cloudHigh": 0,
+        "cloudMid": 0,
+        "cloudLow": 2,
+        "cloudTotal": 2,
+        "humidity": 96,
+        "precipProb": 0,
+        "visibilityKm": 10.2,
+        "aqiForecast": 32,
+        "pm25": 8.2,
+        "aod": 0.23
       },
       "metrics": {
-        "horizonClearance": 0,
-        "visKm": 14.3,
+        "horizonClearance": 66,
+        "visKm": 10.2,
         "aqi": 45,
         "aqiModifier": 2,
-        "clearSkyUncappedScore": 5
+        "clearSkyUncappedScore": 33
       }
     },
     "waimushan": {
-      "score": 5,
-      "rating": "陰沉沉寂",
-      "color": "#5A6275",
-      "beautyScore": 25,
+      "score": 10,
+      "rating": "晴空無雲",
+      "color": "#7B88A8",
+      "beautyScore": 21,
       "weather": {
-        "cloudHigh": 1,
-        "cloudMid": 15,
-        "cloudLow": 100,
-        "cloudTotal": 100,
-        "humidity": 98,
-        "precipProb": 86,
-        "visibilityKm": 3.9,
-        "aqiForecast": 58,
-        "pm25": 13.5,
-        "aod": 0.25
+        "cloudHigh": 0,
+        "cloudMid": 0,
+        "cloudLow": 11,
+        "cloudTotal": 11,
+        "humidity": 95,
+        "precipProb": 0,
+        "visibilityKm": 3,
+        "aqiForecast": 64,
+        "pm25": 15.1,
+        "aod": 0.3
       },
       "metrics": {
-        "horizonClearance": 0,
-        "visKm": 3.9,
+        "horizonClearance": 23,
+        "visKm": 3,
         "aqi": 45,
         "aqiModifier": 2,
-        "clearSkyUncappedScore": 5
+        "clearSkyUncappedScore": 15
       }
     }
   }
