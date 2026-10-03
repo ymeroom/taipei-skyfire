@@ -147,6 +147,8 @@ def apply_night_gate(result, capture_time=None, twilight_window=None):
     return result
 
 
+RAIN_GATE_CAP = 30  # 沒有天空範圍資料時的退路
+
 # WMO weathercode：雨/毛毛雨/陣雨/雷雨 (51-67, 80-82, 95-99)
 _RAIN_WEATHER_CODES = frozenset([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82, 95, 96, 99])
 
@@ -207,10 +209,14 @@ def lookup_rain_at(series, capture_time):
 
 
 def apply_rain_gate(result, rain_info):
-    """雨天閘門：下雨時暖色像素多半是濕路面/車燈反光，而非真正火燒雲，分數封頂 30 分。
+    """雨天閘門：下雨時地面的暖色多半是濕路面/車燈反光，不是天空的顏色。
 
-    與暗夜閘門疊加時取更嚴格者 (min)：暗夜閘門已封頂 12 分的話，雨天閘門
-    (30 分封頂) 不會再放寬回去。
+    有天空範圍 (result["skyOnlyScore"]，由機位 skyRoiBottom 算出) 時，改用「只看
+    天空範圍」的分數 —— 反光在地面，天空的晚霞照算。2026-10-03 傍晚模式資料判定
+    6 站都在下雨，實際是晴雨交界的晚霞 (淡水原始分數 94)，舊的一律封頂 30 分
+    把它們全部壓成 30。沒有天空範圍資料的舊擷取路徑 (單張快照) 仍封頂 30 分。
+
+    與暗夜閘門疊加時取更嚴格者 (min)：暗夜閘門已封頂 12 分的話不會再放寬回去。
     """
     if rain_info is None:
         result["rainGate"] = {"applied": False, "reason": "no rain data available"}
@@ -221,16 +227,21 @@ def apply_rain_gate(result, rain_info):
         return result
 
     raw_score = result.get("score", 0)
-    gated_score = min(raw_score, 30)
+    sky_only = result.get("skyOnlyScore")
+    method = "sky-roi-only" if sky_only is not None else "cap-30"
+    gated_score = min(raw_score, sky_only if sky_only is not None else RAIN_GATE_CAP)
     if gated_score >= raw_score:
-        result["rainGate"] = {"applied": False, "reason": "already at or below rain cap", **rain_info}
+        result["rainGate"] = {"applied": False, "reason": "no ground warmth to exclude"
+                              if sky_only is not None else "already at or below rain cap",
+                              "method": method, **rain_info}
         return result
 
     result["rainGate"] = {
         "applied": True,
-        "reason": "raining at capture time — wet pavement / vehicle-light reflections and "
-                  "low ambient contrast are more likely to read as false warm-color signal "
-                  "than genuine afterglow",
+        "reason": "raining at capture time — warm pixels below the sky ROI (wet pavement / "
+                  "vehicle-light reflections) are excluded" if sky_only is not None else
+                  "raining at capture time and no sky ROI known — capped at 30",
+        "method": method,
         "rawScoreBeforeGate": raw_score,
         "rawLevelBeforeGate": result.get("level"),
         **rain_info
@@ -391,6 +402,23 @@ def _cap_fire_cloud(result, cap):
         result["fireCloudScore"] = min(result["fireCloudScore"], cap)
 
 
+def _beauty_from_masks(orange_mask, warm_mask, vivid_mask, s, v, total_pixels):
+    """美感分公式：覆蓋率 (最高 45) + 飽和度能量 (最高 35) + 鮮豔核心 (最高 20)。"""
+    warm_n = int(np.sum(warm_mask))
+    warm_coverage_pct = warm_n / total_pixels * 100
+    vivid_coverage_pct = float(np.sum(vivid_mask)) / total_pixels * 100
+    # 飽和度能量取「只看橘紅」與「含粉紅」較高者：加入粉紅只會加分，不會讓鮮豔的橘色晚霞變低分
+    avg_orange_saturation = float(np.mean(s[orange_mask])) if orange_mask.any() else 0
+    avg_warm_saturation = float(np.mean(s[warm_mask])) if warm_n > 0 else 0
+    avg_warm_saturation = max(avg_orange_saturation, avg_warm_saturation)
+    avg_warm_brightness = float(np.mean(v[warm_mask])) if warm_n > 0 else 0
+    raw = (min(45, (warm_coverage_pct / 50.0) * 45) + min(35, (avg_warm_saturation / 0.75) * 35)
+           + min(20, (vivid_coverage_pct / 20.0) * 20))
+    return {"score": int(np.clip(np.round(raw), 5, 100)), "warm_coverage_pct": warm_coverage_pct,
+            "vivid_coverage_pct": vivid_coverage_pct, "avg_warm_saturation": avg_warm_saturation,
+            "avg_warm_brightness": avg_warm_brightness}
+
+
 def analyze_image_optics(image_path, capture_time=None, twilight_window=None, rain_series=None,
                          station_coords=None, sky_roi_bottom=None):
     """分析天空區域的火燒雲光學特徵"""
@@ -457,29 +485,20 @@ def analyze_image_optics(image_path, capture_time=None, twilight_window=None, ra
         # 強烈燃燒核心遮罩 (深橘紅、高飽和度 S >= 0.45)
         vivid_mask = ((h_arr <= 45) | (h_arr >= 350)) & (s >= 0.42) & (v >= 0.30)
 
-        warm_pixels_count = np.sum(warm_mask)
-        vivid_pixels_count = np.sum(vivid_mask)
-
-        # 1. 天空漫射覆蓋率 (0 - 100%)
-        warm_coverage_pct = (warm_pixels_count / total_sky_pixels) * 100
-        vivid_coverage_pct = (vivid_pixels_count / total_sky_pixels) * 100
-
-        # 2. 平均色彩純度與飽和度能量：取「只看橘紅」與「含粉紅」較高者，
-        #    加入粉紅只會加分，不會讓原本鮮豔的橘色晚霞變低分
-        avg_orange_saturation = float(np.mean(s[orange_mask])) if orange_mask.any() else 0
-        avg_warm_saturation = float(np.mean(s[warm_mask])) if warm_pixels_count > 0 else 0
-        avg_warm_saturation = max(avg_orange_saturation, avg_warm_saturation)
-        avg_warm_brightness = float(np.mean(v[warm_mask])) if warm_pixels_count > 0 else 0
-
-        # 3. 綜合火燒雲出景強度公式 (0 - 100 分)
-        # 覆蓋率 (最高 45分) + 飽和度能量 (最高 35分) + 鮮豔核心加成 (最高 20分)
-        coverage_score = min(45, (warm_coverage_pct / 50.0) * 45)
-        saturation_score = min(35, (avg_warm_saturation / 0.75) * 35)
-        vivid_bonus = min(20, (vivid_coverage_pct / 20.0) * 20)
-
-        raw_score = coverage_score + saturation_score + vivid_bonus
-        final_score = int(np.clip(np.round(raw_score), 5, 100))
+        b = _beauty_from_masks(orange_mask, warm_mask, vivid_mask, s, v, total_sky_pixels)
+        final_score = b["score"]
         level, badge = classify_score(final_score)
+        warm_coverage_pct, vivid_coverage_pct = b["warm_coverage_pct"], b["vivid_coverage_pct"]
+        avg_warm_saturation, avg_warm_brightness = b["avg_warm_saturation"], b["avg_warm_brightness"]
+
+        # 雨天閘門用：只看機位天空範圍 (skyRoiBottom 以上) 的同一個公式。分母不變，
+        # 所以只會 ≤ 全畫面分數 —— 差掉的就是地面 (濕路面、車燈、水面) 的暖色。
+        sky_only_score = None
+        if sky_roi_bottom:
+            sky_rows = int(target_h * sky_roi_bottom)
+            keep = (np.arange(sky_height) < sky_rows)[:, None]
+            sky_only_score = _beauty_from_masks(orange_mask & keep, warm_mask & keep, vivid_mask & keep,
+                                                s, v, total_sky_pixels)["score"]
 
         result = {
             "score": final_score,
@@ -493,6 +512,8 @@ def analyze_image_optics(image_path, capture_time=None, twilight_window=None, ra
             "beautyScorerVersion": BEAUTY_SCORER_VERSION,
             "is_simulated": False
         }
+        if sky_only_score is not None:
+            result["skyOnlyScore"] = sky_only_score
         fire = analyze_fire_cloud(img_full, sky_roi_bottom)
         result["fireCloudScore"] = fire.pop("score")
         result["fireCloud"] = fire

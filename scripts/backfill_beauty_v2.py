@@ -13,9 +13,12 @@ backfill_beauty_v2.py - 用留存的縮時影格，以美感分評分器 v2 (粉
 先用報告裡存下的 v1 影格分數重算一次聚合，要與紀錄完全一致才改寫 (確認對到同一批
 影格)；對不上或找不到影格的紀錄維持 v1，不猜。
 
-暗夜閘門、雨天閘門沿用影格當時存下的判定 (不重新查天氣)。
+暗夜閘門、雨天閘門沿用影格當時存下的判定 (不重新查天氣)；雨天閘門用現行規則
+(只排除機位天空範圍以下的暖色，見 apply_rain_gate)，所以也用來把 2026-10-03 前
+「下雨一律封頂 30 分」的紀錄改成新規則。
 
-可重複執行：已是 v2 且來源相同的紀錄重算結果不變。
+可重複執行：重算結果與紀錄相同的不改寫。原始數字存在 verification.beautyV1
+(原本是 v1 的紀錄) 或 verification.beautyOriginal (原本就是 v2、只因雨天閘門重算)。
 
 用法: python scripts/backfill_beauty_v2.py <artifact 資料夾的上層目錄> [--dry-run]
 """
@@ -26,13 +29,12 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
-from analyze_sky_ground_truth import BEAUTY_SCORER_VERSION, analyze_image_optics  # noqa: E402
+from analyze_sky_ground_truth import BEAUTY_SCORER_VERSION, analyze_image_optics, apply_rain_gate  # noqa: E402
 import capture_timelapse_multi_station as tl  # noqa: E402
 import generate_daily_briefing as briefing  # noqa: E402
 
 TAIPEI = datetime.timezone(datetime.timedelta(hours=8))
 NIGHT_GATE_CAP = 12
-RAIN_GATE_CAP = 30
 
 
 def load_reports(bundles_root):
@@ -70,30 +72,39 @@ def find_station_frames(reports, record):
     return (bundle_dir, st["frames"]) if st else (None, None)
 
 
-def rescore_frame(bundle_dir, frame):
+def rescore_frame(bundle_dir, frame, sky_roi_bottom):
     fr = dict(frame)
     if not fr.get("ok") or not fr.get("imagePath"):
         return fr
     path = os.path.join(bundle_dir, fr["imagePath"])
     if not os.path.exists(path):
         raise FileNotFoundError(path)
-    score = analyze_image_optics(path)["score"]
+    result = analyze_image_optics(path, sky_roi_bottom=sky_roi_bottom)
     if (fr.get("nightGate") or {}).get("applied"):
-        score = min(score, NIGHT_GATE_CAP)
+        result["score"] = min(result["score"], NIGHT_GATE_CAP)
     if (fr.get("rainGate") or {}).get("isRaining"):
-        score = min(score, RAIN_GATE_CAP)
-    fr["score"] = score
+        result = apply_rain_gate(result, {"isRaining": True})
+    fr["score"] = result["score"]
     return fr
 
 
-def _v1_of(v):
-    return v.get("beautyV1") or {k: v.get(k) for k in ("avgScore", "peakScore", "peakOffsetMin")}
+BEAUTY_FIELDS = ("avgScore", "peakScore", "peakOffsetMin")
+
+
+def _original_of(v):
+    """擷取當下寫進紀錄的美感數字 (= artifact 裡影格分數的聚合)。"""
+    return v.get("beautyV1") or v.get("beautyOriginal") or {k: v.get(k) for k in BEAUTY_FIELDS}
 
 
 def apply_beauty(record, agg):
     """把新的美感聚合寫回紀錄，判定規則同 build_station_verification_record。"""
     v = record["verification"]
-    v["beautyV1"] = _v1_of(v)
+    if "beautyV1" not in v and "beautyOriginal" not in v:
+        current = {k: v.get(k) for k in BEAUTY_FIELDS}
+        if v.get("beautyScorerVersion", 1) == 1:
+            v["beautyV1"] = current
+        else:
+            v["beautyOriginal"] = {**current, "scorerVersion": v["beautyScorerVersion"]}
     v["avgScore"], v["peakScore"], v["peakOffsetMin"] = agg["avgScore"], agg["peakScore"], agg["peakOffsetMin"]
     pred = record.get("prediction") or {}
     if v.get("status") == "verified_completed" and pred.get("score") is not None:
@@ -109,7 +120,7 @@ def apply_beauty(record, agg):
     v["beautyScorerVersion"] = BEAUTY_SCORER_VERSION
 
 
-def backfill(records, reports):
+def backfill(records, reports, roi_bottoms):
     updated, skipped = [], []
     for rec in records:
         if (rec.get("capture") or {}).get("kind") != "timelapse-multi-frame":
@@ -122,18 +133,22 @@ def backfill(records, reports):
             skipped.append((rec["id"], "找不到影格"))
             continue
         # 用報告存下的 v1 影格分數重算，必須與紀錄的 v1 一致，才確定是同一批影格
-        v1 = _v1_of(v)
+        orig = _original_of(v)
         replay = tl.aggregate_station_scores(frames, rec["session"])
-        if (replay["avgScore"], replay["peakScore"]) != (v1["avgScore"], v1["peakScore"]):
+        if (replay["avgScore"], replay["peakScore"]) != (orig["avgScore"], orig["peakScore"]):
             skipped.append((rec["id"], f"影格對不上 (重算 {replay['avgScore']}/{replay['peakScore']}，"
-                                       f"紀錄 {v1['avgScore']}/{v1['peakScore']})"))
+                                       f"紀錄 {orig['avgScore']}/{orig['peakScore']})"))
             continue
         try:
-            new_frames = [rescore_frame(bundle_dir, f) for f in frames]
+            new_frames = [rescore_frame(bundle_dir, f, roi_bottoms.get(rec["station"])) for f in frames]
         except FileNotFoundError as e:
             skipped.append((rec["id"], f"影格檔缺失 {e}"))
             continue
-        apply_beauty(rec, tl.aggregate_station_scores(new_frames, rec["session"]))
+        agg = tl.aggregate_station_scores(new_frames, rec["session"])
+        if (v.get("beautyScorerVersion") == BEAUTY_SCORER_VERSION
+                and all(agg[k] == v.get(k) for k in BEAUTY_FIELDS)):
+            continue  # 已是現行規則的結果，不改寫
+        apply_beauty(rec, agg)
         rec["verification"]["beautyRescoredFrom"] = os.path.basename(bundle_dir)
         updated.append(rec)
     return updated, skipped
@@ -175,9 +190,9 @@ def main():
     with open(records_path, "r", encoding="utf-8") as f:
         records = json.load(f)
 
-    updated, skipped = backfill(records, load_reports(args[0]))
+    updated, skipped = backfill(records, load_reports(args[0]), tl.SKY_ROI_BOTTOMS)
     for r in sorted(updated, key=lambda r: r["id"]):
-        v, v1 = r["verification"], r["verification"]["beautyV1"]
+        v, v1 = r["verification"], _original_of(r["verification"])
         print(f"{r['id']}: 美感峰值 {v1['peakScore']} → {v['peakScore']}・平均 {v1['avgScore']} → {v['avgScore']}"
               f"  (預報 {(v.get('beauty') or {}).get('predicted', '—')})")
     for rid, why in skipped:
@@ -186,7 +201,7 @@ def main():
     with open(reports_path, "r", encoding="utf-8") as f:
         reports = json.load(f)
     touched = refresh_reports(reports, records, {(r["date"], r["session"]) for r in updated})
-    print(f"共 {len(updated)} 筆紀錄改為美感分 v{BEAUTY_SCORER_VERSION}、略過 {len(skipped)} 筆、"
+    print(f"共 {len(updated)} 筆紀錄改寫 (美感分 v{BEAUTY_SCORER_VERSION} + 現行雨天閘門)、略過 {len(skipped)} 筆、"
           f"{touched} 篇日報更新{'（dry run，未寫入）' if dry_run else ''}")
     if not dry_run:
         with open(records_path, "w", encoding="utf-8") as f:

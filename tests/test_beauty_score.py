@@ -76,4 +76,35 @@ assert real["score"] >= 40, real
 assert real["pink_coverage_pct"] >= 30, real
 print(f"✅ 2026-09-29 烘爐地粉紫色霾 → {real['score']} 分 (v1 為 15 分，粉紅 {real['pink_coverage_pct']}%)")
 
+# 雨天閘門：只排除天空範圍以下 (地面) 的暖色，天空的晚霞照算 (2026-10-03 傍晚 6 站被一律壓成 30)
+glow_sky = sky([20, 20, 25], band=(hsv_rgb(25, 0.80, 0.90), 0, 110))      # 上 30% 橘色晚霞
+glow_ground = sky([20, 20, 25], band=(hsv_rgb(30, 0.80, 0.90), 170, 230))  # 天空範圍以下的暖色反光
+
+
+def rained(arr, roi):
+    with tempfile.TemporaryDirectory() as d:
+        p = os.path.join(d, "frame.png")
+        Image.fromarray(arr.astype(np.uint8)).save(p)
+        r = gt.analyze_image_optics(p, sky_roi_bottom=roi)
+    return gt.apply_rain_gate(r, {"isRaining": True})
+
+
+sky_glow = rained(glow_sky, 0.4)
+assert sky_glow["score"] > 30 and not sky_glow["rainGate"]["applied"], sky_glow
+assert sky_glow["rainGate"]["method"] == "sky-roi-only"
+print(f"✅ 下雨但晚霞在天空範圍內 → 照算 {sky_glow['score']} 分，不再封頂 30")
+
+ground_glow = rained(glow_ground, 0.4)
+assert ground_glow["score"] == 5 and ground_glow["rainGate"]["applied"], ground_glow
+assert ground_glow["rainGate"]["rawScoreBeforeGate"] > 5
+print(f"✅ 下雨時地面的暖色反光被排除: {ground_glow['rainGate']['rawScoreBeforeGate']} → {ground_glow['score']} 分")
+
+no_roi = rained(glow_sky, None)
+assert no_roi["score"] == gt.RAIN_GATE_CAP and no_roi["rainGate"]["method"] == "cap-30", no_roi
+print("✅ 沒有天空範圍資料的舊路徑仍封頂 30 分")
+
+dry = gt.analyze_image_optics(os.path.join(HERE, "fixtures", "2026-09-29-hongludi-t-20.jpg"), sky_roi_bottom=0.22)
+assert dry["score"] == real["score"] and dry["skyOnlyScore"] <= dry["score"], "不下雨時天空範圍不影響分數"
+print("✅ 不下雨時分數不受天空範圍影響")
+
 print("🎉 天空美感分評分器測試全數 PASS!\n")

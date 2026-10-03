@@ -54,55 +54,55 @@
   "beautyModel": {
     "input": "clearSkyUncappedScore",
     "target": "verification.peakScore",
-    "fittedAt": "2026-09-29T05:25:47.718Z",
+    "fittedAt": "2026-10-03T13:16:27.777Z",
     "stations": {
-      "hongludi": {
-        "slope": -0.018,
-        "intercept": 39.699,
-        "n": 14,
-        "mae": 17.647
-      },
-      "waimushan": {
-        "slope": -0.073,
-        "intercept": 25.087,
-        "n": 10,
-        "mae": 4.585
-      },
       "maokong": {
-        "slope": 2.151,
-        "intercept": -19.553,
-        "n": 11,
-        "mae": 6.109
+        "slope": 1.133,
+        "intercept": 25.387,
+        "n": 16,
+        "mae": 17.24
       },
       "jiufen": {
-        "slope": 0.609,
-        "intercept": 34.607,
-        "n": 10,
-        "mae": 18.861
+        "slope": 0.749,
+        "intercept": 22.943,
+        "n": 14,
+        "mae": 18.224
       },
       "bali": {
-        "slope": -0.018,
-        "intercept": 88.95,
-        "n": 12,
-        "mae": 3.98
+        "slope": 0.491,
+        "intercept": 58.694,
+        "n": 17,
+        "mae": 6.937
       },
       "tamsui": {
-        "slope": 0.476,
-        "intercept": 70.187,
-        "n": 12,
-        "mae": 3.462
+        "slope": 0.274,
+        "intercept": 68.709,
+        "n": 17,
+        "mae": 17.563
       },
       "dadaocheng": {
-        "slope": -0.145,
-        "intercept": 63.97,
-        "n": 11,
-        "mae": 7.712
+        "slope": 0.803,
+        "intercept": 13.132,
+        "n": 16,
+        "mae": 9.777
       },
       "xiangshan": {
-        "slope": 0.286,
-        "intercept": 21.864,
-        "n": 11,
-        "mae": 9.313
+        "slope": 0.052,
+        "intercept": 34.772,
+        "n": 16,
+        "mae": 9.122
+      },
+      "hongludi": {
+        "slope": 0.089,
+        "intercept": 35.548,
+        "n": 18,
+        "mae": 16.636
+      },
+      "waimushan": {
+        "slope": 0.012,
+        "intercept": 20.61,
+        "n": 14,
+        "mae": 5.249
       }
     }
   }
