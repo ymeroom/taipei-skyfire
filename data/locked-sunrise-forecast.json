@@ -1,28 +1,28 @@
 {
-  "date": "2026-10-05",
+  "date": "2026-10-07",
   "session": "sunrise",
-  "lockedAt": "2026-10-04T15:45:17.555Z",
+  "lockedAt": "2026-10-06T15:45:16.551Z",
   "skyfire": {
-    "score": 10,
+    "score": 45,
     "rating": {
-      "level": "CLEAR",
-      "badge": "晴空無雲",
-      "icon": "🌇",
+      "level": "FAINT",
+      "badge": "平淡暮光",
+      "icon": "🌤️",
       "color": "#7B88A8",
       "secondaryColor": "#A0AEC0",
-      "summary": "高中空幾乎無雲，沒有雲層可被染紅，不會有火燒雲；地平線的橘色暮光請看各機位的天空美感分。",
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
       "bgGradient": "linear-gradient(135deg, rgba(123,136,168,0.2) 0%, rgba(160,174,192,0.1) 100%)"
     },
     "metrics": {
-      "cloudQualityScore": 1,
-      "lowCloudPenalty": 1,
-      "horizonScore": 14,
-      "visibilityScore": 1,
-      "horizonClearance": 47,
-      "visKm": 0.9,
+      "cloudQualityScore": 16,
+      "lowCloudPenalty": 0,
+      "horizonScore": 5,
+      "visibilityScore": 15,
+      "horizonClearance": 15,
+      "visKm": 28.2,
       "aqi": 45,
       "aqiModifier": 2,
-      "clearSkyUncappedScore": 21
+      "clearSkyUncappedScore": 45
     },
     "diagnostics": [
       {
@@ -31,88 +31,88 @@
         "desc": "高雲量僅 0%，上方缺少大面積紅色漫射反光板。"
       },
       {
-        "label": "中空雲層 (2,000-6,000m)",
-        "status": "low",
-        "desc": "中雲量稀疏 (1%)，雲彩層次感較為單純。"
+        "label": "中空立體高積雲 (2,000-6,000m)",
+        "status": "optimal",
+        "desc": "中雲量達 30%，極易形成如魚鱗、波狀之立體金色燃燒雲紋。"
       },
       {
         "label": "遠方東方（太平洋/宜蘭外海）透光窗",
         "status": "fair",
-        "desc": "低雲量約 22%，地平線具有部分透光縫隙，呈現局部霞光。"
+        "desc": "低雲量約 11%，地平線具有部分透光縫隙，呈現局部霞光。"
       },
       {
         "label": "大氣能見度與通透度",
-        "status": "bad",
-        "desc": "能見度受限（0.86 公里），霧霾或水氣可能使天色偏灰白。"
+        "status": "optimal",
+        "desc": "能見度優異（28.18 公里），大氣清澈通透，晚霞色彩飽和純淨。"
       }
     ],
     "photoTips": {
-      "bestTime": "日出前 35-20 分鐘之藍調時段",
-      "whiteBalance": "色溫設為 3800K - 4500K 拍出城市冷冽深藍氛圍",
-      "filter": "長曝減光鏡 (ND64/ND1000) 霧化雲流或車軌",
-      "exposure": "建議使用腳架進行 10-30 秒慢速長曝",
-      "lens": "廣角至中望遠，適合捕捉台北夜景、橋樑車軌與建築點燈",
-      "mobileTip": "切換至手機「夜景模式 (Night Mode)」，藉由多幀降噪紀錄城市藍調夜景。"
+      "bestTime": "日出前 20 分鐘至日出刻",
+      "whiteBalance": "建議 6000K - 7000K 增強夕陽色彩飽和度",
+      "filter": "可搭配 CPL 偏光鏡增強雲層對比度",
+      "exposure": "曝光補償 -0.3 EV 至 -0.7 EV",
+      "lens": "標準變焦鏡頭 (24-70mm)，取景聚焦於地平線光芒交會處與地景輪廓",
+      "mobileTip": "建議開啟手機 HDR 模式，並利用三分法將地平線置於下 1/3 處。"
     }
   },
   "weather": {
     "cloudHigh": 0,
-    "cloudMid": 1,
-    "cloudLow": 22,
-    "cloudTotal": 22,
-    "humidity": 93,
+    "cloudMid": 30,
+    "cloudLow": 11,
+    "cloudTotal": 38,
+    "humidity": 65,
     "precipProb": 0,
-    "visibilityKm": 0.9,
-    "aqiForecast": 57,
-    "pm25": 11.8,
-    "aod": 0.25
+    "visibilityKm": 28.2,
+    "aqiForecast": 62,
+    "pm25": 16.5,
+    "aod": 0.31
   },
   "stations": {
     "hongludi": {
-      "score": 10,
-      "rating": "晴空無雲",
+      "score": 45,
+      "rating": "平淡暮光",
       "color": "#7B88A8",
-      "beautyScore": 37,
+      "beautyScore": 41,
       "weather": {
         "cloudHigh": 0,
-        "cloudMid": 1,
-        "cloudLow": 22,
-        "cloudTotal": 22,
-        "humidity": 93,
+        "cloudMid": 30,
+        "cloudLow": 11,
+        "cloudTotal": 38,
+        "humidity": 65,
         "precipProb": 0,
-        "visibilityKm": 0.9,
-        "aqiForecast": 57,
-        "pm25": 11.8,
-        "aod": 0.25
+        "visibilityKm": 28.2,
+        "aqiForecast": 62,
+        "pm25": 16.5,
+        "aod": 0.31
       },
       "metrics": {
-        "horizonClearance": 47,
-        "visKm": 0.9,
+        "horizonClearance": 15,
+        "visKm": 28.2,
         "aqi": 45,
         "aqiModifier": 2,
-        "clearSkyUncappedScore": 21
+        "clearSkyUncappedScore": 45
       }
     },
     "waimushan": {
       "score": 5,
       "rating": "陰沉沉寂",
       "color": "#5A6275",
-      "beautyScore": 21,
+      "beautyScore": 20,
       "weather": {
         "cloudHigh": 0,
-        "cloudMid": 19,
-        "cloudLow": 75,
-        "cloudTotal": 78,
-        "humidity": 93,
-        "precipProb": 26,
-        "visibilityKm": 7.1,
-        "aqiForecast": 70,
-        "pm25": 18.7,
-        "aod": 0.25
+        "cloudMid": 48,
+        "cloudLow": 71,
+        "cloudTotal": 72,
+        "humidity": 61,
+        "precipProb": 0,
+        "visibilityKm": 31.6,
+        "aqiForecast": 65,
+        "pm25": 15.9,
+        "aod": 0.27
       },
       "metrics": {
-        "horizonClearance": 6,
-        "visKm": 7.1,
+        "horizonClearance": 1,
+        "visKm": 31.6,
         "aqi": 45,
         "aqiModifier": 2,
         "clearSkyUncappedScore": 5
