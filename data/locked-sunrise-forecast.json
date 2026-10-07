@@ -1,28 +1,28 @@
 {
-  "date": "2026-10-07",
+  "date": "2026-10-08",
   "session": "sunrise",
-  "lockedAt": "2026-10-06T15:45:16.551Z",
+  "lockedAt": "2026-10-07T15:45:21.201Z",
   "skyfire": {
-    "score": 45,
+    "score": 56,
     "rating": {
-      "level": "FAINT",
-      "badge": "平淡暮光",
-      "icon": "🌤️",
-      "color": "#7B88A8",
-      "secondaryColor": "#A0AEC0",
-      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
-      "bgGradient": "linear-gradient(135deg, rgba(123,136,168,0.2) 0%, rgba(160,174,192,0.1) 100%)"
+      "level": "MODERATE",
+      "badge": "局部霞光",
+      "icon": "⛅",
+      "color": "#E5A50A",
+      "secondaryColor": "#3A86FF",
+      "summary": "局部泛紅・唯美溫潤。地平線或天際線邊緣可見金橘色光芒。",
+      "bgGradient": "linear-gradient(135deg, rgba(229,165,10,0.25) 0%, rgba(58,134,255,0.15) 100%)"
     },
     "metrics": {
-      "cloudQualityScore": 16,
+      "cloudQualityScore": 14,
       "lowCloudPenalty": 0,
-      "horizonScore": 5,
+      "horizonScore": 17,
       "visibilityScore": 15,
-      "horizonClearance": 15,
-      "visKm": 28.2,
+      "horizonClearance": 56,
+      "visKm": 25.4,
       "aqi": 45,
       "aqiModifier": 2,
-      "clearSkyUncappedScore": 45
+      "clearSkyUncappedScore": 56
     },
     "diagnostics": [
       {
@@ -33,17 +33,17 @@
       {
         "label": "中空立體高積雲 (2,000-6,000m)",
         "status": "optimal",
-        "desc": "中雲量達 30%，極易形成如魚鱗、波狀之立體金色燃燒雲紋。"
+        "desc": "中雲量達 26%，極易形成如魚鱗、波狀之立體金色燃燒雲紋。"
       },
       {
         "label": "遠方東方（太平洋/宜蘭外海）透光窗",
         "status": "fair",
-        "desc": "低雲量約 11%，地平線具有部分透光縫隙，呈現局部霞光。"
+        "desc": "低雲量約 5%，地平線具有部分透光縫隙，呈現局部霞光。"
       },
       {
         "label": "大氣能見度與通透度",
         "status": "optimal",
-        "desc": "能見度優異（28.18 公里），大氣清澈通透，晚霞色彩飽和純淨。"
+        "desc": "能見度優異（25.36 公里），大氣清澈通透，晚霞色彩飽和純淨。"
       }
     ],
     "photoTips": {
@@ -57,65 +57,65 @@
   },
   "weather": {
     "cloudHigh": 0,
-    "cloudMid": 30,
-    "cloudLow": 11,
-    "cloudTotal": 38,
-    "humidity": 65,
+    "cloudMid": 26,
+    "cloudLow": 5,
+    "cloudTotal": 28,
+    "humidity": 75,
     "precipProb": 0,
-    "visibilityKm": 28.2,
-    "aqiForecast": 62,
-    "pm25": 16.5,
-    "aod": 0.31
+    "visibilityKm": 25.4,
+    "aqiForecast": 57,
+    "pm25": 7.8,
+    "aod": 0.2
   },
   "stations": {
     "hongludi": {
-      "score": 45,
-      "rating": "平淡暮光",
-      "color": "#7B88A8",
-      "beautyScore": 41,
+      "score": 56,
+      "rating": "局部霞光",
+      "color": "#E5A50A",
+      "beautyScore": 42,
       "weather": {
         "cloudHigh": 0,
-        "cloudMid": 30,
-        "cloudLow": 11,
-        "cloudTotal": 38,
-        "humidity": 65,
+        "cloudMid": 26,
+        "cloudLow": 5,
+        "cloudTotal": 28,
+        "humidity": 75,
         "precipProb": 0,
-        "visibilityKm": 28.2,
-        "aqiForecast": 62,
-        "pm25": 16.5,
-        "aod": 0.31
+        "visibilityKm": 25.4,
+        "aqiForecast": 57,
+        "pm25": 7.8,
+        "aod": 0.2
       },
       "metrics": {
-        "horizonClearance": 15,
-        "visKm": 28.2,
+        "horizonClearance": 56,
+        "visKm": 25.4,
         "aqi": 45,
         "aqiModifier": 2,
-        "clearSkyUncappedScore": 45
+        "clearSkyUncappedScore": 56
       }
     },
     "waimushan": {
-      "score": 5,
-      "rating": "陰沉沉寂",
-      "color": "#5A6275",
-      "beautyScore": 20,
+      "score": 10,
+      "rating": "晴空無雲",
+      "color": "#7B88A8",
+      "beautyScore": 21,
       "weather": {
         "cloudHigh": 0,
-        "cloudMid": 48,
-        "cloudLow": 71,
-        "cloudTotal": 72,
-        "humidity": 61,
+        "cloudMid": 0,
+        "cloudLow": 15,
+        "cloudTotal": 16,
+        "humidity": 71,
         "precipProb": 0,
-        "visibilityKm": 31.6,
-        "aqiForecast": 65,
-        "pm25": 15.9,
-        "aod": 0.27
+        "visibilityKm": 28.9,
+        "aqiForecast": 59,
+        "pm25": 12.2,
+        "aod": 0.16
       },
       "metrics": {
-        "horizonClearance": 1,
-        "visKm": 31.6,
+        "horizonClearance": 15,
+        "visKm": 28.9,
         "aqi": 45,
         "aqiModifier": 2,
-        "clearSkyUncappedScore": 5
+        "clearSkyUncappedScore": 30
       }
     }
   }
