@@ -85,14 +85,37 @@ try {
     try {
         $ghArgs = @('workflow', 'run', $WorkflowFile)
         if ($Session) { $ghArgs += @('-f', "session=$Session") }
-        $output = & gh @ghArgs 2>&1 | Out-String
-        $exitCode = $LASTEXITCODE
-        if ($exitCode -eq 0) {
-            Write-Log "成功: $($output.Trim())"
-        } else {
-            Write-Log "失敗 (exit $exitCode): $($output.Trim())"
+
+        # 連線層失敗就重試 (2026-10-08 實測教訓：09:00、15:30 兩次都是
+        # 「error connecting to api.github.com」一次就放棄，當天日落的
+        # 鎖定預測整個漏掉，6 站實測都變成 no_locked_prediction)。
+        # 只重試「請求根本沒送出去」的錯誤 (DNS/TCP)，這類失敗 GitHub
+        # 端不可能已經收到 dispatch，重試不會造成重複觸發；其他錯誤
+        # (權限、workflow 不存在…) 重試也沒用，直接失敗。
+        $maxAttempts = 5
+        $retryDelaySec = 30
+        $retryablePattern = 'error connecting to|could not resolve host|dial tcp|no such host'
+        for ($attempt = 1; $attempt -le $maxAttempts; $attempt++) {
+            # Windows PowerShell 5.1 在 'Stop' 下會把原生指令的 stderr
+            # (經 2>&1) 直接變成終止錯誤，跳過下面的結束碼判斷。呼叫 gh
+            # 時暫時改成 'Continue'，才拿得到輸出文字與 $LASTEXITCODE。
+            $ErrorActionPreference = 'Continue'
+            $output = & gh @ghArgs 2>&1 | Out-String
+            $exitCode = $LASTEXITCODE
+            $ErrorActionPreference = 'Stop'
+
+            if ($exitCode -eq 0) {
+                Write-Log "成功 (第 $attempt 次): $($output.Trim())"
+                exit 0
+            }
+            if ($attempt -lt $maxAttempts -and $output -match $retryablePattern) {
+                Write-Log "連線失敗 (第 $attempt/$maxAttempts 次)，$retryDelaySec 秒後重試: $($output.Trim())"
+                Start-Sleep -Seconds $retryDelaySec
+                continue
+            }
+            Write-Log "失敗 (exit $exitCode，第 $attempt 次): $($output.Trim())"
+            exit $exitCode
         }
-        exit $exitCode
     } finally {
         Pop-Location
     }
