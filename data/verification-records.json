@@ -28,7 +28,7 @@
       "peakScore": 91,
       "peakOffsetMin": 20,
       "peakSide": "post-sunset",
-      "verifiedAt": "2026-10-08T11:48:41.234579+00:00",
+      "verifiedAt": "2026-10-08T13:03:53.750571+00:00",
       "beautyScorerVersion": 2,
       "status": "no_locked_prediction",
       "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差",
@@ -66,11 +66,11 @@
       ]
     },
     "verification": {
-      "avgScore": 14.7,
-      "peakScore": 22,
-      "peakOffsetMin": 20,
+      "avgScore": 14.8,
+      "peakScore": 21,
+      "peakOffsetMin": 10,
       "peakSide": "post-sunset",
-      "verifiedAt": "2026-10-08T11:48:41.234081+00:00",
+      "verifiedAt": "2026-10-08T13:03:53.749614+00:00",
       "beautyScorerVersion": 2,
       "status": "no_locked_prediction",
       "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差",
@@ -108,11 +108,11 @@
       ]
     },
     "verification": {
-      "avgScore": 18.4,
+      "avgScore": 18.2,
       "peakScore": 39,
       "peakOffsetMin": 20,
       "peakSide": "post-sunset",
-      "verifiedAt": "2026-10-08T11:48:41.233589+00:00",
+      "verifiedAt": "2026-10-08T13:03:53.748260+00:00",
       "beautyScorerVersion": 2,
       "status": "no_locked_prediction",
       "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差",
@@ -150,18 +150,18 @@
       ]
     },
     "verification": {
-      "avgScore": 24.8,
-      "peakScore": 65,
+      "avgScore": 25.7,
+      "peakScore": 66,
       "peakOffsetMin": 20,
       "peakSide": "post-sunset",
-      "verifiedAt": "2026-10-08T11:48:41.233115+00:00",
+      "verifiedAt": "2026-10-08T13:03:53.746973+00:00",
       "beautyScorerVersion": 2,
       "status": "no_locked_prediction",
       "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差",
       "fireCloud": {
-        "avgScore": 5.0,
-        "peakScore": 5,
-        "peakOffsetMin": 0,
+        "avgScore": 5.4,
+        "peakScore": 7,
+        "peakOffsetMin": 40,
         "okFrameCount": 9,
         "unreadableFrameCount": 0
       }
@@ -192,11 +192,11 @@
       ]
     },
     "verification": {
-      "avgScore": 28.2,
-      "peakScore": 42,
+      "avgScore": 28.1,
+      "peakScore": 41,
       "peakOffsetMin": 20,
       "peakSide": "post-sunset",
-      "verifiedAt": "2026-10-08T11:48:41.232630+00:00",
+      "verifiedAt": "2026-10-08T13:03:53.745731+00:00",
       "beautyScorerVersion": 2,
       "status": "no_locked_prediction",
       "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差",
@@ -234,17 +234,17 @@
       ]
     },
     "verification": {
-      "avgScore": 16.7,
-      "peakScore": 21,
-      "peakOffsetMin": 10,
+      "avgScore": 17.0,
+      "peakScore": 22,
+      "peakOffsetMin": 20,
       "peakSide": "post-sunset",
-      "verifiedAt": "2026-10-08T11:48:41.232070+00:00",
+      "verifiedAt": "2026-10-08T13:03:53.743893+00:00",
       "beautyScorerVersion": 2,
       "status": "no_locked_prediction",
       "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差",
       "fireCloud": {
-        "avgScore": 5.8,
-        "peakScore": 8,
+        "avgScore": 6.2,
+        "peakScore": 9,
         "peakOffsetMin": 30,
         "okFrameCount": 9,
         "unreadableFrameCount": 0
