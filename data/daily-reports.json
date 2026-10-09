@@ -18,9 +18,9 @@
       "beautyScore": 53
     },
     "groundTruth": {
-      "score": 63,
+      "score": 62,
       "avgScore": 32.9,
-      "peakScore": 63,
+      "peakScore": 62,
       "peakOffsetMin": 20,
       "verdict": "MISMATCH",
       "verdictAvg": "MISMATCH",
@@ -30,7 +30,7 @@
       "fireCloud": {
         "predicted": 51,
         "peakScore": 30,
-        "avgScore": 11.4,
+        "avgScore": 11.2,
         "peakOffsetMin": 20,
         "verdict": "MISMATCH",
         "verdictBadge": "⚠️ 出現偏差需校準",
@@ -38,7 +38,7 @@
       },
       "beauty": {
         "predicted": 53,
-        "peakScore": 63,
+        "peakScore": 62,
         "avgScore": 32.9,
         "peakOffsetMin": 20,
         "verdict": "SLIGHT_DEVIATION",
@@ -52,7 +52,7 @@
         "icon": "⛵",
         "tag": "臺北旅遊網 4K 直播・淡水河倒影晚霞",
         "phasePrep": "—",
-        "phasePeak": "平均 32.9 分・峰值 63 分（T+20）",
+        "phasePeak": "平均 32.9 分・峰值 62 分（T+20）",
         "phasePost": "—",
         "forecast": "51 分（低雲 20%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -60,7 +60,7 @@
         "fireCloud": {
           "predicted": 51,
           "peakScore": 30,
-          "avgScore": 11.4,
+          "avgScore": 11.2,
           "peakOffsetMin": 20,
           "verdict": "MISMATCH",
           "verdictBadge": "⚠️ 出現偏差需校準",
@@ -68,7 +68,7 @@
         },
         "beauty": {
           "predicted": 53,
-          "peakScore": 63,
+          "peakScore": 62,
           "avgScore": 32.9,
           "peakOffsetMin": 20,
           "verdict": "SLIGHT_DEVIATION",
@@ -81,24 +81,24 @@
         "icon": "⛩️",
         "tag": "臺北旅遊網 4K 直播・高處俯瞰盆地火燒雲",
         "phasePrep": "—",
-        "phasePeak": "平均 63.4 分・峰值 94 分（T+10）",
+        "phasePeak": "平均 64.7 分・峰值 95 分（T+10）",
         "phasePost": "—",
         "forecast": "41 分（低雲 25%）",
         "verdict": "⚠️ 出現偏差需校準",
         "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 41,
-          "peakScore": 52,
-          "avgScore": 27.4,
-          "peakOffsetMin": 10,
-          "verdict": "SLIGHT_DEVIATION",
-          "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-          "color": "#FBBF24"
+          "peakScore": 64,
+          "avgScore": 26.0,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
         },
         "beauty": {
           "predicted": 69,
-          "peakScore": 94,
-          "avgScore": 63.4,
+          "peakScore": 95,
+          "avgScore": 64.7,
           "peakOffsetMin": 10,
           "verdict": "MISMATCH",
           "verdictBadge": "⚠️ 出現偏差需校準",
@@ -110,7 +110,7 @@
         "icon": "🏮",
         "tag": "新北觀光 4K 直播・山海交界落日",
         "phasePrep": "—",
-        "phasePeak": "平均 29.4 分・峰值 30 分（T+10）",
+        "phasePeak": "平均 34.7 分・峰值 31 分（T+10）",
         "phasePost": "—",
         "forecast": "5 分（低雲 100%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -126,8 +126,8 @@
         },
         "beauty": {
           "predicted": 24,
-          "peakScore": 30,
-          "avgScore": 29.4,
+          "peakScore": 31,
+          "avgScore": 34.7,
           "peakOffsetMin": 10,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -204,8 +204,8 @@
         "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 43,
-          "peakScore": 12,
-          "avgScore": 6.4,
+          "peakScore": 11,
+          "avgScore": 6.2,
           "peakOffsetMin": 30,
           "verdict": "MISMATCH",
           "verdictBadge": "⚠️ 出現偏差需校準",
@@ -226,13 +226,13 @@
       "verified": 5,
       "pending": 1,
       "bestStation": "maokong",
-      "bestScore": 94,
+      "bestScore": 95,
       "worstError": 60,
-      "meanError": 35.0
+      "meanError": 35.2
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 10% ／ 低空 20%。",
-      "modelPerformance": "🔥 火燒雲：預報 51 分，實測平均 11.4 分、峰值 30 分（T+20，峰值誤差 21 分）。🌅 天空美感：預報 53 分，實測平均 32.9 分、峰值 63 分（T+20，峰值誤差 10 分）。"
+      "modelPerformance": "🔥 火燒雲：預報 51 分，實測平均 11.2 分、峰值 30 分（T+20，峰值誤差 21 分）。🌅 天空美感：預報 53 分，實測平均 32.9 分、峰值 62 分（T+20，峰值誤差 9 分）。"
     }
   },
   {
