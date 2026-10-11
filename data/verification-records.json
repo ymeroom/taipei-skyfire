@@ -1,5 +1,89 @@
 [
   {
+    "id": "rec-2026-10-11-sunrise-hongludi",
+    "date": "2026-10-11",
+    "session": "sunrise",
+    "station": "hongludi",
+    "targetTime": "2026-10-10T21:51:03.031000+00:00",
+    "source": "烘爐地（縮時多影格）",
+    "prediction": null,
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 9,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 21.3,
+      "peakScore": 31,
+      "peakOffsetMin": -20,
+      "peakSide": "pre-sunrise",
+      "verifiedAt": "2026-10-11T01:13:43.030409+00:00",
+      "beautyScorerVersion": 2,
+      "status": "no_locked_prediction",
+      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": -40,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0
+      }
+    }
+  },
+  {
+    "id": "rec-2026-10-11-sunrise-waimushan",
+    "date": "2026-10-11",
+    "session": "sunrise",
+    "station": "waimushan",
+    "targetTime": "2026-10-10T21:51:03.031000+00:00",
+    "source": "外木山（縮時多影格）",
+    "prediction": null,
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 9,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 15.8,
+      "peakScore": 38,
+      "peakOffsetMin": -10,
+      "peakSide": "pre-sunrise",
+      "verifiedAt": "2026-10-11T01:13:43.029807+00:00",
+      "beautyScorerVersion": 2,
+      "status": "no_locked_prediction",
+      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": -10,
+        "okFrameCount": 6,
+        "unreadableFrameCount": 3
+      }
+    }
+  },
+  {
     "id": "rec-2026-10-10-sunset-maokong",
     "date": "2026-10-10",
     "session": "sunset",
