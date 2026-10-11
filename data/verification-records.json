@@ -1,5 +1,129 @@
 [
   {
+    "id": "rec-2026-10-12-sunrise-hongludi",
+    "date": "2026-10-12",
+    "session": "sunrise",
+    "station": "hongludi",
+    "targetTime": "2026-10-11T21:51:30.194000+00:00",
+    "source": "烘爐地（縮時多影格）",
+    "prediction": {
+      "score": 10,
+      "rating": "晴空無雲",
+      "color": "#7B88A8",
+      "beautyScore": 39,
+      "clearSkyUncappedScore": 26,
+      "highCloud": 0,
+      "midCloud": 0,
+      "lowCloud": 18,
+      "totalCloud": 18,
+      "humidity": 93,
+      "precipProb": 0,
+      "horizonClearance": 65,
+      "visibilityKm": 0.6,
+      "aqi": 45,
+      "aqiForecast": 63,
+      "pm25": 18.2,
+      "aod": 0.21,
+      "isSimulated": false,
+      "lockedAt": "2026-10-11T15:45:16.137Z"
+    },
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 0,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": null,
+      "peakScore": null,
+      "peakOffsetMin": null,
+      "peakSide": "pre-sunrise",
+      "verifiedAt": "2026-10-11T23:40:47.762809+00:00",
+      "beautyScorerVersion": 2,
+      "status": "capture_unavailable",
+      "reason": "9 張影格全數擷取失敗，本場次無實測資料",
+      "fireCloud": {
+        "avgScore": null,
+        "peakScore": null,
+        "peakOffsetMin": null,
+        "okFrameCount": 0,
+        "unreadableFrameCount": 0
+      }
+    }
+  },
+  {
+    "id": "rec-2026-10-12-sunrise-waimushan",
+    "date": "2026-10-12",
+    "session": "sunrise",
+    "station": "waimushan",
+    "targetTime": "2026-10-11T21:51:30.194000+00:00",
+    "source": "外木山（縮時多影格）",
+    "prediction": {
+      "score": 10,
+      "rating": "晴空無雲",
+      "color": "#7B88A8",
+      "beautyScore": 20,
+      "clearSkyUncappedScore": 26,
+      "highCloud": 0,
+      "midCloud": 0,
+      "lowCloud": 39,
+      "totalCloud": 39,
+      "humidity": 88,
+      "precipProb": 0,
+      "horizonClearance": 47,
+      "visibilityKm": 21.1,
+      "aqi": 45,
+      "aqiForecast": 68,
+      "pm25": 26.7,
+      "aod": 0.33,
+      "isSimulated": false,
+      "lockedAt": "2026-10-11T15:45:16.137Z"
+    },
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 0,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": null,
+      "peakScore": null,
+      "peakOffsetMin": null,
+      "peakSide": "pre-sunrise",
+      "verifiedAt": "2026-10-11T23:40:47.762135+00:00",
+      "beautyScorerVersion": 2,
+      "status": "capture_unavailable",
+      "reason": "9 張影格全數擷取失敗，本場次無實測資料",
+      "fireCloud": {
+        "avgScore": null,
+        "peakScore": null,
+        "peakOffsetMin": null,
+        "okFrameCount": 0,
+        "unreadableFrameCount": 0
+      }
+    }
+  },
+  {
     "id": "rec-2026-10-11-sunset-maokong",
     "date": "2026-10-11",
     "session": "sunset",
