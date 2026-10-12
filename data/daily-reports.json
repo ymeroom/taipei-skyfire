@@ -81,7 +81,7 @@
         "icon": "⛩️",
         "tag": "臺北旅遊網 4K 直播・高處俯瞰盆地火燒雲",
         "phasePrep": "—",
-        "phasePeak": "平均 68.0 分・峰值 100 分（T+20）",
+        "phasePeak": "平均 66.8 分・峰值 100 分（T+10）",
         "phasePost": "—",
         "forecast": "10 分（低雲 1%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
@@ -98,8 +98,8 @@
         "beauty": {
           "predicted": 84,
           "peakScore": 100,
-          "avgScore": 68.0,
-          "peakOffsetMin": 20,
+          "avgScore": 66.8,
+          "peakOffsetMin": 10,
           "verdict": "SLIGHT_DEVIATION",
           "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
           "color": "#FBBF24"
