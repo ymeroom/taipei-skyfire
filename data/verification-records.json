@@ -30,7 +30,7 @@
     "capture": {
       "kind": "timelapse-multi-frame",
       "frameCount": 9,
-      "okFrameCount": 0,
+      "okFrameCount": 9,
       "offsetsMin": [
         -40,
         -30,
@@ -44,20 +44,35 @@
       ]
     },
     "verification": {
-      "avgScore": null,
-      "peakScore": null,
-      "peakOffsetMin": null,
+      "avgScore": 13.6,
+      "peakScore": 24,
+      "peakOffsetMin": -10,
       "peakSide": "pre-sunrise",
-      "verifiedAt": "2026-10-13T23:40:47.518599+00:00",
+      "verifiedAt": "2026-10-14T01:01:15.215701+00:00",
       "beautyScorerVersion": 2,
-      "status": "capture_unavailable",
-      "reason": "9 張影格全數擷取失敗，本場次無實測資料",
+      "status": "verified_completed",
+      "errorAvgAbsolute": 3.5999999999999996,
+      "verdictAvg": "EXACT_MATCH",
+      "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "errorPeakAbsolute": 14,
+      "verdictPeak": "SLIGHT_DEVIATION",
+      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "fireCloud": {
-        "avgScore": null,
-        "peakScore": null,
-        "peakOffsetMin": null,
-        "okFrameCount": 0,
-        "unreadableFrameCount": 0
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": -40,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "predicted": 10,
+        "errorPeakAbsolute": 5,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      },
+      "beauty": {
+        "predicted": 37,
+        "errorPeakAbsolute": 13,
+        "verdictPeak": "SLIGHT_DEVIATION",
+        "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
       }
     }
   },
@@ -92,7 +107,7 @@
     "capture": {
       "kind": "timelapse-multi-frame",
       "frameCount": 9,
-      "okFrameCount": 0,
+      "okFrameCount": 9,
       "offsetsMin": [
         -40,
         -30,
@@ -106,20 +121,31 @@
       ]
     },
     "verification": {
-      "avgScore": null,
-      "peakScore": null,
-      "peakOffsetMin": null,
+      "avgScore": 10.1,
+      "peakScore": 12,
+      "peakOffsetMin": 0,
       "peakSide": "pre-sunrise",
-      "verifiedAt": "2026-10-13T23:40:47.518020+00:00",
+      "verifiedAt": "2026-10-14T01:01:15.215041+00:00",
       "beautyScorerVersion": 2,
-      "status": "capture_unavailable",
-      "reason": "9 張影格全數擷取失敗，本場次無實測資料",
+      "status": "verified_completed",
+      "errorAvgAbsolute": 0.09999999999999964,
+      "verdictAvg": "EXACT_MATCH",
+      "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "errorPeakAbsolute": 2,
+      "verdictPeak": "EXACT_MATCH",
+      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "fireCloud": {
         "avgScore": null,
         "peakScore": null,
         "peakOffsetMin": null,
-        "okFrameCount": 0,
-        "unreadableFrameCount": 0
+        "okFrameCount": 4,
+        "unreadableFrameCount": 5
+      },
+      "beauty": {
+        "predicted": 20,
+        "errorPeakAbsolute": 8,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
       }
     }
   },
