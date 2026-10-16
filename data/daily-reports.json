@@ -29,9 +29,9 @@
       "color": "#F87171",
       "fireCloud": {
         "predicted": 10,
-        "peakScore": 10,
-        "avgScore": 7.8,
-        "peakOffsetMin": 20,
+        "peakScore": 9,
+        "avgScore": 7.0,
+        "peakOffsetMin": 10,
         "verdict": "EXACT_MATCH",
         "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
         "color": "#4ADE80"
@@ -59,9 +59,9 @@
         "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 10,
-          "peakScore": 10,
-          "avgScore": 7.8,
-          "peakOffsetMin": 20,
+          "peakScore": 9,
+          "avgScore": 7.0,
+          "peakOffsetMin": 10,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
           "color": "#4ADE80"
@@ -175,8 +175,8 @@
         "verdictColor": "#FBBF24",
         "fireCloud": {
           "predicted": 10,
-          "peakScore": 18,
-          "avgScore": 12.4,
+          "peakScore": 14,
+          "avgScore": 9.6,
           "peakOffsetMin": 20,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -232,7 +232,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 3% ／ 中空 2% ／ 低空 18%。",
-      "modelPerformance": "🔥 火燒雲：預報 10 分，實測平均 7.8 分、峰值 10 分（T+20，峰值誤差 0 分）。🌅 天空美感：預報 54 分，實測平均 27.7 分、峰值 34 分（T+10，峰值誤差 20 分）。"
+      "modelPerformance": "🔥 火燒雲：預報 10 分，實測平均 7.0 分、峰值 9 分（T+10，峰值誤差 1 分）。🌅 天空美感：預報 54 分，實測平均 27.7 分、峰值 34 分（T+10，峰值誤差 20 分）。"
     }
   },
   {
@@ -385,9 +385,9 @@
       "color": "#F87171",
       "fireCloud": {
         "predicted": 35,
-        "peakScore": 6,
-        "avgScore": 5.2,
-        "peakOffsetMin": 20,
+        "peakScore": 5,
+        "avgScore": 5.0,
+        "peakOffsetMin": 0,
         "verdict": "MISMATCH",
         "verdictBadge": "⚠️ 出現偏差需校準",
         "color": "#F87171"
@@ -415,9 +415,9 @@
         "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 35,
-          "peakScore": 6,
-          "avgScore": 5.2,
-          "peakOffsetMin": 20,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
           "verdict": "MISMATCH",
           "verdictBadge": "⚠️ 出現偏差需校準",
           "color": "#F87171"
@@ -444,8 +444,8 @@
         "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 17,
-          "peakScore": 32,
-          "avgScore": 10.4,
+          "peakScore": 30,
+          "avgScore": 10.0,
           "peakOffsetMin": 20,
           "verdict": "SLIGHT_DEVIATION",
           "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
@@ -502,12 +502,12 @@
         "verdictColor": "#FBBF24",
         "fireCloud": {
           "predicted": 50,
-          "peakScore": 36,
-          "avgScore": 12.2,
-          "peakOffsetMin": 20,
-          "verdict": "SLIGHT_DEVIATION",
-          "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-          "color": "#FBBF24"
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
         },
         "beauty": {
           "predicted": 81,
@@ -531,12 +531,12 @@
         "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 50,
-          "peakScore": 70,
-          "avgScore": 33.2,
-          "peakOffsetMin": 10,
-          "verdict": "MISMATCH",
-          "verdictBadge": "⚠️ 出現偏差需校準",
-          "color": "#F87171"
+          "peakScore": 62,
+          "avgScore": 26.4,
+          "peakOffsetMin": 20,
+          "verdict": "SLIGHT_DEVIATION",
+          "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+          "color": "#FBBF24"
         },
         "beauty": {
           "predicted": 84,
@@ -588,7 +588,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 87% ／ 中空 11% ／ 低空 54%。",
-      "modelPerformance": "🔥 火燒雲：預報 35 分，實測平均 5.2 分、峰值 6 分（T+20，峰值誤差 29 分）。🌅 天空美感：預報 41 分，實測平均 23.4 分、峰值 38 分（T+20，峰值誤差 3 分）。"
+      "modelPerformance": "🔥 火燒雲：預報 35 分，實測平均 5.0 分、峰值 5 分（峰值誤差 30 分）。🌅 天空美感：預報 41 分，實測平均 23.4 分、峰值 38 分（T+20，峰值誤差 3 分）。"
     }
   },
   {
@@ -800,8 +800,8 @@
         "verdictColor": "#4ADE80",
         "fireCloud": {
           "predicted": 48,
-          "peakScore": 46,
-          "avgScore": 17.8,
+          "peakScore": 40,
+          "avgScore": 16.6,
           "peakOffsetMin": 10,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -887,8 +887,8 @@
         "verdictColor": "#4ADE80",
         "fireCloud": {
           "predicted": 48,
-          "peakScore": 50,
-          "avgScore": 18.4,
+          "peakScore": 47,
+          "avgScore": 16.6,
           "peakOffsetMin": 20,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -1809,8 +1809,8 @@
       "color": "#F87171",
       "fireCloud": {
         "predicted": 10,
-        "peakScore": 15,
-        "avgScore": 8.4,
+        "peakScore": 14,
+        "avgScore": 7.8,
         "peakOffsetMin": 20,
         "verdict": "EXACT_MATCH",
         "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -1839,8 +1839,8 @@
         "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 10,
-          "peakScore": 15,
-          "avgScore": 8.4,
+          "peakScore": 14,
+          "avgScore": 7.8,
           "peakOffsetMin": 20,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -1868,8 +1868,8 @@
         "verdictColor": "#FBBF24",
         "fireCloud": {
           "predicted": 10,
-          "peakScore": 14,
-          "avgScore": 10.0,
+          "peakScore": 13,
+          "avgScore": 9.0,
           "peakOffsetMin": 10,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -1897,12 +1897,12 @@
         "verdictColor": "#FBBF24",
         "fireCloud": {
           "predicted": 10,
-          "peakScore": 23,
-          "avgScore": 14.0,
-          "peakOffsetMin": 20,
-          "verdict": "SLIGHT_DEVIATION",
-          "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-          "color": "#FBBF24"
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
         },
         "beauty": {
           "predicted": 50,
@@ -1926,9 +1926,9 @@
         "verdictColor": "#4ADE80",
         "fireCloud": {
           "predicted": 10,
-          "peakScore": 6,
-          "avgScore": 5.2,
-          "peakOffsetMin": 30,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
           "color": "#4ADE80"
@@ -1955,8 +1955,8 @@
         "verdictColor": "#FBBF24",
         "fireCloud": {
           "predicted": 10,
-          "peakScore": 10,
-          "avgScore": 6.4,
+          "peakScore": 9,
+          "avgScore": 5.8,
           "peakOffsetMin": 30,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -2012,7 +2012,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 5%。",
-      "modelPerformance": "🔥 火燒雲：預報 10 分，實測平均 8.4 分、峰值 15 分（T+20，峰值誤差 5 分）。🌅 天空美感：預報 54 分，實測平均 42.0 分、峰值 78 分（T+20，峰值誤差 24 分）。"
+      "modelPerformance": "🔥 火燒雲：預報 10 分，實測平均 7.8 分、峰值 14 分（T+20，峰值誤差 4 分）。🌅 天空美感：預報 54 分，實測平均 42.0 分、峰值 78 分（T+20，峰值誤差 24 分）。"
     }
   },
   {
@@ -2250,9 +2250,9 @@
         "verdictColor": "#4ADE80",
         "fireCloud": {
           "predicted": 5,
-          "peakScore": 6,
-          "avgScore": 5.4,
-          "peakOffsetMin": 10,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
           "color": "#4ADE80"
@@ -2279,12 +2279,12 @@
         "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 5,
-          "peakScore": 45,
-          "avgScore": 17.0,
-          "peakOffsetMin": 20,
-          "verdict": "MISMATCH",
-          "verdictBadge": "⚠️ 出現偏差需校準",
-          "color": "#F87171"
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
         },
         "beauty": {
           "predicted": 61,
@@ -2308,8 +2308,8 @@
         "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 5,
-          "peakScore": 100,
-          "avgScore": 29.0,
+          "peakScore": 80,
+          "avgScore": 24.0,
           "peakOffsetMin": 20,
           "verdict": "MISMATCH",
           "verdictBadge": "⚠️ 出現偏差需校準",
@@ -2337,9 +2337,9 @@
         "verdictColor": "#FBBF24",
         "fireCloud": {
           "predicted": 5,
-          "peakScore": 8,
-          "avgScore": 5.6,
-          "peakOffsetMin": 30,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
           "color": "#4ADE80"
@@ -2518,8 +2518,8 @@
       "color": "#F87171",
       "fireCloud": {
         "predicted": 51,
-        "peakScore": 30,
-        "avgScore": 11.2,
+        "peakScore": 25,
+        "avgScore": 9.8,
         "peakOffsetMin": 20,
         "verdict": "MISMATCH",
         "verdictBadge": "⚠️ 出現偏差需校準",
@@ -2548,8 +2548,8 @@
         "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 51,
-          "peakScore": 30,
-          "avgScore": 11.2,
+          "peakScore": 25,
+          "avgScore": 9.8,
           "peakOffsetMin": 20,
           "verdict": "MISMATCH",
           "verdictBadge": "⚠️ 出現偏差需校準",
@@ -2577,9 +2577,9 @@
         "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 41,
-          "peakScore": 64,
-          "avgScore": 26.0,
-          "peakOffsetMin": 0,
+          "peakScore": 22,
+          "avgScore": 13.2,
+          "peakOffsetMin": 10,
           "verdict": "MISMATCH",
           "verdictBadge": "⚠️ 出現偏差需校準",
           "color": "#F87171"
@@ -2606,9 +2606,9 @@
         "verdictColor": "#4ADE80",
         "fireCloud": {
           "predicted": 5,
-          "peakScore": 8,
-          "avgScore": 6.0,
-          "peakOffsetMin": 10,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
           "color": "#4ADE80"
@@ -2635,12 +2635,12 @@
         "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 10,
-          "peakScore": 46,
-          "avgScore": 19.6,
-          "peakOffsetMin": 20,
-          "verdict": "MISMATCH",
-          "verdictBadge": "⚠️ 出現偏差需校準",
-          "color": "#F87171"
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
         },
         "beauty": {
           "predicted": 83,
@@ -2693,8 +2693,8 @@
         "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 43,
-          "peakScore": 11,
-          "avgScore": 6.2,
+          "peakScore": 10,
+          "avgScore": 6.0,
           "peakOffsetMin": 30,
           "verdict": "MISMATCH",
           "verdictBadge": "⚠️ 出現偏差需校準",
@@ -2721,7 +2721,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 10% ／ 低空 20%。",
-      "modelPerformance": "🔥 火燒雲：預報 51 分，實測平均 11.2 分、峰值 30 分（T+20，峰值誤差 21 分）。🌅 天空美感：預報 53 分，實測平均 32.9 分、峰值 62 分（T+20，峰值誤差 9 分）。"
+      "modelPerformance": "🔥 火燒雲：預報 51 分，實測平均 9.8 分、峰值 25 分（T+20，峰值誤差 26 分）。🌅 天空美感：預報 53 分，實測平均 32.9 分、峰值 62 分（T+20，峰值誤差 9 分）。"
     }
   },
   {
@@ -2871,8 +2871,8 @@
       "captureStatus": "no_locked_prediction",
       "fireCloud": {
         "predicted": null,
-        "peakScore": 10,
-        "avgScore": 6.0,
+        "peakScore": 6,
+        "avgScore": 5.2,
         "peakOffsetMin": 20,
         "verdict": "PENDING",
         "verdictBadge": "⏳ 無法比對",
@@ -2901,8 +2901,8 @@
         "verdictColor": "#94A3B8",
         "fireCloud": {
           "predicted": null,
-          "peakScore": 10,
-          "avgScore": 6.0,
+          "peakScore": 6,
+          "avgScore": 5.2,
           "peakOffsetMin": 20,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -2930,8 +2930,8 @@
         "verdictColor": "#94A3B8",
         "fireCloud": {
           "predicted": null,
-          "peakScore": 49,
-          "avgScore": 19.4,
+          "peakScore": 41,
+          "avgScore": 16.6,
           "peakOffsetMin": 10,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
@@ -3017,9 +3017,9 @@
         "verdictColor": "#94A3B8",
         "fireCloud": {
           "predicted": null,
-          "peakScore": 7,
-          "avgScore": 5.4,
-          "peakOffsetMin": 40,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
           "color": "#94A3B8"
@@ -3046,9 +3046,9 @@
         "verdictColor": "#94A3B8",
         "fireCloud": {
           "predicted": null,
-          "peakScore": 9,
-          "avgScore": 6.2,
-          "peakOffsetMin": 30,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
           "verdict": "PENDING",
           "verdictBadge": "⏳ 無法比對",
           "color": "#94A3B8"
@@ -3074,7 +3074,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "本場預報雲量細項未隨鎖定檔存下。",
-      "modelPerformance": "🔥 火燒雲：實測平均 6.0 分、峰值 10 分（T+20），本場無預報可比對。🌅 天空美感：實測平均 28.1 分、峰值 41 分（T+20），本場無預報可比對。"
+      "modelPerformance": "🔥 火燒雲：實測平均 5.2 分、峰值 6 分（T+20），本場無預報可比對。🌅 天空美感：實測平均 28.1 分、峰值 41 分（T+20），本場無預報可比對。"
     }
   },
   {
@@ -3107,8 +3107,8 @@
       "color": "#F87171",
       "fireCloud": {
         "predicted": 56,
-        "peakScore": 28,
-        "avgScore": 12.6,
+        "peakScore": 27,
+        "avgScore": 12.0,
         "peakOffsetMin": -20,
         "verdict": "MISMATCH",
         "verdictBadge": "⚠️ 出現偏差需校準",
@@ -3137,8 +3137,8 @@
         "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 56,
-          "peakScore": 28,
-          "avgScore": 12.6,
+          "peakScore": 27,
+          "avgScore": 12.0,
           "peakOffsetMin": -20,
           "verdict": "MISMATCH",
           "verdictBadge": "⚠️ 出現偏差需校準",
@@ -3194,7 +3194,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 26% ／ 低空 5%。",
-      "modelPerformance": "🔥 火燒雲：預報 56 分，實測平均 12.6 分、峰值 28 分（T-20，峰值誤差 28 分）。🌅 天空美感：預報 42 分，實測平均 20.3 分、峰值 43 分（T-20，峰值誤差 1 分）。"
+      "modelPerformance": "🔥 火燒雲：預報 56 分，實測平均 12.0 分、峰值 27 分（T-20，峰值誤差 29 分）。🌅 天空美感：預報 42 分，實測平均 20.3 分、峰值 43 分（T-20，峰值誤差 1 分）。"
     }
   },
   {
@@ -3286,12 +3286,12 @@
         "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 5,
-          "peakScore": 32,
-          "avgScore": 10.8,
+          "peakScore": 22,
+          "avgScore": 8.4,
           "peakOffsetMin": 20,
-          "verdict": "MISMATCH",
-          "verdictBadge": "⚠️ 出現偏差需校準",
-          "color": "#F87171"
+          "verdict": "SLIGHT_DEVIATION",
+          "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+          "color": "#FBBF24"
         },
         "beauty": {
           "predicted": 22,
@@ -3344,12 +3344,12 @@
         "verdictColor": "#FBBF24",
         "fireCloud": {
           "predicted": 10,
-          "peakScore": 25,
-          "avgScore": 12.4,
-          "peakOffsetMin": 20,
-          "verdict": "SLIGHT_DEVIATION",
-          "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-          "color": "#FBBF24"
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
         },
         "beauty": {
           "predicted": 67,
@@ -3374,8 +3374,8 @@
         "fireCloud": {
           "predicted": 10,
           "peakScore": 12,
-          "avgScore": 10.7,
-          "peakOffsetMin": 20,
+          "avgScore": 9.0,
+          "peakOffsetMin": 30,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
           "color": "#4ADE80"
@@ -3759,7 +3759,7 @@
         "fireCloud": {
           "predicted": 19,
           "peakScore": 12,
-          "avgScore": 8.2,
+          "avgScore": 6.4,
           "peakOffsetMin": 30,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -3819,9 +3819,9 @@
       "color": "#F87171",
       "fireCloud": {
         "predicted": 10,
-        "peakScore": 7,
-        "avgScore": 5.4,
-        "peakOffsetMin": 30,
+        "peakScore": 5,
+        "avgScore": 5.0,
+        "peakOffsetMin": 0,
         "verdict": "EXACT_MATCH",
         "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
         "color": "#4ADE80"
@@ -3849,9 +3849,9 @@
         "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 10,
-          "peakScore": 7,
-          "avgScore": 5.4,
-          "peakOffsetMin": 30,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
           "color": "#4ADE80"
@@ -3936,9 +3936,9 @@
         "verdictColor": "#4ADE80",
         "fireCloud": {
           "predicted": 10,
-          "peakScore": 13,
-          "avgScore": 7.0,
-          "peakOffsetMin": 20,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
           "color": "#4ADE80"
@@ -3965,9 +3965,9 @@
         "verdictColor": "#4ADE80",
         "fireCloud": {
           "predicted": 10,
-          "peakScore": 8,
-          "avgScore": 6.2,
-          "peakOffsetMin": 20,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
           "color": "#4ADE80"
@@ -3994,9 +3994,9 @@
         "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 35,
-          "peakScore": 10,
-          "avgScore": 6.4,
-          "peakOffsetMin": 30,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
           "verdict": "MISMATCH",
           "verdictBadge": "⚠️ 出現偏差需校準",
           "color": "#F87171"
@@ -4022,7 +4022,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 2% ／ 低空 5%。",
-      "modelPerformance": "🔥 火燒雲：預報 10 分，實測平均 5.4 分、峰值 7 分（T+30，峰值誤差 3 分）。🌅 天空美感：預報 40 分，實測平均 22.2 分、峰值 17 分（T+0，峰值誤差 23 分）。"
+      "modelPerformance": "🔥 火燒雲：預報 10 分，實測平均 5.0 分、峰值 5 分（峰值誤差 5 分）。🌅 天空美感：預報 40 分，實測平均 22.2 分、峰值 17 分（T+0，峰值誤差 23 分）。"
     }
   },
   {
@@ -4175,9 +4175,9 @@
       "color": "#FBBF24",
       "fireCloud": {
         "predicted": 5,
-        "peakScore": 7,
-        "avgScore": 5.4,
-        "peakOffsetMin": 20,
+        "peakScore": 5,
+        "avgScore": 5.0,
+        "peakOffsetMin": 0,
         "verdict": "EXACT_MATCH",
         "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
         "color": "#4ADE80"
@@ -4205,9 +4205,9 @@
         "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 5,
-          "peakScore": 7,
-          "avgScore": 5.4,
-          "peakOffsetMin": 20,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
           "color": "#4ADE80"
@@ -4292,9 +4292,9 @@
         "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 5,
-          "peakScore": 9,
-          "avgScore": 6.0,
-          "peakOffsetMin": 10,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
           "color": "#4ADE80"
@@ -4321,8 +4321,8 @@
         "verdictColor": "#4ADE80",
         "fireCloud": {
           "predicted": 5,
-          "peakScore": 13,
-          "avgScore": 7.6,
+          "peakScore": 11,
+          "avgScore": 6.8,
           "peakOffsetMin": 20,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -4350,8 +4350,8 @@
         "verdictColor": "#FBBF24",
         "fireCloud": {
           "predicted": 5,
-          "peakScore": 9,
-          "avgScore": 6.2,
+          "peakScore": 7,
+          "avgScore": 5.4,
           "peakOffsetMin": 20,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -4378,7 +4378,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 29% ／ 低空 50%。",
-      "modelPerformance": "🔥 火燒雲：預報 5 分，實測平均 5.4 分、峰值 7 分（T+20，峰值誤差 2 分）。🌅 天空美感：預報 63 分，實測平均 14.7 分、峰值 23 分（T+20，峰值誤差 40 分）。"
+      "modelPerformance": "🔥 火燒雲：預報 5 分，實測平均 5.0 分、峰值 5 分（峰值誤差 0 分）。🌅 天空美感：預報 63 分，實測平均 14.7 分、峰值 23 分（T+20，峰值誤差 40 分）。"
     }
   },
   {
@@ -4531,9 +4531,9 @@
       "color": "#4ADE80",
       "fireCloud": {
         "predicted": 31,
-        "peakScore": 8,
-        "avgScore": 5.6,
-        "peakOffsetMin": 20,
+        "peakScore": 5,
+        "avgScore": 5.0,
+        "peakOffsetMin": 0,
         "verdict": "MISMATCH",
         "verdictBadge": "⚠️ 出現偏差需校準",
         "color": "#F87171"
@@ -4561,9 +4561,9 @@
         "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 31,
-          "peakScore": 8,
-          "avgScore": 5.6,
-          "peakOffsetMin": 20,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
           "verdict": "MISMATCH",
           "verdictBadge": "⚠️ 出現偏差需校準",
           "color": "#F87171"
@@ -4590,12 +4590,12 @@
         "verdictColor": "#4ADE80",
         "fireCloud": {
           "predicted": 36,
-          "peakScore": 36,
-          "avgScore": 12.4,
-          "peakOffsetMin": 20,
-          "verdict": "EXACT_MATCH",
-          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
-          "color": "#4ADE80"
+          "peakScore": 10,
+          "avgScore": 6.0,
+          "peakOffsetMin": 10,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
         },
         "beauty": {
           "predicted": 58,
@@ -4648,12 +4648,12 @@
         "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 5,
-          "peakScore": 34,
-          "avgScore": 14.4,
-          "peakOffsetMin": 10,
-          "verdict": "MISMATCH",
-          "verdictBadge": "⚠️ 出現偏差需校準",
-          "color": "#F87171"
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "EXACT_MATCH",
+          "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+          "color": "#4ADE80"
         },
         "beauty": {
           "predicted": 89,
@@ -4706,12 +4706,12 @@
         "verdictColor": "#FBBF24",
         "fireCloud": {
           "predicted": 35,
-          "peakScore": 24,
-          "avgScore": 10.8,
+          "peakScore": 9,
+          "avgScore": 5.8,
           "peakOffsetMin": 20,
-          "verdict": "SLIGHT_DEVIATION",
-          "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-          "color": "#FBBF24"
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
         },
         "beauty": {
           "predicted": 32,
@@ -4734,7 +4734,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 10% ／ 中空 24% ／ 低空 24%。",
-      "modelPerformance": "🔥 火燒雲：預報 31 分，實測平均 5.6 分、峰值 8 分（T+20，峰值誤差 23 分）。🌅 天空美感：預報 59 分，實測平均 19.3 分、峰值 36 分（T+20，峰值誤差 23 分）。"
+      "modelPerformance": "🔥 火燒雲：預報 31 分，實測平均 5.0 分、峰值 5 分（峰值誤差 26 分）。🌅 天空美感：預報 59 分，實測平均 19.3 分、峰值 36 分（T+20，峰值誤差 23 分）。"
     }
   },
   {
@@ -5062,12 +5062,12 @@
         "verdictColor": "#FBBF24",
         "fireCloud": {
           "predicted": 28,
-          "peakScore": 11,
-          "avgScore": 6.4,
-          "peakOffsetMin": 20,
-          "verdict": "SLIGHT_DEVIATION",
-          "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-          "color": "#FBBF24"
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
+          "verdict": "MISMATCH",
+          "verdictBadge": "⚠️ 出現偏差需校準",
+          "color": "#F87171"
         },
         "beauty": {
           "predicted": 30,
@@ -5243,9 +5243,9 @@
       "color": "#F87171",
       "fireCloud": {
         "predicted": 10,
-        "peakScore": 6,
-        "avgScore": 5.2,
-        "peakOffsetMin": 20,
+        "peakScore": 5,
+        "avgScore": 5.0,
+        "peakOffsetMin": 0,
         "verdict": "EXACT_MATCH",
         "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
         "color": "#4ADE80"
@@ -5273,9 +5273,9 @@
         "verdictColor": "#F87171",
         "fireCloud": {
           "predicted": 10,
-          "peakScore": 6,
-          "avgScore": 5.2,
-          "peakOffsetMin": 20,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
           "color": "#4ADE80"
@@ -5331,9 +5331,9 @@
         "verdictColor": "#FBBF24",
         "fireCloud": {
           "predicted": 10,
-          "peakScore": 10,
-          "avgScore": 6.8,
-          "peakOffsetMin": 20,
+          "peakScore": 5,
+          "avgScore": 5.0,
+          "peakOffsetMin": 0,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
           "color": "#4ADE80"
@@ -5446,7 +5446,7 @@
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 1% ／ 低空 4%。",
-      "modelPerformance": "🔥 火燒雲：預報 10 分，實測平均 5.2 分、峰值 6 分（T+20，峰值誤差 4 分）。🌅 天空美感：預報 56 分，實測平均 30.8 分、峰值 36 分（T+20，峰值誤差 20 分）。"
+      "modelPerformance": "🔥 火燒雲：預報 10 分，實測平均 5.0 分、峰值 5 分（峰值誤差 5 分）。🌅 天空美感：預報 56 分，實測平均 30.8 分、峰值 36 分（T+20，峰值誤差 20 分）。"
     }
   },
   {
