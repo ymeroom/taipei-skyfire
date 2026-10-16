@@ -1,5 +1,122 @@
 [
   {
+    "id": "report-2026-10-17-sunrise",
+    "date": "2026-10-17",
+    "session": "sunrise",
+    "sessionLabel": "清晨日出",
+    "publishedAt": "2026-10-17T07:40:56.166250",
+    "publishTimeLabel": "09:00 定時發布",
+    "title": "2026-10-17 清晨日出實況觀測 vs. 模型預報總結",
+    "prediction": {
+      "score": 48,
+      "rating": "局部霞光",
+      "color": "#E5A50A",
+      "highCloud": 82,
+      "midCloud": 1,
+      "lowCloud": 32,
+      "summary": "局部泛紅・唯美溫潤。地平線或天際線邊緣可見金橘色光芒。",
+      "beautyScore": 41
+    },
+    "groundTruth": {
+      "score": null,
+      "rating": null,
+      "verdict": "PENDING",
+      "verdictBadge": "⏳ 實測待驗證",
+      "color": "#94A3B8",
+      "captureStatus": "capture_unavailable",
+      "fireCloud": {
+        "predicted": 48,
+        "peakScore": null,
+        "avgScore": null,
+        "peakOffsetMin": null,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      },
+      "beauty": {
+        "predicted": 41,
+        "peakScore": null,
+        "avgScore": null,
+        "peakOffsetMin": null,
+        "verdict": "PENDING",
+        "verdictBadge": "⏳ 無法比對",
+        "color": "#94A3B8"
+      }
+    },
+    "stations": [
+      {
+        "name": "新北中和烘爐地",
+        "icon": "⛰️",
+        "tag": "新北觀光・雙北盆地俯瞰晨光",
+        "phasePrep": "—",
+        "phasePeak": "9 張縮時影格全數擷取失敗，本場無實測資料",
+        "phasePost": "—",
+        "forecast": "48 分（低雲 32%）",
+        "verdict": "⏳ 實測待驗證",
+        "verdictColor": "#94A3B8",
+        "fireCloud": {
+          "predicted": 48,
+          "peakScore": null,
+          "avgScore": null,
+          "peakOffsetMin": null,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        },
+        "beauty": {
+          "predicted": 41,
+          "peakScore": null,
+          "avgScore": null,
+          "peakOffsetMin": null,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
+      },
+      {
+        "name": "基隆外木山濱海",
+        "icon": "🌊",
+        "tag": "國海院・太平洋日出第一線",
+        "phasePrep": "—",
+        "phasePeak": "9 張縮時影格全數擷取失敗，本場無實測資料",
+        "phasePost": "—",
+        "forecast": "42 分（低雲 20%）",
+        "verdict": "⏳ 實測待驗證",
+        "verdictColor": "#94A3B8",
+        "fireCloud": {
+          "predicted": 42,
+          "peakScore": null,
+          "avgScore": null,
+          "peakOffsetMin": null,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        },
+        "beauty": {
+          "predicted": 20,
+          "peakScore": null,
+          "avgScore": null,
+          "peakOffsetMin": null,
+          "verdict": "PENDING",
+          "verdictBadge": "⏳ 無法比對",
+          "color": "#94A3B8"
+        }
+      }
+    ],
+    "stationSummary": {
+      "verified": 0,
+      "pending": 2,
+      "bestStation": null,
+      "bestScore": null,
+      "worstError": null,
+      "meanError": null
+    },
+    "summaryAnalysis": {
+      "atmosphericReason": "預報雲量：高空 82% ／ 中空 1% ／ 低空 32%。",
+      "modelPerformance": "🔥 火燒雲：本場無實測。🌅 天空美感：本場無實測。"
+    }
+  },
+  {
     "id": "report-2026-10-16-sunset",
     "date": "2026-10-16",
     "session": "sunset",
