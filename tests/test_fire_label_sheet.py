@@ -48,6 +48,13 @@ assert [r["y"] for r in rows] == [0, 1, 0, 0], rows
 assert rows[1]["src"] == "auto:2026-10-17-sunset#2" and rows[1]["split"] == "dev", rows
 print("✅ 只列有燒的編號，其他自動記為不算")
 
+burned = [dict(bundle="2026-10-17-sunset-1945", station="tamsui", y=1),
+          dict(bundle="2026-10-17-sunset-2100", station="tamsui", y=2),   # 同一場另一份 bundle
+          dict(bundle="2026-10-17-sunset-2100", station="bali", y=0),
+          dict(bundle="2026-10-18-sunset-2100", station="tamsui", y=1)]
+assert ls.burn_events(burned) == 2, burned
+print("✅ 有燒的場數：同一場次同一站的多張只算一場")
+
 for bad in (dict(partial=[5], full=[]), dict(partial=[1], full=[1])):
     try:
         ls.apply_labels(meta, **bad)

@@ -245,7 +245,15 @@ def cmd_label(key, partial, full):
     with open(meta_path, "w", encoding="utf-8") as f:
         json.dump(meta, f, ensure_ascii=False, indent=1)
     total_pos = sum(r["y"] > 0 for r in existing + rows)
-    print(f"{key}: 記下 {len(rows)} 張 (有燒 {sum(r['y'] > 0 for r in rows)})；累計有燒 {total_pos} 張")
+    print(f"{key}: 記下 {len(rows)} 張 (有燒 {sum(r['y'] > 0 for r in rows)})；"
+          f"累計有燒 {total_pos} 張、{burn_events(existing + rows)} 場")
+
+
+def burn_events(rows):
+    """有燒的「場」數 = 有任何一張有燒的 (場次, 站)。同一站連續幾張 (+10/+20/+30)
+    是同一次燒、高度相關，v3 的定案門檻要算場數不算張數；切 dev/驗證也要整個
+    場次一起切，不能同一場的相鄰影格分到兩邊。"""
+    return len({(r["bundle"].rsplit("-", 1)[0], r["station"]) for r in rows if r["y"] > 0})
 
 
 def main():
