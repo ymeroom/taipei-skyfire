@@ -84,6 +84,7 @@ jobs:
           "$PY" tests/test_daily_briefing.py || echo "::warning::日報產生器／校準守門測試未通過"
           "$PY" tests/test_timelapse_aggregation.py || echo "::warning::縮時聚合 (平均分/峰值分) 測試未通過"
           "$PY" tests/test_fire_cloud.py || echo "::warning::火燒雲分評分器測試未通過"
+          "$PY" tests/test_fire_label_sheet.py || echo "::warning::火燒雲人工標註表測試未通過"
 
       - name: 🌅 解析本次天文驗證時段
         id: session
@@ -187,3 +188,14 @@ jobs:
           git config --local user.name "GitHub Action [SkyFire Bot]"
           git add data/
           git diff --quiet && git diff --staged --quiet || (git commit -m "chore(validation): record live sky snapshot and prediction [skip ci]" && git push)
+
+      # 火燒雲人工標註表 (見 scripts/fire_label_sheet.py)：累積 v3 評分器需要的
+      # 標註。只在自架 runner 上跑 (影格在本機)，產出放 checkout 外、不進 git；
+      # 放在提交之後，失敗或變慢都不影響驗證資料提交。
+      - name: 🏷️ 產生火燒雲人工標註表
+        if: always() && runner.environment == 'self-hosted'
+        continue-on-error: true
+        env:
+          SKYFIRE_LABEL_DIR: "C:/Users/ymero/skyfire-frames"
+        run: |
+          "$PYTHON_BIN" scripts/fire_label_sheet.py build "${{ steps.session.outputs.value }}"
