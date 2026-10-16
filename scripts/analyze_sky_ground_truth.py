@@ -275,8 +275,24 @@ def classify_score(score):
 # 這裡改看「紋理」：晴空漸層沿著水平方向幾乎不變，雲會在水平方向造成亮度起伏
 # 與邊緣。紋理 ∧ 暖色 ∧ 夠亮 = 被染紅的雲；暗的雲剪影不算 (沒有被照亮)。
 # 門檻用 2026-09-13~26 的 888 張縮時影格逐張目視校對過：晴天傍晚落在 0-7%，
-# 9/13 淡水、9/16 貓空這種整片雲燒起來的畫面落在 22-27%。
+# 9/13 淡水、9/16 貓空這種整片雲燒起來的畫面落在 22-27% (這批影格已過保留期刪除，
+# 無法重驗)。
+#
+# v2 (2026-10-14)：暖色只認紅橘 (≤22° 或 ≥330°)，金黃色不算。v1 認 ≤50° 與 ≥300°，
+# 「暗雲剪影 + 雲縫透出的金黃色暮光」整片被當成染紅的雲：10/9 貓空 64 分、10/9
+# 八里 46 分、10/10 八里 45 分，使用者看了都判「不算」，分數卻比真正局部燒起來的
+# 10/7、10/8 貓空 (約 30 分) 還高。金黃是天空本身的暮光；雲被地平線下的太陽從
+# 底下照亮時，光線穿過的大氣更厚，只剩紅光。用使用者標註的 25 張影格比對
+# (存在 C:/Users/ymero/skyfire-frames，label_batch1.json)：
+#   - 整片燒 (10/10 淡水 +20) 100 → 80；局部燒 (10/7、10/8 貓空 +20、烘爐地日出前) 幾乎不變
+#   - 暗雲 + 金黃縫 (八里、10/2 貓空) 34-46 → 5
+#   - 已知仍分不開：紅色系的誤判 (10/8 貓空 +10 41 分、10/9 大稻埕粉紅雲 25 分)，
+#     以及金黃色的局部燒 (10/10 八里 +10，19 → 5)
+# 改了遮罩就要升 FIRE_CLOUD_SCORER_VERSION：校準只用目前版本量的紀錄。
 # ---------------------------------------------------------------------------
+FIRE_CLOUD_SCORER_VERSION = 2
+FIRE_CLOUD_RED_HUE_MAX = 22       # 紅橘上限；金黃色 (約 30-50°) 的雲縫暮光不算
+FIRE_CLOUD_RED_HUE_MIN = 330      # 深紅／洋紅下限
 FIRE_CLOUD_WIDTH = 320
 
 # ---------------------------------------------------------------------------
@@ -391,8 +407,9 @@ def analyze_fire_cloud(img, sky_roi_bottom=None):
     hgrad = np.abs((p[:-2, 2:] + 2 * p[1:-1, 2:] + p[2:, 2:]) - (p[:-2, :-2] + 2 * p[1:-1, :-2] + p[2:, :-2]))
     textured = inner & ((np.abs(v - background) > FIRE_CLOUD_DEVIATION) | (hgrad > FIRE_CLOUD_HGRAD))
 
-    warm = ((h <= 50) | (h >= 300)) & (s >= 0.30) & (v >= 0.30)
-    lit_pct = 100.0 * float((textured & warm).sum()) / v.size
+    red = (((h <= FIRE_CLOUD_RED_HUE_MAX) | (h >= FIRE_CLOUD_RED_HUE_MIN))
+           & (s >= 0.30) & (v >= 0.30))
+    lit_pct = 100.0 * float((textured & red).sum()) / v.size
     score = int(np.clip(round(lit_pct * FIRE_CLOUD_SCORE_PER_PCT), 5, 100))
     return {**base, "score": score, "litCloudPct": round(lit_pct, 1), "readable": True, "reason": None}
 

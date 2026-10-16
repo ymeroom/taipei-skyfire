@@ -71,7 +71,10 @@ print(f"✅ calculate_score 與 JS 引擎在 {len(grid)} 個輸入點上完全�
 
 # 4. 校準目標是火燒雲實測峰值，不是美感分 (暖色峰值)
 rec_dual = {"date": "2026-09-28", "prediction": base, "verification": {
-    "avgScore": 65.4, "peakScore": 100, "fireCloud": {"avgScore": 5.6, "peakScore": 5}}}
+    "avgScore": 65.4, "peakScore": 100,
+    "fireCloud": {"avgScore": 5.6, "peakScore": 5, "scorerVersion": ac.FIRE_CLOUD_SCORER_VERSION}}}
+rec_fire_v1 = {"date": "2026-09-27", "prediction": base, "verification": {
+    "avgScore": 70, "peakScore": 95, "fireCloud": {"avgScore": 40, "peakScore": 64}}}
 rec_old = {"date": "2026-09-20", "prediction": base, "verification": {"avgScore": 80, "peakScore": 95}}
 rec_legacy = {"date": "2026-09-05", "prediction": base, "verification": {"groundTruthScore": 90}}
 rec_nofire = {"date": "2026-09-28", "prediction": base, "verification": {
@@ -80,7 +83,14 @@ samples = ac.expand_to_calibration_samples([rec_dual, rec_old, rec_legacy, rec_n
 assert [s["verification"]["groundTruthScore"] for s in samples] == [5], \
     "只用 fireCloud.peakScore；沒有火燒雲實測的紀錄 (舊版暖色分) 不能拿美感分頂替"
 assert samples[0]["date"] == "2026-09-28", "樣本要帶日期，寫入校準歷史時用得到"
-print("✅ 校準樣本只取火燒雲實測峰值，舊版暖色分紀錄排除")
+print("✅ 校準樣本只取目前版本的火燒雲實測峰值，舊版暖色分與 v1 火燒雲分排除")
+
+spec_gt = importlib.util.spec_from_file_location(
+    "analyze_sky_ground_truth", os.path.join(HERE, "..", "scripts", "analyze_sky_ground_truth.py"))
+gt = importlib.util.module_from_spec(spec_gt)
+spec_gt.loader.exec_module(gt)
+assert ac.FIRE_CLOUD_SCORER_VERSION == gt.FIRE_CLOUD_SCORER_VERSION, "校準與評分器的火燒雲版本號要同步"
+print("✅ 校準與評分器的火燒雲版本號一致")
 
 # 5. 真的有改進時也要能寫檔 (樣本曾經沒帶 date，一改進就 KeyError)
 tmp = tempfile.mkdtemp()
@@ -91,7 +101,9 @@ try:
     cloudy = {"highCloud": 45, "midCloud": 35, "lowCloud": 50, "humidity": 70, "precipProb": 0, "visibilityKm": 20}
     target = ac.calculate_score(cloudy, {**weights, "lowCloudSlope": max(0.5, weights["lowCloudSlope"] - 0.15)})
     synthetic = [{"date": f"2026-09-{d:02d}", "prediction": cloudy,
-                  "verification": {"fireCloud": {"avgScore": target, "peakScore": target}}} for d in (1, 2, 3)]
+                  "verification": {"fireCloud": {"avgScore": target, "peakScore": target,
+                                                 "scorerVersion": ac.FIRE_CLOUD_SCORER_VERSION}}}
+                 for d in (1, 2, 3)]
     with open(tmp_records, "w", encoding="utf-8") as f:
         json.dump(synthetic, f)
     ac.run_calibration(tmp_records, tmp_params)

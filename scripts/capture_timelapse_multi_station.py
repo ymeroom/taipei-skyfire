@@ -53,6 +53,7 @@ REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, os.path.dirname(__file__))
 from analyze_sky_ground_truth import (  # noqa: E402
     BEAUTY_SCORER_VERSION,
+    FIRE_CLOUD_SCORER_VERSION,
     analyze_image_optics,
     get_twilight_window,
     fetch_hourly_weather_series,
@@ -750,6 +751,7 @@ def add_dual_score_verdicts(record, fire_aggregate):
         "peakOffsetMin": fire_aggregate["peakOffsetMin"],
         "okFrameCount": fire_aggregate["okFrameCount"],
         "unreadableFrameCount": fire_aggregate["unreadableFrameCount"],
+        "scorerVersion": FIRE_CLOUD_SCORER_VERSION,
         **peak_verdict(pred.get("score"), fire_aggregate["peakScore"]),
     }
     beauty = peak_verdict(pred.get("beautyScore"), v.get("peakScore"))

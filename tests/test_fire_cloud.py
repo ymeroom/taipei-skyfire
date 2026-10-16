@@ -57,6 +57,14 @@ lit = score(add_clouds(twilight_gradient(), [255, 90, 60], 60, 150))
 assert lit["score"] >= 60, lit
 print(f"✅ 被照亮的暖色雲 → {lit['score']} 分 (染紅雲 {lit['litCloudPct']}%)")
 
+golden = score(add_clouds(twilight_gradient(), [250, 170, 40], 60, 150))
+assert golden["score"] <= 15, golden
+print(f"✅ 金黃色雲縫暮光 (v1 會當成染紅的雲) → {golden['score']} 分")
+
+magenta = score(add_clouds(twilight_gradient(), [240, 60, 130], 60, 150))
+assert magenta["score"] >= 60, magenta
+print(f"✅ 洋紅色被照亮的雲 (10/10 淡水那種) → {magenta['score']} 分")
+
 dark = score(add_clouds(twilight_gradient(), [35, 30, 40], 60, 150))
 assert dark["score"] <= 15, dark
 print(f"✅ 暗灰雲剪影 (沒被照亮) → {dark['score']} 分")
@@ -73,5 +81,15 @@ print("✅ 黑白夜視畫面 → 無法判讀 (score=None)，不冒充 0 分")
 default_roi = gt.analyze_fire_cloud(Image.fromarray(twilight_gradient().astype(np.uint8)), None)
 assert default_roi["skyRoiBottom"] == gt.FIRE_CLOUD_DEFAULT_ROI_BOTTOM
 print("✅ 未設定 skyRoiBottom 時退回預設天空範圍")
+
+spec_tl = importlib.util.spec_from_file_location(
+    "capture_timelapse_multi_station", os.path.join(HERE, "..", "scripts", "capture_timelapse_multi_station.py"))
+tl = importlib.util.module_from_spec(spec_tl)
+spec_tl.loader.exec_module(tl)
+rec = {"prediction": {"score": 10}, "verification": {"peakScore": 40}}
+tl.add_dual_score_verdicts(rec, {"avgScore": 5, "peakScore": 5, "peakOffsetMin": 0,
+                                 "okFrameCount": 9, "unreadableFrameCount": 0})
+assert rec["verification"]["fireCloud"]["scorerVersion"] == gt.FIRE_CLOUD_SCORER_VERSION, rec
+print("✅ 驗證紀錄的 fireCloud 帶評分器版本號 (校準只用目前版本)")
 
 print("🎉 火燒雲分評分器測試全數 PASS!\n")

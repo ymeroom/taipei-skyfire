@@ -128,6 +128,10 @@ def has_usable_cloud_inputs(prediction):
     return True
 
 
+# 與 scripts/analyze_sky_ground_truth.py 的 FIRE_CLOUD_SCORER_VERSION 一致，改遮罩時兩邊一起升
+FIRE_CLOUD_SCORER_VERSION = 2
+
+
 def expand_to_calibration_samples(records):
     """每筆紀錄取 0~1 個校準樣本：火燒雲實測峰值 verification.fireCloud.peakScore。
 
@@ -136,11 +140,13 @@ def expand_to_calibration_samples(records):
     也給高分)，拿來調火燒雲權重會把引擎往美感分拉；沒有 fireCloud 的舊紀錄
     直接排除，不拿暖色分頂替。只用峰值：日報判定看峰值，而 2026-09-29 之前的
     fireCloud.avgScore 把日落前被照亮的雲也算進去了，定義跟現在不同。
+    也只用目前評分器版本量的紀錄：v1 把暗雲縫裡的金黃色暮光當成染紅的雲
+    (2026-10-08~10 貓空、八里 45-64 分)，影格過期無法重算的舊紀錄不拿來校準。
     """
     samples = []
     for r in records:
         fire = (r.get('verification') or {}).get('fireCloud') or {}
-        if fire.get('peakScore') is None:
+        if fire.get('peakScore') is None or fire.get('scorerVersion') != FIRE_CLOUD_SCORER_VERSION:
             continue
         samples.append({'date': r.get('date'), 'prediction': r.get('prediction') or {},
                         'verification': {'groundTruthScore': fire['peakScore']}})
