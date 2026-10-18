@@ -110,7 +110,7 @@
         "icon": "🏮",
         "tag": "新北觀光 4K 直播・山海交界落日",
         "phasePrep": "—",
-        "phasePeak": "平均 33.7 分・峰值 72 分（T+20）",
+        "phasePeak": "平均 33.9 分・峰值 78 分（T+20）",
         "phasePost": "—",
         "forecast": "10 分（低雲 13%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
@@ -126,8 +126,8 @@
         },
         "beauty": {
           "predicted": 61,
-          "peakScore": 72,
-          "avgScore": 33.7,
+          "peakScore": 78,
+          "avgScore": 33.9,
           "peakOffsetMin": 20,
           "verdict": "SLIGHT_DEVIATION",
           "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
@@ -139,7 +139,7 @@
         "icon": "🌊",
         "tag": "新北觀光 4K 直播・淡江大橋與台灣海峽晚霞",
         "phasePrep": "—",
-        "phasePeak": "平均 48.2 分・峰值 86 分（T+20）",
+        "phasePeak": "平均 48.0 分・峰值 86 分（T+20）",
         "phasePost": "—",
         "forecast": "10 分（低雲 4%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -156,7 +156,7 @@
         "beauty": {
           "predicted": 84,
           "peakScore": 86,
-          "avgScore": 48.2,
+          "avgScore": 48.0,
           "peakOffsetMin": 20,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -228,7 +228,7 @@
       "bestStation": "tamsui",
       "bestScore": 100,
       "worstError": 90,
-      "meanError": 65.6
+      "meanError": 66.8
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 2%。",
