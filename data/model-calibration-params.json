@@ -1,12 +1,12 @@
 {
   "version": "2.5.1-adaptive",
   "lastCalibratedAt": "2026-08-17T14:40:00+08:00",
-  "calibrationCount": 6,
-  "sampleSize": 101,
+  "calibrationCount": 7,
+  "sampleSize": 117,
   "metrics": {
-    "initialMAE": 10.61,
-    "calibratedMAE": 10.55,
-    "improvementPct": 0.6
+    "initialMAE": 11.99,
+    "calibratedMAE": 11.93,
+    "improvementPct": 0.5
   },
   "weights": {
     "highCloudMax": 20,
@@ -14,12 +14,18 @@
     "midCloudMax": 15,
     "midCloudOpt": 42,
     "synergyBonus": 5,
-    "lowCloudSlope": 1.1,
+    "lowCloudSlope": 1.2,
     "horizonMax": 30,
     "visMax": 15,
     "moistureMax": 8
   },
   "history": [
+    {
+      "date": "2026-10-18",
+      "maeBefore": 11.99,
+      "maeAfter": 11.93,
+      "adjustment": "基於 117 場觀測紀錄微調高低雲光學權重，MAE 降低 0.06 分"
+    },
     {
       "date": "2026-10-16",
       "maeBefore": 10.61,
@@ -60,55 +66,55 @@
   "beautyModel": {
     "input": "clearSkyUncappedScore",
     "target": "verification.peakScore",
-    "fittedAt": "2026-10-16T12:32:50.997Z",
+    "fittedAt": "2026-10-18T16:00:18.758Z",
     "stations": {
-      "tamsui": {
-        "slope": 0.186,
-        "intercept": 77.111,
-        "n": 27,
-        "mae": 12.917
-      },
-      "dadaocheng": {
-        "slope": 0.912,
-        "intercept": 8.673,
-        "n": 27,
-        "mae": 11.902
-      },
-      "waimushan": {
-        "slope": 0.103,
-        "intercept": 15.582,
-        "n": 22,
-        "mae": 6.212
-      },
-      "maokong": {
-        "slope": 0.654,
-        "intercept": 50.617,
-        "n": 26,
-        "mae": 17.746
+      "jiufen": {
+        "slope": 0.949,
+        "intercept": 17.932,
+        "n": 25,
+        "mae": 15.939
       },
       "bali": {
-        "slope": 0.417,
-        "intercept": 61.588,
-        "n": 26,
-        "mae": 8.341
+        "slope": 0.427,
+        "intercept": 61.39,
+        "n": 28,
+        "mae": 7.915
       },
-      "hongludi": {
-        "slope": 0.186,
-        "intercept": 31.699,
-        "n": 26,
-        "mae": 14.576
+      "tamsui": {
+        "slope": 0.221,
+        "intercept": 76.406,
+        "n": 29,
+        "mae": 12.31
       },
-      "jiufen": {
-        "slope": 0.884,
-        "intercept": 18.052,
-        "n": 23,
-        "mae": 15.513
+      "dadaocheng": {
+        "slope": 0.989,
+        "intercept": 6.419,
+        "n": 29,
+        "mae": 12.551
       },
       "xiangshan": {
-        "slope": 0.13,
-        "intercept": 30.221,
-        "n": 25,
-        "mae": 9.124
+        "slope": 0.138,
+        "intercept": 29.707,
+        "n": 28,
+        "mae": 8.622
+      },
+      "hongludi": {
+        "slope": 0.15,
+        "intercept": 33.898,
+        "n": 28,
+        "mae": 15.038
+      },
+      "waimushan": {
+        "slope": 0.104,
+        "intercept": 15.542,
+        "n": 24,
+        "mae": 6.019
+      },
+      "maokong": {
+        "slope": 0.603,
+        "intercept": 52.445,
+        "n": 27,
+        "mae": 17.614
       }
     }
   }
