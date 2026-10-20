@@ -44,17 +44,17 @@
       ]
     },
     "verification": {
-      "avgScore": 47.7,
-      "peakScore": 88,
+      "avgScore": 55.7,
+      "peakScore": 93,
       "peakOffsetMin": 20,
       "peakSide": "post-sunset",
-      "verifiedAt": "2026-10-20T11:50:45.082087+00:00",
+      "verifiedAt": "2026-10-20T13:01:48.249127+00:00",
       "beautyScorerVersion": 2,
       "status": "verified_completed",
-      "errorAvgAbsolute": 37.7,
+      "errorAvgAbsolute": 45.7,
       "verdictAvg": "MISMATCH",
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
-      "errorPeakAbsolute": 78,
+      "errorPeakAbsolute": 83,
       "verdictPeak": "MISMATCH",
       "verdictPeakBadge": "⚠️ 出現偏差需校準",
       "fireCloud": {
@@ -71,9 +71,9 @@
       },
       "beauty": {
         "predicted": 83,
-        "errorPeakAbsolute": 5,
-        "verdictPeak": "EXACT_MATCH",
-        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+        "errorPeakAbsolute": 10,
+        "verdictPeak": "SLIGHT_DEVIATION",
+        "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
       }
     }
   },
@@ -122,14 +122,14 @@
       ]
     },
     "verification": {
-      "avgScore": 39.7,
+      "avgScore": 39.0,
       "peakScore": 89,
       "peakOffsetMin": 20,
       "peakSide": "post-sunset",
-      "verifiedAt": "2026-10-20T11:50:45.080733+00:00",
+      "verifiedAt": "2026-10-20T13:01:48.248395+00:00",
       "beautyScorerVersion": 2,
       "status": "verified_completed",
-      "errorAvgAbsolute": 29.700000000000003,
+      "errorAvgAbsolute": 29.0,
       "verdictAvg": "MISMATCH",
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 79,
@@ -200,17 +200,17 @@
       ]
     },
     "verification": {
-      "avgScore": 48.0,
-      "peakScore": 91,
+      "avgScore": 47.7,
+      "peakScore": 90,
       "peakOffsetMin": 20,
       "peakSide": "post-sunset",
-      "verifiedAt": "2026-10-20T11:50:45.079205+00:00",
+      "verifiedAt": "2026-10-20T13:01:48.247700+00:00",
       "beautyScorerVersion": 2,
       "status": "verified_completed",
-      "errorAvgAbsolute": 38.0,
+      "errorAvgAbsolute": 37.7,
       "verdictAvg": "MISMATCH",
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
-      "errorPeakAbsolute": 81,
+      "errorPeakAbsolute": 80,
       "verdictPeak": "MISMATCH",
       "verdictPeakBadge": "⚠️ 出現偏差需校準",
       "fireCloud": {
@@ -227,7 +227,7 @@
       },
       "beauty": {
         "predicted": 79,
-        "errorPeakAbsolute": 12,
+        "errorPeakAbsolute": 11,
         "verdictPeak": "SLIGHT_DEVIATION",
         "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
       }
@@ -356,14 +356,14 @@
       ]
     },
     "verification": {
-      "avgScore": 36.0,
+      "avgScore": 35.9,
       "peakScore": 70,
       "peakOffsetMin": 20,
       "peakSide": "post-sunset",
-      "verifiedAt": "2026-10-20T11:50:45.075820+00:00",
+      "verifiedAt": "2026-10-20T13:01:48.246307+00:00",
       "beautyScorerVersion": 2,
       "status": "verified_completed",
-      "errorAvgAbsolute": 26.0,
+      "errorAvgAbsolute": 25.9,
       "verdictAvg": "MISMATCH",
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
       "errorPeakAbsolute": 60,
@@ -434,17 +434,17 @@
       ]
     },
     "verification": {
-      "avgScore": 14.4,
-      "peakScore": 17,
-      "peakOffsetMin": 20,
+      "avgScore": 14.6,
+      "peakScore": 16,
+      "peakOffsetMin": 0,
       "peakSide": "post-sunset",
-      "verifiedAt": "2026-10-20T11:50:45.074648+00:00",
+      "verifiedAt": "2026-10-20T13:01:48.245543+00:00",
       "beautyScorerVersion": 2,
       "status": "verified_completed",
-      "errorAvgAbsolute": 4.4,
+      "errorAvgAbsolute": 4.6,
       "verdictAvg": "EXACT_MATCH",
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
-      "errorPeakAbsolute": 7,
+      "errorPeakAbsolute": 6,
       "verdictPeak": "EXACT_MATCH",
       "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "fireCloud": {
@@ -461,7 +461,7 @@
       },
       "beauty": {
         "predicted": 37,
-        "errorPeakAbsolute": 20,
+        "errorPeakAbsolute": 21,
         "verdictPeak": "MISMATCH",
         "verdictPeakBadge": "⚠️ 出現偏差需校準"
       }
