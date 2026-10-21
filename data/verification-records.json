@@ -44,17 +44,17 @@
       ]
     },
     "verification": {
-      "avgScore": 20.8,
-      "peakScore": 24,
+      "avgScore": 18.7,
+      "peakScore": 26,
       "peakOffsetMin": -10,
       "peakSide": "pre-sunrise",
-      "verifiedAt": "2026-10-20T23:41:01.526550+00:00",
+      "verifiedAt": "2026-10-21T01:00:59.209657+00:00",
       "beautyScorerVersion": 2,
       "status": "verified_completed",
-      "errorAvgAbsolute": 10.8,
+      "errorAvgAbsolute": 8.7,
       "verdictAvg": "SLIGHT_DEVIATION",
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-      "errorPeakAbsolute": 14,
+      "errorPeakAbsolute": 16,
       "verdictPeak": "SLIGHT_DEVIATION",
       "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "fireCloud": {
@@ -71,7 +71,7 @@
       },
       "beauty": {
         "predicted": 40,
-        "errorPeakAbsolute": 16,
+        "errorPeakAbsolute": 14,
         "verdictPeak": "SLIGHT_DEVIATION",
         "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
       }
@@ -122,17 +122,17 @@
       ]
     },
     "verification": {
-      "avgScore": 19.2,
-      "peakScore": 24,
+      "avgScore": 19.6,
+      "peakScore": 28,
       "peakOffsetMin": 0,
       "peakSide": "pre-sunrise",
-      "verifiedAt": "2026-10-20T23:41:01.525760+00:00",
+      "verifiedAt": "2026-10-21T01:00:59.208903+00:00",
       "beautyScorerVersion": 2,
       "status": "verified_completed",
-      "errorAvgAbsolute": 9.2,
+      "errorAvgAbsolute": 9.600000000000001,
       "verdictAvg": "SLIGHT_DEVIATION",
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-      "errorPeakAbsolute": 14,
+      "errorPeakAbsolute": 18,
       "verdictPeak": "SLIGHT_DEVIATION",
       "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "fireCloud": {
@@ -149,9 +149,9 @@
       },
       "beauty": {
         "predicted": 18,
-        "errorPeakAbsolute": 6,
-        "verdictPeak": "EXACT_MATCH",
-        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+        "errorPeakAbsolute": 10,
+        "verdictPeak": "SLIGHT_DEVIATION",
+        "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
       }
     }
   },
