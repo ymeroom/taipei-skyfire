@@ -1,5 +1,91 @@
 [
   {
+    "id": "rec-2026-10-23-sunrise-hongludi",
+    "date": "2026-10-23",
+    "session": "sunrise",
+    "station": "hongludi",
+    "targetTime": "2026-10-22T21:56:59.822000+00:00",
+    "source": "烘爐地（縮時多影格）",
+    "prediction": null,
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 9,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 6.6,
+      "peakScore": 12,
+      "peakOffsetMin": -40,
+      "peakSide": "pre-sunrise",
+      "verifiedAt": "2026-10-22T23:41:04.475780+00:00",
+      "beautyScorerVersion": 2,
+      "status": "no_locked_prediction",
+      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": -40,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "scorerVersion": 2
+      }
+    }
+  },
+  {
+    "id": "rec-2026-10-23-sunrise-waimushan",
+    "date": "2026-10-23",
+    "session": "sunrise",
+    "station": "waimushan",
+    "targetTime": "2026-10-22T21:56:59.822000+00:00",
+    "source": "外木山（縮時多影格）",
+    "prediction": null,
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 0,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": null,
+      "peakScore": null,
+      "peakOffsetMin": null,
+      "peakSide": "pre-sunrise",
+      "verifiedAt": "2026-10-22T23:41:04.474965+00:00",
+      "beautyScorerVersion": 2,
+      "status": "capture_unavailable",
+      "reason": "9 張影格全數擷取失敗，本場次無實測資料",
+      "fireCloud": {
+        "avgScore": null,
+        "peakScore": null,
+        "peakOffsetMin": null,
+        "okFrameCount": 0,
+        "unreadableFrameCount": 0,
+        "scorerVersion": 2
+      }
+    }
+  },
+  {
     "id": "rec-2026-10-21-sunset-maokong",
     "date": "2026-10-21",
     "session": "sunset",
