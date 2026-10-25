@@ -139,7 +139,7 @@
         "icon": "🌊",
         "tag": "新北觀光 4K 直播・淡江大橋與台灣海峽晚霞",
         "phasePrep": "—",
-        "phasePeak": "平均 19.1 分・峰值 44 分（T+20）",
+        "phasePeak": "平均 19.7 分・峰值 44 分（T+20）",
         "phasePost": "—",
         "forecast": "6 分（低雲 67%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -156,7 +156,7 @@
         "beauty": {
           "predicted": 64,
           "peakScore": 44,
-          "avgScore": 19.1,
+          "avgScore": 19.7,
           "peakOffsetMin": 20,
           "verdict": "MISMATCH",
           "verdictBadge": "⚠️ 出現偏差需校準",
