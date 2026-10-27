@@ -1,5 +1,263 @@
 [
   {
+    "id": "rec-2026-10-27-sunset-maokong",
+    "date": "2026-10-27",
+    "session": "sunset",
+    "station": "maokong",
+    "targetTime": "2026-10-27T09:18:23.581000+00:00",
+    "source": "貓空（縮時多影格）",
+    "prediction": null,
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 9,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 45.9,
+      "peakScore": 42,
+      "peakOffsetMin": 10,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-10-27T11:46:57.735352+00:00",
+      "beautyScorerVersion": 2,
+      "status": "no_locked_prediction",
+      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差",
+      "fireCloud": {
+        "avgScore": 5.6,
+        "peakScore": 8,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "scorerVersion": 2
+      }
+    }
+  },
+  {
+    "id": "rec-2026-10-27-sunset-jiufen",
+    "date": "2026-10-27",
+    "session": "sunset",
+    "station": "jiufen",
+    "targetTime": "2026-10-27T09:18:23.581000+00:00",
+    "source": "九份（縮時多影格）",
+    "prediction": null,
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 0,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": null,
+      "peakScore": null,
+      "peakOffsetMin": null,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-10-27T11:46:57.734874+00:00",
+      "beautyScorerVersion": 2,
+      "status": "capture_unavailable",
+      "reason": "9 張影格全數擷取失敗，本場次無實測資料",
+      "fireCloud": {
+        "avgScore": null,
+        "peakScore": null,
+        "peakOffsetMin": null,
+        "okFrameCount": 0,
+        "unreadableFrameCount": 0,
+        "scorerVersion": 2
+      }
+    }
+  },
+  {
+    "id": "rec-2026-10-27-sunset-bali",
+    "date": "2026-10-27",
+    "session": "sunset",
+    "station": "bali",
+    "targetTime": "2026-10-27T09:18:23.581000+00:00",
+    "source": "八里左岸（縮時多影格）",
+    "prediction": null,
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 0,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": null,
+      "peakScore": null,
+      "peakOffsetMin": null,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-10-27T11:46:57.734412+00:00",
+      "beautyScorerVersion": 2,
+      "status": "capture_unavailable",
+      "reason": "9 張影格全數擷取失敗，本場次無實測資料",
+      "fireCloud": {
+        "avgScore": null,
+        "peakScore": null,
+        "peakOffsetMin": null,
+        "okFrameCount": 0,
+        "unreadableFrameCount": 0,
+        "scorerVersion": 2
+      }
+    }
+  },
+  {
+    "id": "rec-2026-10-27-sunset-tamsui",
+    "date": "2026-10-27",
+    "session": "sunset",
+    "station": "tamsui",
+    "targetTime": "2026-10-27T09:18:23.581000+00:00",
+    "source": "淡水漁人碼頭（縮時多影格）",
+    "prediction": null,
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 9,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 25.6,
+      "peakScore": 89,
+      "peakOffsetMin": 20,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-10-27T11:46:57.733909+00:00",
+      "beautyScorerVersion": 2,
+      "status": "no_locked_prediction",
+      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差",
+      "fireCloud": {
+        "avgScore": 16.2,
+        "peakScore": 47,
+        "peakOffsetMin": 20,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "scorerVersion": 2
+      }
+    }
+  },
+  {
+    "id": "rec-2026-10-27-sunset-dadaocheng",
+    "date": "2026-10-27",
+    "session": "sunset",
+    "station": "dadaocheng",
+    "targetTime": "2026-10-27T09:18:23.581000+00:00",
+    "source": "大稻埕（縮時多影格）",
+    "prediction": null,
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 9,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 30.9,
+      "peakScore": 18,
+      "peakOffsetMin": 20,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-10-27T11:46:57.733256+00:00",
+      "beautyScorerVersion": 2,
+      "status": "no_locked_prediction",
+      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "scorerVersion": 2
+      }
+    }
+  },
+  {
+    "id": "rec-2026-10-27-sunset-xiangshan",
+    "date": "2026-10-27",
+    "session": "sunset",
+    "station": "xiangshan",
+    "targetTime": "2026-10-27T09:18:23.581000+00:00",
+    "source": "101大樓（縮時多影格）",
+    "prediction": null,
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 9,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 19.9,
+      "peakScore": 27,
+      "peakOffsetMin": 20,
+      "peakSide": "post-sunset",
+      "verifiedAt": "2026-10-27T11:46:57.732626+00:00",
+      "beautyScorerVersion": 2,
+      "status": "no_locked_prediction",
+      "reason": "找不到對應的鎖定預測，已有實測分數但無法計算誤差",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": 0,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "scorerVersion": 2
+      }
+    }
+  },
+  {
     "id": "rec-2026-10-25-sunset-maokong",
     "date": "2026-10-25",
     "session": "sunset",
