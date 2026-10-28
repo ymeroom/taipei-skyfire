@@ -1,5 +1,157 @@
 [
   {
+    "id": "rec-2026-10-29-sunrise-hongludi",
+    "date": "2026-10-29",
+    "session": "sunrise",
+    "station": "hongludi",
+    "targetTime": "2026-10-28T22:00:25.210000+00:00",
+    "source": "烘爐地（縮時多影格）",
+    "prediction": {
+      "score": 10,
+      "rating": "晴空無雲",
+      "color": "#7B88A8",
+      "beautyScore": 37,
+      "clearSkyUncappedScore": 19,
+      "highCloud": 0,
+      "midCloud": 2,
+      "lowCloud": 13,
+      "totalCloud": 16,
+      "humidity": 82,
+      "precipProb": 0,
+      "horizonClearance": 16,
+      "visibilityKm": 3.7,
+      "aqi": 45,
+      "aqiForecast": 56,
+      "pm25": 9.1,
+      "aod": 0.23,
+      "isSimulated": false,
+      "lockedAt": "2026-10-28T15:45:18.459Z"
+    },
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 9,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 10.9,
+      "peakScore": 22,
+      "peakOffsetMin": -10,
+      "peakSide": "pre-sunrise",
+      "verifiedAt": "2026-10-28T23:41:09.308786+00:00",
+      "beautyScorerVersion": 2,
+      "status": "verified_completed",
+      "errorAvgAbsolute": 0.9000000000000004,
+      "verdictAvg": "EXACT_MATCH",
+      "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "errorPeakAbsolute": 12,
+      "verdictPeak": "SLIGHT_DEVIATION",
+      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "fireCloud": {
+        "avgScore": 5.0,
+        "peakScore": 5,
+        "peakOffsetMin": -40,
+        "okFrameCount": 9,
+        "unreadableFrameCount": 0,
+        "scorerVersion": 2,
+        "predicted": 10,
+        "errorPeakAbsolute": 5,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      },
+      "beauty": {
+        "predicted": 37,
+        "errorPeakAbsolute": 15,
+        "verdictPeak": "SLIGHT_DEVIATION",
+        "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+      }
+    }
+  },
+  {
+    "id": "rec-2026-10-29-sunrise-waimushan",
+    "date": "2026-10-29",
+    "session": "sunrise",
+    "station": "waimushan",
+    "targetTime": "2026-10-28T22:00:25.210000+00:00",
+    "source": "外木山（縮時多影格）",
+    "prediction": {
+      "score": 5,
+      "rating": "晴空無雲",
+      "color": "#7B88A8",
+      "beautyScore": 16,
+      "clearSkyUncappedScore": 5,
+      "highCloud": 0,
+      "midCloud": 0,
+      "lowCloud": 55,
+      "totalCloud": 55,
+      "humidity": 89,
+      "precipProb": 0,
+      "horizonClearance": 25,
+      "visibilityKm": 19.1,
+      "aqi": 45,
+      "aqiForecast": 66,
+      "pm25": 15.9,
+      "aod": 0.2,
+      "isSimulated": false,
+      "lockedAt": "2026-10-28T15:45:18.459Z"
+    },
+    "capture": {
+      "kind": "timelapse-multi-frame",
+      "frameCount": 9,
+      "okFrameCount": 9,
+      "offsetsMin": [
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "verification": {
+      "avgScore": 8.8,
+      "peakScore": 11,
+      "peakOffsetMin": 0,
+      "peakSide": "pre-sunrise",
+      "verifiedAt": "2026-10-28T23:41:09.307668+00:00",
+      "beautyScorerVersion": 2,
+      "status": "verified_completed",
+      "errorAvgAbsolute": 3.8000000000000007,
+      "verdictAvg": "EXACT_MATCH",
+      "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "errorPeakAbsolute": 6,
+      "verdictPeak": "EXACT_MATCH",
+      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "fireCloud": {
+        "avgScore": null,
+        "peakScore": null,
+        "peakOffsetMin": null,
+        "okFrameCount": 3,
+        "unreadableFrameCount": 6,
+        "scorerVersion": 2
+      },
+      "beauty": {
+        "predicted": 16,
+        "errorPeakAbsolute": 5,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+      }
+    }
+  },
+  {
     "id": "rec-2026-10-28-sunset-maokong",
     "date": "2026-10-28",
     "session": "sunset",
