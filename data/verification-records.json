@@ -44,19 +44,19 @@
       ]
     },
     "verification": {
-      "avgScore": 10.9,
-      "peakScore": 22,
-      "peakOffsetMin": -10,
+      "avgScore": 15.7,
+      "peakScore": 37,
+      "peakOffsetMin": 0,
       "peakSide": "pre-sunrise",
-      "verifiedAt": "2026-10-28T23:41:09.308786+00:00",
+      "verifiedAt": "2026-10-29T01:01:05.965891+00:00",
       "beautyScorerVersion": 2,
       "status": "verified_completed",
-      "errorAvgAbsolute": 0.9000000000000004,
+      "errorAvgAbsolute": 5.699999999999999,
       "verdictAvg": "EXACT_MATCH",
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
-      "errorPeakAbsolute": 12,
-      "verdictPeak": "SLIGHT_DEVIATION",
-      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "errorPeakAbsolute": 27,
+      "verdictPeak": "MISMATCH",
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
       "fireCloud": {
         "avgScore": 5.0,
         "peakScore": 5,
@@ -71,9 +71,9 @@
       },
       "beauty": {
         "predicted": 37,
-        "errorPeakAbsolute": 15,
-        "verdictPeak": "SLIGHT_DEVIATION",
-        "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+        "errorPeakAbsolute": 0,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
       }
     }
   },
@@ -122,17 +122,17 @@
       ]
     },
     "verification": {
-      "avgScore": 8.8,
-      "peakScore": 11,
-      "peakOffsetMin": 0,
+      "avgScore": 10.4,
+      "peakScore": 5,
+      "peakOffsetMin": -40,
       "peakSide": "pre-sunrise",
-      "verifiedAt": "2026-10-28T23:41:09.307668+00:00",
+      "verifiedAt": "2026-10-29T01:01:05.965238+00:00",
       "beautyScorerVersion": 2,
       "status": "verified_completed",
-      "errorAvgAbsolute": 3.8000000000000007,
+      "errorAvgAbsolute": 5.4,
       "verdictAvg": "EXACT_MATCH",
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
-      "errorPeakAbsolute": 6,
+      "errorPeakAbsolute": 0,
       "verdictPeak": "EXACT_MATCH",
       "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "fireCloud": {
@@ -145,9 +145,9 @@
       },
       "beauty": {
         "predicted": 16,
-        "errorPeakAbsolute": 5,
-        "verdictPeak": "EXACT_MATCH",
-        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
+        "errorPeakAbsolute": 11,
+        "verdictPeak": "SLIGHT_DEVIATION",
+        "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
       }
     }
   },
