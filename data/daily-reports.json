@@ -18,9 +18,9 @@
       "beautyScore": 60
     },
     "groundTruth": {
-      "score": 73,
-      "avgScore": 43.7,
-      "peakScore": 73,
+      "score": 74,
+      "avgScore": 43.9,
+      "peakScore": 74,
       "peakOffsetMin": 20,
       "verdict": "SLIGHT_DEVIATION",
       "verdictAvg": "MISMATCH",
@@ -30,7 +30,7 @@
       "fireCloud": {
         "predicted": 10,
         "peakScore": 12,
-        "avgScore": 7.2,
+        "avgScore": 7.4,
         "peakOffsetMin": 30,
         "verdict": "EXACT_MATCH",
         "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -38,8 +38,8 @@
       },
       "beauty": {
         "predicted": 60,
-        "peakScore": 73,
-        "avgScore": 43.7,
+        "peakScore": 74,
+        "avgScore": 43.9,
         "peakOffsetMin": 20,
         "verdict": "SLIGHT_DEVIATION",
         "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
@@ -52,7 +52,7 @@
         "icon": "⛵",
         "tag": "臺北旅遊網 4K 直播・淡水河倒影晚霞",
         "phasePrep": "—",
-        "phasePeak": "平均 43.7 分・峰值 73 分（T+20）",
+        "phasePeak": "平均 43.9 分・峰值 74 分（T+20）",
         "phasePost": "—",
         "forecast": "10 分（低雲 10%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
@@ -60,7 +60,7 @@
         "fireCloud": {
           "predicted": 10,
           "peakScore": 12,
-          "avgScore": 7.2,
+          "avgScore": 7.4,
           "peakOffsetMin": 30,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -68,8 +68,8 @@
         },
         "beauty": {
           "predicted": 60,
-          "peakScore": 73,
-          "avgScore": 43.7,
+          "peakScore": 74,
+          "avgScore": 43.9,
           "peakOffsetMin": 20,
           "verdict": "SLIGHT_DEVIATION",
           "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
@@ -81,7 +81,7 @@
         "icon": "⛩️",
         "tag": "臺北旅遊網 4K 直播・高處俯瞰盆地火燒雲",
         "phasePrep": "—",
-        "phasePeak": "平均 64.8 分・峰值 100 分（T+20）",
+        "phasePeak": "平均 66.3 分・峰值 100 分（T+20）",
         "phasePost": "—",
         "forecast": "10 分（低雲 9%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -89,7 +89,7 @@
         "fireCloud": {
           "predicted": 10,
           "peakScore": 69,
-          "avgScore": 22.2,
+          "avgScore": 22.4,
           "peakOffsetMin": 20,
           "verdict": "MISMATCH",
           "verdictBadge": "⚠️ 出現偏差需校準",
@@ -98,7 +98,7 @@
         "beauty": {
           "predicted": 84,
           "peakScore": 100,
-          "avgScore": 64.8,
+          "avgScore": 66.3,
           "peakOffsetMin": 20,
           "verdict": "SLIGHT_DEVIATION",
           "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
@@ -175,7 +175,7 @@
         "verdictColor": "#FBBF24",
         "fireCloud": {
           "predicted": 10,
-          "peakScore": 8,
+          "peakScore": 9,
           "avgScore": 5.8,
           "peakOffsetMin": 30,
           "verdict": "EXACT_MATCH",
@@ -228,11 +228,11 @@
       "bestStation": "maokong",
       "bestScore": 100,
       "worstError": 90,
-      "meanError": 55.2
+      "meanError": 55.4
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 4% ／ 低空 10%。",
-      "modelPerformance": "🔥 火燒雲：預報 10 分，實測平均 7.2 分、峰值 12 分（T+30，峰值誤差 2 分）。🌅 天空美感：預報 60 分，實測平均 43.7 分、峰值 73 分（T+20，峰值誤差 13 分）。"
+      "modelPerformance": "🔥 火燒雲：預報 10 分，實測平均 7.4 分、峰值 12 分（T+30，峰值誤差 2 分）。🌅 天空美感：預報 60 分，實測平均 43.9 分、峰值 74 分（T+20，峰值誤差 14 分）。"
     }
   },
   {
