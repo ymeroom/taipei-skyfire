@@ -44,19 +44,19 @@
       ]
     },
     "verification": {
-      "avgScore": 11.4,
-      "peakScore": 23,
-      "peakOffsetMin": -20,
+      "avgScore": 18.9,
+      "peakScore": 51,
+      "peakOffsetMin": 0,
       "peakSide": "pre-sunrise",
-      "verifiedAt": "2026-10-29T23:42:02.729860+00:00",
+      "verifiedAt": "2026-10-30T01:01:01.760199+00:00",
       "beautyScorerVersion": 2,
       "status": "verified_completed",
-      "errorAvgAbsolute": 19.6,
-      "verdictAvg": "MISMATCH",
-      "verdictAvgBadge": "⚠️ 出現偏差需校準",
-      "errorPeakAbsolute": 8,
-      "verdictPeak": "EXACT_MATCH",
-      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "errorAvgAbsolute": 12.100000000000001,
+      "verdictAvg": "SLIGHT_DEVIATION",
+      "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
+      "errorPeakAbsolute": 20,
+      "verdictPeak": "MISMATCH",
+      "verdictPeakBadge": "⚠️ 出現偏差需校準",
       "fireCloud": {
         "avgScore": 5.0,
         "peakScore": 5,
@@ -71,7 +71,7 @@
       },
       "beauty": {
         "predicted": 39,
-        "errorPeakAbsolute": 16,
+        "errorPeakAbsolute": 12,
         "verdictPeak": "SLIGHT_DEVIATION",
         "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
       }
@@ -122,19 +122,19 @@
       ]
     },
     "verification": {
-      "avgScore": 24.2,
-      "peakScore": 28,
-      "peakOffsetMin": 0,
+      "avgScore": 23.8,
+      "peakScore": 17,
+      "peakOffsetMin": -10,
       "peakSide": "pre-sunrise",
-      "verifiedAt": "2026-10-29T23:42:02.729003+00:00",
+      "verifiedAt": "2026-10-30T01:01:01.759627+00:00",
       "beautyScorerVersion": 2,
       "status": "verified_completed",
-      "errorAvgAbsolute": 8.8,
+      "errorAvgAbsolute": 9.2,
       "verdictAvg": "SLIGHT_DEVIATION",
       "verdictAvgBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
-      "errorPeakAbsolute": 5,
-      "verdictPeak": "EXACT_MATCH",
-      "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)",
+      "errorPeakAbsolute": 16,
+      "verdictPeak": "SLIGHT_DEVIATION",
+      "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
       "fireCloud": {
         "avgScore": 5.0,
         "peakScore": 5,
@@ -149,9 +149,9 @@
       },
       "beauty": {
         "predicted": 19,
-        "errorPeakAbsolute": 9,
-        "verdictPeak": "SLIGHT_DEVIATION",
-        "verdictPeakBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)"
+        "errorPeakAbsolute": 2,
+        "verdictPeak": "EXACT_MATCH",
+        "verdictPeakBadge": "🎯 極致精準 (誤差 ≤ 8分)"
       }
     }
   },
