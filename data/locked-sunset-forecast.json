@@ -1,28 +1,28 @@
 {
-  "date": "2026-10-30",
+  "date": "2026-10-31",
   "session": "sunset",
-  "lockedAt": "2026-10-30T07:30:15.051Z",
+  "lockedAt": "2026-10-31T07:30:14.755Z",
   "skyfire": {
-    "score": 10,
+    "score": 5,
     "rating": {
-      "level": "CLEAR",
-      "badge": "晴空無雲",
-      "icon": "🌇",
-      "color": "#7B88A8",
-      "secondaryColor": "#A0AEC0",
-      "summary": "高中空幾乎無雲，沒有雲層可被染紅，不會有火燒雲；地平線的橘色暮光請看各機位的天空美感分。",
-      "bgGradient": "linear-gradient(135deg, rgba(123,136,168,0.2) 0%, rgba(160,174,192,0.1) 100%)"
+      "level": "OVERCAST",
+      "badge": "陰沉沉寂",
+      "icon": "☁️",
+      "color": "#5A6275",
+      "secondaryColor": "#394150",
+      "summary": "厚重低雲覆蓋天際或有陣雨，天色灰暗難見彩霞。",
+      "bgGradient": "linear-gradient(135deg, rgba(90,98,117,0.2) 0%, rgba(57,65,80,0.1) 100%)"
     },
     "metrics": {
-      "cloudQualityScore": 2,
-      "lowCloudPenalty": 0,
-      "horizonScore": 26,
+      "cloudQualityScore": 1,
+      "lowCloudPenalty": 51,
+      "horizonScore": 0,
       "visibilityScore": 15,
-      "horizonClearance": 88,
+      "horizonClearance": 0,
       "visKm": 26.8,
       "aqi": 45,
       "aqiModifier": 2,
-      "clearSkyUncappedScore": 54
+      "clearSkyUncappedScore": 5
     },
     "diagnostics": [
       {
@@ -33,17 +33,17 @@
       {
         "label": "中空雲層 (2,000-6,000m)",
         "status": "low",
-        "desc": "中雲量稀疏 (4%)，雲彩層次感較為單純。"
+        "desc": "中雲量稀疏 (2%)，雲彩層次感較為單純。"
       },
       {
         "label": "遠方西方（台灣海峽/海平面）透光窗",
-        "status": "optimal",
-        "desc": "低雲遮蔽極低 (10%)，透光窗達 88%，夕陽/晨光無阻直射雲底！"
+        "status": "bad",
+        "desc": "低雲遮蔽高達 96%，厚雲層恐阻斷地平線入射光，投下暗灰色陰影。"
       },
       {
         "label": "大氣能見度與通透度",
         "status": "optimal",
-        "desc": "能見度優異（26.76 公里），大氣清澈通透，晚霞色彩飽和純淨。"
+        "desc": "能見度優異（26.84 公里），大氣清澈通透，晚霞色彩飽和純淨。"
       }
     ],
     "photoTips": {
@@ -57,165 +57,165 @@
   },
   "weather": {
     "cloudHigh": 0,
-    "cloudMid": 4,
-    "cloudLow": 10,
-    "cloudTotal": 10,
-    "humidity": 74,
+    "cloudMid": 2,
+    "cloudLow": 96,
+    "cloudTotal": 96,
+    "humidity": 77,
     "precipProb": 0,
     "visibilityKm": 26.8,
-    "aqiForecast": 66,
-    "pm25": 17.1,
-    "aod": 0.23
+    "aqiForecast": 75,
+    "pm25": 24.7,
+    "aod": 0.32
   },
   "stations": {
     "dadaocheng": {
-      "score": 10,
-      "rating": "晴空無雲",
-      "color": "#7B88A8",
-      "beautyScore": 60,
+      "score": 5,
+      "rating": "陰沉沉寂",
+      "color": "#5A6275",
+      "beautyScore": 11,
       "weather": {
         "cloudHigh": 0,
-        "cloudMid": 4,
-        "cloudLow": 10,
-        "cloudTotal": 10,
-        "humidity": 74,
+        "cloudMid": 2,
+        "cloudLow": 96,
+        "cloudTotal": 96,
+        "humidity": 77,
         "precipProb": 0,
         "visibilityKm": 26.8,
-        "aqiForecast": 66,
-        "pm25": 17.1,
-        "aod": 0.23
+        "aqiForecast": 75,
+        "pm25": 24.7,
+        "aod": 0.32
       },
       "metrics": {
-        "horizonClearance": 88,
+        "horizonClearance": 0,
         "visKm": 26.8,
         "aqi": 45,
         "aqiModifier": 2,
-        "clearSkyUncappedScore": 54
+        "clearSkyUncappedScore": 5
       }
     },
     "xiangshan": {
-      "score": 10,
-      "rating": "晴空無雲",
-      "color": "#7B88A8",
-      "beautyScore": 37,
+      "score": 5,
+      "rating": "陰沉沉寂",
+      "color": "#5A6275",
+      "beautyScore": 30,
       "weather": {
         "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 9,
-        "cloudTotal": 9,
-        "humidity": 73,
+        "cloudLow": 100,
+        "cloudTotal": 100,
+        "humidity": 79,
         "precipProb": 0,
-        "visibilityKm": 27,
-        "aqiForecast": 66,
-        "pm25": 17.1,
-        "aod": 0.23
+        "visibilityKm": 12.6,
+        "aqiForecast": 75,
+        "pm25": 24.7,
+        "aod": 0.32
       },
       "metrics": {
-        "horizonClearance": 89,
-        "visKm": 27,
+        "horizonClearance": 0,
+        "visKm": 12.6,
         "aqi": 45,
         "aqiModifier": 2,
-        "clearSkyUncappedScore": 52
+        "clearSkyUncappedScore": 5
       }
     },
     "tamsui": {
-      "score": 10,
+      "score": 5,
       "rating": "晴空無雲",
       "color": "#7B88A8",
-      "beautyScore": 89,
+      "beautyScore": 78,
       "weather": {
         "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 1,
-        "cloudTotal": 1,
-        "humidity": 72,
-        "precipProb": 0,
-        "visibilityKm": 26.3,
-        "aqiForecast": 66,
-        "pm25": 17.1,
-        "aod": 0.23
+        "cloudLow": 76,
+        "cloudTotal": 76,
+        "humidity": 75,
+        "precipProb": 49,
+        "visibilityKm": 26.4,
+        "aqiForecast": 75,
+        "pm25": 24.7,
+        "aod": 0.32
       },
       "metrics": {
-        "horizonClearance": 99,
-        "visKm": 26.3,
+        "horizonClearance": 6,
+        "visKm": 26.4,
         "aqi": 45,
         "aqiModifier": 2,
-        "clearSkyUncappedScore": 55
+        "clearSkyUncappedScore": 5
       }
     },
     "bali": {
-      "score": 10,
+      "score": 5,
       "rating": "晴空無雲",
       "color": "#7B88A8",
-      "beautyScore": 85,
+      "beautyScore": 64,
       "weather": {
         "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 1,
-        "cloudTotal": 1,
-        "humidity": 72,
-        "precipProb": 0,
-        "visibilityKm": 26.3,
-        "aqiForecast": 66,
-        "pm25": 17.1,
-        "aod": 0.23
+        "cloudLow": 76,
+        "cloudTotal": 76,
+        "humidity": 75,
+        "precipProb": 49,
+        "visibilityKm": 26.4,
+        "aqiForecast": 75,
+        "pm25": 24.7,
+        "aod": 0.32
       },
       "metrics": {
-        "horizonClearance": 99,
-        "visKm": 26.3,
+        "horizonClearance": 4,
+        "visKm": 26.4,
         "aqi": 45,
         "aqiModifier": 2,
-        "clearSkyUncappedScore": 55
+        "clearSkyUncappedScore": 5
       }
     },
     "maokong": {
-      "score": 10,
-      "rating": "晴空無雲",
-      "color": "#7B88A8",
-      "beautyScore": 84,
+      "score": 5,
+      "rating": "陰沉沉寂",
+      "color": "#5A6275",
+      "beautyScore": 55,
       "weather": {
         "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 9,
-        "cloudTotal": 9,
-        "humidity": 73,
+        "cloudLow": 100,
+        "cloudTotal": 100,
+        "humidity": 79,
         "precipProb": 0,
-        "visibilityKm": 27,
-        "aqiForecast": 58,
-        "pm25": 14.5,
-        "aod": 0.28
+        "visibilityKm": 12.6,
+        "aqiForecast": 62,
+        "pm25": 21.1,
+        "aod": 0.35
       },
       "metrics": {
-        "horizonClearance": 89,
-        "visKm": 27,
+        "horizonClearance": 0,
+        "visKm": 12.6,
         "aqi": 45,
         "aqiModifier": 2,
-        "clearSkyUncappedScore": 52
+        "clearSkyUncappedScore": 5
       }
     },
     "jiufen": {
-      "score": 10,
-      "rating": "晴空無雲",
-      "color": "#7B88A8",
-      "beautyScore": 57,
+      "score": 5,
+      "rating": "陰沉沉寂",
+      "color": "#5A6275",
+      "beautyScore": 23,
       "weather": {
         "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 30,
-        "cloudTotal": 30,
-        "humidity": 76,
-        "precipProb": 0,
-        "visibilityKm": 28,
-        "aqiForecast": 54,
-        "pm25": 13.8,
-        "aod": 0.22
+        "cloudLow": 100,
+        "cloudTotal": 100,
+        "humidity": 83,
+        "precipProb": 90,
+        "visibilityKm": 7.5,
+        "aqiForecast": 71,
+        "pm25": 21.9,
+        "aod": 0.3
       },
       "metrics": {
-        "horizonClearance": 65,
-        "visKm": 28,
+        "horizonClearance": 0,
+        "visKm": 7.5,
         "aqi": 45,
         "aqiModifier": 2,
-        "clearSkyUncappedScore": 41
+        "clearSkyUncappedScore": 5
       }
     }
   }
