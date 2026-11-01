@@ -168,7 +168,7 @@
         "icon": "🌉",
         "tag": "新北觀光 4K 直播・情人橋烈焰落日",
         "phasePrep": "—",
-        "phasePeak": "平均 67.3 分・峰值 100 分（T+20）",
+        "phasePeak": "平均 67.4 分・峰值 100 分（T+20）",
         "phasePost": "—",
         "forecast": "10 分（低雲 0%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
@@ -185,7 +185,7 @@
         "beauty": {
           "predicted": 87,
           "peakScore": 100,
-          "avgScore": 67.3,
+          "avgScore": 67.4,
           "peakOffsetMin": 20,
           "verdict": "SLIGHT_DEVIATION",
           "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
@@ -197,7 +197,7 @@
         "icon": "🏙️",
         "tag": "臺北旅遊網 4K 直播・101 與西方天際線",
         "phasePrep": "—",
-        "phasePeak": "平均 21.0 分・峰值 43 分（T+20）",
+        "phasePeak": "平均 20.9 分・峰值 44 分（T+20）",
         "phasePost": "—",
         "forecast": "10 分（低雲 5%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -213,8 +213,8 @@
         },
         "beauty": {
           "predicted": 37,
-          "peakScore": 43,
-          "avgScore": 21.0,
+          "peakScore": 44,
+          "avgScore": 20.9,
           "peakOffsetMin": 20,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -228,7 +228,7 @@
       "bestStation": "maokong",
       "bestScore": 100,
       "worstError": 90,
-      "meanError": 71.7
+      "meanError": 71.8
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 1%。",
