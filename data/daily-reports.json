@@ -19,7 +19,7 @@
     },
     "groundTruth": {
       "score": 36,
-      "avgScore": 14.7,
+      "avgScore": 15.1,
       "peakScore": 36,
       "peakOffsetMin": -20,
       "verdict": "EXACT_MATCH",
@@ -39,7 +39,7 @@
       "beauty": {
         "predicted": 42,
         "peakScore": 36,
-        "avgScore": 14.7,
+        "avgScore": 15.1,
         "peakOffsetMin": -20,
         "verdict": "EXACT_MATCH",
         "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -52,7 +52,7 @@
         "icon": "⛰️",
         "tag": "新北觀光・雙北盆地俯瞰晨光",
         "phasePrep": "—",
-        "phasePeak": "平均 14.7 分・峰值 36 分（T-20）",
+        "phasePeak": "平均 15.1 分・峰值 36 分（T-20）",
         "phasePost": "—",
         "forecast": "10 分（低雲 0%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -69,7 +69,7 @@
         "beauty": {
           "predicted": 42,
           "peakScore": 36,
-          "avgScore": 14.7,
+          "avgScore": 15.1,
           "peakOffsetMin": -20,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -81,7 +81,7 @@
         "icon": "🌊",
         "tag": "國海院・太平洋日出第一線",
         "phasePrep": "—",
-        "phasePeak": "平均 15.9 分・峰值 19 分（T+0）",
+        "phasePeak": "平均 16.1 分・峰值 18 分（T-10）",
         "phasePost": "—",
         "forecast": "10 分（低雲 2%）",
         "verdict": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -97,9 +97,9 @@
         },
         "beauty": {
           "predicted": 21,
-          "peakScore": 19,
-          "avgScore": 15.9,
-          "peakOffsetMin": 0,
+          "peakScore": 18,
+          "avgScore": 16.1,
+          "peakOffsetMin": -10,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
           "color": "#4ADE80"
@@ -112,11 +112,11 @@
       "bestStation": "hongludi",
       "bestScore": 36,
       "worstError": 26,
-      "meanError": 17.5
+      "meanError": 17.0
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 0% ／ 低空 0%。",
-      "modelPerformance": "🔥 火燒雲：預報 10 分，實測平均 5.0 分、峰值 5 分（峰值誤差 5 分）。🌅 天空美感：預報 42 分，實測平均 14.7 分、峰值 36 分（T-20，峰值誤差 6 分）。"
+      "modelPerformance": "🔥 火燒雲：預報 10 分，實測平均 5.0 分、峰值 5 分（峰值誤差 5 分）。🌅 天空美感：預報 42 分，實測平均 15.1 分、峰值 36 分（T-20，峰值誤差 6 分）。"
     }
   },
   {
