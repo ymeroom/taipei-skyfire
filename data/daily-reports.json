@@ -81,7 +81,7 @@
         "icon": "⛩️",
         "tag": "臺北旅遊網 4K 直播・高處俯瞰盆地火燒雲",
         "phasePrep": "—",
-        "phasePeak": "平均 17.1 分・峰值 27 分（T+20）",
+        "phasePeak": "平均 17.0 分・峰值 26 分（T+20）",
         "phasePost": "—",
         "forecast": "5 分（低雲 86%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -97,8 +97,8 @@
         },
         "beauty": {
           "predicted": 66,
-          "peakScore": 27,
-          "avgScore": 17.1,
+          "peakScore": 26,
+          "avgScore": 17.0,
           "peakOffsetMin": 20,
           "verdict": "MISMATCH",
           "verdictBadge": "⚠️ 出現偏差需校準",
@@ -110,7 +110,7 @@
         "icon": "🏮",
         "tag": "新北觀光 4K 直播・山海交界落日",
         "phasePrep": "—",
-        "phasePeak": "平均 18.3 分・峰值 37 分（T+20）",
+        "phasePeak": "平均 17.3 分・峰值 37 分（T+20）",
         "phasePost": "—",
         "forecast": "5 分（低雲 100%）",
         "verdict": "⚡ 輕微偏差 (誤差 ≤ 18分)",
@@ -127,7 +127,7 @@
         "beauty": {
           "predicted": 22,
           "peakScore": 37,
-          "avgScore": 18.3,
+          "avgScore": 17.3,
           "peakOffsetMin": 20,
           "verdict": "SLIGHT_DEVIATION",
           "verdictBadge": "⚡ 輕微偏差 (誤差 ≤ 18分)",
@@ -228,7 +228,7 @@
       "bestStation": "tamsui",
       "bestScore": 86,
       "worstError": 81,
-      "meanError": 29.0
+      "meanError": 28.8
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 0% ／ 中空 13% ／ 低空 66%。",
