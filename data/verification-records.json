@@ -44,14 +44,14 @@
       ]
     },
     "verification": {
-      "avgScore": 9.3,
+      "avgScore": 9.7,
       "peakScore": 19,
       "peakOffsetMin": -20,
       "peakSide": "pre-sunrise",
-      "verifiedAt": "2026-11-05T23:41:29.664154+00:00",
+      "verifiedAt": "2026-11-06T01:01:05.806329+00:00",
       "beautyScorerVersion": 2,
       "status": "verified_completed",
-      "errorAvgAbsolute": 4.300000000000001,
+      "errorAvgAbsolute": 4.699999999999999,
       "verdictAvg": "EXACT_MATCH",
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 14,
@@ -122,14 +122,14 @@
       ]
     },
     "verification": {
-      "avgScore": 5.8,
+      "avgScore": 5.0,
       "peakScore": 5,
       "peakOffsetMin": -40,
       "peakSide": "pre-sunrise",
-      "verifiedAt": "2026-11-05T23:41:29.663148+00:00",
+      "verifiedAt": "2026-11-06T01:01:05.805869+00:00",
       "beautyScorerVersion": 2,
       "status": "verified_completed",
-      "errorAvgAbsolute": 0.7999999999999998,
+      "errorAvgAbsolute": 0.0,
       "verdictAvg": "EXACT_MATCH",
       "verdictAvgBadge": "🎯 極致精準 (誤差 ≤ 8分)",
       "errorPeakAbsolute": 0,
@@ -139,8 +139,8 @@
         "avgScore": null,
         "peakScore": null,
         "peakOffsetMin": null,
-        "okFrameCount": 1,
-        "unreadableFrameCount": 8,
+        "okFrameCount": 3,
+        "unreadableFrameCount": 6,
         "scorerVersion": 2
       },
       "beauty": {
