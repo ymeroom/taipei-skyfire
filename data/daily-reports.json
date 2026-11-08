@@ -81,7 +81,7 @@
         "icon": "⛩️",
         "tag": "臺北旅遊網 4K 直播・高處俯瞰盆地火燒雲",
         "phasePrep": "—",
-        "phasePeak": "平均 59.6 分・峰值 100 分（T+20）",
+        "phasePeak": "平均 68.7 分・峰值 100 分（T+20）",
         "phasePost": "—",
         "forecast": "75 分（低雲 1%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -98,7 +98,7 @@
         "beauty": {
           "predicted": 96,
           "peakScore": 100,
-          "avgScore": 59.6,
+          "avgScore": 68.7,
           "peakOffsetMin": 20,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -110,7 +110,7 @@
         "icon": "🏮",
         "tag": "新北觀光 4K 直播・山海交界落日",
         "phasePrep": "—",
-        "phasePeak": "平均 36.2 分・峰值 59 分（T+20）",
+        "phasePeak": "平均 36.6 分・峰值 61 分（T+20）",
         "phasePost": "—",
         "forecast": "67 分（低雲 8%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -126,8 +126,8 @@
         },
         "beauty": {
           "predicted": 85,
-          "peakScore": 59,
-          "avgScore": 36.2,
+          "peakScore": 61,
+          "avgScore": 36.6,
           "peakOffsetMin": 20,
           "verdict": "MISMATCH",
           "verdictBadge": "⚠️ 出現偏差需校準",
@@ -139,7 +139,7 @@
         "icon": "🌊",
         "tag": "新北觀光 4K 直播・淡江大橋與台灣海峽晚霞",
         "phasePrep": "—",
-        "phasePeak": "平均 44.7 分・峰值 78 分（T+20）",
+        "phasePeak": "平均 44.6 分・峰值 78 分（T+20）",
         "phasePost": "—",
         "forecast": "79 分（低雲 0%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -156,7 +156,7 @@
         "beauty": {
           "predicted": 98,
           "peakScore": 78,
-          "avgScore": 44.7,
+          "avgScore": 44.6,
           "peakOffsetMin": 20,
           "verdict": "MISMATCH",
           "verdictBadge": "⚠️ 出現偏差需校準",
@@ -197,7 +197,7 @@
         "icon": "🏙️",
         "tag": "臺北旅遊網 4K 直播・101 與西方天際線",
         "phasePrep": "—",
-        "phasePeak": "平均 23.7 分・峰值 43 分（T+20）",
+        "phasePeak": "平均 24.4 分・峰值 43 分（T+20）",
         "phasePost": "—",
         "forecast": "75 分（低雲 1%）",
         "verdict": "⚠️ 出現偏差需校準",
@@ -214,7 +214,7 @@
         "beauty": {
           "predicted": 42,
           "peakScore": 43,
-          "avgScore": 23.7,
+          "avgScore": 24.4,
           "peakOffsetMin": 20,
           "verdict": "EXACT_MATCH",
           "verdictBadge": "🎯 極致精準 (誤差 ≤ 8分)",
@@ -228,7 +228,7 @@
       "bestStation": "maokong",
       "bestScore": 100,
       "worstError": 32,
-      "meanError": 15.3
+      "meanError": 15.0
     },
     "summaryAnalysis": {
       "atmosphericReason": "預報雲量：高空 45% ／ 中空 0% ／ 低空 0%。",
