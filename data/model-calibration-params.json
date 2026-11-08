@@ -66,55 +66,55 @@
   "beautyModel": {
     "input": "clearSkyUncappedScore",
     "target": "verification.peakScore",
-    "fittedAt": "2026-11-01T16:00:20.590Z",
+    "fittedAt": "2026-11-08T16:00:22.231Z",
     "stations": {
       "maokong": {
-        "slope": 0.423,
-        "intercept": 64.209,
-        "n": 37,
-        "mae": 17.287
+        "slope": 0.527,
+        "intercept": 58.977,
+        "n": 44,
+        "mae": 19.172
       },
       "jiufen": {
-        "slope": 1.028,
-        "intercept": 16.39,
-        "n": 29,
-        "mae": 15.011
+        "slope": 0.904,
+        "intercept": 19.985,
+        "n": 35,
+        "mae": 15.124
       },
       "bali": {
-        "slope": 0.671,
-        "intercept": 45.117,
-        "n": 39,
-        "mae": 13.826
+        "slope": 0.746,
+        "intercept": 40.142,
+        "n": 46,
+        "mae": 14.308
       },
       "tamsui": {
-        "slope": 0.073,
-        "intercept": 85.613,
-        "n": 40,
-        "mae": 10.832
+        "slope": 0.091,
+        "intercept": 85.608,
+        "n": 47,
+        "mae": 10.268
       },
       "dadaocheng": {
-        "slope": 0.468,
-        "intercept": 35.821,
-        "n": 38,
-        "mae": 16.199
+        "slope": 0.494,
+        "intercept": 34.254,
+        "n": 44,
+        "mae": 17.383
       },
       "xiangshan": {
-        "slope": 0.256,
-        "intercept": 23.268,
-        "n": 39,
-        "mae": 8.525
+        "slope": 0.266,
+        "intercept": 22.146,
+        "n": 46,
+        "mae": 7.841
       },
       "hongludi": {
-        "slope": 0.068,
-        "intercept": 36.487,
-        "n": 38,
-        "mae": 15.152
+        "slope": 0.156,
+        "intercept": 33.359,
+        "n": 45,
+        "mae": 15.17
       },
       "waimushan": {
-        "slope": 0.161,
-        "intercept": 12.679,
-        "n": 34,
-        "mae": 6.374
+        "slope": 0.169,
+        "intercept": 11.495,
+        "n": 40,
+        "mae": 6.363
       }
     }
   }
