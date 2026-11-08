@@ -1,28 +1,28 @@
 {
-  "date": "2026-11-08",
+  "date": "2026-11-09",
   "session": "sunrise",
-  "lockedAt": "2026-11-07T15:45:17.991Z",
+  "lockedAt": "2026-11-08T15:45:15.162Z",
   "skyfire": {
-    "score": 10,
+    "score": 39,
     "rating": {
-      "level": "CLEAR",
-      "badge": "晴空無雲",
-      "icon": "🌇",
+      "level": "FAINT",
+      "badge": "平淡暮光",
+      "icon": "🌤️",
       "color": "#7B88A8",
       "secondaryColor": "#A0AEC0",
-      "summary": "高中空幾乎無雲，沒有雲層可被染紅，不會有火燒雲；地平線的橘色暮光請看各機位的天空美感分。",
+      "summary": "雲量偏少或光線受阻，主要為漸層藍調或柔和微光。",
       "bgGradient": "linear-gradient(135deg, rgba(123,136,168,0.2) 0%, rgba(160,174,192,0.1) 100%)"
     },
     "metrics": {
-      "cloudQualityScore": 1,
-      "lowCloudPenalty": 0,
-      "horizonScore": 2,
-      "visibilityScore": 15,
-      "horizonClearance": 7,
-      "visKm": 27.4,
+      "cloudQualityScore": 4,
+      "lowCloudPenalty": 2,
+      "horizonScore": 17,
+      "visibilityScore": 13,
+      "horizonClearance": 57,
+      "visKm": 21,
       "aqi": 45,
       "aqiModifier": 2,
-      "clearSkyUncappedScore": 28
+      "clearSkyUncappedScore": 39
     },
     "diagnostics": [
       {
@@ -33,17 +33,17 @@
       {
         "label": "中空雲層 (2,000-6,000m)",
         "status": "low",
-        "desc": "中雲量稀疏 (1%)，雲彩層次感較為單純。"
+        "desc": "中雲量稀疏 (7%)，雲彩層次感較為單純。"
       },
       {
         "label": "遠方東方（太平洋/宜蘭外海）透光窗",
         "status": "fair",
-        "desc": "低雲量約 13%，地平線具有部分透光縫隙，呈現局部霞光。"
+        "desc": "低雲量約 24%，地平線具有部分透光縫隙，呈現局部霞光。"
       },
       {
         "label": "大氣能見度與通透度",
         "status": "optimal",
-        "desc": "能見度優異（27.42 公里），大氣清澈通透，晚霞色彩飽和純淨。"
+        "desc": "能見度優異（21.04 公里），大氣清澈通透，晚霞色彩飽和純淨。"
       }
     ],
     "photoTips": {
@@ -57,65 +57,65 @@
   },
   "weather": {
     "cloudHigh": 0,
-    "cloudMid": 1,
-    "cloudLow": 13,
-    "cloudTotal": 13,
-    "humidity": 75,
-    "precipProb": 0,
-    "visibilityKm": 27.4,
-    "aqiForecast": 51,
-    "pm25": 7.5,
-    "aod": 0.13
+    "cloudMid": 7,
+    "cloudLow": 24,
+    "cloudTotal": 25,
+    "humidity": 88,
+    "precipProb": 4,
+    "visibilityKm": 21,
+    "aqiForecast": 57,
+    "pm25": 11.9,
+    "aod": 0.21
   },
   "stations": {
     "hongludi": {
-      "score": 10,
-      "rating": "晴空無雲",
+      "score": 39,
+      "rating": "平淡暮光",
       "color": "#7B88A8",
-      "beautyScore": 38,
+      "beautyScore": 39,
       "weather": {
         "cloudHigh": 0,
-        "cloudMid": 1,
-        "cloudLow": 13,
-        "cloudTotal": 13,
-        "humidity": 75,
-        "precipProb": 0,
-        "visibilityKm": 27.4,
-        "aqiForecast": 51,
-        "pm25": 7.5,
-        "aod": 0.13
+        "cloudMid": 7,
+        "cloudLow": 24,
+        "cloudTotal": 25,
+        "humidity": 88,
+        "precipProb": 4,
+        "visibilityKm": 21,
+        "aqiForecast": 57,
+        "pm25": 11.9,
+        "aod": 0.21
       },
       "metrics": {
-        "horizonClearance": 7,
-        "visKm": 27.4,
+        "horizonClearance": 57,
+        "visKm": 21,
         "aqi": 45,
         "aqiModifier": 2,
-        "clearSkyUncappedScore": 28
+        "clearSkyUncappedScore": 39
       }
     },
     "waimushan": {
-      "score": 10,
+      "score": 5,
       "rating": "晴空無雲",
       "color": "#7B88A8",
-      "beautyScore": 17,
+      "beautyScore": 13,
       "weather": {
         "cloudHigh": 0,
         "cloudMid": 0,
-        "cloudLow": 9,
-        "cloudTotal": 9,
-        "humidity": 74,
-        "precipProb": 0,
-        "visibilityKm": 21.8,
-        "aqiForecast": 70,
-        "pm25": 15.5,
-        "aod": 0.16
+        "cloudLow": 51,
+        "cloudTotal": 51,
+        "humidity": 80,
+        "precipProb": 36,
+        "visibilityKm": 20.7,
+        "aqiForecast": 58,
+        "pm25": 12,
+        "aod": 0.21
       },
       "metrics": {
-        "horizonClearance": 13,
-        "visKm": 21.8,
+        "horizonClearance": 37,
+        "visKm": 20.7,
         "aqi": 45,
         "aqiModifier": 2,
-        "clearSkyUncappedScore": 28
+        "clearSkyUncappedScore": 5
       }
     }
   }
