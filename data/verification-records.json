@@ -44,17 +44,17 @@
       ]
     },
     "verification": {
-      "avgScore": 12.3,
-      "peakScore": 19,
+      "avgScore": 11.8,
+      "peakScore": 20,
       "peakOffsetMin": -20,
       "peakSide": "pre-sunrise",
-      "verifiedAt": "2026-11-08T23:41:30.408797+00:00",
+      "verifiedAt": "2026-11-09T01:00:57.171145+00:00",
       "beautyScorerVersion": 2,
       "status": "verified_completed",
-      "errorAvgAbsolute": 26.7,
+      "errorAvgAbsolute": 27.2,
       "verdictAvg": "MISMATCH",
       "verdictAvgBadge": "⚠️ 出現偏差需校準",
-      "errorPeakAbsolute": 20,
+      "errorPeakAbsolute": 19,
       "verdictPeak": "MISMATCH",
       "verdictPeakBadge": "⚠️ 出現偏差需校準",
       "fireCloud": {
@@ -71,7 +71,7 @@
       },
       "beauty": {
         "predicted": 39,
-        "errorPeakAbsolute": 20,
+        "errorPeakAbsolute": 19,
         "verdictPeak": "MISMATCH",
         "verdictPeakBadge": "⚠️ 出現偏差需校準"
       }
